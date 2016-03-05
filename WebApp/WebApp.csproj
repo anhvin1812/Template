@@ -186,8 +186,54 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Html\categories.html" />
+    <Content Include="Html\css\bootstrap.min.css" />
+    <Content Include="Html\css\fonts.css" />
+    <Content Include="Html\css\style.css" />
+    <Content Include="Html\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Html\images\1.jpg" />
+    <Content Include="Html\images\1_zoom.jpg" />
+    <Content Include="Html\images\2.jpg" />
+    <Content Include="Html\images\3.jpg" />
+    <Content Include="Html\images\facebook-footer.png" />
+    <Content Include="Html\images\instagram-footer.png" />
+    <Content Include="Html\images\logo.png" />
+    <Content Include="Html\images\pinterest-footer.png" />
+    <Content Include="Html\images\product-10-270x270.png" />
+    <Content Include="Html\images\product-31-270x270.png" />
+    <Content Include="Html\images\product-37-270x270.png" />
+    <Content Include="Html\images\slider-arrow-left.png" />
+    <Content Include="Html\images\slider-arrow-right.png" />
+    <Content Include="Html\images\slideshow_1.jpg" />
+    <Content Include="Html\images\slideshow_2.jpg" />
+    <Content Include="Html\images\slideshow_3.jpg" />
+    <Content Include="Html\images\slideshow_4.jpg" />
+    <Content Include="Html\images\sm1.jpg" />
+    <Content Include="Html\images\sm2.jpg" />
+    <Content Include="Html\images\sm3.jpg" />
+    <Content Include="Html\images\twitter-footer.png" />
+    <Content Include="Html\index.html" />
+    <Content Include="Html\js\bootstrap.min.js" />
+    <Content Include="Html\js\common.js" />
+    <Content Include="Html\js\EasyZoom\css\easyzoom.css" />
+    <Content Include="Html\js\EasyZoom\easyzoom.js" />
+    <Content Include="Html\js\jquery.bootsnipp\jquery.bootsnipp.js" />
+    <Content Include="Html\js\jquery.bxslider\images\bx_loader.gif" />
+    <Content Include="Html\js\jquery.bxslider\images\controls.png" />
+    <Content Include="Html\js\jquery.bxslider\jquery.bxslider.css" />
+    <Content Include="Html\js\jquery.bxslider\jquery.bxslider.js" />
+    <Content Include="Html\js\jquery.bxslider\jquery.bxslider.min.js" />
+    <Content Include="Html\js\jquery.bxslider\plugins\jquery.easing.1.3.js" />
+    <Content Include="Html\js\jquery.bxslider\plugins\jquery.fitvids.js" />
+    <Content Include="Html\js\jquery.incrementer\jquery-incrementer-1.0.js" />
+    <Content Include="Html\js\jquery.incrementer\jquery-tools-1.0.js" />
+    <Content Include="Html\product.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Html\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Html\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Html\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Html\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -237,7 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Html\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
