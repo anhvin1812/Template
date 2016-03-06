@@ -196,6 +196,8 @@
     <Content Include="Html\images\2.jpg" />
     <Content Include="Html\images\3.jpg" />
     <Content Include="Html\images\facebook-footer.png" />
+    <Content Include="Html\images\facebook.png" />
+    <Content Include="Html\images\google.png" />
     <Content Include="Html\images\instagram-footer.png" />
     <Content Include="Html\images\logo.png" />
     <Content Include="Html\images\pinterest-footer.png" />
@@ -212,6 +214,8 @@
     <Content Include="Html\images\sm2.jpg" />
     <Content Include="Html\images\sm3.jpg" />
     <Content Include="Html\images\twitter-footer.png" />
+    <Content Include="Html\images\twitter.png" />
+    <Content Include="Html\search.html" />
     <Content Include="Html\index.html" />
     <Content Include="Html\js\bootstrap.min.js" />
     <Content Include="Html\js\common.js" />
@@ -310,11 +314,10 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>21843</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:21843/</IISUrl>
+          <IISUrl>http://localhost:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://localhost:8080</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

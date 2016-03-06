@@ -23,18 +23,28 @@ footer,header,hgroup,menu,nav,section {
     display:block;
 }
 
-
+html {
+    min-height: 100%;
+    position: relative;
+}
 body {
     background-color: #ffffff;
     color: #8a8683;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
-    letter-spacing: 1px;
     overflow-x: hidden;
     margin: 0;
+    height: 100% !important;
+    padding-bottom: 110px;
 }
-
+/* Common */
+hr.divider {
+    background: #dddddd;
+    border: 0 none;
+    height: 1px;
+    margin: 15px 0;
+}
 a {
     color: #999999;
     text-decoration: none;
@@ -42,6 +52,10 @@ a {
 }
 a:hover {
     text-decoration: none;
+}
+
+.page-content {
+    margin-top: 88px;
 }
 
 header {
@@ -54,6 +68,7 @@ header {
     top: 0;
     width: 100%;
     z-index: 10000;
+    letter-spacing: 1px;
 }
 
 #logo-container {
@@ -202,7 +217,7 @@ header {
 
 /* Product list */
 .product-list {
-    
+    vertical-align: top;
 }
 .product-list .item {
     display: inline-block;
@@ -247,6 +262,8 @@ header {
     border: none;
     font-size: 12px;
     font-weight: bold;
+    text-transform: uppercase;
+    line-height: 24px;
 }
 .product-list .item .actions button:hover {
      background: #41a28e;
@@ -302,6 +319,73 @@ header {
     height: 60px;
 }
 
+#product .product-name {
+    color: #136352;
+}
+#product .title {
+    color: #555;
+    margin-right: 15px;
+}
+#product .sort-description {
+    border-bottom: 1px solid #ededed;
+    margin: 20px 0;
+    padding-bottom: 20px;
+}
+
+#product .quantity-box {
+    margin-bottom: 20px; 
+}
+#product .quantity-box .title {
+    line-height: 46px;
+}
+#product .quantity-box .title,
+#product .quantity-box #add-to-cart {
+    display: block;
+    float: left;
+}
+#product .quantity-box .input-group button {
+    color: #46b8da;
+}
+#product .input-group {
+    float: left;
+    margin-right: 30px;
+    padding-top: 8px;
+    width: 150px;
+}
+#product .price-box {
+    margin: 20px 0;
+    font-size: 2px;
+}
+
+#product .price {
+    color: #d60c0c;
+    display: block;
+    font-size: 36px;
+    font-weight: bold;
+}
+#product .old-price {
+    font-size: 16px;
+    font-style: italic;
+    text-decoration: line-through;
+}
+#product .social-box {
+    border-top: 1px solid #ededed;
+    padding-top: 20px; 
+}
+#product .social-item {
+    display: inline-block;
+    margin-right: 20px;
+}
+#specification {
+    margin: 20px 0;
+}
+#specification .tab-pane.active {
+    padding: 10px;
+}
+
+#comments {
+    margin-bottom: 20px;
+}
 
 
 
@@ -314,6 +398,9 @@ header {
     width: 100%;
     z-index: 10;
     margin-bottom: 0;
+    letter-spacing: 1px;
+    font-size: 12px;
+    letter-spacing: 0;
 }
 .title-section-left{
     float: left; 
@@ -457,12 +544,80 @@ select.sort-by option:hover {
 }
 
 
+/* Search page */
+#search-box {
+    text-align: center;
+}
+#search-box .title {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 48px;
+    margin: 20px;
+}
+#search-box input[type="text"] {
+    font-size: inherit;
+    max-width: 600px;
+    width: 80%;
+    display: inline-block;
+}
+#search-box .btn {
+    padding: 13px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    background: #1c4355;
+}
+#reach-result {
+    margin-bottom: 30px;
+}
+#reach-result .title {
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 36px;
+    margin: 20px 10px;
+    text-align: center;
+}
+.item-result{
+    margin-bottom: 30px;
+}
+.item-result .thumbnail {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    margin: 0 20px 20px 0;
+    float: left;
+}
+.item-result .thumbnail img{
+    max-width: 100%;
+    max-height: 100%;
+}
+.item-result .info {
+    float: left;
+    width: 100%;
+}
+.item-result .info a {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.item-result .info p {
+    
+}
+.item-result hr.divider {
+    overflow: hidden;
+    white-space: nowrap;
+    width: auto;
+}
 
 
 /* footer */
 footer {
     border-top: 1px solid #efefef;
-    font-family: "proxima-nova"
+    font-family: "proxima-nova";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 .footer-social {
     margin-top: -10px;
@@ -471,10 +626,19 @@ footer {
 }
 
 
+
+
+
 /* Bootstrap overiding*/
 .row {
     margin-left: 0;
     margin-right: 0;
+}
+#product .nav-tabs > li.active > a,
+#product .nav-tabs > li.active > a:focus, 
+#product .nav-tabs > li.active > a:hover {
+    color: #46b8da;
+    font-size: 16px;
 }
 
 /* EasyZoom overiding */
