@@ -837,6 +837,39 @@ select.sort-by option:hover {
 #customer-info {
     overflow: hidden;
 }
+.summary-toggle {
+    background: #fafafa;
+    border-bottom: 1px solid #e6e6e6;
+    border-top: 1px solid #e6e6e6;
+    color: #44a08c;
+    cursor: pointer;
+    padding: 1.25em 0;
+    text-align: left;
+}
+.summary-toggle-text {
+    position: relative;
+    padding-right: 13px;
+}
+.summary-toggle-text:after {
+    position: absolute;
+    right: 0;
+    top: 7px;
+    font-family: "Glyphicons Halflings";
+    font-size: 11px;
+    content: "\e259";
+}
+.summary-toggle.collapsed .summary-toggle-text:after {
+    content: "\e260";
+}
+.summary-toggle-text > span {
+    font-size: 16px;
+    margin-right: 10px;
+}
+.summary-toggle-total {
+    color: #4d4d4d;
+    font-weight: bold;
+    font-size: 16px;
+}
 
 
 
