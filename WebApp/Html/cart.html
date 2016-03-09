@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Cart</title>
+
+    <!-- Bootstrap -->
+    <link href="css/fonts.css" rel="stylesheet">
+    <link href="js/jquery.bxslider/jquery.bxslider.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+    <body>
+        <header>
+            <div id="top-line"></div>
+            <nav id="top-nav">
+                <div id="logo-container">
+                    <a href="#">
+                        <img src="images/logo.png" />
+                    </a>
+                </div>
+                <div id="collapse-menu">
+                    <div id="nav-right" class="navigation">
+                        <a href="#" class="gray-border-right">
+                            <span class="glyphicon glyphicon-search"></span>
+                            TÌM KIẾM
+                        </a>
+                        <a href="#" class="gray-border-right">
+                            <span class="glyphicon glyphicon-user"></span>
+                            Đăng nhập
+                        </a>
+                        <a href="#" class="gray-border-right">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            GIỎ HÀNG
+                            <span id="item-amount">4</span>
+                        </a>
+                    </div>
+                    <div id="nav-left" class="navigation">
+                        <a href="#">TRANG CHỦ</a>
+                        <a href="#">SẢN PHẨM</a>
+                        <a href="#">DỊCH VỤ</a>
+                        <a href="#">GIỚI THIỆU</a>
+                    </div>
+                </div>
+            </nav>
+        </header>
+       
+        <div id="content-container" class="cart-page">
+            <div class="title-section title-section-product page-title clearfix">
+                <div class="title-section-left">
+                    <h3><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng </h3>
+                    <div class="shop-display-count">
+                        Hiển thị
+                        <span id="display_num">4</span>
+                         sản phẩm
+                    </div>
+                </div>
+            </div>
+            <div id="cart-section" class="content">
+                <div class="cart-column-lables clearfix">
+                    <div class="cart-image">
+                        Sản phẩm
+                    </div>
+                    <div class="cart-name">
+                        Mô tả
+                    </div>
+                    <div class="cart-quantity">
+                        Số lượng
+                    </div>
+                    <div class="cart-price">
+                        Giá
+                    </div>
+                        <div class="cart-function">
+
+                        </div>
+                    </div>
+                <div class="cart-column">
+                    <div class="cart-image">
+                        <a href="#"><img src="images/product-10-270x270.png" /></a>
+                    </div>
+                    <div class="cart-name">
+                        <a href="#">Hourglass Jersey</a>
+                    </div>
+                    <div class="cart-quantity">
+                        <div class="input-group quantity">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </span>
+                            <input id="quantity" type="text" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cart-price">
+                        <span>12,000,000đ</span>
+
+                    </div>
+                    <div class="cart-function">
+                        <a class="btn-cart-remove" href="#">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+                </div><!-- /.cart-column -->
+                <div class="cart-column">
+                    <div class="cart-image">
+                        <a href="#"><img src="images/product-10-270x270.png" /></a>
+                    </div>
+                    <div class="cart-name">
+                        <a href="#">Hourglass Jersey</a>
+                    </div>
+                    <div class="cart-quantity">
+                        <div class="input-group quantity">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </span>
+                            <input id="quantity" type="text" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="cart-price">
+                        <span>12,000,000đ</span>
+
+                    </div>
+                    <div class="cart-function">
+                        <a class="btn-cart-remove" href="#">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+                </div><!-- /.cart-column -->
+                <div class="cart-column summary">
+                    THÀNH TIỀN: <span>12,000,000đ</span>
+                </div>
+                <div class="cart-column checkout">
+                    <button id="btn-update-cart" class="btn-white">Cập nhật</button>
+                    <button id="btn-checkout" class="btn-white">Thanh toán</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="navigation pull-right">
+                <a href="#">
+                    <img class="footer-social" src="images/facebook-footer.png" alt="Alternate Text" />
+                </a>
+                <a href="#">
+                    <img class="footer-social" src="images/twitter-footer.png" alt="Alternate Text" />
+                </a>
+                <a href="#">
+                    <img class="footer-social" src="images/pinterest-footer.png" alt="Alternate Text" />
+                </a>
+                <a href="#">
+                    <img class="footer-social" src="images/instagram-footer.png" alt="Alternate Text" />
+                </a>
+            </div>
+            <div class="navigation pull-left gray-border-right">
+                <a href="#">Developed by Tuan Le</a>
+            </div>
+        </footer>
+       
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Bxslider -->
+        <script src="js/jquery.bxslider/jquery.bxslider.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Common -->
+        <script src="js/common.js"></script>
+    </body>
+</html>
