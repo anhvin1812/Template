@@ -57,7 +57,7 @@
        
         <div id="content-container" class="cart-page">
             
-            <div id="checkout-wrap">
+            <div id="checkout-wrap" class="clearfix">
                 <div id="order-summary">
                     <div class="summary-toggle collapsed clearfix" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary">
                         <div class="summary-toggle-text pull-left">
@@ -66,7 +66,7 @@
                         <div class="summary-toggle-total pull-right">12,000,000đ</div>
                     </div>
                     <div class="collapse" id="collapseSummary">
-                        <table class="summary-items">
+                        <table class="order-items">
                             <tbody>
                                 <tr>
                                     <td class="image-column">
@@ -75,115 +75,103 @@
                                             <span class="product-quantity">3</span>
                                         </div>
                                     </td>
-                                    <td class="imgage-name">
+                                    <td class="name-column">
                                         Wrapture Jersey
                                     </td>
-                                    <td class="imgage-price">
+                                    <td class="price-column">
+                                        16,000,000đ
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="image-column">
+                                        <div class="thumbnail">
+                                            <img src="images/product-31-270x270.png" />
+                                            <span class="product-quantity">3</span>
+                                        </div>
+                                    </td>
+                                    <td class="name-column">
+                                        Wrapture Jersey
+                                    </td>
+                                    <td class="price-column">
                                         16,000,000đ
                                     </td>
                                 </tr>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3">
+                                        <span>Tổng</span>
+                                        <span class="pull-right"> 12,000,000đ</span>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div><!-- /#order-summary-->
                 
                 <div id="customer-info">
-                đâsdasdasdasdasdsads
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="txtFullName" class="col-sm-12">Họ tên <span class="required-field">*</span></label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="txtFullName" placeholder="Họ tên">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtEmail" class="col-sm-12">Email</label>
+                            <div class="col-sm-12">
+                                <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtPhoneNumber" class="col-sm-12">Điện thoại <span class="required-field">*</span></label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="txtPhoneNumber" placeholder="Điện thoại">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtAddress" class="col-sm-12">Địa chỉ <span class="required-field">*</span></label>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control" id="txtAddress" placeholder="số nhà, tên đường, phường/xã">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <select id="sltProvince" class="form-control">
+                                    <option>Tỉnh/Thành phố</option>
+                                    <option>Chuyển khoản</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <select id="sltDistrict" class="form-control">
+                                    <option>Quận/Huyện</option>
+                                    <option>Chuyển khoản</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sltPaymentMethod">Phương thức thanh toán</label>
+                            <select id="sltPaymentMethod" class="form-control">
+                                <option>Tiền mặt lúc nhận hàng</option>
+                                <option>Chuyển khoản</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" id="exampleInputFile">
+                            <p class="help-block">Example block-level help text here.</p>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Check me out
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
                 </div><!-- /#customer-info-->
 
             </div><!-- /#checkout-wrap-->
 
-            
-            <div id="cart-section" class="content">
-                <div class="cart-column-lables clearfix">
-                    <div class="cart-image">
-                        Sản phẩm
-                    </div>
-                    <div class="cart-name">
-                        Mô tả
-                    </div>
-                    <div class="cart-quantity">
-                        Số lượng
-                    </div>
-                    <div class="cart-price">
-                        Giá
-                    </div>
-                    <div class="cart-function">
-
-                    </div>
-                </div>
-                <div class="cart-column">
-                    <div class="cart-image">
-                        <a href="#"><img src="images/product-10-270x270.png" /></a>
-                    </div>
-                    <div class="cart-name">
-                        <a href="#">Hourglass Jersey</a>
-                    </div>
-                    <div class="cart-quantity">
-                        <div class="input-group quantity">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
-                                    <span class="glyphicon glyphicon-minus"></span>
-                                </button>
-                            </span>
-                            <input id="quantity" type="text" name="quantity" class="form-control input-number" value="1" min="1" max="10">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="cart-price">
-                        <span>12,000,000đ</span>
-
-                    </div>
-                    <div class="cart-function">
-                        <a class="btn-cart-remove" href="#">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
-                    </div>
-                </div><!-- /.cart-column -->
-                <div class="cart-column">
-                    <div class="cart-image">
-                        <a href="#"><img src="images/product-10-270x270.png" /></a>
-                    </div>
-                    <div class="cart-name">
-                        <a href="#">Hourglass Jersey</a>
-                    </div>
-                    <div class="cart-quantity">
-                        <div class="input-group quantity">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
-                                    <span class="glyphicon glyphicon-minus"></span>
-                                </button>
-                            </span>
-                            <input id="quantity" type="text" name="quantity" class="form-control input-number" value="1" min="1" max="10">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
-                                    <span class="glyphicon glyphicon-plus"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="cart-price">
-                        <span>12,000,000đ</span>
-
-                    </div>
-                    <div class="cart-function">
-                        <a class="btn-cart-remove" href="#">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
-                    </div>
-                </div><!-- /.cart-column -->
-                <div class="cart-column summary">
-                    THÀNH TIỀN: <span>12,000,000đ</span>
-                </div>
-                <div class="cart-column checkout">
-                    <button id="btn-update-cart" class="btn-white">Cập nhật</button>
-                    <button id="btn-checkout" class="btn-white">Thanh toán</button>
-                </div>
-            </div>
         </div>
 
         <footer>
@@ -212,6 +200,8 @@
         <script src="js/jquery.bxslider/jquery.bxslider.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+        <!-- Boostrap plugin minus & plus -->
+        <script src="js/jquery.bootsnipp/jquery.bootsnipp.js"></script>
         <!-- Common -->
         <script src="js/common.js"></script>
     </body>

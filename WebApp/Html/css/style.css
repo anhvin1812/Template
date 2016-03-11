@@ -833,9 +833,14 @@ select.sort-by option:hover {
 #order-summary {
     float: right;
     width: 38%;
+    padding: 0 15px;
 }
 #customer-info {
+    background: #fff;
+    
     overflow: hidden;
+    border-right: 1px solid #e1e1e1;
+    height: 100%;
 }
 .summary-toggle {
     background: #fafafa;
@@ -870,6 +875,57 @@ select.sort-by option:hover {
     font-weight: bold;
     font-size: 16px;
 }
+.order-items {
+    width: 100%;
+}
+.order-items tbody td {
+    vertical-align: middle;
+    padding-top: 1.1em;
+}
+.order-items .image-column {
+    width: 65px;
+    padding-bottom: 20px;
+}
+.order-items .name-column {
+    padding-left: 1em;
+    text-align: left;
+}
+.order-items .price-column {
+    padding-left: 1em;
+    text-align: right;
+}
+.image-column .thumbnail{
+    width: 64px;
+    height: 64px;
+    text-align: center;
+    margin: 0;
+    position: relative;
+}
+.image-column .thumbnail img {
+    height: 100%;
+    max-width: 100%;
+}
+.image-column .thumbnail .product-quantity {
+    position: absolute;
+    background-color: rgba(153, 153, 153, 0.9);
+    border-radius: 2em;
+    color: #fff;
+    font-size: 0.85714em;
+    font-weight: 500;
+    min-width: 0.8em;
+    padding: 0.15em 0.6em;
+    right: -0.75em;
+    text-align: center;
+    top: -0.75em;
+    z-index: 2;
+}
+.order-items tfoot td {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    color: #4b4b4b;
+    font-size: 1.2em;
+    padding: 20px 0;
+}
 
 
 
@@ -890,22 +946,15 @@ footer {
 }
 
 /* Form controls */
-input[type="text"] {
-    background-color: white;
-    color: #333333;
-    border-radius: 4px;
-    border: none;
-    box-sizing: border-box;
-    display: block;
-    padding: 0.94em 0.8em;
-    width: 100%;
-    transition: all 0.2s ease-out 0s;
-    box-shadow: 0 0 0 1px #d9d9d9;
+.form-control:focus {
+    border: 1px solid #44a08c;
+    box-shadow: none;
 }
-input[type="text"]:focus {
-    box-shadow: 0 0 0 2px #44a08c;
+.required-field {
+    color: #f45858;
+    display: inline;
+    font-size: 1.2em;
 }
-
 
 /* Bootstrap overiding*/
 .row {
@@ -918,6 +967,10 @@ input[type="text"]:focus {
 #comments .nav-tabs > li.active > a{
     color: #46b8da;
     font-size: 16px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
 }
 
 /* EasyZoom overiding */
