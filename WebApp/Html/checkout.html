@@ -56,16 +56,15 @@
         </header>
        
         <div id="content-container" class="cart-page">
-            
-            <div id="checkout-wrap" class="clearfix">
+            <div id="checkout-wrap" class="container">
                 <div id="order-summary">
-                    <div class="summary-toggle collapsed clearfix" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="false" aria-controls="collapseSummary">
+                    <div class="summary-toggle collapsed clearfix hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="true" aria-controls="collapseSummary">
                         <div class="summary-toggle-text pull-left">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Đơn hàng
                         </div>
                         <div class="summary-toggle-total pull-right">12,000,000đ</div>
                     </div>
-                    <div class="collapse" id="collapseSummary">
+                    <div class="collapse in" id="collapseSummary">
                         <table class="order-items">
                             <tbody>
                                 <tr>
@@ -110,6 +109,18 @@
                 </div><!-- /#order-summary-->
                 
                 <div id="customer-info">
+                    <!--<div class="row">
+                        <div class="col-sm-12">
+                            <ul class="breadcrumb">
+                                <li>
+                                    <a href="#">Cart</a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">Checkout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>-->
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label for="txtFullName" class="col-sm-12">Họ tên <span class="required-field">*</span></label>
@@ -150,24 +161,28 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="sltPaymentMethod">Phương thức thanh toán</label>
-                            <select id="sltPaymentMethod" class="form-control">
-                                <option>Tiền mặt lúc nhận hàng</option>
-                                <option>Chuyển khoản</option>
-                            </select>
+                            <div class="col-sm-12">
+                                <label for="sltPaymentMethod">Phương thức thanh toán</label>
+                                <select id="sltPaymentMethod" class="form-control">
+                                    <option>Tiền mặt lúc nhận hàng</option>
+                                    <option>Chuyển khoản</option>
+                                </select>    
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
+                        <div class="form-group checkout-footer">
+                            <div class="wrap-vertical-align-center col-sm-12 clearfix">
+                                <div class="align-center-container w50p">
+                                    <a class="align-center-container" href="#">
+                                        <span class="glyphicon glyphicon-menu-left"></span>
+                                        Quay lại giỏ hàng
+                                    </a>
+                                </div>
+                                <div class="align-center-container text-right w50p">
+                                    <button type="submit" class="align-center-container btn btn-green btn-lg">Tiếp tục thanh toán</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Check me out
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                    </form><!-- /form-->
                 </div><!-- /#customer-info-->
 
             </div><!-- /#checkout-wrap-->

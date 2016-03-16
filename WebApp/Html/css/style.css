@@ -39,12 +39,7 @@ body {
     padding-bottom: 78px;
 }
 /* Common */
-hr.divider {
-    background: #dddddd;
-    border: 0 none;
-    height: 1px;
-    margin: 15px 0;
-}
+
 a {
     color: #44a08c;
     text-decoration: none;
@@ -53,6 +48,26 @@ a {
 a:hover {
     text-decoration: none;
 }
+.btn-green {
+    background: #44a08c;
+    color: #fff;
+    font-size: 1em;
+    padding: 1.4em 1.7em;
+}
+.btn-green:hover {
+    background: #357c6d;
+    color: #fff;
+}
+hr.divider {
+    background: #dddddd;
+    border: 0 none;
+    height: 1px;
+    margin: 15px 0;
+}
+.w50p {
+    width: 50%;
+}
+
 .page-content {
     margin-top: 88px;
 }
@@ -719,8 +734,7 @@ select.sort-by option:hover {
 
 /* Cart */
 .cart-page {
-    background: #efefef;
-    padding-bottom: 20px;
+    
 }
 #cart-section {
     background: #fff;
@@ -829,18 +843,37 @@ select.sort-by option:hover {
 
 #checkout-wrap {
     margin-top: 88px;
+    display: flex;
+    flex-direction: row-reverse;
+    flex: 1 0 auto;
 }
 #order-summary {
     float: right;
     width: 38%;
     padding: 0 15px;
+    position: relative;
+    padding: 4em 0 0 4%;
+}
+#order-summary:after {
+    background: #fafafa;
+    bottom: 0;
+    box-shadow: 0 -1px 0 #e1e1e1 inset;
+    content: "";
+    display: block;
+    left: -100%;
+    position: absolute;
+    top: 0;
+    width: 300%;
+    z-index: -1;
+    box-shadow: 1px 0 0 #e1e1e1 inset;
+    left: 0;
 }
 #customer-info {
-    background: #fff;
-    
-    overflow: hidden;
-    border-right: 1px solid #e1e1e1;
-    height: 100%;
+    float: left;
+    flex: 1 0 auto;
+    flex-direction: column;
+    display: flex;
+    padding: 4em 5% 0 0;
 }
 .summary-toggle {
     background: #fafafa;
@@ -920,11 +953,31 @@ select.sort-by option:hover {
     z-index: 2;
 }
 .order-items tfoot td {
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #e1e1e1;
+    border-top: 1px solid #e1e1e1;
     color: #4b4b4b;
     font-size: 1.2em;
     padding: 20px 0;
+}
+.wrap-vertical-align-center {
+    font-size: 0;
+}
+.wrap-vertical-align-center:before {
+    /* this is the important part */
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+}
+.wrap-vertical-align-center:before, .align-center-container {
+    /* these are the important styles for the centered element: */
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+}
+.checkout-footer {
+    margin: 30px;
 }
 
 
@@ -971,6 +1024,15 @@ footer {
 .form-horizontal .form-group {
     margin-left: 0;
     margin-right: 0;
+}
+
+.breadcrumb > li + li::before {
+    content: "\e258";
+    font-family: "Glyphicons Halflings";
+    font-size: 10px;
+}
+.breadcrumb > .active a {
+    color: #999;
 }
 
 /* EasyZoom overiding */
