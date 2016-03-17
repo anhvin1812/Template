@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{60
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "App.Database", "App.Database\App.Database.sqlproj", "{70D4C46C-82E1-40D8-98C5-1417549913EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Entities", "App.Entities\App.Entities.csproj", "{252EAFCD-1245-43F6-8F30-A0219BF26474}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{70D4C46C-82E1-40D8-98C5-1417549913EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70D4C46C-82E1-40D8-98C5-1417549913EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{70D4C46C-82E1-40D8-98C5-1417549913EA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{252EAFCD-1245-43F6-8F30-A0219BF26474}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{252EAFCD-1245-43F6-8F30-A0219BF26474}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{252EAFCD-1245-43F6-8F30-A0219BF26474}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{252EAFCD-1245-43F6-8F30-A0219BF26474}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

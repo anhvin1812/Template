@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[UserRoles]
+(
+	[Id] NVARCHAR(128) NOT NULL,
+	[Name] NVARCHAR(256) NOT NULL,
+
+    CONSTRAINT [PK_UserRole_id] PRIMARY KEY CLUSTERED ([Id] ASC),
+	CONSTRAINT [UK_UserRole_Name] UNIQUE NONCLUSTERED ([Name] ASC)
+);
+
