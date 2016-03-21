@@ -18,9 +18,13 @@ namespace App.Core.Repositories
 
         IQueryable<TEntity> Get<TEntity>() where TEntity : class;
 
+        IQueryable<TEntity> Get<TEntity>(string storedProcedureName, params object[] args);
+
         Guid InstanceId { get; }
 
         int SaveChanges();
+
+        Task<int> SaveChangesAsync();
 
         void CommitTransaction();
 

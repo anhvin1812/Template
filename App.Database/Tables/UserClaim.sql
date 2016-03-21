@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[UserClaims]
+﻿CREATE TABLE [dbo].[UserClaim]
 (
     [Id] INT IDENTITY(1,1) NOT NULL,
 	[UserId] NVARCHAR (128) NOT NULL,
@@ -6,5 +6,5 @@
     [ClaimValue] NVARCHAR (MAX) NULL,
 
     CONSTRAINT [PK_UserClaim_ClaimID] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_UserClaim_User] FOREIGN KEY ([UserID]) REFERENCES [dbo].[Users] ([Id]) ON DELETE CASCADE
+    CONSTRAINT [FK_UserClaim_User] FOREIGN KEY ([UserID]) REFERENCES [dbo].[User] ([Id]) ON DELETE CASCADE
 );

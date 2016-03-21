@@ -17,7 +17,12 @@ namespace App.Entities.IdentityManagement
         public bool PhoneNumberConfirmed { get; set; }
         public bool TwoFactorEnabled { get; set; }
         public DateTime LockoutEndDateUtc { get; set; }
+        public bool LockoutEnable { get; set; }
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
+
+        public virtual ICollection<UserRole> Roles { get; set; }
+        public virtual ICollection<UserClaim> Claims { get; set; }
+        public virtual ICollection<UserLogin> Logins { get; set; } 
     }
 }

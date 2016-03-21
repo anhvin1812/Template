@@ -45,6 +45,7 @@
     <Compile Include="IdentityManagement\UserLogin.cs" />
     <Compile Include="IdentityManagement\UserRole.cs" />
     <Compile Include="IdentityManagement\User.cs" />
+    <Compile Include="IObjectState.cs" />
     <Compile Include="ObjecState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

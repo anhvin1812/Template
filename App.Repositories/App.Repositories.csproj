@@ -40,7 +40,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="IdentityManagement\IUserRepository.cs" />
+    <Compile Include="IdentityManagement\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\App.Core\App.Core.csproj">
+      <Project>{4c9e72ca-ec84-4661-bad2-9208c3065dc2}</Project>
+      <Name>App.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\App.Data.EntityFramework\App.Data.EntityFramework.csproj">
+      <Project>{7c462465-b833-4abd-82e1-8549645fdf53}</Project>
+      <Name>App.Data.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\App.Entities\App.Entities.csproj">
+      <Project>{252eafcd-1245-43f6-8f30-a0219bf26474}</Project>
+      <Name>App.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

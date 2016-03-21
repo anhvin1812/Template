@@ -61,11 +61,11 @@
     <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Users.sql" />
-    <Build Include="Tables\UserRoles.sql" />
+    <Build Include="Tables\User.sql" />
+    <Build Include="Tables\UserRole.sql" />
     <Build Include="Tables\UserUserRole.sql" />
-    <Build Include="Tables\UserLogins.sql" />
-    <Build Include="Tables\UserClaims.sql" />
+    <Build Include="Tables\UserLogin.sql" />
+    <Build Include="Tables\UserClaim.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="App.Database.refactorlog" />
