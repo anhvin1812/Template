@@ -4,10 +4,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using App.Core.Repositories;
 using App.Entities;
+using App.Infastructure.IdentityManagement;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Data.EntityFramework
 {
-    public abstract class DbContextBase : DbContext, IDbContext
+    public abstract class DbContextBase : IdentityDbContext<User, Role, int, UserLogin, UserRole, UserClaim>, IDbContext
     {
         private readonly Guid _instanceId;
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Data.EntityFramework.Mapping;
+using App.Infastructure.IdentityManagement;
 
 namespace App.Data.EntityFramework
 {
@@ -38,9 +39,17 @@ namespace App.Data.EntityFramework
             Database.Log = s => Debug.Write(s);
             #endif
 
-            IdentityManagementMap.Configure(modelBuilder);
-        }
+            // Add entities for Identity
+            modelBuilder.Entity<UserRole>().ToTable("UserRole", "Security");
+            modelBuilder.Entity<UserLogin>().ToTable("UserLogin", "Security");
+            modelBuilder.Entity<UserClaim>().ToTable("UserClaim", "Security");
+            modelBuilder.Entity<Role>().ToTable("Role", "Security");
+            modelBuilder.Entity<User>().ToTable("User", "Security");
 
+            // Mapping
+            IdentityManagementMap.Configure(modelBuilder);
+
+        }
 
         private bool disposed = false;
 
@@ -55,6 +64,5 @@ namespace App.Data.EntityFramework
             }
             base.Dispose(isDisposing);
         }
-    }
     }
 }

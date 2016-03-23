@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[UserLogin]
 (
-    [UserId] NVARCHAR (128) NOT NULL,
+    [UserId] INT NOT NULL,
     [LoginProvider] NVARCHAR (128) NOT NULL,
     [ProviderKey]   NVARCHAR (128) NOT NULL,
 

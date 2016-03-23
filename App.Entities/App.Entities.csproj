@@ -41,15 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityBase.cs" />
-    <Compile Include="IdentityManagement\UserClaim.cs" />
-    <Compile Include="IdentityManagement\UserLogin.cs" />
-    <Compile Include="IdentityManagement\UserRole.cs" />
-    <Compile Include="IdentityManagement\User.cs" />
     <Compile Include="IObjectState.cs" />
     <Compile Include="ObjecState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="IdentityManagement\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

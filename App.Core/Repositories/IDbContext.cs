@@ -16,6 +16,7 @@ namespace App.Core.Repositories
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
         Task<int> SaveChangesAsync();
+
         void SyncObjectState(object entity);
     }
 }

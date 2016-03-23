@@ -7,7 +7,7 @@ using App.Core.Repositories;
 
 namespace App.Data.EntityFramework
 {
-    public interface IMinhKhangDbContext : IDatabaseContext
+    public interface IMinhKhangDbContext : IDbContext
     {
 
     }

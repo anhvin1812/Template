@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using App.Core.Repositories;
 using App.Data.EntityFramework;
-using App.Entities.IdentityManagement;
 
 namespace App.Repositories.IdentityManagement
 {
@@ -29,8 +28,6 @@ namespace App.Repositories.IdentityManagement
         }
 
         //Other Methods ignored for bravity
-
-        }
 
     }
 }
