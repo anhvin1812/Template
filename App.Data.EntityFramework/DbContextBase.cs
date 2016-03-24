@@ -3,8 +3,8 @@ using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;
 using App.Core.Repositories;
+using App.Core.Identity;
 using App.Entities;
-using App.Infastructure.IdentityManagement;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Data.EntityFramework

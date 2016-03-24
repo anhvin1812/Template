@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using App.Core.Identity;
 using App.Data.EntityFramework.Mapping;
-using App.Infastructure.IdentityManagement;
 
 namespace App.Data.EntityFramework
 {
@@ -23,7 +17,19 @@ namespace App.Data.EntityFramework
             // Sets DateTimeKinds on DateTimes of Entities, so that Dates are automatically set to be UTC.
             // Currently only processes CleanEntityBase entities. All EntityBase entities remain unchanged.
             // http://stackoverflow.com/questions/4648540/entity-framework-datetime-and-utc
-           // ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += (sender, e) => DateTimeKindAttribute.Apply(e.Entity);
+            // ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += (sender, e) => DateTimeKindAttribute.Apply(e.Entity);
+        }
+
+        static MinhKhangDbContext()
+        {
+            // Set the database intializer which is run once during application start
+            // This seeds the database with admin user credentials and admin role
+            Database.SetInitializer<MinhKhangDbContext>(new ApplicationDbInitializer());
+        }
+
+        public static MinhKhangDbContext Create()
+        {
+            return new MinhKhangDbContext();
         }
 
         public new IDbSet<T> Set<T>() where T : class
@@ -35,9 +41,9 @@ namespace App.Data.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
-            #if DEBUG
+#if DEBUG
             Database.Log = s => Debug.Write(s);
-            #endif
+#endif
 
             // Add entities for Identity
             modelBuilder.Entity<UserRole>().ToTable("UserRole", "Security");

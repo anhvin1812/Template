@@ -3,31 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using App.Core.Identity;
 using App.Core.Repositories;
-using App.Data.EntityFramework;
+using App.Infastructure.IdentityManagement;
+using App.Core.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace App.Repositories.IdentityManagement
 {
     public class UserRepository : RepositoryBase, IUserRepository
     {
-        public UserRepository(IMinhKhangDbContext databaseContext)
+        private ApplicationUserManager _ApplicationUserManager;
+        public UserRepository(IMinhKhangDatabaseContext databaseContext)
             : base(databaseContext)
         {
         }
 
-
-        private IMinhKhangDbContext DatabaseContext
+         protected ApplicationUserManager AppUserManager
         {
-            get { return DatabaseContext as IMinhKhangDbContext; }
+            get
+            {
+                return _ApplicationUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
         }
 
-        public async Task CreateAsync(User user)
+
+        private IMinhKhangDatabaseContext DatabaseContext
         {
-            DatabaseContext.Insert(user);
-            await DatabaseContext.SaveChangesAsync();
+            get { return DatabaseContext as IMinhKhangDatabaseContext; }
         }
 
-        //Other Methods ignored for bravity
+        public User GetUserById(int id)
+        {
+            var result = _ApplicationUserManager.Users.FirstOrDefault(x => x.Id == id);
+            return result;    
+        }
+
+        public void Create(User user)
+        {
+            var result = _ApplicationUserManager.Create(user);
+        }
+        
 
     }
 }

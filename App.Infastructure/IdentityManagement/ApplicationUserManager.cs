@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
+using App.Core.Identity;
+using App.Core.Repositories;
+using App.Data.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -7,7 +10,7 @@ using Microsoft.Owin;
 
 namespace App.Infastructure.IdentityManagement
 {
-    public class ApplicationUserManager : UserManager<User, int>, IApplicationUserManager
+    public class ApplicationUserManager : UserManager<User, int>
     {
         public ApplicationUserManager(IUserStore<User,int> store)
             : base(store)
@@ -15,11 +18,13 @@ namespace App.Infastructure.IdentityManagement
         }
 
         public static ApplicationUserManager GetUserManager(IdentityFactoryOptions<ApplicationUserManager> options,
-            DbContext dbContext)
+            IOwinContext owinContext)
         {
 
-            var store = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(dbContext);
+            var store = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(owinContext.Get<MinhKhangDbContext>());
+            store.AutoSaveChanges = false;
             var appUserManager = new ApplicationUserManager(store);
+
 
             ////Configure validation logic for usernames
             //appUserManager.UserValidator = new CustomUserValidator(appUserManager)
