@@ -20,17 +20,17 @@ namespace App.Data.EntityFramework
             // ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += (sender, e) => DateTimeKindAttribute.Apply(e.Entity);
         }
 
-        static MinhKhangDbContext()
-        {
-            // Set the database intializer which is run once during application start
-            // This seeds the database with admin user credentials and admin role
-            Database.SetInitializer<MinhKhangDbContext>(new ApplicationDbInitializer());
-        }
+        //public MinhKhangDbContext()
+        //{
+        //    // Set the database intializer which is run once during application start
+        //    // This seeds the database with admin user credentials and admin role
+        //    Database.SetInitializer(new ApplicationDbInitializer());
+        //}
 
-        public static MinhKhangDbContext Create()
-        {
-            return new MinhKhangDbContext();
-        }
+        //public static MinhKhangDbContext Create()
+        //{
+        //    return  new MinhKhangDbContext();
+        //}
 
         public new IDbSet<T> Set<T>() where T : class
         {

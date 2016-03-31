@@ -7,8 +7,8 @@
     <ProjectGuid>{002A2C84-B10C-4C92-BF46-A3800CC0AEB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>App.Infastructure</RootNamespace>
-    <AssemblyName>App.Infastructure</AssemblyName>
+    <RootNamespace>App.Infrastructure</RootNamespace>
+    <AssemblyName>App.Infrastructure</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -89,9 +89,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdentityManagement\ApplicationDbInitializer.cs" />
     <Compile Include="IdentityManagement\ApplicationRoleManager.cs" />
     <Compile Include="IdentityManagement\ApplicationUserManager.cs" />
     <Compile Include="IdentityManagement\IdentityEmail.cs" />
+    <Compile Include="IdentityManagement\Migrations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

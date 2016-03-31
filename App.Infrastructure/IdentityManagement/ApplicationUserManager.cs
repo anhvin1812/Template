@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Data.Entity;
 using App.Core.Identity;
-using App.Core.Repositories;
 using App.Data.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace App.Infastructure.IdentityManagement
+namespace App.Infrastructure.IdentityManagement
 {
     public class ApplicationUserManager : UserManager<User, int>
     {
@@ -26,7 +24,7 @@ namespace App.Infastructure.IdentityManagement
             var appUserManager = new ApplicationUserManager(store);
 
 
-            ////Configure validation logic for usernames
+            //Configure validation logic for usernames
             //appUserManager.UserValidator = new CustomUserValidator(appUserManager)
             //{
             //    AllowOnlyAlphanumericUserNames = true,

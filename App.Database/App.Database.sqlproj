@@ -70,4 +70,7 @@
   <ItemGroup>
     <RefactorLog Include="App.Database.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Database.publish.xml" />
+  </ItemGroup>
 </Project>

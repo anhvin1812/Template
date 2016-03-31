@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using App.Data.EntityFramework;
+﻿using App.Data.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace App.Infastructure.IdentityManagement
+namespace App.Infrastructure.IdentityManagement
 {
     public class ApplicationRoleManager : RoleManager<IdentityRole>
     {

@@ -25,7 +25,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "App.Database", "App.Databas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Entities", "App.Entities\App.Entities.csproj", "{252EAFCD-1245-43F6-8F30-A0219BF26474}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructure", "App.Infastructure\App.Infrastructure.csproj", "{002A2C84-B10C-4C92-BF46-A3800CC0AEB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Infrastructure", "App.Infrastructure\App.Infrastructure.csproj", "{002A2C84-B10C-4C92-BF46-A3800CC0AEB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

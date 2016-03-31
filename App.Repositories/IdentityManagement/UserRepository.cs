@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using App.Core.Identity;
 using App.Core.Repositories;
-using App.Infastructure.IdentityManagement;
 using App.Core.Identity;
+using App.Infrastructure.IdentityManagement;
 using Microsoft.AspNet.Identity;
 
 namespace App.Repositories.IdentityManagement
@@ -19,13 +19,13 @@ namespace App.Repositories.IdentityManagement
         {
         }
 
-         protected ApplicationUserManager AppUserManager
-        {
-            get
-            {
-                return _ApplicationUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-        }
+        // protected ApplicationUserManager AppUserManager
+        //{
+        //    get
+        //    {
+        //        return _ApplicationUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        //    }
+        //}
 
 
         private IMinhKhangDatabaseContext DatabaseContext

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace App.Infastructure.IdentityManagement
+namespace App.Infrastructure.IdentityManagement
 {
     public class IdentityEmail : IIdentityMessageService
     {
