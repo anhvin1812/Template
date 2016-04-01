@@ -1,9 +1,5 @@
 ﻿using System.Data.Entity;
-using System.Web;
-using App.Core.Identity;
 using App.Data.EntityFramework;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 
 public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<MinhKhangDbContext>
 {

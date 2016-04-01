@@ -1,6 +1,6 @@
 ﻿using System;
-using App.Core.Identity;
 using App.Data.EntityFramework;
+using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,7 +20,7 @@ namespace App.Infrastructure.IdentityManagement
         {
 
             var store = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(owinContext.Get<MinhKhangDbContext>());
-            store.AutoSaveChanges = false;
+            store.AutoSaveChanges = true;
             var appUserManager = new ApplicationUserManager(store);
 
 

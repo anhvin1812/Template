@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using App.Infrastructure.IdentityManagement;
 
 namespace App.Website
 {
@@ -13,7 +14,7 @@ namespace App.Website
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //ApplicationIdentity.CreateIdentityUser();
+           Migrations.Initialize();
         }
     }
 }

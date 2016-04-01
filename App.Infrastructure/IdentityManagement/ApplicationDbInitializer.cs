@@ -1,13 +1,13 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using App.Core.Identity;
 using App.Data.EntityFramework;
+using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Infrastructure.IdentityManagement
 {
-    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<MinhKhangDbContext>
+    public class ApplicationDbInitializer : DropCreateDatabaseAlways<MinhKhangDbContext>
     {
     
         protected override void Seed(MinhKhangDbContext context)
@@ -19,11 +19,12 @@ namespace App.Infrastructure.IdentityManagement
 
         public static void InitializeIdentityForEF(MinhKhangDbContext context)
         {
-            var store = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(context);
+            //context = new MinhKhangDbContext("MinhKhang");
+            var userStore = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(context);
+            var roleStore = new RoleStore<Role, int, UserRole>(context);
 
-
-            var userManager = new UserManager<User, int>(store);
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new ApplicationUserManager(userStore);
+            var roleManager = new ApplicationRoleManager(roleStore);
 
             //var userManager = HttpContext
             //.Current.GetOwinContext()
@@ -39,29 +40,31 @@ namespace App.Infrastructure.IdentityManagement
                 Email = "leanhvin@gmail.com",
                 EmailConfirmed = true,
             };
-
+            //context.Users.Add(user);
             userManager.Create(user, "Admin@123");
 
             if (!roleManager.Roles.Any())
             {
-                roleManager.Create(new IdentityRole { Name = "Admin" });
-                roleManager.Create(new IdentityRole { Name = "User" });
+                roleManager.Create(new Role { Name = "Admin" });
+                roleManager.Create(new Role { Name = "User" });
             }
 
             var adminUser = userManager.FindByName("Admin");
 
             userManager.AddToRoles(adminUser.Id, new string[] { "Admin" });
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+              //You can use the DbSet<T>.AddOrUpdate() helper extension method 
+              //to avoid creating duplicate seed data. E.g.
+            
+              //  context.People.AddOrUpdate(
+              //    p => p.FullName,
+              //    new Person { FullName = "Andrew Peters" },
+              //    new Person { FullName = "Brice Lambson" },
+              //    new Person { FullName = "Rowan Miller" }
+              //  );
+            
+
+            context.SaveChanges();
         }
 
 

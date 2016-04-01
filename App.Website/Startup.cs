@@ -1,4 +1,7 @@
-﻿using App.Website;
+﻿using System.Configuration;
+using System.Data.Entity;
+using App.Infrastructure.IdentityManagement;
+using App.Website;
 using Microsoft.Owin;
 using Owin;
 

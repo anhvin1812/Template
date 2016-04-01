@@ -109,13 +109,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Core\App.Core.csproj">
-      <Project>{4C9E72CA-EC84-4661-BAD2-9208C3065DC2}</Project>
+      <Project>{4c9e72ca-ec84-4661-bad2-9208c3065dc2}</Project>
       <Name>App.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\App.Entities\App.Entities.csproj">
       <Project>{252eafcd-1245-43f6-8f30-a0219bf26474}</Project>
       <Name>App.Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

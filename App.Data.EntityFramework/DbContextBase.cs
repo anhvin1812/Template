@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using App.Core.Repositories;
-using App.Core.Identity;
 using App.Entities;
+using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Data.EntityFramework
@@ -18,6 +19,26 @@ namespace App.Data.EntityFramework
         {
             _instanceId = Guid.NewGuid();
             //Configuration.LazyLoadingEnabled = false;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+#if DEBUG
+            Database.Log = s => Debug.Write(s);
+#endif
+
+            // Add entities for Identity
+            modelBuilder.Entity<UserRole>().ToTable("UserRole", "Security");
+            modelBuilder.Entity<UserLogin>().ToTable("UserLogin", "Security");
+            modelBuilder.Entity<UserClaim>().ToTable("UserClaim", "Security");
+            modelBuilder.Entity<Role>().ToTable("Role", "Security");
+            modelBuilder.Entity<User>().ToTable("User", "Security");
+
+            // Mapping
+           // IdentityManagementMap.Configure(modelBuilder);
+
         }
 
         public Guid InstanceId

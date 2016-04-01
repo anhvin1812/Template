@@ -7,7 +7,7 @@ namespace App.Data.EntityFramework
 {
     public class MinhKhangDbContext : DbContextBase, IMinhKhangDbContext
     {
-        public MinhKhangDbContext(string nameOrConnectionString) :
+        public MinhKhangDbContext(string nameOrConnectionString ="MinhKhang") :
             base(nameOrConnectionString)
         {
             Database.SetInitializer<MinhKhangDbContext>(null);
@@ -19,6 +19,11 @@ namespace App.Data.EntityFramework
             // http://stackoverflow.com/questions/4648540/entity-framework-datetime-and-utc
             // ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += (sender, e) => DateTimeKindAttribute.Apply(e.Entity);
         }
+
+        //static MinhKhangDbContext()
+        //{
+        //    Database.SetInitializer<MinhKhangDbContext>(null);
+        //}
 
         //public MinhKhangDbContext()
         //{
@@ -46,11 +51,11 @@ namespace App.Data.EntityFramework
 #endif
 
             // Add entities for Identity
-            modelBuilder.Entity<UserRole>().ToTable("UserRole", "Security");
-            modelBuilder.Entity<UserLogin>().ToTable("UserLogin", "Security");
-            modelBuilder.Entity<UserClaim>().ToTable("UserClaim", "Security");
-            modelBuilder.Entity<Role>().ToTable("Role", "Security");
-            modelBuilder.Entity<User>().ToTable("User", "Security");
+            //modelBuilder.Entity<UserRole>().ToTable("UserRole", "Security");
+            //modelBuilder.Entity<UserLogin>().ToTable("UserLogin", "Security");
+            //modelBuilder.Entity<UserClaim>().ToTable("UserClaim", "Security");
+            //modelBuilder.Entity<Role>().ToTable("Role", "Security");
+            //modelBuilder.Entity<User>().ToTable("User", "Security");
 
             // Mapping
             IdentityManagementMap.Configure(modelBuilder);
