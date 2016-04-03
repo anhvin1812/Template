@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using App.Core.Identity;
 using App.Core.Repositories;
-using App.Core.Identity;
 using App.Infrastructure.IdentityManagement;
 using Microsoft.AspNet.Identity;
+using User = App.Entities.IdentityManagement.User;
 
 namespace App.Repositories.IdentityManagement
 {

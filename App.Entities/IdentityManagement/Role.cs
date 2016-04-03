@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Entities.IdentityManagement
 {
-    public class Role : IdentityRole<int, UserRole>
+    [Serializable]
+    public class Role : IdentityRole<int, UserRole>, IObjectState
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Role"/> class.
@@ -14,5 +17,8 @@ namespace App.Entities.IdentityManagement
         /// </summary>
         /// <param name="name">The name.</param>
         public Role(string name) { Name = name; }
+
+        [NotMapped]
+        public ObjectState State { get; set; }
     }
 }

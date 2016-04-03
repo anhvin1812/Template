@@ -7,17 +7,17 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Infrastructure.IdentityManagement
 {
-    public class ApplicationDbInitializer : DropCreateDatabaseAlways<MinhKhangDbContext>
+    public class ApplicationDbInitializer : DropCreateDatabaseIfModelChanges<MinhKhangDbContext>
     {
     
         protected override void Seed(MinhKhangDbContext context)
         {
-            InitializeIdentityForEF(context);
+            InitializeIdentity(context);
             base.Seed(context);
         }
 
 
-        public static void InitializeIdentityForEF(MinhKhangDbContext context)
+        public static void InitializeIdentity(MinhKhangDbContext context)
         {
             //context = new MinhKhangDbContext("MinhKhang");
             var userStore = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(context);

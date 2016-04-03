@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using App.Data.EntityFramework;
+using App.Entities;
 using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -10,9 +12,11 @@ namespace App.Infrastructure.IdentityManagement
 {
     public class ApplicationUserManager : UserManager<User, int>
     {
+        private UserManager<User, int> _userManager;
         public ApplicationUserManager(IUserStore<User,int> store)
             : base(store)
         {
+            _userManager = new UserManager<User, int>(store);
         }
 
         public static ApplicationUserManager GetUserManager(IdentityFactoryOptions<ApplicationUserManager> options,
@@ -20,7 +24,7 @@ namespace App.Infrastructure.IdentityManagement
         {
 
             var store = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(owinContext.Get<MinhKhangDbContext>());
-            store.AutoSaveChanges = true;
+            store.AutoSaveChanges = false;
             var appUserManager = new ApplicationUserManager(store);
 
 
@@ -55,6 +59,21 @@ namespace App.Infrastructure.IdentityManagement
             }
 
             return appUserManager;
+        }
+
+        public void Create(User user)
+        {
+            user.State = ObjectState.Added;
+        }
+        public void Create(User user, string password)
+        {
+            _userManager.Create(user, password);
+            user.State = ObjectState.Added;
+        }
+
+        public void AddToRoles(int userId, params string[] roles)
+        {
+            _userManager.AddToRoles(userId, roles);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace App.Entities
 {
      [Serializable]
-    public abstract class EntityBase
+    public abstract class EntityBase : IObjectState
     {
          [NotMapped]
          public ObjectState State { get; set; }

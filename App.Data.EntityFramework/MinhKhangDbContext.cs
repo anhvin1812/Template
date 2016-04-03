@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Diagnostics;
-using App.Core.Identity;
 using App.Data.EntityFramework.Mapping;
+using App.Entities.IdentityManagement;
 
 namespace App.Data.EntityFramework
 {
@@ -51,14 +51,15 @@ namespace App.Data.EntityFramework
 #endif
 
             // Add entities for Identity
-            //modelBuilder.Entity<UserRole>().ToTable("UserRole", "Security");
-            //modelBuilder.Entity<UserLogin>().ToTable("UserLogin", "Security");
-            //modelBuilder.Entity<UserClaim>().ToTable("UserClaim", "Security");
-            //modelBuilder.Entity<Role>().ToTable("Role", "Security");
-            //modelBuilder.Entity<User>().ToTable("User", "Security");
+            modelBuilder.Entity<UserRole>().ToTable("UserRole");
+            modelBuilder.Entity<UserLogin>().ToTable("UserLogin");
+            modelBuilder.Entity<UserClaim>().ToTable("UserClaim");
+            modelBuilder.Entity<Role>().ToTable("Role");
+            modelBuilder.Entity<User>().ToTable("User");
 
             // Mapping
             IdentityManagementMap.Configure(modelBuilder);
+            PostMap.Configure(modelBuilder);
 
         }
 
