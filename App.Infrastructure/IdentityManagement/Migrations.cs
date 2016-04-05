@@ -31,19 +31,26 @@ namespace App.Infrastructure.IdentityManagement
             };
             if (!userManager.Users.Any())
             {
-                userManager.Create(user, "Admin@123");
+                userManager.CreateAsync(user, "Admin@123");
                 db.SaveChanges();
             }
 
             if (!roleManager.Roles.Any())
             {
-                roleManager.Create(new Role { Name = "Admin" });
-                roleManager.Create(new Role { Name = "User" });
+                roleManager.CreateAsync(new Role { Name = "Admin" });
+                roleManager.CreateAsync(new Role { Name = "User" });
+                db.SaveChanges();
             }
 
             var adminUser = userManager.FindByName("Admin");
+            var adminRole = roleManager.FindByName("Admin");
+            if (!adminUser.Roles.Any(x => x.RoleId == adminRole.Id)) { 
+                var userRole = new UserRole{RoleId = 1, UserId = adminUser.Id, State = ObjectState.Added};
+                adminUser.Roles.Add(userRole);
+            }
 
-            userManager.AddToRoles(adminUser.Id, new string[] { "Admin" });
+
+            //userManager.AddToRoles(adminUser.Id, new string[] { "Admin" });
 
             db.SaveChanges();
             //  MinhKhangDbContext db = new MinhKhangDbContext();

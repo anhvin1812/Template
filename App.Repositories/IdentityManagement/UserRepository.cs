@@ -38,11 +38,13 @@ namespace App.Repositories.IdentityManagement
             return result;    
         }
 
-        public void Create(User user)
+        public void AddtoRoles(int u)
         {
-            var result = _ApplicationUserManager.Create(user);
+           // var result = _ApplicationUserManager.Create(user);
         }
+
         
+      
 
     }
 }

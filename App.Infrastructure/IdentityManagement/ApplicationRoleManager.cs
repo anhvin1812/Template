@@ -1,4 +1,5 @@
-﻿using App.Data.EntityFramework;
+﻿using System.Threading.Tasks;
+using App.Data.EntityFramework;
 using App.Entities;
 using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
@@ -29,5 +30,11 @@ namespace App.Infrastructure.IdentityManagement
             role.State = ObjectState.Modified;
         }
 
+        public override Task<IdentityResult> CreateAsync(Role role)
+        {
+            role.State = ObjectState.Added;
+            var result = base.CreateAsync(role);
+            return result;
+        }
     }
 }

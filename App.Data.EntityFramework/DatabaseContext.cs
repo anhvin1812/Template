@@ -81,8 +81,11 @@ namespace App.Data.EntityFramework
 
         Task<int> IDatabaseContext.SaveChangesAsync()
         {
-            var result =  _dbContext.SaveChangesAsync();
-            return result;
+            Task<int> task = Task<int>.Factory.StartNew(() => 0);
+            int i = task.Result;
+            return task;
+            //var result =  _dbContext.SaveChangesAsync();
+            //return result;
         }
 
         void IDatabaseContext.CommitTransaction()

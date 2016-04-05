@@ -61,6 +61,43 @@ namespace App.Infrastructure.IdentityManagement
             return appUserManager;
         }
 
+        public override Task<IdentityResult> CreateAsync(User user, string password)
+        {
+            var result = base.CreateAsync(user, password);
+            user.State = ObjectState.Added;
+
+            return result;
+        }
+
+        //public override Task<IdentityResult> AddToRoleAsync(int userId, string roleName)
+        //{
+        //    var user = FindByIdAsync(userId);
+
+        //    if (user == null)
+        //    {
+        //        throw new InvalidOperationException("Invalid user Id");
+        //    }
+
+        //    if (string.IsNullOrWhiteSpace(roleName))
+        //    {
+        //        throw new ArgumentException("roleName can not be null.");
+        //    }
+
+        //    //var role =  _uiOfWorkAsync.RepositoryAsync<ApplicationRole>().Queryable().SingleOrDefault(r => r.Name.ToUpper() == roleName.ToUpper());
+
+        //    //if (role == null)
+        //    //{
+        //    //    throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, "{0} not found", new object[] { roleName }));
+        //    //}
+
+
+        //    //var userRole = new ApplicationUserRole {RoleId = role.Id, UserId = user.Id, ObjectState = ObjectState.Added};
+
+        //    //role.Users.Add(userRole);
+        //    //user.Roles.Add(userRole);
+        //    //_uiOfWorkAsync.RepositoryAsync<ApplicationUserRole>().Insert(userRole);
+        //}
+
         public void Create(User user)
         {
             user.State = ObjectState.Added;
@@ -71,9 +108,5 @@ namespace App.Infrastructure.IdentityManagement
             user.State = ObjectState.Added;
         }
 
-        public void AddToRoles(int userId, params string[] roles)
-        {
-            _userManager.AddToRoles(userId, roles);
-        }
     }
 }
