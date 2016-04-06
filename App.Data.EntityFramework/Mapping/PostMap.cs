@@ -28,7 +28,7 @@ namespace App.Data.EntityFramework.Mapping
                 ToTable("Category");
                 // Primary Key
                 HasKey(t => t.Id);
-                Property(t => t.Id).IsRequired();
+                Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
                 // Properties
                 Property(t => t.Name).IsRequired();

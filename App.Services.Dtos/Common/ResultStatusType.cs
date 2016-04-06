@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace App.Services.Dtos.Common
+{
+    public enum ResultStatusType
+    {
+        Success = 0,
+        Fail = 1
+    }
+}

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Services.Dtos
+namespace App.Services.Dtos.Common
 {
-    public class Class1
+    public abstract class DtoBase
     {
     }
 }

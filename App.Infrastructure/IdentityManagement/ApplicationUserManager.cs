@@ -63,8 +63,8 @@ namespace App.Infrastructure.IdentityManagement
 
         public override Task<IdentityResult> CreateAsync(User user, string password)
         {
-            var result = base.CreateAsync(user, password);
             user.State = ObjectState.Added;
+            var result = base.CreateAsync(user, password);
 
             return result;
         }

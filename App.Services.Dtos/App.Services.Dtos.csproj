@@ -30,8 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,9 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs" />
+    <Compile Include="Common\BasicAction.cs" />
+    <Compile Include="Common\EntityActionSummary.cs" />
+    <Compile Include="Common\DropdownListDto.cs" />
+    <Compile Include="Common\HttpResponseMessageExtensions.cs" />
+    <Compile Include="Common\ResultStatus.cs" />
+    <Compile Include="Common\SuccessStatus.cs" />
+    <Compile Include="Common\EntityActionType.cs" />
+    <Compile Include="Common\EntityAction.cs" />
+    <Compile Include="Common\ResultStatusType.cs" />
+    <Compile Include="Common\Result.cs" />
+    <Compile Include="Common\DtoExtensions.cs" />
+    <Compile Include="Common\ErrorExtentions.cs" />
+    <Compile Include="Common\Pagination.cs" />
+    <Compile Include="Common\ErrorCodeType.cs" />
+    <Compile Include="Common\ErrorExtraInfo.cs" />
+    <Compile Include="Common\Error.cs" />
+    <Compile Include="Common\DtoBase.cs" />
+    <Compile Include="IdentityManagement\LogOnModel.cs" />
+    <Compile Include="JsonConverters\JsonCreationConverter.cs" />
+    <Compile Include="JsonConverters\ResultConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

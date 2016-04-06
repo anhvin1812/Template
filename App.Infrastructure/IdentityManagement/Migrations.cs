@@ -10,49 +10,54 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Infrastructure.IdentityManagement
 {
-    public class Migrations 
+    public class Migrations
     {
         public static void Initialize()
         {
-            Database.SetInitializer(new ApplicationDbInitializer());
-            IMinhKhangDatabaseContext db = new MinhKhangDatabaseContext("MinhKhang");
-            db.MinhKhangDbContext.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
-
-            var userStore = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(db.MinhKhangDbContext);
-            var roleStore = new RoleStore<Role, int, UserRole>(db.MinhKhangDbContext);
-            var roleManager = new ApplicationRoleManager(roleStore);
-            var userManager = new ApplicationUserManager(userStore);
-
-            var user = new User()
-            {
-                UserName = "Admin",
-                Email = "leanhvin@gmail.com",
-                EmailConfirmed = true,
-            };
-            if (!userManager.Users.Any())
-            {
-                userManager.CreateAsync(user, "Admin@123");
-                db.SaveChanges();
+            string mkConnection = System.Configuration.ConfigurationManager.ConnectionStrings["MinhKhang"].ToString();
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MinhKhangDbContext, Configuration>());
+            using (var temp = new MinhKhangDbContext()) {
+                temp.Database.Initialize(true);
             }
-
-            if (!roleManager.Roles.Any())
-            {
-                roleManager.CreateAsync(new Role { Name = "Admin" });
-                roleManager.CreateAsync(new Role { Name = "User" });
-                db.SaveChanges();
-            }
-
-            var adminUser = userManager.FindByName("Admin");
-            var adminRole = roleManager.FindByName("Admin");
-            if (!adminUser.Roles.Any(x => x.RoleId == adminRole.Id)) { 
-                var userRole = new UserRole{RoleId = 1, UserId = adminUser.Id, State = ObjectState.Added};
-                adminUser.Roles.Add(userRole);
-            }
+            //Database.SetInitializer(new ApplicationDbInitializer());
+            //MinhKhangDbContext db = new MinhKhangDbContext();
+            //db.Database.Initialize(true);
 
 
-            //userManager.AddToRoles(adminUser.Id, new string[] { "Admin" });
+            //var userStore = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(db.MinhKhangDbContext);
+            //var roleStore = new RoleStore<Role, int, UserRole>(db.MinhKhangDbContext);
+            //var roleManager = new ApplicationRoleManager(roleStore);
+            //var userManager = new ApplicationUserManager(userStore);
 
-            db.SaveChanges();
+            //var user = new User()
+            //{
+            //    UserName = "Admin",
+            //    Email = "leanhvin@gmail.com",
+            //    EmailConfirmed = true,
+            //};
+            //if (!userManager.Users.Any())
+            //{
+            //    userManager.CreateAsync(user, "Admin@123");
+            //    db.SaveChanges();
+            //}
+
+            //if (!roleManager.Roles.Any())
+            //{
+            //    roleManager.CreateAsync(new Role { Name = "Admin" });
+            //    roleManager.CreateAsync(new Role { Name = "User" });
+            //    db.SaveChanges();
+            //}
+
+            //var adminUser = userManager.FindByName("Admin");
+            //var adminRole = roleManager.FindByName("Admin");
+            //if (!adminUser.Roles.Any(x => x.RoleId == adminRole.Id)) { 
+            //    var userRole = new UserRole{RoleId = 1, UserId = adminUser.Id, State = ObjectState.Added};
+            //    adminUser.Roles.Add(userRole);
+            //}
+
+            //db.SaveChanges();
+
+
             //  MinhKhangDbContext db = new MinhKhangDbContext();
             //db.Database.Initialize(true);
             //db.Roles.Add(new Role("ADmin"));

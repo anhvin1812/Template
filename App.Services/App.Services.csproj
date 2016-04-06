@@ -48,11 +48,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ClaimsIdentityExtensions.cs" />
+    <Compile Include="Common\DtoExtensions..cs" />
     <Compile Include="EntityMapping\AutoMapperExtensions.cs" />
     <Compile Include="EntityMapping\MappingHelper.cs" />
     <Compile Include="EntityMapping\PostMapping.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicesAutoFacModule.cs" />
     <Compile Include="ServiceBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +65,17 @@
       <Project>{4c9e72ca-ec84-4661-bad2-9208c3065dc2}</Project>
       <Name>App.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\App.Entities\App.Entities.csproj">
+      <Project>{252eafcd-1245-43f6-8f30-a0219bf26474}</Project>
+      <Name>App.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\App.Repositories\App.Repositories.csproj">
       <Project>{27929fe0-67a4-47e3-bb99-d449e3c789a2}</Project>
       <Name>App.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\App.Services.Dtos\App.Services.Dtos.csproj">
+      <Project>{de811d9a-c19e-4158-9e54-85594dd2c776}</Project>
+      <Name>App.Services.Dtos</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
