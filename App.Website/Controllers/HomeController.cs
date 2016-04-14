@@ -1,9 +1,11 @@
 ﻿using System.Web.Mvc;
+using App.Website.Fillters;
 
 namespace App.Website.Controllers
 {
     public class HomeController : Controller
     {
+        [CustomAuthorize(AllowAnonymous = false)]
         public ActionResult Index()
         {
             return View();

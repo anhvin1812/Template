@@ -59,6 +59,7 @@ namespace App.Data.EntityFramework
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
+            
             SyncObjectsStatePreCommit();
             var changesAsync = base.SaveChangesAsync(cancellationToken);
             SyncObjectsStatePostCommit();

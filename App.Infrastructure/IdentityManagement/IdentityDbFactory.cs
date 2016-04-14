@@ -9,6 +9,15 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Infrastructure.IdentityManagement
 {
+    public class IdentityDbContextFactory
+    {
+        public static MinhKhangDbContext CreateIdentityDbContext()
+        {
+            return new MinhKhangDbContext(); ;
+        }
+    }
+
+
     public class ApplicationDbInitializer : DropCreateDatabaseAlways<MinhKhangDbContext>
     {
 

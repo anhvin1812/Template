@@ -14,48 +14,42 @@ namespace App.Infrastructure.IdentityManagement
     {
         public static void Initialize()
         {
-            string mkConnection = System.Configuration.ConfigurationManager.ConnectionStrings["MinhKhang"].ToString();
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MinhKhangDbContext, Configuration>());
-            using (var temp = new MinhKhangDbContext()) {
-                temp.Database.Initialize(true);
-            }
-            //Database.SetInitializer(new ApplicationDbInitializer());
-            //MinhKhangDbContext db = new MinhKhangDbContext();
-            //db.Database.Initialize(true);
+           IMinhKhangDatabaseContext db = new MinhKhangDatabaseContext("MinhKhang");
 
+           var userStore = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(db.MinhKhangDbContext);
+           var roleStore = new RoleStore<Role, int, UserRole>(db.MinhKhangDbContext);
+           var roleManager = new ApplicationRoleManager(roleStore);
+           var userManager = new ApplicationUserManager(userStore);
 
-            //var userStore = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(db.MinhKhangDbContext);
-            //var roleStore = new RoleStore<Role, int, UserRole>(db.MinhKhangDbContext);
-            //var roleManager = new ApplicationRoleManager(roleStore);
-            //var userManager = new ApplicationUserManager(userStore);
+           var user = new User()
+           {
+               UserName = "Admin",
+               Email = "leanhvin@gmail.com",
+               EmailConfirmed = true,
+           };
 
-            //var user = new User()
-            //{
-            //    UserName = "Admin",
-            //    Email = "leanhvin@gmail.com",
-            //    EmailConfirmed = true,
-            //};
-            //if (!userManager.Users.Any())
-            //{
-            //    userManager.CreateAsync(user, "Admin@123");
-            //    db.SaveChanges();
-            //}
+           if (!userManager.Users.Any())
+           {
+               userManager.CreateAsync(user, "Admin@123");
+               db.SaveChanges();
+           }
 
-            //if (!roleManager.Roles.Any())
-            //{
-            //    roleManager.CreateAsync(new Role { Name = "Admin" });
-            //    roleManager.CreateAsync(new Role { Name = "User" });
-            //    db.SaveChanges();
-            //}
+           if (!roleManager.Roles.Any())
+           {
+               roleManager.CreateAsync(new Role { Name = "Admin" });
+               roleManager.CreateAsync(new Role { Name = "User" });
+                db.SaveChanges();
+           }
 
-            //var adminUser = userManager.FindByName("Admin");
-            //var adminRole = roleManager.FindByName("Admin");
-            //if (!adminUser.Roles.Any(x => x.RoleId == adminRole.Id)) { 
-            //    var userRole = new UserRole{RoleId = 1, UserId = adminUser.Id, State = ObjectState.Added};
-            //    adminUser.Roles.Add(userRole);
-            //}
+           var adminUser = userManager.FindByName("Admin");
+           var adminRole = roleManager.FindByName("Admin");
+           if (!adminUser.Roles.Any(x => x.RoleId == adminRole.Id))
+           {
+               var userRole = new UserRole { RoleId = 1, UserId = adminUser.Id, State = ObjectState.Added };
+               adminUser.Roles.Add(userRole);
+           }
 
-            //db.SaveChanges();
+           db.SaveChanges();
 
 
             //  MinhKhangDbContext db = new MinhKhangDbContext();

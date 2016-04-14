@@ -23,7 +23,7 @@ namespace App.Services.Dtos.Common
                 {
                     if (result is FailResult)
                     {
-                        throw ((FailResult)result).ToException();
+                        //throw ((FailResult)result).ToException();
                     }
                 }
             }

@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Fillters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Fillters\ServiceAuthorizationAttribute.cs" />
     <Compile Include="OkWithHeaders.cs" />
     <Compile Include="Controllers\AccountController.cs" />
