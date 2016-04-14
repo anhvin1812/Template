@@ -19,7 +19,7 @@ namespace App.Infrastructure.IdentityManagement
             _userManager = new UserManager<User, int>(store);
         }
 
-        public static ApplicationUserManager GetUserManager(IdentityFactoryOptions<ApplicationUserManager> options,
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
             IOwinContext owinContext)
         {
 

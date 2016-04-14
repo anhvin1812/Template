@@ -99,6 +99,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IdentityManagement\ApplicationSignInManager.cs" />
+    <Compile Include="IdentityManagement\AuthConfiguration.cs" />
     <Compile Include="IdentityManagement\CustomOAuthProvider.cs" />
     <Compile Include="IdentityManagement\CustomJwtFormat.cs" />
     <Compile Include="IdentityManagement\IdentityDbFactory.cs" />

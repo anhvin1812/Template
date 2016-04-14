@@ -20,9 +20,9 @@ namespace App.Data.EntityFramework
             // ((IObjectContextAdapter)this).ObjectContext.ObjectMaterialized += (sender, e) => DateTimeKindAttribute.Apply(e.Entity);
         }
 
-        static MinhKhangDbContext()
+        public static MinhKhangDbContext Create()
         {
-           // Database.SetInitializer<MinhKhangDbContext>(null);
+            return new MinhKhangDbContext();
         }
 
         //public static MinhKhangDbContext Create()

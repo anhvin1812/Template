@@ -15,6 +15,7 @@ namespace App.Website
     {
         public void Configuration(IAppBuilder app)
         {
+            AuthConfiguration.ConfigureAuth(app);
             //ConfigureAuth(app);
         }
 

@@ -41,7 +41,7 @@ namespace App.Infrastructure.IdentityManagement
                 db.SaveChanges();
            }
 
-           var adminUser = userManager.FindByName("Admin");
+           var adminUser = userManager.FindByName("leanhvin@gmail.com");
            var adminRole = roleManager.FindByName("Admin");
            if (!adminUser.Roles.Any(x => x.RoleId == adminRole.Id))
            {

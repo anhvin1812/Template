@@ -1074,6 +1074,9 @@
     <Content Include="Areas\Admin\Scripts\datatables\extensions\TableTools\Readme.md" />
     <Content Include="Areas\Admin\Scripts\input-mask\phone-codes\phone-be.json" />
     <Content Include="Areas\Admin\Scripts\input-mask\phone-codes\phone-codes.json" />
+    <Content Include="Areas\Admin\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout - Copy.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1127,7 +1130,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Html\" />
   </ItemGroup>
   <ItemGroup>
@@ -1141,6 +1143,18 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\App.Core\App.Core.csproj">
+      <Project>{4c9e72ca-ec84-4661-bad2-9208c3065dc2}</Project>
+      <Name>App.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\App.Data.EntityFramework\App.Data.EntityFramework.csproj">
+      <Project>{7c462465-b833-4abd-82e1-8549645fdf53}</Project>
+      <Name>App.Data.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\App.Entities\App.Entities.csproj">
+      <Project>{252eafcd-1245-43f6-8f30-a0219bf26474}</Project>
+      <Name>App.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\App.Infrastructure\App.Infrastructure.csproj">
       <Project>{002a2c84-b10c-4c92-bf46-a3800cc0aeb7}</Project>
       <Name>App.Infrastructure</Name>
