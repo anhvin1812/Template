@@ -71,9 +71,9 @@ namespace App.Website.Fillters
                 var userName = filterContext.HttpContext.User.Identity.Name;
                 //var userAllowedTime = principal.FindFirst("userAllowedTime").Value;
 
-                if (userName != "Admin")
+                if (userName == "Admin")
                 {
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Account", action = "Login" }));
+                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { area = "Admin", controller = "Home", action = "Index"}));
                     
                 }
             }

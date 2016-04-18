@@ -180,6 +180,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\App_Start\AdminBundleConfig.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Fillters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Fillters\ServiceAuthorizationAttribute.cs" />
@@ -1074,9 +1076,9 @@
     <Content Include="Areas\Admin\Scripts\datatables\extensions\TableTools\Readme.md" />
     <Content Include="Areas\Admin\Scripts\input-mask\phone-codes\phone-be.json" />
     <Content Include="Areas\Admin\Scripts\input-mask\phone-codes\phone-codes.json" />
-    <Content Include="Areas\Admin\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1128,9 +1130,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\Product\" />
     <Folder Include="Areas\Html\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
