@@ -61,21 +61,21 @@ namespace App.Website.Fillters
 
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (!AllowAnonymous)
+            if (AllowAnonymous)
             {
                 if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Account", action = "Login" }));
                 }
 
-                var userName = filterContext.HttpContext.User.Identity.Name;
-                //var userAllowedTime = principal.FindFirst("userAllowedTime").Value;
+                //var userName = filterContext.HttpContext.User.Identity.Name;
+                ////var userAllowedTime = principal.FindFirst("userAllowedTime").Value;
 
-                if (userName == "Admin")
-                {
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { area = "Admin", controller = "Home", action = "Index"}));
+                //if (userName == "Admin")
+                //{
+                //    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { area = "Admin", controller = "Home", action = "Index"}));
                     
-                }
+                //}
             }
 
 

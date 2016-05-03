@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Giỏ hàng | Minh Khang Store";
+    ViewBag.ContentContainerCssClass = "cart-page";
+    ViewBag.ContentCssId = "cart-section";
+}
+
+@section PageTitle{
+    <div class="title-section title-section-advanced page-title clearfix">
+        <div class="title-section-left">
+            <h3><span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng
+            </h3>
+            <div class="shop-display-count">
+                <span id="display_num">4</span>
+                sản phẩm
+            </div>
+        </div>
+    </div>
+}
+<div class="cart-column-lables clearfix">
+    <div class="cart-image">
+        Sản phẩm
+    </div>
+    <div class="cart-name">
+        Mô tả
+    </div>
+    <div class="cart-quantity">
+        Số lượng
+    </div>
+    <div class="cart-price">
+        Giá
+    </div>
+    <div class="cart-function">
+
+    </div>
+</div>
+<div class="cart-column clearfix">
+    <div class="cart-image">
+        <a href="#"><img src="/content/images/product-10-270x270.png" /></a>
+    </div>
+    <div class="cart-name">
+        <a href="#">Hourglass Jersey</a>
+    </div>
+    <div class="cart-quantity">
+        <div class="input-group quantity">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+            </span>
+            <input id="quantity" type="text" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="cart-price">
+        <span>12,000,000đ</span>
+
+    </div>
+    <div class="cart-function">
+        <a class="btn-cart-remove" href="#">
+            <span class="glyphicon glyphicon-trash"></span>
+        </a>
+    </div>
+</div><!-- /.cart-column -->
+<div class="cart-column clearfix">
+    <div class="cart-image">
+        <a href="#"><img src="/content/images/product-10-270x270.png" /></a>
+    </div>
+    <div class="cart-name">
+        <a href="#">Hourglass Jersey</a>
+    </div>
+    <div class="cart-quantity">
+        <div class="input-group quantity">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+            </span>
+            <input id="quantity" type="text" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="cart-price">
+        <span>12,000,000đ</span>
+
+    </div>
+    <div class="cart-function">
+        <a class="btn-cart-remove" href="#">
+            <span class="glyphicon glyphicon-trash"></span>
+        </a>
+    </div>
+</div><!-- /.cart-column -->
+<div class="cart-column summary">
+    THÀNH TIỀN: <span>12,000,000đ</span>
+</div>
+<div class="cart-column checkout">
+    <button id="btn-update-cart" class="btn-white">Cập nhật</button>
+    <button id="btn-checkout" class="btn-white">Thanh toán</button>
+</div>

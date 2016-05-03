@@ -1,31 +1,132 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Minh Khang Store";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@section AddStyles{
+    <link href="@Url.Content("~/Scripts/jquery.bxslider/jquery.bxslider.css")" rel="stylesheet" type="text/css" />
+}
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+@section HomeSlider{
+    <div id="home-slide-section">
+        <ul class="page-slider">
+            <li><img src="content/images/slideshow_1.jpg" /></li>
+            <li><img src="content/images/slideshow_2.jpg" /></li>
+            <li><img src="content/images/slideshow_3.jpg" /></li>
+            <li><img src="content/images/slideshow_4.jpg" /></li>
+        </ul>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+}
+
+@section PageTitle{
+    <div class="title-section">
+        <h3>
+            Sản phẩm mới
+            <span class="pull-right"><a href="#">Xem tất cả</a></span>
+        </h3>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+}
+
+<ul class="product-list clearfix">
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="content/images/product-10-270x270.png" alt="Alternate Text"/>
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br/>
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="content/images/product-10-270x270.png" alt="Alternate Text"/>
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br/>
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="content/images/product-10-270x270.png" alt="Alternate Text"/>
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br/>
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="content/images/product-10-270x270.png" alt="Alternate Text"/>
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br/>
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="content/images/product-10-270x270.png" alt="Alternate Text"/>
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br/>
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+</ul>
+
+@section AddScript{
+    <!-- Bxslider -->
+    <script src="@Url.Content("~/Scripts/jquery.bxslider/jquery.bxslider.min.js")"></script>
+
+    <script>
+        $(".page-slider").bxSlider({
+            touchEnabled: false,
+            mode: "fade",
+            auto: true,
+            speed: 600,
+            tickerHover: true,
+            pager: false,
+            adaptiveHeight: true
+        });
+    </script>
+}

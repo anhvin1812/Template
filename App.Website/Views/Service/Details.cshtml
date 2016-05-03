@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Dịch vụ | Minh Khang Store";
+    ViewBag.ContentCssClass = "page-content-2";
+}
+
+@section PageTitle{
+    <div class="title-section title-section-advanced clearfix">
+        <div class="title-section-left">
+            <div id="categories">
+                <div class="filter-button">
+                    <span class="filter-button-open glyphicon glyphicon-menu-hamburger"></span>
+                    <span class="filter-button-close glyphicon glyphicon-remove"></span>
+                </div>
+                <div class="slide-navigation">
+                    <ul>
+                        <li><a>Apple</a></li>
+                        <li><a>Samsung</a></li>
+                        <li>
+                            <a>Nokia</a>
+                            <ul>
+                                <li class="active"><a>Popular</a></li>
+                                <li><a>N-series</a></li>
+                                <li>
+                                    <a>Touch</a>
+                                    <ul>
+                                        <li><a>Popular</a></li>
+                                        <li><a>N-series</a></li>
+                                        <li><a>Touch</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a>HTC</a></li>
+                        <li><a>Blackberry</a></li>
+                        <li><a>Microsoft</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Dịch vụ</h3>
+        </div>
+        <div style="clear: both"></div>
+    </div><!-- /.title-section-->
+}
+
+<div id="article">
+    <h1 class="art-title">Sửa chữa smartphone</h1>
+    <div class="art-info">
+        21/02/2016 | Đăng bởi <a href="#">Admin</a>
+    </div>
+    <div class="art-content">
+        <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item. </p>
+        <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item. </p>
+        <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item. </p>
+        <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item. </p>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="comments">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a role="tab">Bình luận</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active">
+                        <!-- Facebook comments plugin-->
+                        <div class="fb-comments" data-href="http://xem.vn/photo/177433?ref=r2" data-width="100%" data-numposts="5"></div>
+                    </div>
+                </div>
+            </div><!-- /#specification-->
+        </div>
+    </div>
+</div><!-- /#article -->
+
+@section AddScript{
+    <!-- Bxslider -->
+    <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
+}

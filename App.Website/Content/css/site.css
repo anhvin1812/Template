@@ -97,7 +97,7 @@ header {
 
 #logo-container a{
     bottom: 0;
-    height: 80px;
+    height: 77px;
     left: 0;
     margin: auto;
     position: absolute;
@@ -160,8 +160,9 @@ header {
 .navigation a {
     font-weight: 600;
     float: left;
-    height: 78px;
-    padding: 32px 25px;
+    height: 77px;
+    line-height: 77px;
+    padding: 0 25px;
     transition: all 0.3s ease 0s;
     text-transform: uppercase;
     color: #8a8683;
@@ -393,12 +394,15 @@ header {
     box-shadow: none;
     border: 1px solid #ccc;
     padding: 6px 12px;
+    text-align: center;
+    height: 40px;
 }
 .quantity .input-number:focus {
     box-shadow: none;
 }
 .quantity .input-group-btn button {
-    color: #46b8da;
+    color: #44a08c;
+    padding: 9px 12px;
 }
 #product .input-group {
     float: left;
@@ -444,7 +448,7 @@ header {
 
 
 /* categories */
-.title-section-product {
+.title-section-advanced {
     background: #444;
     padding: 0;
     position: fixed;
@@ -466,12 +470,12 @@ header {
 
 .title-section-left h3 {
     color: #fff;
-    display: inline-block;
+    display: inline;
     padding: 0 20px;
     line-height: 80px;
     font-size: 24px;
     font-weight: bold;
-
+    float: left;
 }
 .page-title {
     margin-top: 88px;
@@ -495,14 +499,16 @@ header {
 #categories {
     position: relative;
     display: inline-block;
+    float: left;
 }
 .filter-button {
     background: #2d2d2d;
     cursor: pointer;
     color: #fff;
-    display: inline-block;
+    display: inline;
     font-size: 24px;
     font-weight: bold;
+    float: left;
     height: 80px;
     line-height: 80px;
     transition: all 0.3s ease 0s;
@@ -632,12 +638,13 @@ select.sort-by option:hover {
     text-align: left;
     max-width: 960px;
     margin: 0 auto;
+    font-size: 0;
 }
 .service-item {
     display: inline-block;
-    margin: 0 2% 30px;
+    margin: 0 1.666666% 30px;
     vertical-align: top;
-    width: 29%;
+    width: 30%;
 }
 .service-item .heading {
     text-align: center;
@@ -660,10 +667,9 @@ select.sort-by option:hover {
 }
 .service-item .sort-description{
     text-align: justify;
+    font-size: 14px;
 }
-#services .service-content {
-    text-align: justify;
-}
+
 
 /* Article */
 #article {
@@ -1022,8 +1028,12 @@ footer {
     bottom: 0;
     width: 100%;
 }
-.footer-social {
-    margin-top: -10px;
+.footer-social.navigation a {
+    padding: 21px 25px;
+    font-size: 0;
+    line-height: 0;
+}
+.footer-social img {
     width: 34px;
     height: 34px;
 }

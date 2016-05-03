@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Dịch vụ | Minh Khang Store";
+    ViewBag.ContentCssClass = "page-content-2";
+}
+
+@section PageTitle{
+    <div class="title-section title-section-advanced clearfix">
+        <div class="title-section-left">
+            <div id="categories">
+                <div class="filter-button">
+                    <span class="filter-button-open glyphicon glyphicon-menu-hamburger"></span>
+                    <span class="filter-button-close glyphicon glyphicon-remove"></span>
+                </div>
+                <div class="slide-navigation">
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Service")">Apple</a></li>
+                        <li><a>Samsung</a></li>
+                        <li>
+                            <a>Nokia</a>
+                            <ul>
+                                <li class="active"><a>Popular</a></li>
+                                <li><a>N-series</a></li>
+                                <li>
+                                    <a>Touch</a>
+                                    <ul>
+                                        <li><a>Popular</a></li>
+                                        <li><a>N-series</a></li>
+                                        <li><a>Touch</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a>HTC</a></li>
+                        <li><a>Blackberry</a></li>
+                        <li><a>Microsoft</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Dịch vụ</h3>
+        </div>
+        <div style="clear: both"></div>
+    </div><!-- /.title-section-->
+}
+
+<div id="services">
+    <div class="service-item">
+        <div class="heading"><a href="#">Sửa chữa smartphone</a></div>
+        <div class="body">
+            <a href="#" class="image">
+                <img src="Content/images/service-repair.jpg" />
+            </a>
+            <div class="sort-description">
+                I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.
+            </div>
+        </div>
+    </div><!-- /.item -->
+    <div class="service-item">
+        <div class="heading"><a href="#">Cài đặt phần mềm, ứng dụng</a></div>
+        <div class="body">
+            <a href="#" class="image">
+                <img src="Content/images/service-app.jpg" />
+            </a>
+            <div class="sort-description">
+                I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.
+            </div>
+        </div>
+    </div><!-- /.item -->
+    <div class="service-item">
+        <div class="heading"><a href="#">Sửa chữa smartphone</a></div>
+        <div class="body">
+            <a href="#" class="image">
+                <img src="Content/images/service-repair.jpg" />
+            </a>
+            <div class="sort-description">
+                I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.
+            </div>
+        </div>
+    </div><!-- /.item -->
+    <div class="service-item">
+        <div class="heading"><a href="#">Sửa chữa smartphone</a></div>
+        <div class="body">
+            <a href="#" class="image">
+                <img src="Content/images/service-repair.jpg" />
+            </a>
+            <div class="sort-description">
+                I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.
+            </div>
+        </div>
+    </div><!-- /.item -->
+</div><!-- /#services -->
+
+@section AddScript{
+    <!-- Bxslider -->
+    <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
+}

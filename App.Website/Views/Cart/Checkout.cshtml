@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Giỏ hàng | Minh Khang Store";
+    ViewBag.ContentContainerCssClass = "cart-page";
+}
+
+@section PageTitle{
+    <div id="checkout-wrap" class="container">
+        <div id="order-summary">
+            <div class="summary-toggle collapsed clearfix hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target="#collapseSummary" aria-expanded="true" aria-controls="collapseSummary">
+                <div class="summary-toggle-text pull-left">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Đơn hàng
+                </div>
+                <div class="summary-toggle-total pull-right">12,000,000đ</div>
+            </div>
+            <div class="collapse in" id="collapseSummary">
+                <table class="order-items">
+                    <tbody>
+                        <tr>
+                            <td class="image-column">
+                                <div class="thumbnail">
+                                    <img src="images/product-31-270x270.png" />
+                                    <span class="product-quantity">3</span>
+                                </div>
+                            </td>
+                            <td class="name-column">
+                                Wrapture Jersey
+                            </td>
+                            <td class="price-column">
+                                16,000,000đ
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="image-column">
+                                <div class="thumbnail">
+                                    <img src="images/product-31-270x270.png" />
+                                    <span class="product-quantity">3</span>
+                                </div>
+                            </td>
+                            <td class="name-column">
+                                Wrapture Jersey
+                            </td>
+                            <td class="price-column">
+                                16,000,000đ
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">
+                                <span>Tổng</span>
+                                <span class="pull-right"> 12,000,000đ</span>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div><!-- /#order-summary-->
+
+        <div id="customer-info">
+            <!--<div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Cart</a>
+                        </li>
+                        <li class="active">
+                            <a href="#">Checkout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>-->
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="txtFullName" class="col-sm-12">Họ tên <span class="required-field">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="txtFullName" placeholder="Họ tên">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtEmail" class="col-sm-12">Email</label>
+                    <div class="col-sm-12">
+                        <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtPhoneNumber" class="col-sm-12">Điện thoại <span class="required-field">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="txtPhoneNumber" placeholder="Điện thoại">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtAddress" class="col-sm-12">Địa chỉ <span class="required-field">*</span></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="txtAddress" placeholder="số nhà, tên đường, phường/xã">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <select id="sltProvince" class="form-control">
+                            <option>Tỉnh/Thành phố</option>
+                            <option>Chuyển khoản</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <select id="sltDistrict" class="form-control">
+                            <option>Quận/Huyện</option>
+                            <option>Chuyển khoản</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label for="sltPaymentMethod">Phương thức thanh toán</label>
+                        <select id="sltPaymentMethod" class="form-control">
+                            <option>Tiền mặt lúc nhận hàng</option>
+                            <option>Chuyển khoản</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group checkout-footer">
+                    <div class="wrap-vertical-align-center col-sm-12 clearfix">
+                        <div class="align-center-container w50p">
+                            <a class="align-center-container" href="#">
+                                <span class="glyphicon glyphicon-menu-left"></span>
+                                Quay lại giỏ hàng
+                            </a>
+                        </div>
+                        <div class="align-center-container text-right w50p">
+                            <button type="submit" class="align-center-container btn btn-green btn-lg">Tiếp tục thanh toán</button>
+                        </div>
+                    </div>
+                </div>
+            </form><!-- /form-->
+        </div><!-- /#customer-info-->
+
+    </div><!-- /#checkout-wrap-->
+}

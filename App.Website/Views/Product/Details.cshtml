@@ -1,0 +1,325 @@
+﻿@{
+    ViewBag.Title = "Sản phẩm | Minh Khang Store";
+    ViewBag.ContentCssClass = "page-product";
+}
+
+@section AddStyles{
+    <link href="@Url.Content("~/Scripts/jquery.bxslider/jquery.bxslider.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Scripts/EasyZoom/css/easyzoom.css")" rel="stylesheet">
+}
+
+@section PageTitle{
+    <div class="title-section title-section-product clearfix">
+        <div class="title-section-left">
+            <div id="categories">
+                <div class="filter-button">
+                    <span class="filter-button-open glyphicon glyphicon-menu-hamburger"></span>
+                    <span class="filter-button-close glyphicon glyphicon-remove"></span>
+                </div>
+                <div class="slide-navigation">
+                    <ul>
+                        <li><a>Apple</a></li>
+                        <li><a>Samsung</a></li>
+                        <li>
+                            <a>Nokia</a>
+                            <ul>
+                                <li><a>Popular</a></li>
+                                <li><a>N-series</a></li>
+                                <li>
+                                    <a>Touch</a>
+                                    <ul>
+                                        <li><a>Popular</a></li>
+                                        <li><a>N-series</a></li>
+                                        <li><a>Touch</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a>HTC</a></li>
+                        <li><a>Blackberry</a></li>
+                        <li><a>Microsoft</a></li>
+                    </ul>
+                </div>
+            </div>
+            <h3>Sản phẩm</h3>
+        </div>
+        <div class="title-section-right">
+            <div class="shop-display-count">
+                Hiển thị
+                <span>
+                    <span id="display_num">4</span>
+                    sản phẩm
+                </span>
+            </div>
+            <div class="sort-select">
+                <select id="shop-sort" class="sort-by">
+                    <option value="price-ascending">Giá: tăng dần</option>
+                    <option value="price-descending">Giá: giảm dần</option>
+                    <option value="title-ascending">A-Z</option>
+                    <option value="title-descending">Z-A</option>
+                    <option value="created-ascending">Mới nhất</option>
+                    <option value="created-descending">Cũ nhất</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="clear: both"></div>
+    </div><!-- /.title-section-->
+}
+
+<div id="product">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="gallery">
+                <div class="product-image easyzoom easyzoom--overlay">
+                    <a href="images/1_zoom.jpg">
+                        <img src="/content/images/1.jpg" alt="" />
+                    </a>
+                </div>
+                <div class="wrap-thumbnails">
+                    <div class="thumbnails">
+                        <div class="slide active" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                            <img src="/content/images/sm1.jpg">
+                        </div>
+                        <div class="slide" data-zoom="images/2.jpg" data-standard="images/2.jpg">
+                            <img src="/content/images/sm2.jpg">
+                        </div>
+                        <div class="slide" data-zoom="images/3.jpg" data-standard="images/3.jpg">
+                            <img src="/content/images/sm3.jpg">
+                        </div>
+                        <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                            <img src="/content/images/sm1.jpg">
+                        </div>
+                        <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                            <img src="/content/images/sm1.jpg">
+                        </div>
+                        <div class="slide" data-zoom="images/2.jpg" data-standard="images/2.jpg">
+                            <img src="/content/images/sm2.jpg">
+                        </div>
+                        <div class="slide" data-zoom="images/3.jpg" data-standard="images/3.jpg">
+                            <img src="/content/images/sm3.jpg">
+                        </div>
+                        <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                            <img src="/content/images/sm1.jpg">
+                        </div>
+                        <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                            <img src="/content/images/sm1.jpg">
+                        </div>
+                    </div>
+                    <div class="thumbnails-controls">
+                        <span id="slider-prev"></span>
+                        <span id="slider-next"></span>
+                    </div>
+                </div>
+            </div><!-- /.gallery-->
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="product-name">Hourglass Jersey</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="sort-description">
+                        Suspendisse posuere arcu diam, id accumsan eros pharetra ac. Nulla enim risus, facilisis bibendum gravida eget, lacinia id purus. Suspendisse posuere arcu diam, id accumsan eros pharetra ac. Nulla enim risus, facilisis bibendum gravida eget, lacinia id purus. Susp endisse posuere arcu diam, id accumsan eros pharetra ac.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="status-box">
+                        <span class="title">Tình trạng :</span>
+                        <span class="label label-success">Còn hàng</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="price-box">
+                        <span class="price">12,000,000 đ</span>
+                        <br />
+                        <span class="old-price">15,000,000 đ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="quantity-box clearfix">
+                        <span class="title">Số lượng :</span>
+                        <div class="input-group quantity">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+                            </span>
+                            <input id="quantity" type="text" name="quantity" class="form-control input-number" value="1" min="1" max="10">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quantity">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <button id="add-to-cart" class="btn btn-lg btn-primary" type="button">
+                            <span class="glyphicon glyphicon-shopping-cart"></span> Đặt mua
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="social-box">
+                        <a class="social-item">
+                            <img src="/content/images/facebook.png" alt="" />
+                        </a>
+                        <a class="social-item">
+                            <img src="/content/images/google.png" alt="" />
+                        </a>
+                        <a class="social-item">
+                            <img src="/content/images/twitter.png" alt="" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="specification">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a aria-controls="home" role="tab" data-toggle="tab">Chi tiết sản phẩm</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                        dsadsads
+                        <p>dsadsadsadsa</p>
+                        <p>dsadsadsadsa</p>
+                        <p>dsadsadsadsa</p>
+                    </div>
+                </div>
+            </div><!-- /#specification-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="comments">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a aria-controls="home" role="tab" data-toggle="tab">Bình luận</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active">
+                        <!-- Facebook comments plugin-->
+                        <div class="fb-comments" data-href="http://xem.vn/photo/177433?ref=r2" data-width="100%" data-numposts="5"></div>
+                    </div>
+                </div>
+            </div><!-- /#specification-->
+        </div>
+    </div>
+</div><!-- /#product-->
+<div class="title-section">
+    <h3>
+        Sản phẩm liên quan
+    </h3>
+</div>
+<ul class="product-list clearfix">
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br />
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br />
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br />
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br />
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+    <li class="item">
+        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+        <div class="image">
+            <a href="#">
+                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
+            </a>
+        </div>
+        <div class="price">
+            <span class="price-old">1,200,000</span>
+            <br />
+            <span class="price-new">1,100,000</span>
+        </div>
+        <div class="actions">
+            <button type="button" class="btn btn-info">Đặt mua</button>
+            <button type="button" class="btn btn-info">Chi tiết</button>
+        </div>
+    </li>
+</ul>
+
+@section AddScript{
+    <!-- Bxslider -->
+    <script src="@Url.Content("~/Scripts/jquery.bxslider/jquery.bxslider.min.js")"></script>
+    <!-- Easy zoom -->
+    <script src="@Url.Content("~/Scripts/EasyZoom/easyzoom.js")"></script>
+    <!-- Slide menu -->
+    <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
+    <!-- Product scripts -->
+    <script src="@Url.Content("~/Scripts/product-scripts.js")"></script>
+}
