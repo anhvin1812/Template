@@ -7,48 +7,52 @@ namespace App.Website.Areas.Admin.App_Start
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/js/jquery").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/jquery").Include(
                         getPath("Scripts/jQuery/jQuery-2.1.4.min.js"),
                         getPath("Scripts/bootstrap/js/bootstrap.min.js")));
 
-            bundles.Add(new ScriptBundle("~/js/morrisCharts").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/morrisCharts").Include(
                        getPath("Scripts/morris/morris.min.js")));
 
-            bundles.Add(new ScriptBundle("~/js/sparkline").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/sparkline").Include(
                       getPath("Scripts/sparkline/jquery.sparkline.min.js")));
 
-            bundles.Add(new ScriptBundle("~/js/jvectormap").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/jvectormap").Include(
                       getPath("Scripts/jvectormap/jquery-jvectormap-1.2.2.min.js"),
                       getPath("Scripts/jvectormap/jquery-jvectormap-world-mill-en.js")));
 
-            bundles.Add(new ScriptBundle("~/js/jQueryKnobChart").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/jQueryKnobChart").Include(
                        getPath("Scripts/knob/jquery.knob.js")));
 
            
-            bundles.Add(new ScriptBundle("~/js/dateRangePicker").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/dateRangePicker").Include(
                        getPath("Scripts/daterangepicker/daterangepicker.js")));
 
-            bundles.Add(new ScriptBundle("~/js/datePicker").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/datePicker").Include(
                        getPath("Scripts/datepicker/bootstrap-datepicker.js")));
 
-            bundles.Add(new ScriptBundle("~/js/boostrapEditor").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/boostrapEditor").Include(
                        getPath("Scripts/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")));
 
-            bundles.Add(new ScriptBundle("~/js/slimScroll").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/slimScroll").Include(
                       getPath("Scripts/slimScroll/jquery.slimscroll.min.js")));
 
-            bundles.Add(new ScriptBundle("~/js/fastClick").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/fastClick").Include(
                       getPath("Scripts/fastclick/fastclick.min.js")));
 
-            bundles.Add(new ScriptBundle("~/js/app").Include(
+            bundles.Add(new ScriptBundle("~/Admin/Js/app").Include(
                       getPath("Scripts/js/app.min.js")));
 
-            //bundles.Add(new ScriptBundle("~/js/morris-charts").Include(
-            //            "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/Admin/Js/dataTable").Include(
+                      getPath("Scripts/datatables/jquery.dataTables.min.js"),
+                      getPath("Scripts/dataTables.bootstrap.min.js")));
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+              //bundles.Add(new ScriptBundle("~/js/morris-charts").Include(
+              //            "~/Scripts/jquery.validate*"));
+
+              // Use the development version of Modernizr to develop with and learn from. Then, when you're
+              // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
+              bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
@@ -77,6 +81,9 @@ namespace App.Website.Areas.Admin.App_Start
 
             bundles.Add(new StyleBundle("~/Admin/Content/textEditor").Include(
                      getPath("Scripts/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css")));
+
+            bundles.Add(new StyleBundle("~/Admin/Css/DataTable").Include(
+                     getPath("Scripts/datatables/dataTables.bootstrap.css")));
         }
 
         private static string getPath(string relativePath)

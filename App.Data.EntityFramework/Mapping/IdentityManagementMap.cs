@@ -14,41 +14,31 @@ namespace App.Data.EntityFramework.Mapping
     {
         public static void Configure(DbModelBuilder modelBuilder)
         {
-          //  modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new PermissionMap());
             //modelBuilder.Configurations.Add(new UserRoleMap());
             //modelBuilder.Configurations.Add(new UserClaimMap());
            // modelBuilder.Configurations.Add(new UserLoginMap());
         }
 
-        private class UserMap : EntityTypeConfiguration<User>
+        private class PermissionMap : EntityTypeConfiguration<Permission>
         {
-            public UserMap()
+            public PermissionMap()
             {
-                ToTable("User");
+                ToTable("Permission");
                 // Primary Key
                 HasKey(t => t.Id);
                 Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
                 // Properties
-                Property(t => t.Email).IsOptional();
-                Property(t => t.EmailConfirmed).IsRequired();
-                Property(t => t.PasswordHash).IsRequired();
-                Property(t => t.SecurityStamp).IsOptional();
-                Property(t => t.PhoneNumber).IsOptional();
-                Property(t => t.PhoneNumberConfirmed).IsRequired();
-                Property(t => t.TwoFactorEnabled).IsRequired();
-                Property(t => t.LockoutEndDateUtc).IsOptional();
-                Property(t => t.LockoutEnabled).IsRequired();
-                Property(t => t.AccessFailedCount).IsRequired();
-                Property(t => t.UserName).IsRequired();
+                Property(t => t.ClaimType).IsRequired();
+                Property(t => t.ClaimValue).IsRequired();
+                Property(t => t.Description).IsRequired();
 
                 // Relationships
-                HasMany(t => t.Claims).WithRequired().HasForeignKey(t => t.UserId);
-                HasMany(t => t.Logins).WithRequired().HasForeignKey(t => t.UserId);
-                HasMany(t => t.Roles).WithMany().Map(t =>
+                HasMany(t => t.Roles).WithMany(p=>p.Permissions).Map(t =>
                 {
-                    t.ToTable("UserUserRole");
-                    t.MapLeftKey("UserId");
+                    t.ToTable("PermissionRole");
+                    t.MapLeftKey("PermissionId");
                     t.MapRightKey("RoleId");
                 });
             }

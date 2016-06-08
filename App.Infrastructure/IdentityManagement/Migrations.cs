@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using App.Core.Repositories;
 using App.Data.EntityFramework;
@@ -48,7 +49,18 @@ namespace App.Infrastructure.IdentityManagement
                var userRole = new UserRole { RoleId = 1, UserId = adminUser.Id, State = ObjectState.Added };
                adminUser.Roles.Add(userRole);
            }
-
+            var permissions = db.MinhKhangDbContext.Set<Permission>().ToList();
+            var tempRole = permissions.FirstOrDefault().Roles.ToList();
+            var roles = roleManager.Roles.ToList();
+            foreach (var role in roles)
+            {
+                Debug.WriteLine(role.Name+":");
+                foreach (var permission in role.Permissions)
+                {
+                    Debug.Write(permission.Description);
+                }
+            }
+            
            db.SaveChanges();
 
 

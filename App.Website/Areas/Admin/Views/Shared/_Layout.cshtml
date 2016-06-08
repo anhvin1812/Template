@@ -18,7 +18,8 @@
     @Styles.Render("~/Admin/Content/datePicker")
     @Styles.Render("~/Admin/Content/dateRangePicker")
     @Styles.Render("~/Admin/Content/textEditor")
-   
+
+    @RenderSection("AddStyles", required: false)
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -321,17 +322,17 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="pages/widgets.html">
+                        <a href="@Url.Action("Index", "Product")">
                             <i class="fa fa-dropbox"></i> <span>Sản phẩm</span> <small class="label pull-right bg-green">new</small>
                         </a>
                     </li>
                     <li>
-                        <a href="pages/widgets.html">
+                        <a href="@Url.Action("Index", "Service")">
                             <i class="fa fa-gears"></i> <span>Dịch vụ</span> <small class="label pull-right bg-green">new</small>
                         </a>
                     </li>
                     <li>
-                        <a href="pages/widgets.html">
+                        <a href="@Url.Action("Index", "Order")">
                             <i class="fa fa-shopping-cart"></i> <span>Đơn hàng</span> <small class="label pull-right bg-red">3</small>
                         </a>
                     </li>
@@ -342,8 +343,8 @@
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/charts/chartjs.html"><i class="fa fa-users"></i> Vai trò</a></li>
-                            <li><a href="pages/charts/morris.html"><i class="fa fa-user"></i> Người dùng</a></li>
+                            <li><a href="@Url.Action("Index", "Role")"><i class="fa fa-users"></i> Vai trò</a></li>
+                            <li><a href="@Url.Action("Index", "User")"><i class="fa fa-user"></i> Người dùng</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -740,22 +741,22 @@
     </div><!-- ./wrapper -->
 
 
-    @Scripts.Render("~/js/jquery")
+    @Scripts.Render("~/Admin/Js/jquery")
     <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    @Scripts.Render("~/js/morrisCharts")
-    @Scripts.Render("~/js/sparkline")
-    @Scripts.Render("~/js/jvectormap")
-    @Scripts.Render("~/js/jQueryKnobChart")
+    @Scripts.Render("~/Admin/Js/morrisCharts")
+    @Scripts.Render("~/Admin/Js/sparkline")
+    @Scripts.Render("~/Admin/Js/jvectormap")
+    @Scripts.Render("~/Admin/Js/jQueryKnobChart")
     <!-- daterangepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    @Scripts.Render("~/js/dateRangePicker")
-    @Scripts.Render("~/js/datePicker")
-    @Scripts.Render("~/js/boostrapEditor")
-    @Scripts.Render("~/js/slimScroll")
-    @Scripts.Render("~/js/app")
+    @Scripts.Render("~/Admin/Js/dateRangePicker")
+    @Scripts.Render("~/Admin/Js/datePicker")
+    @Scripts.Render("~/Admin/Js/boostrapEditor")
+    @Scripts.Render("~/Admin/Js/slimScroll")
+    @Scripts.Render("~/Admin/Js/app")
    
     <script>
       $.widget.bridge('uibutton', $.ui.button);
@@ -766,5 +767,7 @@
     <script src="/Areas/Admin/Scripts/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/Areas/Admin/Scripts/js/demo.js"></script>
+
+    @RenderSection("AddScripts", required: false)
 </body>
 </html>

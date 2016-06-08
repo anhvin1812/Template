@@ -60,6 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\QueryableExtensions.cs" />
+    <Compile Include="IdentityManagement\IPermissionRepository.cs" />
+    <Compile Include="IdentityManagement\PermissionRepository.cs" />
     <Compile Include="RepositoryAutofacModule.cs" />
     <Compile Include="IdentityManagement\IUserRepository.cs" />
     <Compile Include="IdentityManagement\UserRepository.cs" />
