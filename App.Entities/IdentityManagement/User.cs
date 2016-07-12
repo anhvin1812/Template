@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -8,6 +9,12 @@ namespace App.Entities.IdentityManagement
 {
     public class User : IdentityUser<int, UserLogin, UserRole, UserClaim>, IObjectState
     {
+        public string Firstname  { get; set; }
+        public string Lastname { get; set; }
+        public string Address { get; set; }
+
+        public ICollection<Role> UserRoles { get; set; }
+        
         [NotMapped]
         public ObjectState State { get; set; }
 

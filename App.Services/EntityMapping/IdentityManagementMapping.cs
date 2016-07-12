@@ -7,7 +7,7 @@ using AutoMapper;
 
 namespace App.Services.EntityMapping
 {
-    internal static class PostMapping
+    internal static class IdentityManagementMapping
     {
         public static void ConfigureMapping()
         {

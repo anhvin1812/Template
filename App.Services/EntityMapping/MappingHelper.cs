@@ -30,7 +30,7 @@ namespace App.Services.EntityMapping
 
             #endregion
             // There should be one mapping configuration class per leaf namespace.
-            PostMapping.ConfigureMapping();
+            IdentityManagementMapping.ConfigureMapping();
 
             #region Network
             //Mapper.CreateMap<NetworkGroup, NetworkGroupDetail>().IgnoreUnmapped();

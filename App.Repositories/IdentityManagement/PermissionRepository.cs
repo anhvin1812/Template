@@ -10,7 +10,7 @@ using User = App.Entities.IdentityManagement.User;
 
 namespace App.Repositories.IdentityManagement
 {
-    public class PermissionRepository : RepositoryBase, IUserRepository
+    public class PermissionRepository : RepositoryBase, IPermissionRepository
     {
         private ApplicationUserManager _ApplicationUserManager;
         public PermissionRepository(IMinhKhangDatabaseContext databaseContext)

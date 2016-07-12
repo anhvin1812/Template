@@ -45,7 +45,7 @@ namespace App.Website.Areas.Admin.App_Start
 
             bundles.Add(new ScriptBundle("~/Admin/Js/dataTable").Include(
                       getPath("Scripts/datatables/jquery.dataTables.min.js"),
-                      getPath("Scripts/dataTables.bootstrap.min.js")));
+                      getPath("Scripts/datatables/dataTables.bootstrap.min.js")));
 
               //bundles.Add(new ScriptBundle("~/js/morris-charts").Include(
               //            "~/Scripts/jquery.validate*"));

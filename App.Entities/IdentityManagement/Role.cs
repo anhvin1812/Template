@@ -8,16 +8,7 @@ namespace App.Entities.IdentityManagement
     [Serializable]
     public class Role : IdentityRole<int, UserRole>, IObjectState
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Role"/> class.
-        /// </summary>
-        public Role() { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Role"/> class.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        public Role(string name) { Name = name; }
+        public string Description { get; set; }
 
         [NotMapped]
         public ObjectState State { get; set; }
