@@ -9,6 +9,7 @@ namespace App.Entities.IdentityManagement
     public class Role : IdentityRole<int, UserRole>, IObjectState
     {
         public string Description { get; set; }
+        public ICollection<User> RoleUsers { get; set; }
 
         [NotMapped]
         public ObjectState State { get; set; }

@@ -26,7 +26,7 @@ namespace App.Infrastructure.IdentityManagement
            {
                UserName = "Admin",
                Email = "leanhvin@gmail.com",
-               EmailConfirmed = true,
+               EmailConfirmed = true
            };
 
            if (!userManager.Users.Any())
@@ -42,24 +42,24 @@ namespace App.Infrastructure.IdentityManagement
                 db.SaveChanges();
            }
 
-           var adminUser = userManager.FindByName("leanhvin@gmail.com");
+           var adminUser = userManager.FindByEmail("leanhvin@gmail.com");
            var adminRole = roleManager.FindByName("Admin");
-           if (!adminUser.Roles.Any(x => x.RoleId == adminRole.Id))
+           if (adminUser.Roles.All(x => x.RoleId != adminRole.Id))
            {
                var userRole = new UserRole { RoleId = 1, UserId = adminUser.Id, State = ObjectState.Added };
                adminUser.Roles.Add(userRole);
            }
-            var permissions = db.MinhKhangDbContext.Set<Permission>().ToList();
-            var tempRole = permissions.FirstOrDefault().Roles.ToList();
-            var roles = roleManager.Roles.ToList();
-            foreach (var role in roles)
-            {
-                Debug.WriteLine(role.Name+":");
-                foreach (var permission in role.Permissions)
-                {
-                    Debug.Write(permission.Description);
-                }
-            }
+            //var permissions = db.MinhKhangDbContext.Set<Permission>().ToList();
+            //var tempRole = permissions.FirstOrDefault().Roles.ToList();
+            //var roles = roleManager.Roles.ToList();
+            //foreach (var role in roles)
+            //{
+            //    Debug.WriteLine(role.Name+":");
+            //    foreach (var permission in role.Permissions)
+            //    {
+            //        Debug.Write(permission.Description);
+            //    }
+            //}
             
            db.SaveChanges();
 

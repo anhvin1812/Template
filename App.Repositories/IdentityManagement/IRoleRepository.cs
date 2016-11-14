@@ -11,8 +11,8 @@ namespace App.Repositories.IdentityManagement
 {
     public interface IRoleRepository : IRepository
     {
-        IEnumerable<Role> GetAllRole(int? page, int? pageSize, ref int? recordCount);
-        Role GetRoleById(int id);
+        IEnumerable<Role> GetAll(int? page, int? pageSize, ref int? recordCount);
+        Role GetById(int id);
         void Create(Role role);
         void Update(Role role);
         void Delete(Role role);
