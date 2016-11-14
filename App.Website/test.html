@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>
+    <script src="https://npmcdn.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+         /* fluid 5 columns */
+         .grid-sizer,
+         .grid-item { background: #006400;
+             display: inline-block;
+             width: 100%;
+             margin-top: 15px;
+
+         }
+    /* 2 columns */
+        .h50 {
+            height: 50px !important;
+        }
+
+        .cols {
+            -moz-column-count: 2;
+            -webkit-column-count: 2;
+            column-count: 2;
+            -moz-column-gap: 13px;
+            -webkit-column-gap: 13px;
+            column-gap: 13px;
+
+        }
+    </style>
+
+</head>
+<body style="height: 400px;">
+    <div class="cols">
+        <!-- width of .grid-sizer used for columnWidth -->
+        <!--<div class="grid-sizer"></div>-->
+        <div class="grid-item" style="height: 100px"> DIV 1</div>
+        <div class="grid-item grid-item--width2"   style="height: 400px"> DIV 2</div>
+        <div class="grid-item grid-item--width2" style="height: 100px;"> DIV 3</div>
+        <div class="grid-item grid-item--width2" style="height: 400px"> DIV 3</div>
+        <div class="grid-item grid-item--width2" style="height: 100px"> DIV 4</div>
+    </div>
+
+<script>
+    //var $grid = $('.grid').masonry({
+    //    // set itemSelector so .grid-sizer is not used in layout
+    //    itemSelector: '.grid-item',
+    //    // use element for option
+    //    columnWidth: '.grid-sizer',
+    //    percentPosition: true
+    //});
+
+    $(document).ready(function() {
+        $('.grid-item').click(function() {
+            $(this).toggleClass("h50");
+            //$grid.masonry('layout');
+        });
+    });
+    
+</script>
+</body>
+</html>

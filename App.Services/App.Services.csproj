@@ -69,7 +69,9 @@
     <Compile Include="EntityMapping\AutoMapperExtensions.cs" />
     <Compile Include="EntityMapping\MappingHelper.cs" />
     <Compile Include="EntityMapping\IdentityManagementMapping.cs" />
+    <Compile Include="IdentityManagement\IRoleService.cs" />
     <Compile Include="IdentityManagement\IUserService.cs" />
+    <Compile Include="IdentityManagement\RoleService.cs" />
     <Compile Include="IdentityManagement\UserService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

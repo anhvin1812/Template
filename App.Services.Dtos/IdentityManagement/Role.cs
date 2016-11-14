@@ -15,5 +15,15 @@ namespace App.Services.Dtos.IdentityManagement
         public int RoleId { get; set; }
 
         public string RoleName { get; set; }
+
+        public string Description { get; set; }
+    }
+
+    public class PermissionDetails : DtoBase
+    {
+        public int PermisstionId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
+        public string Description { get; set; }
     }
 }
