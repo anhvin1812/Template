@@ -64,7 +64,7 @@
     <Compile Include="IdentityManagement\IPermissionRepository.cs" />
     <Compile Include="IdentityManagement\IRoleRepository.cs" />
     <Compile Include="IdentityManagement\PermissionRepository.cs" />
-    <Compile Include="IdentityManagement\RoleRepositoryCopy.cs" />
+    <Compile Include="IdentityManagement\RoleRepository.cs" />
     <Compile Include="RepositoryAutofacModule.cs" />
     <Compile Include="IdentityManagement\IUserRepository.cs" />
     <Compile Include="IdentityManagement\UserRepository.cs" />
