@@ -19,9 +19,9 @@ namespace App.Core.Repositories
         /// <remarks>
         /// Concrete repositories should inject more specific interfaces that inherit from IDatabaseContext.
         /// </remarks>
-        protected RepositoryBase(IDatabaseContext DatabaseContext)
+        protected RepositoryBase(IDatabaseContext platformContext)
         {
-            DatabaseContext = DatabaseContext;
+            PlatformContext = platformContext;
             InstanceId = Guid.NewGuid();
         }
 
@@ -40,7 +40,7 @@ namespace App.Core.Repositories
         /// <remarks>
         /// This property should be visible to UnitOfWork to enable cross DatabaseContexts transaction management.
         /// </remarks>
-        protected internal IDatabaseContext DatabaseContext { get; set; }
+        protected internal IDatabaseContext PlatformContext { get; set; }
 
         private Guid InstanceId { get; set; }
 
@@ -57,7 +57,7 @@ namespace App.Core.Repositories
             {
                 if (isDisposing)
                 {
-                    DatabaseContext = null;
+                    PlatformContext = null;
                 }
                 disposed = true;
             }

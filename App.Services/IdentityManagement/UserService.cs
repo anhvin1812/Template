@@ -29,10 +29,11 @@ namespace App.Services.IdentityManagement
             var users = UserRepository.GetAllUser(page, pageSize, ref recordCount)
                 .Select(x => new UserSummary
                 {
+                    Id = x.Id,
                     UserName = x.UserName,
                     Email = x.Email,
                     PhoneNumber = x.PhoneNumber,
-                    Roles = x.UserRoles.Select(r => new RoleDetails {RoleId = r.Id, RoleName = r.Name})
+                    Roles = UserRepository.GetRoleByUser(x.Id).ToList().Select(r=> new RoleDetails {RoleName = r.Name, RoleId = r.Id})
                 });
             
             return users;

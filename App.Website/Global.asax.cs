@@ -13,8 +13,9 @@ namespace App.Website
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            WebAutofacConfig.ConfigureContainer();
 
-           Migrations.Initialize();
+            //Migrations.Initialize();
         }
     }
 }

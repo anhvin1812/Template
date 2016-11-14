@@ -74,7 +74,7 @@ namespace App.Core.Repositories
         {
             foreach (var repositoryBase in repositories.OfType<RepositoryBase>())
             {
-                _databaseContexts.Add(repositoryBase.DatabaseContext);
+                _databaseContexts.Add(repositoryBase.PlatformContext);
             }
         }
 

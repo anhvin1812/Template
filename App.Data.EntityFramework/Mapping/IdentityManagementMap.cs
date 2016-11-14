@@ -17,7 +17,7 @@ namespace App.Data.EntityFramework.Mapping
             modelBuilder.Configurations.Add(new PermissionMap());
             //modelBuilder.Configurations.Add(new UserRoleMap());
             //modelBuilder.Configurations.Add(new UserClaimMap());
-           // modelBuilder.Configurations.Add(new UserLoginMap());
+            // modelBuilder.Configurations.Add(new UserLoginMap());
         }
 
         private class PermissionMap : EntityTypeConfiguration<Permission>

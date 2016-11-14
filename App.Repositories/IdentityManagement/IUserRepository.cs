@@ -16,5 +16,7 @@ namespace App.Repositories.IdentityManagement
         void Create(User user);
         void Update(User user);
         void Delete(User user);
+
+        IEnumerable<Role> GetRoleByUser(int useId);
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Core.Repositories;
+using App.Data.EntityFramework;
+using App.Entities.IdentityManagement;
 using App.Infrastructure.IdentityManagement;
 using App.Repositories.Common;
 using Microsoft.AspNet.Identity;
@@ -14,6 +17,7 @@ namespace App.Repositories.IdentityManagement
     public class UserRepository : RepositoryBase, IUserRepository
     {
         private ApplicationUserManager _applicationUserManager;
+        private ApplicationRoleManager _applicationRoleManager;
 
         public UserRepository(IMinhKhangDatabaseContext databaseContext, ApplicationUserManager applicationUserManager)
             : base(databaseContext)
@@ -21,7 +25,7 @@ namespace App.Repositories.IdentityManagement
             _applicationUserManager = applicationUserManager;
         }
 
-        private IMinhKhangDatabaseContext DatabaseContext => DatabaseContext as IMinhKhangDatabaseContext;
+        private IMinhKhangDatabaseContext DatabaseContext => PlatformContext as IMinhKhangDatabaseContext;
 
         public User GetUserById(int id)
         {
@@ -32,6 +36,8 @@ namespace App.Repositories.IdentityManagement
 
         public IEnumerable<User> GetAllUser(int? page, int? pageSize, ref int? recordCount)
         {
+            var db = new MinhKhangDbContext();
+
             var result = DatabaseContext.Get<User>();
 
             if (recordCount != null)
@@ -60,6 +66,11 @@ namespace App.Repositories.IdentityManagement
         public void Delete(User user)
         {
             _applicationUserManager.Delete(user);
+        }
+
+        public IEnumerable<Role> GetRoleByUser(int useId)
+        {
+            return DatabaseContext.Get<Role>().Where(r => r.Users.Any(u => u.UserId == useId));
         }
 
 

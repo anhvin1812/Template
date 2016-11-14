@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Repositories;
+using App.Services.IdentityManagement;
 using Autofac;
 
 namespace App.Services
@@ -19,7 +20,7 @@ namespace App.Services
 
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.RegisterType<RedCatMemberFactory>().As<IThirdPartyProviderMemberFactory<RedCatMember>>().InstancePerLifetimeScope();
+            builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
             //builder.RegisterType<Talent2MemberFactory>().As<IThirdPartyProviderMemberFactory<Talent2Member>>().InstancePerLifetimeScope();
             //builder.RegisterType<KeyPayMemberFactory>().As<IThirdPartyProviderMemberFactory<KeyPayMember>>().InstancePerLifetimeScope();
             //builder.RegisterType<SherpaPayrollMemberFactory>().As<IThirdPartyProviderMemberFactory<SherpaPayrollMember>>().InstancePerLifetimeScope();
