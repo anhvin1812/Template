@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using App.Core.Permission;
 using App.Services;
+using App.Services.Dtos.IdentityManagement;
 using App.Services.IdentityManagement;
 
 namespace App.Website.Areas.Admin.Controllers
@@ -33,12 +35,46 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var model = new RoleEntry
+            {
+                Permissions = new List<PermissionEntry>
+                {
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Create},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Read},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Modify},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Delete},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Super},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Create},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Read},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Modify},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Delete},
+                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Super},
+                }
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(RoleEntry entry)
+        {
+            RoleService.Insert(entry);
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var result = RoleService.GetById(id);
+            return View(result);
+        }
+
+        [HttpPost]
+        [Route("{id:int}")]
+        public ActionResult Edit(int id, RoleEntry entry)
+        {
+            RoleService.Insert(entry);
+
+            return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)

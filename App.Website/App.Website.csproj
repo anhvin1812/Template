@@ -1142,6 +1142,7 @@
     <Content Include="Areas\Admin\Views\Shared\_SideBar.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\product-scripts.js" />
     <Content Include="Scripts\common.js" />

@@ -1,4 +1,6 @@
 ﻿@using System.Web.Optimization
+@using App.Core.Permission
+@model App.Services.Dtos.IdentityManagement.RoleEntry
 @{
     ViewBag.Title = "Roles";
 }
@@ -25,70 +27,89 @@
 <div class="box box-primary">
     <div class="box-header with-border">
     </div><!-- /.box-header -->
-
-    <form role="form">
-        <div class="box-body">
-            <div class="form-group">
-                <label for="txtRoleName">Role name</label>
-                <input class="form-control" id="txtRoleName" placeholder="Enter role name" type="text">
-            </div>
-            <div class="form-group">
-                <label>Permissions</label>
-                <table class="table table-hover">
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td>Create</td>
-                            <td>Read</td>
-                            <td>Modify</td>
-                            <td>Delete</td>
-                            <td>Super</td>
-                        </tr>
-                        <tr>
-                            <td>User management</td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Roles management</td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                            <td>
-                                <input type="checkbox" class="flat-red">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div><!-- /.box-body -->
-        <div class="box-footer">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a class="btn btn-default" href="@Url.Action("Index", "Role")">Back to roles</a>
+    @using (Html.BeginForm("Create", "Role", FormMethod.Post))
+    {
+    <div class="box-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.RoleName)
+            @Html.TextAreaFor(m => m.RoleName, new { @class = "form-control", placeholder = "Enter role name" })
         </div>
-    </form><!-- /form-->
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextAreaFor(m => m.Description, new {@class="form-control", placeholder = "Enter description"})
+            @*<label for="txtDescription">Description</label>
+            <input class="form-control" id="txtDescription" placeholder="Enter description" type="text">*@
+        </div>
+        <div class="form-group">
+            <label>Permissions</label>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td>Create</td>
+                        <td>Read</td>
+                        <td>Modify</td>
+                        <td>Delete</td>
+                        <td>Super</td>
+                    </tr>
+                    <tr>
+                        <td>Users management</td>
+                        <td>
+                            <input name="Permissions[0].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
+                            <input name="Permissions[0].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Create">
+                        </td>
+                        <td>
+                            <input name="Permissions[1].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
+                            <input name="Permissions[1].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Read">
+                        </td>
+                        <td>
+                            <input name="Permissions[2].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
+                            <input name="Permissions[2].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Modify">
+                        </td>
+                        <td>
+                            <input name="Permissions[3].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
+                            <input name="Permissions[3].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Delete">
+                        </td>
+                        <td>
+                            <input name="Permissions[4].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
+                            <input name="Permissions[4].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Super">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>News management</td>
+                        <td>
+                            <input name="Permissions[5].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
+                            <input name="Permissions[5].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Create">
+                        </td>
+                        <td>
+                            <input name="Permissions[6].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
+                            <input name="Permissions[6].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Read">
+                        </td>
+                        <td>
+                            <input name="Permissions[7].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
+                            <input name="Permissions[7].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Modify">
+                        </td>
+                        <td>
+                            <input name="Permissions[8].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
+                            <input name="Permissions[8].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Delete">
+                        </td>
+                        <td>
+                            <input name="Permissions[9].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
+                            <input name="Permissions[9].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Super">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Role")">Back to roles</a>
+    </div>
+
+    }
+
+    <form role="form"></form><!-- /form-->
 </div><!-- /.box -->
 
 

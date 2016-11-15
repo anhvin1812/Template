@@ -88,6 +88,8 @@
     <Compile Include="Common\DisposableObject.cs" />
     <Compile Include="Exceptions\ErrorCodeType.cs" />
     <Compile Include="Exceptions\ErrorExtraInfo.cs" />
+    <Compile Include="Permission\ApplicationPermissionCapabilities.cs" />
+    <Compile Include="Permission\ApplicationPermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IMinhKhangDatabaseContext.cs" />
     <Compile Include="Repositories\IDatabaseContext.cs" />

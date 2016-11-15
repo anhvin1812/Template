@@ -13,7 +13,7 @@ namespace App.Repositories.IdentityManagement
     {
         IEnumerable<Role> GetAll(int? page, int? pageSize, ref int? recordCount);
         Role GetById(int id);
-        void Create(Role role);
+        void Insert(Role role);
         void Update(Role role);
         void Delete(Role role);
     }

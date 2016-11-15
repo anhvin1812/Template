@@ -9,7 +9,14 @@ namespace App.Services.IdentityManagement
 {
     public interface IRoleService : IService
     {
-        IEnumerable<RoleDetails> GetAll(int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<RoleSummary> GetAll(int? page, int? pageSize, ref int? recordCount);
+
+        RoleDetails GetById(int id);
+
+        void Insert(RoleEntry entry);
+
+        void Update(int id, RoleEntry entry);
+
 
     }
 }

@@ -44,7 +44,7 @@ namespace App.Repositories.IdentityManagement
             return result;
         }
 
-        public void Create(Role role)
+        public void Insert(Role role)
         {
             PlatformContext.Insert(role);
         }
