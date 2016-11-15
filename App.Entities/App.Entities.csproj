@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityBase.cs" />
-    <Compile Include="IdentityManagement\Permission.cs" />
+    <Compile Include="IdentityManagement\RoleClaim.cs" />
     <Compile Include="IdentityManagement\CustomRole.cs" />
     <Compile Include="IdentityManagement\Role.cs" />
     <Compile Include="IdentityManagement\User.cs" />

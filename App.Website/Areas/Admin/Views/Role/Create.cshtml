@@ -32,11 +32,11 @@
     <div class="box-body">
         <div class="form-group">
             @Html.LabelFor(m => m.RoleName)
-            @Html.TextAreaFor(m => m.RoleName, new { @class = "form-control", placeholder = "Enter role name" })
+            @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control", placeholder = "Enter role name" })
         </div>
         <div class="form-group">
             @Html.LabelFor(m => m.Description)
-            @Html.TextAreaFor(m => m.Description, new {@class="form-control", placeholder = "Enter description"})
+            @Html.TextBoxFor(m => m.Description, new {@class="form-control", placeholder = "Enter description"})
             @*<label for="txtDescription">Description</label>
             <input class="form-control" id="txtDescription" placeholder="Enter description" type="text">*@
         </div>
@@ -54,49 +54,44 @@
                     </tr>
                     <tr>
                         <td>Users management</td>
-                        <td>
-                            <input name="Permissions[0].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
-                            <input name="Permissions[0].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Create">
-                        </td>
-                        <td>
-                            <input name="Permissions[1].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
-                            <input name="Permissions[1].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Read">
-                        </td>
-                        <td>
-                            <input name="Permissions[2].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
-                            <input name="Permissions[2].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Modify">
-                        </td>
-                        <td>
-                            <input name="Permissions[3].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
-                            <input name="Permissions[3].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Delete">
-                        </td>
-                        <td>
-                            <input name="Permissions[4].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.USER" />
-                            <input name="Permissions[4].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Super">
-                        </td>
+                        @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.USER))
+                        {
+                            <td>
+                                <input name="Permissions[0].ClaimType" type="hidden" value="@p.ClaimType" />
+                                <input name="Permissions[0].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                            </td>
+                        }
                     </tr>
+                <tr>
+                    <td>News management</td>
+                    @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.NEWS))
+                    {
+                        <td>
+                            <input name="Permissions[0].ClaimType" type="hidden" value="@p.ClaimType"/>
+                            <input name="Permissions[0].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                        </td>
+                    }
+                </tr>
+
+                <tr>
+                    <td>Products management</td>
+                    @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.PRODUCT))
+                    {
+                        <td>
+                            <input name="Permissions[0].ClaimType" type="hidden" value="@p.ClaimType"/>
+                            <input name="Permissions[0].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                        </td>
+                    }
+                </tr>
                     <tr>
-                        <td>News management</td>
-                        <td>
-                            <input name="Permissions[5].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
-                            <input name="Permissions[5].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Create">
-                        </td>
-                        <td>
-                            <input name="Permissions[6].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
-                            <input name="Permissions[6].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Read">
-                        </td>
-                        <td>
-                            <input name="Permissions[7].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
-                            <input name="Permissions[7].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Modify">
-                        </td>
-                        <td>
-                            <input name="Permissions[8].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
-                            <input name="Permissions[8].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Delete">
-                        </td>
-                        <td>
-                            <input name="Permissions[9].ClaimType" type="hidden" value="@ApplicationPermissionCapabilities.NEWS" />
-                            <input name="Permissions[9].ClaimValue" type="checkbox"  value="@ApplicationPermissions.Super">
-                        </td>
+                        <td>Orders management</td>
+                        @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.ORDER))
+                        {
+                            <td>
+                                <input name="Permissions[0].ClaimType" type="hidden" value="@p.ClaimType" />
+                                <input name="Permissions[0].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                            </td>
+                        }
                     </tr>
                 </tbody>
             </table>

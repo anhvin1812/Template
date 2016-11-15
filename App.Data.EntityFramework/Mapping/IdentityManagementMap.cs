@@ -14,33 +14,28 @@ namespace App.Data.EntityFramework.Mapping
     {
         public static void Configure(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new PermissionMap());
+            modelBuilder.Configurations.Add(new RoleClaimnMap());
             //modelBuilder.Configurations.Add(new UserRoleMap());
             //modelBuilder.Configurations.Add(new UserClaimMap());
             // modelBuilder.Configurations.Add(new UserLoginMap());
         }
 
-        private class PermissionMap : EntityTypeConfiguration<Permission>
+        private class RoleClaimnMap : EntityTypeConfiguration<RoleClaim>
         {
-            public PermissionMap()
+            public RoleClaimnMap()
             {
-                ToTable("Permission");
+                ToTable("RoleClaim");
                 // Primary Key
                 HasKey(t => t.Id);
                 Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
                 // Properties
+                Property(t => t.RoleId).IsRequired();
                 Property(t => t.ClaimType).IsRequired();
                 Property(t => t.ClaimValue).IsRequired();
-                Property(t => t.Description).IsRequired();
 
                 // Relationships
-                HasMany(t => t.Roles).WithMany(p=>p.Permissions).Map(t =>
-                {
-                    t.ToTable("PermissionRole");
-                    t.MapLeftKey("PermissionId");
-                    t.MapRightKey("RoleId");
-                });
+                HasRequired(t => t.Roles).WithMany().HasForeignKey(r => r.RoleId);
             }
         }
 

@@ -35,22 +35,8 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var model = new RoleEntry
-            {
-                Permissions = new List<PermissionEntry>
-                {
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Create},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Read},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Modify},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Delete},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Super},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Create},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Read},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Modify},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Delete},
-                    new PermissionEntry {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Super},
-                }
-            };
+            var model = RoleService.GetBlankRoleEntry();
+
             return View(model);
         }
 

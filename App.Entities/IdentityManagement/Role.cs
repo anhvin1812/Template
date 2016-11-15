@@ -10,10 +10,10 @@ namespace App.Entities.IdentityManagement
     {
         public string Description { get; set; }
         public ICollection<User> RoleUsers { get; set; }
+        public virtual ICollection<RoleClaim> RoleClaims { get; set; }
+
 
         [NotMapped]
         public ObjectState State { get; set; }
-
-        public virtual ICollection<Permission> Permissions { get; set; }
     }
 }

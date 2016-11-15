@@ -40,6 +40,14 @@ namespace App.Services.IdentityManagement
             return roles;
         }
 
+        public RoleEntry GetBlankRoleEntry()
+        {
+            return new RoleEntry
+            {
+                RoleClaims = GetAllPermissions()
+            };
+        }
+
         public RoleDetails GetById(int id)
         {
             var roleEntity = RoleRepository.GetById(id);
@@ -53,11 +61,12 @@ namespace App.Services.IdentityManagement
                 RoleId = roleEntity.Id,
                 RoleName = roleEntity.Name,
                 Description = roleEntity.Description,
-                Permissions = roleEntity.Permissions.Select(x => new PermissionSummary
+                RoleClaims = roleEntity.RoleClaims.Select(x => new RoleClaimSummary
                 {
-                    PermisstionId = x.Id,
+                    RoleClaimId = x.Id,
+                    RoleId = x.RoleId,
                     ClaimType = x.ClaimType,
-                    ClaimValue = (ApplicationPermissions)Enum.Parse(typeof(ApplicationPermissions), x.ClaimValue)
+                    ClaimValue = x.ClaimValue
                 }).ToList()
             };
 
@@ -70,15 +79,12 @@ namespace App.Services.IdentityManagement
 
             var roleEntity = new Role
             {
-                State = ObjectState.Added,
                 Name = entry.RoleName,
                 Description = entry.Description,
-                Permissions = entry.Permissions.Select(x=>new Permission
+                RoleClaims = entry.RoleClaims.Select(x=>new RoleClaim
                 {
-                    State = ObjectState.Added,
                     ClaimType = x.ClaimType,
-                    ClaimValue = x.ClaimValue.ToString(),
-                    Description = x.Description
+                    ClaimValue = x.ClaimValue,
                 }).ToList()
             };
 
@@ -97,12 +103,10 @@ namespace App.Services.IdentityManagement
 
             roleEntity.Name = entry.RoleName;
             roleEntity.Description = entry.Description;
-            roleEntity.Permissions = entry.Permissions.Select(x => new Permission
+            roleEntity.RoleClaims = entry.RoleClaims.Select(x => new RoleClaim
             {
-                State = ObjectState.Added,
                 ClaimType = x.ClaimType,
-                ClaimValue = x.ClaimValue.ToString(),
-                Description = x.Description
+                ClaimValue = x.ClaimValue,
             }).ToList();
 
             RoleRepository.Update(roleEntity);
@@ -113,7 +117,37 @@ namespace App.Services.IdentityManagement
         #endregion
 
         #region Private Methods
+        private List<RoleClaimSummary> GetAllPermissions()
+        {
+            var permissions = new List<RoleClaimSummary>
+            {
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Create.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Read.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Modify.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Delete.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.USER, ClaimValue = ApplicationPermissions.Super.ToString()},
 
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Create.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Read.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Modify.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Delete.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.NEWS, ClaimValue = ApplicationPermissions.Super.ToString()},
+
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.PRODUCT, ClaimValue = ApplicationPermissions.Create.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.PRODUCT, ClaimValue = ApplicationPermissions.Read.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.PRODUCT, ClaimValue = ApplicationPermissions.Modify.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.PRODUCT, ClaimValue = ApplicationPermissions.Delete.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.PRODUCT, ClaimValue = ApplicationPermissions.Super.ToString()},
+
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.ORDER, ClaimValue = ApplicationPermissions.Create.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.ORDER, ClaimValue = ApplicationPermissions.Read.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.ORDER, ClaimValue = ApplicationPermissions.Modify.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.ORDER, ClaimValue = ApplicationPermissions.Delete.ToString()},
+                new RoleClaimSummary {ClaimType = ApplicationPermissionCapabilities.ORDER, ClaimValue = ApplicationPermissions.Super.ToString()},
+            };
+
+            return permissions;
+        }
         #endregion
 
 

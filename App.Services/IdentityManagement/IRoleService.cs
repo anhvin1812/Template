@@ -10,6 +10,7 @@ namespace App.Services.IdentityManagement
     public interface IRoleService : IService
     {
         IEnumerable<RoleSummary> GetAll(int? page, int? pageSize, ref int? recordCount);
+        RoleEntry GetBlankRoleEntry();
 
         RoleDetails GetById(int id);
 

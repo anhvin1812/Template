@@ -11,7 +11,7 @@ namespace App.Services.Dtos.IdentityManagement
 
         public string Description { get; set; }
 
-        public List<PermissionEntry> Permissions { get; set; }
+        public List<RoleClaimSummary> RoleClaims { get; set; }
     }
 
     public class RoleSummary : DtoBase
@@ -31,20 +31,15 @@ namespace App.Services.Dtos.IdentityManagement
 
         public string Description { get; set; }
 
-        public List<PermissionSummary> Permissions { get; set; }
+        public List<RoleClaimSummary> RoleClaims { get; set; }
     }
 
-    public class PermissionSummary : DtoBase
+    public class RoleClaimSummary : DtoBase
     {
-        public int PermisstionId { get; set; }
+        public int RoleClaimId { get; set; }
+        public int RoleId { get; set; }
         public string ClaimType { get; set; }
-        public ApplicationPermissions ClaimValue { get; set; }
+        public string ClaimValue { get; set; }
     }
 
-    public class PermissionEntry : DtoBase
-    {
-        public string ClaimType { get; set; }
-        public ApplicationPermissions ClaimValue { get; set; }
-        public string Description { get; set; }
-    }
 }
