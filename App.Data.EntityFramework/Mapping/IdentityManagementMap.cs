@@ -35,7 +35,7 @@ namespace App.Data.EntityFramework.Mapping
                 Property(t => t.ClaimValue).IsRequired();
 
                 // Relationships
-                HasRequired(t => t.Roles).WithMany().HasForeignKey(r => r.RoleId);
+                HasRequired(t => t.Role).WithMany(c=>c.RoleClaims).HasForeignKey(r => r.RoleId);
             }
         }
 

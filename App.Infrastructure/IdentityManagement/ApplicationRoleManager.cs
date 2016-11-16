@@ -11,11 +11,11 @@ namespace App.Infrastructure.IdentityManagement
 {
     public class ApplicationRoleManager : RoleManager<Role,int>
     {
-        private RoleManager<Role, int> _oleManager;
+        private RoleManager<Role, int> _roleManager;
         public ApplicationRoleManager(IRoleStore<Role, int> roleStore)
             : base(roleStore)
         {
-            _oleManager = new RoleManager<Role, int>(roleStore);
+            _roleManager = new RoleManager<Role, int>(roleStore);
         }
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
@@ -26,8 +26,20 @@ namespace App.Infrastructure.IdentityManagement
 
         public void Update(Role role)
         {
-            //_oleManager.Update(role);
             role.State = ObjectState.Modified;
+            _roleManager.Update(role);
+        }
+
+        public void Create(Role role)
+        {
+            role.State = ObjectState.Added;
+            _roleManager.Create(role);
+        }
+
+        public void Delete(Role role)
+        {
+            role.State = ObjectState.Deleted;
+            _roleManager.Delete(role);
         }
 
         public override Task<IdentityResult> CreateAsync(Role role)

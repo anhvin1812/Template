@@ -40,6 +40,15 @@ namespace App.Services.Dtos.IdentityManagement
         public int RoleId { get; set; }
         public string ClaimType { get; set; }
         public string ClaimValue { get; set; }
+        public bool IsChecked { get; set; }
+    }
+
+    public class RoleClaimEditEntry : DtoBase
+    {
+        public int RoleId { get; set; }
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
+        
     }
 
 }

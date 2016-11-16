@@ -12,7 +12,7 @@ namespace App.Services.IdentityManagement
         IEnumerable<RoleSummary> GetAll(int? page, int? pageSize, ref int? recordCount);
         RoleEntry GetBlankRoleEntry();
 
-        RoleDetails GetById(int id);
+        RoleEntry GetRoleForEditing(int id);
 
         void Insert(RoleEntry entry);
 

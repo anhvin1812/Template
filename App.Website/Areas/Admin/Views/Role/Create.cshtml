@@ -44,22 +44,24 @@
             <label>Permissions</label>
             <table class="table table-hover">
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td>Create</td>
-                        <td>Read</td>
-                        <td>Modify</td>
-                        <td>Delete</td>
-                        <td>Super</td>
-                    </tr>
+                <tr>
+                    <td></td>
+                    <td>Create</td>
+                    <td>Read</td>
+                    <td>Modify</td>
+                    <td>Delete</td>
+                    <td>Super</td>
+                </tr>
+                    @{ int i = 0; }
                     <tr>
                         <td>Users management</td>
                         @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.USER))
                         {
                             <td>
-                                <input name="Permissions[0].ClaimType" type="hidden" value="@p.ClaimType" />
-                                <input name="Permissions[0].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                                <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType"/>
+                                <input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
                             </td>
+                            i++;
                         }
                     </tr>
                 <tr>
@@ -67,9 +69,10 @@
                     @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.NEWS))
                     {
                         <td>
-                            <input name="Permissions[0].ClaimType" type="hidden" value="@p.ClaimType"/>
-                            <input name="Permissions[0].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                            <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType"/>
+                            <input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
                         </td>
+                        i++;
                     }
                 </tr>
 
@@ -78,9 +81,10 @@
                     @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.PRODUCT))
                     {
                         <td>
-                            <input name="Permissions[0].ClaimType" type="hidden" value="@p.ClaimType"/>
-                            <input name="Permissions[0].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                            <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType"/>
+                            <input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
                         </td>
+                        i++;
                     }
                 </tr>
                     <tr>
@@ -88,9 +92,10 @@
                         @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.ORDER))
                         {
                             <td>
-                                <input name="Permissions[0].ClaimType" type="hidden" value="@p.ClaimType" />
-                                <input name="Permissions[0].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                                <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType"/>
+                                <input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
                             </td>
+                            i++;
                         }
                     </tr>
                 </tbody>

@@ -9,7 +9,7 @@ namespace App.Entities.IdentityManagement
     public class Role : IdentityRole<int, UserRole>, IObjectState
     {
         public string Description { get; set; }
-        public ICollection<User> RoleUsers { get; set; }
+        public virtual ICollection<User> RoleUsers { get; set; }
         public virtual ICollection<RoleClaim> RoleClaims { get; set; }
 
 

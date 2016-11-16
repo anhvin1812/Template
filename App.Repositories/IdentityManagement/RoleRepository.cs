@@ -15,16 +15,20 @@ namespace App.Repositories.IdentityManagement
 {
     public class RoleRepository : RepositoryBase, IRoleRepository
     {
+        private ApplicationRoleManager _applicationRoleManager;
+        private IMinhKhangDatabaseContext DatabaseContext => PlatformContext as IMinhKhangDatabaseContext;
 
-        public RoleRepository(IMinhKhangDatabaseContext databaseContext)
+
+        public RoleRepository(IMinhKhangDatabaseContext databaseContext, ApplicationRoleManager applicationRoleManager)
             : base(databaseContext)
         {
+            _applicationRoleManager = applicationRoleManager;
         }
 
 
         public Role GetById(int id)
         {
-            return PlatformContext.Get<Role>().FirstOrDefault(r=>r.Id == id);
+            return _applicationRoleManager.FindById(id);
         }
 
         public IEnumerable<Role> GetAll(int? page, int? pageSize, ref int? recordCount)
@@ -44,20 +48,38 @@ namespace App.Repositories.IdentityManagement
             return result;
         }
 
-        public void Insert(Role role)
+        public void Insert(Role entity)
         {
-            PlatformContext.Insert(role);
+            _applicationRoleManager.Create(entity);
         }
 
-        public void Update(Role role)
+        public void Update(Role entity)
         {
-            PlatformContext.Update(role);
+            _applicationRoleManager.Update(entity);
         }
 
-        public void Delete(Role role)
+        public void Delete(Role entity)
         {
-            PlatformContext.Delete<Role>(role);
+            _applicationRoleManager.Delete(entity);
         }
-       
+
+        #region Role Claim
+        public IEnumerable<RoleClaim> GetRoleClaimsByRoleId(int id)
+        {
+            return DatabaseContext.Get<RoleClaim>().Where(x=>x.RoleId == id);
+        }
+
+        public void InsertRoleClaim(RoleClaim entity)
+        {
+            DatabaseContext.Insert(entity);
+        }
+
+        public void DeleteRoleClaim(int id)
+        {
+            DatabaseContext.Delete<RoleClaim>(id);
+        }
+        #endregion
+
+
     }
 }

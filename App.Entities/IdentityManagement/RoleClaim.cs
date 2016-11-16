@@ -13,6 +13,6 @@ namespace App.Entities.IdentityManagement
 
         public string ClaimValue { get; set; }
 
-        public virtual ICollection<Role> Roles { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using App.Core.Permission;
 using App.Core.Repositories;
 using App.Entities;
@@ -48,26 +49,28 @@ namespace App.Services.IdentityManagement
             };
         }
 
-        public RoleDetails GetById(int id)
+        public RoleEntry GetRoleForEditing(int id)
         {
             var roleEntity = RoleRepository.GetById(id);
 
             //TODO: implemetn exception
             if(roleEntity == null)
                 throw new Exception();
-            
-            var result = new RoleDetails
+
+            var allPermissions = GetAllPermissions();
+            // set checked for current claims
+            foreach (var roleClaimn in roleEntity.RoleClaims)
             {
-                RoleId = roleEntity.Id,
+                var permission = allPermissions.FirstOrDefault(x => x.ClaimType == roleClaimn.ClaimType && x.ClaimValue == roleClaimn.ClaimValue);
+                if (permission != null)
+                    permission.IsChecked = true;
+            }
+
+            var result = new RoleEntry
+            {
                 RoleName = roleEntity.Name,
                 Description = roleEntity.Description,
-                RoleClaims = roleEntity.RoleClaims.Select(x => new RoleClaimSummary
-                {
-                    RoleClaimId = x.Id,
-                    RoleId = x.RoleId,
-                    ClaimType = x.ClaimType,
-                    ClaimValue = x.ClaimValue
-                }).ToList()
+                RoleClaims = allPermissions
             };
 
             return result;
@@ -77,19 +80,38 @@ namespace App.Services.IdentityManagement
         {
             //TODO: Check exit Role, permission,...
 
-            var roleEntity = new Role
-            {
-                Name = entry.RoleName,
-                Description = entry.Description,
-                RoleClaims = entry.RoleClaims.Select(x=>new RoleClaim
-                {
-                    ClaimType = x.ClaimType,
-                    ClaimValue = x.ClaimValue,
-                }).ToList()
-            };
+            var roleClaims = entry.RoleClaims.Where(x => !string.IsNullOrEmpty(x.ClaimType) && !string.IsNullOrEmpty(x.ClaimValue));
 
-            RoleRepository.Insert(roleEntity);
-            Save();
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
+            {
+                // Save role
+                var roleEntity = new Role
+                {
+                    Name = entry.RoleName,
+                    Description = entry.Description
+                };
+                RoleRepository.Insert(roleEntity);
+                Save();
+
+                // Add Claim into role
+                if (roleClaims != null && roleClaims.Any())
+                {
+                    foreach (var roleClaim in roleClaims)
+                    {
+                        RoleRepository.InsertRoleClaim(new RoleClaim
+                        {
+                            RoleId = roleEntity.Id,
+                            ClaimType = roleClaim.ClaimType,
+                            ClaimValue = roleClaim.ClaimValue
+                        });
+                    }
+
+                    Save();
+                }
+
+                transactionScope.Complete();
+            }
+          
         }
 
         public void Update(int id, RoleEntry entry)
@@ -101,16 +123,38 @@ namespace App.Services.IdentityManagement
             if (roleEntity == null)
                 throw new Exception();
 
-            roleEntity.Name = entry.RoleName;
-            roleEntity.Description = entry.Description;
-            roleEntity.RoleClaims = entry.RoleClaims.Select(x => new RoleClaim
+            var roleClaims = entry.RoleClaims.Where(x => !string.IsNullOrEmpty(x.ClaimType) && !string.IsNullOrEmpty(x.ClaimValue));
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
             {
-                ClaimType = x.ClaimType,
-                ClaimValue = x.ClaimValue,
-            }).ToList();
+                // Remmove old claims
+                var oldClaims = RoleRepository.GetRoleClaimsByRoleId(roleEntity.Id);
+                foreach (var claim in oldClaims)
+                {
+                    RoleRepository.DeleteRoleClaim(claim.Id);
+                }
 
-            RoleRepository.Update(roleEntity);
-            Save();
+                // Add new claims into role
+                if (roleClaims != null && roleClaims.Any())
+                {
+                    foreach (var roleClaim in roleClaims)
+                    {
+                        RoleRepository.InsertRoleClaim(new RoleClaim
+                        {
+                            RoleId = roleEntity.Id,
+                            ClaimType = roleClaim.ClaimType,
+                            ClaimValue = roleClaim.ClaimValue
+                        });
+                    }
+                }
+                // Update role
+                roleEntity.Name = entry.RoleName;
+                roleEntity.Description = entry.Description;
+
+                RoleRepository.Update(roleEntity);
+                Save();
+
+                transactionScope.Complete();
+            }
         }
 
 
@@ -147,6 +191,11 @@ namespace App.Services.IdentityManagement
             };
 
             return permissions;
+        }
+
+        private bool IsChecked(RoleClaim roleClaim, List<RoleClaimSummary> allPermissions)
+        {
+            return allPermissions.Any(x => x.ClaimType == roleClaim.ClaimType && x.ClaimValue == roleClaim.ClaimValue);
         }
         #endregion
 

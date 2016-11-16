@@ -19,7 +19,10 @@ namespace App.Infrastructure
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ApplicationUserManager>().As<ApplicationUserManager>().InstancePerDependency();
+            builder.RegisterType<ApplicationRoleManager>().As<ApplicationRoleManager>().InstancePerDependency();
+
             builder.Register<IUserStore<User, int>>(c => new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(new MinhKhangDbContext())).InstancePerDependency();
+            builder.Register<IRoleStore<Role, int>>(c => new RoleStore<Role, int, UserRole>(new MinhKhangDbContext())).InstancePerDependency();
         
         }
     }

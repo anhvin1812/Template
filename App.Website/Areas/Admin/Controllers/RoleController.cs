@@ -50,15 +50,15 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var result = RoleService.GetById(id);
+            var result = RoleService.GetRoleForEditing(id);
             return View(result);
         }
 
         [HttpPost]
-        [Route("{id:int}")]
+        //[HandleError(ExceptionType = typeof(Exception), View = "Error")]
         public ActionResult Edit(int id, RoleEntry entry)
         {
-            RoleService.Insert(entry);
+            RoleService.Update(id, entry);
 
             return RedirectToAction("Index");
         }
