@@ -13,10 +13,13 @@ namespace App.Repositories.IdentityManagement
     {
         #region Role
         IEnumerable<Role> GetAll(int? page, int? pageSize, ref int? recordCount);
+        Role GetByName(string roleName);
         Role GetById(int id);
         void Insert(Role role);
         void Update(Role role);
         void Delete(Role role);
+
+        bool RoleExists(string roleName);
         #endregion
 
 

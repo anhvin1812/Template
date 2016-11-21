@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using App.Core.Exceptions;
 using App.Core.Permission;
 using App.Core.Repositories;
 using App.Entities;
@@ -80,6 +81,20 @@ namespace App.Services.IdentityManagement
         {
             //TODO: Check exit Role, permission,...
 
+            // Validate data
+            ValidateEntryData(entry);
+
+            // Check existed name
+            var roleForValidation = RoleRepository.GetByName(entry.RoleName);
+            if (roleForValidation != null)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.RoleNameIsUsed, Property = "RoleName"}
+                };
+                throw new ValidationError(violations);
+            }
+
             var roleClaims = entry.RoleClaims.Where(x => !string.IsNullOrEmpty(x.ClaimType) && !string.IsNullOrEmpty(x.ClaimValue));
 
             using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
@@ -118,10 +133,24 @@ namespace App.Services.IdentityManagement
         {
             //TODO: Check exit Role, permission,...
 
+            // Validate data
+            ValidateEntryData(entry);
+
             var roleEntity = RoleRepository.GetById(id);
-            //TODO: throw exception
-            if (roleEntity == null)
-                throw new Exception();
+
+            // Validate entity
+            ValidateEntityData(roleEntity);
+
+            // Check existed name
+            var roleForValidation = RoleRepository.GetByName(entry.RoleName);
+            if (roleForValidation != null && roleForValidation.Id != roleEntity.Id)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.RoleNameIsUsed, Property = "RoleName"}
+                };
+                throw new ValidationError(violations);
+            }
 
             var roleClaims = entry.RoleClaims.Where(x => !string.IsNullOrEmpty(x.ClaimType) && !string.IsNullOrEmpty(x.ClaimValue));
             using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
@@ -197,6 +226,42 @@ namespace App.Services.IdentityManagement
         {
             return allPermissions.Any(x => x.ClaimType == roleClaim.ClaimType && x.ClaimValue == roleClaim.ClaimValue);
         }
+
+        private void ValidateEntryData(RoleEntry entry)
+        {
+
+            if (entry == null)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.DataEmpty}
+                };
+                throw new ValidationError(violations);
+            }
+
+            if ( string.IsNullOrWhiteSpace(entry.RoleName) )
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidRoleName, Property = "RoleName"}
+                };
+                throw new ValidationError(violations);
+            }
+        }
+
+        private void ValidateEntityData(Role entity)
+        {
+            if (entity == null)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.RoleIsNotExsted}
+                };
+                throw new ValidationError(violations);
+            }
+
+        }
+
         #endregion
 
 

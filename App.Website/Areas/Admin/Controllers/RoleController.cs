@@ -41,11 +41,16 @@ namespace App.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(RoleEntry entry)
         {
-            RoleService.Insert(entry);
+            if (ModelState.IsValid)
+            {
+                RoleService.Insert(entry);
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+            return View(entry);
         }
 
         public ActionResult Edit(int id)

@@ -31,6 +31,18 @@ namespace App.Repositories.IdentityManagement
             return _applicationRoleManager.FindById(id);
         }
 
+        public Role GetByName(string roleName)
+        {
+            return _applicationRoleManager.FindByName(roleName);
+        }
+
+
+
+        public bool RoleExists(string roleName)
+        {
+            return _applicationRoleManager.RoleExists(roleName);
+        }
+
         public IEnumerable<Role> GetAll(int? page, int? pageSize, ref int? recordCount)
         {
             var result = PlatformContext.Get<Role>();

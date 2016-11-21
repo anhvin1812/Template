@@ -11,6 +11,9 @@ namespace App.Website.Areas.Admin.App_Start
                         getPath("Scripts/jQuery/jQuery-2.1.4.min.js"),
                         getPath("Scripts/bootstrap/js/bootstrap.min.js")));
 
+            bundles.Add(new ScriptBundle("~/Admin/Js/jqueryval").Include(
+                getPath("Scripts/jQuery-validate/jquery.validate*")));
+
             bundles.Add(new ScriptBundle("~/Admin/Js/morrisCharts").Include(
                        getPath("Scripts/morris/morris.min.js")));
 

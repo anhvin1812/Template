@@ -7,6 +7,7 @@ namespace App.Services.Dtos.IdentityManagement
 {
     public class RoleEntry : DtoBase
     {
+        [Required(ErrorMessage = "Please enter role name.")]
         public string RoleName { get; set; }
 
         public string Description { get; set; }

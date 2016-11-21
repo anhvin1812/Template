@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App.Services.Dtos.Common
 {
-    public enum ErrorCodeType
+    public enum ErrorCodeType_old
     {
         Error = 1,
         Validation = 2,
