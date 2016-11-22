@@ -33,7 +33,7 @@
         @Html.AntiForgeryToken()
 
         <div class="box-body">
-            @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "add-favorite-messages" })
+            @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "create-role-messages" })
             <div class="form-group">
                 @Html.LabelFor(m => m.RoleName)
                 @Html.TextBoxFor(m => m.RoleName, new {@class = "form-control", placeholder = "Enter role name"})

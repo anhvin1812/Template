@@ -68,7 +68,8 @@ namespace App.Website.Areas.Admin.App_Start
                       getPath("Scripts/bootstrap/css/bootstrap.min.css"),
                       getPath("Scripts/bootstrap/css/bootstrap.min.css"),
                       getPath("Content/css/AdminLTE.min.css"),
-                      getPath("Content/css/skins/_all-skins.min.css") ));
+                      getPath("Content/css/skins/_all-skins.min.css"),
+                      getPath("Content/css/site.css")));
 
             bundles.Add(new StyleBundle("~/Admin/Content/iCheck").Include(
                      getPath("Scripts/iCheck/flat/blue.css") ));

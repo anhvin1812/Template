@@ -226,6 +226,7 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Content\css\AdminLTE.css" />
     <Content Include="Areas\Admin\Content\css\AdminLTE.min.css" />
+    <Content Include="Areas\Admin\Content\css\site.css" />
     <Content Include="Areas\Admin\Content\css\skins\skin-black-light.css" />
     <Content Include="Areas\Admin\Content\css\skins\skin-black-light.min.css" />
     <Content Include="Areas\Admin\Content\css\skins\skin-black.css" />
@@ -1151,6 +1152,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Header.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\product-scripts.js" />
     <Content Include="Scripts\common.js" />

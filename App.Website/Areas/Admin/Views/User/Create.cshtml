@@ -1,0 +1,75 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "Người dùng";
+}
+@model IEnumerable<App.Services.Dtos.IdentityManagement.UserSummary>
+
+@section AddStyles{
+    @Styles.Render("~/Admin/Css/DataTable")
+}
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Data Table With Full Features</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="example1" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Phone Number</th>
+                    <th>Roles</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Id</td>
+                <td>@m.Firstname</td>
+                <td>@m.Lastname</td>
+                <td>@m.PhoneNumber</td>
+                <td>
+                    @foreach (var r in m.Roles)
+                    {
+                        <span class="label label-info">@r.RoleName</span>
+                    }
+                </td>
+                <td>
+                    Delete, Edit
+                </td>
+            </tr>
+        }
+        </tbody>
+            @*<tfoot>
+                <tr>
+                    <th>Rendering engine</th>
+                    <th>Browser</th>
+                    <th>Platform(s)</th>
+                    <th>Engine version</th>
+                    <th>CSS grade</th>
+                </tr>
+            </tfoot>*@
+        </table>
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->
+
+
+@section AddScripts{
+
+    <!-- DataTables -->
+    @Scripts.Render("~/Admin/Js/dataTable")
+
+    <script>
+      $(function () {
+        $("#example1").DataTable();
+      });
+    </script>
+}
+
