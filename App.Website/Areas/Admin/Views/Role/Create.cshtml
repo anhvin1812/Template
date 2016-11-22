@@ -63,7 +63,9 @@
                         {
                             <td>
                                 <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType"/>
-                                <input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                                <input name="RoleClaims[@i].ClaimValue" type="hidden" value="@p.ClaimValue"/>
+                                @*<input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">*@
+                                @Html.CheckBox(string.Format("RoleClaims[{0}].IsChecked", i), p.IsChecked, new { @class = "flat-red" })
                             </td>
                             i++;
                         }
@@ -73,8 +75,10 @@
                         @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.NEWS))
                         {
                             <td>
-                                <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType"/>
-                                <input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                                <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType" />
+                                <input name="RoleClaims[@i].ClaimValue" type="hidden" value="@p.ClaimValue" />
+                                @*<input name="RoleClaims[@i].IsChecked" value="@p.IsChecked" type="checkbox" class="flat-red">*@
+                                @Html.CheckBox(string.Format("RoleClaims[{0}].IsChecked", i), p.IsChecked, new { @class="flat-red" })
                             </td>
                             i++;
                         }
@@ -85,8 +89,9 @@
                         @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.PRODUCT))
                         {
                             <td>
-                                <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType"/>
-                                <input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                                <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType" />
+                                <input name="RoleClaims[@i].ClaimValue" type="hidden" value="@p.ClaimValue" />
+                                @Html.CheckBox(string.Format("RoleClaims[{0}].IsChecked", i), p.IsChecked, new { @class = "flat-red" })
                             </td>
                             i++;
                         }
@@ -96,8 +101,9 @@
                         @foreach (var p in Model.RoleClaims.Where(r => r.ClaimType == ApplicationPermissionCapabilities.ORDER))
                         {
                             <td>
-                                <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType"/>
-                                <input name="RoleClaims[@i].ClaimValue" type="checkbox" class="flat-red" value="@p.ClaimValue">
+                                <input name="RoleClaims[@i].ClaimType" type="hidden" value="@p.ClaimType" />
+                                <input name="RoleClaims[@i].ClaimValue" type="hidden" value="@p.ClaimValue" />
+                                @Html.CheckBox(string.Format("RoleClaims[{0}].IsChecked", i), p.IsChecked, new { @class = "flat-red" })
                             </td>
                             i++;
                         }

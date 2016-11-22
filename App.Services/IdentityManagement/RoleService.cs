@@ -95,7 +95,7 @@ namespace App.Services.IdentityManagement
                 throw new ValidationError(violations);
             }
 
-            var roleClaims = entry.RoleClaims.Where(x => !string.IsNullOrEmpty(x.ClaimType) && !string.IsNullOrEmpty(x.ClaimValue));
+            var roleClaims = entry.RoleClaims.Where(x=>x.IsChecked);
 
             using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
             {
@@ -152,7 +152,7 @@ namespace App.Services.IdentityManagement
                 throw new ValidationError(violations);
             }
 
-            var roleClaims = entry.RoleClaims.Where(x => !string.IsNullOrEmpty(x.ClaimType) && !string.IsNullOrEmpty(x.ClaimValue));
+            var roleClaims = entry.RoleClaims.Where(x => x.IsChecked);
             using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
             {
                 // Remmove old claims
