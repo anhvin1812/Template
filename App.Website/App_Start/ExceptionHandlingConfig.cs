@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
 using App.Website.Fillters;
 
 namespace App.Website.App_Start
@@ -19,5 +20,7 @@ namespace App.Website.App_Start
             //    configuration.Services.Add(typeof(IExceptionLogger), new ServiceExceptionLogger(new NullLogger()));
             configuration.Filters.Add(new UnhandledExceptionFilter());
         }
+
+
     }
 }

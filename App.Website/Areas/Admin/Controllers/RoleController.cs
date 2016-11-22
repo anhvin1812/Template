@@ -7,6 +7,7 @@ using App.Core.Permission;
 using App.Services;
 using App.Services.Dtos.IdentityManagement;
 using App.Services.IdentityManagement;
+using App.Website.Fillters;
 
 namespace App.Website.Areas.Admin.Controllers
 {
@@ -42,6 +43,7 @@ namespace App.Website.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ErrorHandler(View = "Create")]
         public ActionResult Create(RoleEntry entry)
         {
             if (ModelState.IsValid)

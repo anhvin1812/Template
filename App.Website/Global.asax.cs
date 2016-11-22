@@ -1,9 +1,13 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using App.Infrastructure.IdentityManagement;
 using App.Website.App_Start;
+using App.Website.Controllers;
+using App.Website.ModelBinder;
 
 namespace App.Website
 {
@@ -17,9 +21,28 @@ namespace App.Website
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             WebAutofacConfig.ConfigureContainer();
 
-            ExceptionHandlingConfig.RegisterExceptionHandler(GlobalConfiguration.Configuration);
+            ModelBinders.Binders.DefaultBinder = new AppModelBinder();
+
+            //ExceptionHandlingConfig.RegisterExceptionHandler(GlobalConfiguration.Configuration);
 
             //Migrations.Initialize();
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            //var httpContext = ((MvcApplication)sender).Context;
+            //var ex = Server.GetLastError();
+
+            //httpContext.ClearError();
+            //httpContext.Response.Clear();
+            //httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;
+            //httpContext.Response.TrySkipIisCustomErrors = true;
+
+            //var routeData = new RouteData();
+            //routeData.Values["controller"] = "ControllerName";
+            //routeData.Values["action"] = "ActionName";
+            //routeData.Values["error"] = "404"; //Handle this url paramater in your action
+            //((IController)new AccountController()).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
         }
     }
 }

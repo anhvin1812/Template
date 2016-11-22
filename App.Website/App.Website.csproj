@@ -205,9 +205,11 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Fillters\ErrorHandlerAttribute.cs" />
     <Compile Include="Fillters\UnhandledExceptionFilter.cs" />
     <Compile Include="Fillters\CustomAuthorizeAttribute.cs" />
     <Compile Include="Fillters\ServiceAuthorizationAttribute.cs" />
+    <Compile Include="ModelBinder\AppModelBinder.cs" />
     <Compile Include="OkWithHeaders.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -938,6 +940,7 @@
     <Content Include="Areas\Admin\Scripts\ionslider\ion.rangeSlider.min.js" />
     <Content Include="Areas\Admin\Scripts\ionslider\ion.rangeSlider.skinFlat.css" />
     <Content Include="Areas\Admin\Scripts\ionslider\ion.rangeSlider.skinNice.css" />
+    <Content Include="Areas\Admin\Scripts\jQuery-validate\bootstrap-style-validation.js" />
     <Content Include="Areas\Admin\Scripts\jQueryUI\jquery-ui.js" />
     <Content Include="Areas\Admin\Scripts\jQueryUI\jquery-ui.min.js" />
     <Content Include="Areas\Admin\Scripts\jQuery\jQuery-2.1.4.min.js" />

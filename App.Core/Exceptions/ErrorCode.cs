@@ -14,7 +14,11 @@ namespace App.Core.Exceptions
                 {ErrorCodeType.Validation, "Fail validation."},
                 {ErrorCodeType.NoPermission, "No permission."},
                 {ErrorCodeType.NoAccessData, "You do not have permission to access this data."},
-                {ErrorCodeType.DataEmpty, "Data is empty."}
+                {ErrorCodeType.DataEmpty, "Data is empty."},
+                // Role
+                {ErrorCodeType.InvalidRoleName, "Role name is not valid."},
+                {ErrorCodeType.RoleNameIsUsed, "Role name is used."},
+                {ErrorCodeType.RoleIsNotExsted, "Role is not existed."}
             };
         }
     }

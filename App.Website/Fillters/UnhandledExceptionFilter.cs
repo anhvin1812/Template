@@ -55,20 +55,21 @@ namespace App.Website.Fillters
             }
             else
             {
-                //if (!String.IsNullOrEmpty(context.Exception.Message))
-                //{
-                //    context.ActionContext.ModelState.AddModelError(ErrorCodeType.Error.ToString(), ErrorCode.ErrorCodes[extraInfo.Code]);
+                if (!String.IsNullOrEmpty(context.Exception.Message))
+                {
+                    context.ActionContext.ModelState.AddModelError(ErrorCodeType.Error.ToString(), context.Exception.Message);
                 //    error.ExtraInfos.Add(new ErrorExtraInfo { Code = ErrorCodeType.Error, Message = context.Exception.Message });
-                //}
-                
+                }
+
             }
 
-            context.ActionContext.ModelState.AddModelError(ErrorCodeType.Error.ToString(), context.Exception.Message);
+
+            base.OnException(context);
 
             //if (logException)
             // Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(context.Exception));
-
-            //context.Response = context.Request.CreateResponse(HttpStatusCode.OK, new FailResult(error));
+          
+            context.Response = context.Request.CreateResponse(HttpStatusCode.OK, new FailResult(error));
             //Elmah.ErrorLog.GetDefault(HttpContext.Current).Log(new Elmah.Error(context.Exception));
         }
     }
