@@ -28,6 +28,7 @@ namespace App.Website.Fillters
                 Code = ErrorCodeType.Error,
                 Message = ErrorCode.ErrorCodes[ErrorCodeType.Error]
             };
+            
             // Create viewData
             ViewDataDictionary viewData = context.Controller.ViewData;
             viewData.Model = context.Controller.TempData["model"];
@@ -78,24 +79,22 @@ namespace App.Website.Fillters
             }
             else
             {
-                //Determine the return type of the action
-                //string actionName = context.RouteData.Values["action"].ToString();
-                //string contrllerName = context.RouteData.Values["controller"].ToString();
-                //Type controllerType = context.Controller.GetType();
-                //var method = controllerType.GetMethod(actionName);
-
-                //var returnType = method.ReturnType;
-
-                context.Result = new ViewResult
+                if (context.Exception is DataNotFoundException)
                 {
-                    MasterName = "_Layout",
-                    ViewName = this.View,
-                    ViewData = viewData
-                };
+                    base.OnException(context);
+                }
+                else
+                {
+                    context.Result = new ViewResult
+                    {
+                        MasterName = "_Layout",
+                        ViewName = this.View,
+                        ViewData = viewData
+                    };
 
-                context.ExceptionHandled = true;
+                    context.ExceptionHandled = true;
+                }
             }
-
         }
 
         private bool IsAjax(ExceptionContext filterContext)

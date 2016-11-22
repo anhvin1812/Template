@@ -7,7 +7,7 @@
 
 @section AddStyles{
     <!-- iCheck for checkboxes and radio inputs -->
-    @Styles.Render("~/Areas/Admin/Scripts/iCheck/line/blue.css")
+    @Styles.Render("~/Admin/Content/iCheck")
 }
 
 @section ContentHeader
@@ -127,17 +127,6 @@
     <!-- jQuery-validate -->
     @Scripts.Render("~/Admin/Js/jqueryval")
     <!-- iCheck -->
-    @Scripts.Render("~/Areas/Admin/Scripts/iCheck/icheck.min.js")
-
-
-    <script>
-        $(function () {
-            //Flat red color scheme for iCheck
-            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-                checkboxClass: 'icheckbox_flat-blue',
-                radioClass: 'iradio_flat-blue'
-            });
-        });
-    </script>
+    @Scripts.Render("~/Admin/Js/iCheck")
 }
 

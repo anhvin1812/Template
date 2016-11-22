@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using App.Core.Exceptions;
 using App.Infrastructure.IdentityManagement;
 using App.Website.App_Start;
 using App.Website.Controllers;
@@ -30,8 +31,15 @@ namespace App.Website
 
         protected void Application_Error(object sender, EventArgs e)
         {
-            //var httpContext = ((MvcApplication)sender).Context;
-            //var ex = Server.GetLastError();
+            var httpContext = ((MvcApplication)sender).Context;
+            var ex = Server.GetLastError();
+
+            if (ex is DataNotFoundException)
+            {
+                httpContext.ClearError();
+                httpContext.Response.Clear();
+                httpContext.Response.StatusCode = 404;
+            }
 
             //httpContext.ClearError();
             //httpContext.Response.Clear();

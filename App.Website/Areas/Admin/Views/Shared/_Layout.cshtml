@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>@ViewBag.Title</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Font Awesome -->
@@ -12,12 +12,11 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     @Styles.Render("~/Admin/Content/css")
-    @Styles.Render("~/Admin/Content/iCheck")
-    @Styles.Render("~/Admin/Content/morrisChart")
+    @*@Styles.Render("~/Admin/Content/morrisChart")
     @Styles.Render("~/Admin/Content/jvectormap")
     @Styles.Render("~/Admin/Content/datePicker")
     @Styles.Render("~/Admin/Content/dateRangePicker")
-    @Styles.Render("~/Admin/Content/textEditor")
+    @Styles.Render("~/Admin/Content/textEditor")*@
 
     @RenderSection("AddStyles", required: false)
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -222,19 +221,20 @@
 
     @Scripts.Render("~/Admin/Js/jquery")
     <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    @*@Scripts.Render("~/Admin/Js/jqueryUI")*@
+    @*<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>*@
     <!-- Morris.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>*@
     @*@Scripts.Render("~/Admin/Js/morrisCharts")*@
-    @Scripts.Render("~/Admin/Js/sparkline")
+    @*@Scripts.Render("~/Admin/Js/sparkline")
     @Scripts.Render("~/Admin/Js/jvectormap")
-    @Scripts.Render("~/Admin/Js/jQueryKnobChart")
+    @Scripts.Render("~/Admin/Js/jQueryKnobChart")*@
     <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     @Scripts.Render("~/Admin/Js/dateRangePicker")
     @Scripts.Render("~/Admin/Js/datePicker")
     @Scripts.Render("~/Admin/Js/boostrapEditor")
-    @Scripts.Render("~/Admin/Js/slimScroll")
+    @Scripts.Render("~/Admin/Js/slimScroll")*@
     @Scripts.Render("~/Admin/Js/app")
 
     <script>

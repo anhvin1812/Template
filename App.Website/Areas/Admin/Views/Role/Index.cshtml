@@ -38,7 +38,7 @@
                     <th>#</th>
                     <th>Role Name</th>
                     <th>Description</th>
-                    <th style="width: 170px"></th>
+                    <th></th>
                 </tr>
                 @{ int i = 1; }
                 @foreach (var m in Model)
@@ -51,9 +51,6 @@
                             <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "Role", new {id = m.RoleId})">
                                 <i class="fa fa-fw fa-pencil"></i> Edit
                             </a>
-                            <a class="btn btn-danger btn-sm">
-                                <i class="fa fa-fw fa-remove"></i> Delete
-                            </a>
                         </td>
                     </tr>
                     i++;
@@ -64,7 +61,7 @@
         
     </div>
     <!-- /.box-body -->
-    <div class="box-footer clearfix">
+    @*<div class="box-footer clearfix">
         <ul class="pagination no-margin pull-right">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
@@ -72,7 +69,7 @@
             <li><a href="#">3</a></li>
             <li><a href="#">&raquo;</a></li>
         </ul>
-    </div>
+    </div>*@
 </div>
 <!-- /.box -->
 

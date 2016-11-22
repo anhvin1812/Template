@@ -945,6 +945,7 @@
     <Content Include="Areas\Admin\Scripts\jQueryUI\jquery-ui.js" />
     <Content Include="Areas\Admin\Scripts\jQueryUI\jquery-ui.min.js" />
     <Content Include="Areas\Admin\Scripts\jQuery\jQuery-2.1.4.min.js" />
+    <Content Include="Areas\Admin\Scripts\js\active-iCheck.js" />
     <Content Include="Areas\Admin\Scripts\js\app.js" />
     <Content Include="Areas\Admin\Scripts\js\app.min.js" />
     <Content Include="Areas\Admin\Scripts\js\demo.js" />

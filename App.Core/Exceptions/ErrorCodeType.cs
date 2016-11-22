@@ -12,11 +12,12 @@ namespace App.Core.Exceptions
         Validation = 2,
         NoPermission = 3,
         NoAccessData = 4,
-        DataEmpty = 5,
+        DataNotFound = 5,
+        InvalidData = 6,
         
         // Role
-        InvalidRoleName = 6,
-        RoleNameIsUsed = 7,
-        RoleIsNotExsted = 8,
+        InvalidRoleName = 7,
+        RoleNameIsUsed = 8,
+        RoleIsNotExsted = 9,
     }
 }

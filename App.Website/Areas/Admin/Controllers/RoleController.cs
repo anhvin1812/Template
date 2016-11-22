@@ -62,7 +62,8 @@ namespace App.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[HandleError(ExceptionType = typeof(Exception), View = "Error")]
+        [ValidateAntiForgeryToken]
+        [ErrorHandler(View = "Edit")]
         public ActionResult Edit(int id, RoleEntry entry)
         {
             RoleService.Update(id, entry);

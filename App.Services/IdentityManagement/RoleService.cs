@@ -52,11 +52,11 @@ namespace App.Services.IdentityManagement
 
         public RoleEntry GetRoleForEditing(int id)
         {
+            //TODO: check permission
             var roleEntity = RoleRepository.GetById(id);
 
-            //TODO: implemetn exception
             if(roleEntity == null)
-                throw new Exception();
+                throw new DataNotFoundException();
 
             var allPermissions = GetAllPermissions();
             // set checked for current claims
@@ -234,7 +234,7 @@ namespace App.Services.IdentityManagement
             {
                 var violations = new List<ErrorExtraInfo>
                 {
-                    new ErrorExtraInfo {Code = ErrorCodeType.DataEmpty}
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidData}
                 };
                 throw new ValidationError(violations);
             }

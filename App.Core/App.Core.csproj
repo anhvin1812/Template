@@ -90,6 +90,7 @@
     <Compile Include="Exceptions\ErrorCode.cs" />
     <Compile Include="Exceptions\ErrorCodeType.cs" />
     <Compile Include="Exceptions\ErrorExtraInfo.cs" />
+    <Compile Include="Exceptions\DataNotFoundException.cs" />
     <Compile Include="Exceptions\ValidationError.cs" />
     <Compile Include="Permission\ApplicationPermissionCapabilities.cs" />
     <Compile Include="Permission\ApplicationPermissions.cs" />

@@ -11,6 +11,9 @@ namespace App.Website.Areas.Admin.App_Start
                         getPath("Scripts/jQuery/jQuery-2.1.4.min.js"),
                         getPath("Scripts/bootstrap/js/bootstrap.min.js")));
 
+            bundles.Add(new ScriptBundle("~/Admin/Js/jqueryUI").Include(
+                        getPath("Scripts/jQueryUI/jquery-ui.min.js")));
+
             bundles.Add(new ScriptBundle("~/Admin/Js/jqueryval").Include(
                 getPath("Scripts/jQuery-validate/jquery.validate.min.js"),
                 getPath("Scripts/jQuery-validate/jquery.validate.unobtrusive.min.js"),
@@ -45,6 +48,10 @@ namespace App.Website.Areas.Admin.App_Start
 
             bundles.Add(new ScriptBundle("~/Admin/Js/fastClick").Include(
                       getPath("Scripts/fastclick/fastclick.min.js")));
+
+            bundles.Add(new ScriptBundle("~/Admin/Js/iCheck").Include(
+                      getPath("Scripts/iCheck/icheck.min.js"),
+                      getPath("Scripts/js/active-iCheck.js")));
 
             bundles.Add(new ScriptBundle("~/Admin/Js/app").Include(
                       getPath("Scripts/js/app.min.js")));

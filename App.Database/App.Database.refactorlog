@@ -35,4 +35,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ClaimType" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="85d524b8-bca1-4977-970d-b10a19f3cc1f" ChangeDateTime="11/15/2016 16:34:35">
+    <Property Name="ElementName" Value="[dbo].[RoleClaim].[ClaimType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RoleClaim]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RoleId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7115b7f6-4d22-4b4e-976f-f2022375d780" ChangeDateTime="11/15/2016 16:34:46">
+    <Property Name="ElementName" Value="[dbo].[RoleClaim].[ClaimValue]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RoleClaim]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClaimType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="db36db88-eaf0-43c0-be2f-43dc1ac22a35" ChangeDateTime="11/15/2016 16:34:53">
+    <Property Name="ElementName" Value="[dbo].[RoleClaim].[RoleId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RoleClaim]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ClaimValue" />
+  </Operation>
 </Operations>
