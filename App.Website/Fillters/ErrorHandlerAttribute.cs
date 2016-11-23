@@ -73,27 +73,24 @@ namespace App.Website.Fillters
 
             if (IsAjax(context))
             {
-                context.Result = new JsonResult{ JsonRequestBehavior = JsonRequestBehavior.AllowGet,  Data = new FailResult(error)};
+                context.Result = new JsonResult
+                {
+                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                    Data = new FailResult(error)
+                };
                 context.ExceptionHandled = true;
                 context.HttpContext.Response.Clear();
             }
             else
             {
-                if (context.Exception is DataNotFoundException)
+                context.Result = new ViewResult
                 {
-                    base.OnException(context);
-                }
-                else
-                {
-                    context.Result = new ViewResult
-                    {
-                        MasterName = "_Layout",
-                        ViewName = this.View,
-                        ViewData = viewData
-                    };
+                    MasterName = "_Layout",
+                    ViewName = this.View,
+                    ViewData = viewData
+                };
 
-                    context.ExceptionHandled = true;
-                }
+                context.ExceptionHandled = true;
             }
         }
 

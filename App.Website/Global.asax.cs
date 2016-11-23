@@ -32,25 +32,64 @@ namespace App.Website
         protected void Application_Error(object sender, EventArgs e)
         {
             var httpContext = ((MvcApplication)sender).Context;
-            var ex = Server.GetLastError();
+            var currentController = " ";
+            var currentAction = " ";
+            var currentRouteData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(httpContext));
 
-            if (ex is DataNotFoundException)
+            if (currentRouteData != null)
             {
-                httpContext.ClearError();
-                httpContext.Response.Clear();
-                httpContext.Response.StatusCode = 404;
+                if (currentRouteData.Values["controller"] != null && !String.IsNullOrEmpty(currentRouteData.Values["controller"].ToString()))
+                {
+                    currentController = currentRouteData.Values["controller"].ToString();
+                }
+
+                if (currentRouteData.Values["action"] != null && !String.IsNullOrEmpty(currentRouteData.Values["action"].ToString()))
+                {
+                    currentAction = currentRouteData.Values["action"].ToString();
+                }
             }
 
-            //httpContext.ClearError();
-            //httpContext.Response.Clear();
-            //httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;
-            //httpContext.Response.TrySkipIisCustomErrors = true;
+            var ex = Server.GetLastError();
+            var controller = new ErrorController();
+            var routeData = new RouteData();
+            var action = "Index";
 
-            //var routeData = new RouteData();
-            //routeData.Values["controller"] = "ControllerName";
-            //routeData.Values["action"] = "ActionName";
-            //routeData.Values["error"] = "404"; //Handle this url paramater in your action
-            //((IController)new AccountController()).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
+            if (ex is HttpException)
+            {
+                var httpEx = ex as HttpException;
+
+                switch (httpEx.GetHttpCode())
+                {
+                    case 404:
+                        action = "NotFound";
+                        break;
+
+                        // others if any
+                }
+            }
+
+            httpContext.ClearError();
+            httpContext.Response.Clear();
+            httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;
+            httpContext.Response.TrySkipIisCustomErrors = true;
+
+            routeData.Values["controller"] = "Error";
+            routeData.Values["action"] = action;
+
+            controller.ViewData.Model = new HandleErrorInfo(ex, currentController, currentAction);
+            ((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
+
+            //var httpContext = ((MvcApplication)sender).Context;
+            //var exp = Server.GetLastError();
+
+            //if (exp is DataNotFoundException)
+            //{
+            //    httpContext.Response.Redirect("~/Error/NotFound");
+            //}
+            //else
+            //{
+            //    Response.Redirect(string.Format("~/Error/?error={0}", exp.Message));
+            //}
         }
     }
 }
