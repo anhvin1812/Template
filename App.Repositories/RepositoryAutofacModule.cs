@@ -12,6 +12,7 @@ namespace App.Repositories
             // User
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerDependency();
             builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerDependency();
+            builder.RegisterType<PermissionRepository>().As<IPermissionRepository>().InstancePerDependency();
             //builder.RegisterType<SherpaRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.SherpaRoster).InstancePerDependency();
             //builder.RegisterType<GCrewRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.GCrewRoster).InstancePerDependency();
             

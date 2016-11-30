@@ -22,6 +22,7 @@ namespace App.Services
         {
             builder.RegisterType<UserService>().As<IUserService>().InstancePerDependency();
             builder.RegisterType<RoleService>().As<IRoleService>().InstancePerDependency();
+            builder.RegisterType<SecurityService>().As<ISecurityService>().InstancePerDependency();
 
             //builder.RegisterType<RedCatMemberFactory>().As<IThirdPartyProviderMemberFactory<RedCatMember>>().InstancePerLifetimeScope();
             //builder.RegisterType<Talent2MemberFactory>().As<IThirdPartyProviderMemberFactory<Talent2Member>>().InstancePerLifetimeScope();

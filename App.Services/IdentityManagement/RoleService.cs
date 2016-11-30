@@ -10,6 +10,7 @@ using App.Core.Repositories;
 using App.Entities;
 using App.Entities.IdentityManagement;
 using App.Repositories.IdentityManagement;
+using App.Services.Common;
 using App.Services.Dtos.IdentityManagement;
 
 namespace App.Services.IdentityManagement
@@ -17,12 +18,14 @@ namespace App.Services.IdentityManagement
     public class RoleService : ServiceBase, IRoleService
     {
         #region Contructor
+        private ISecurityService SecurityService { get; set; }
         private IRoleRepository RoleRepository { get; set; }
 
-        public RoleService(IUnitOfWork unitOfWork, IRoleRepository roleRepository)
-            : base(unitOfWork, new IRepository[] { roleRepository }, new IService[] { })
+        public RoleService(IUnitOfWork unitOfWork, ISecurityService securityService, IRoleRepository roleRepository)
+            : base(unitOfWork, new IRepository[] { roleRepository }, new IService[] { securityService })
         {
             RoleRepository = roleRepository;
+            SecurityService = securityService;
         }
 
         #endregion
@@ -31,6 +34,10 @@ namespace App.Services.IdentityManagement
 
         public IEnumerable<RoleSummary> GetAll(int? page, int? pageSize, ref int? recordCount)
         {
+            var userId = CurrentClaimsIdentity.GetUserId();
+            if (SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER,ApplicationPermissions.Read))
+                throw new PermissionException();
+
             var roles = RoleRepository.GetAll(page, pageSize, ref recordCount)
                 .Select(x => new RoleSummary
                 {
@@ -52,7 +59,10 @@ namespace App.Services.IdentityManagement
 
         public RoleEntry GetRoleForEditing(int id)
         {
-            //TODO: check permission
+            var userId = CurrentClaimsIdentity.GetUserId();
+            if (SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Modify))
+                throw new PermissionException();
+
             var roleEntity = RoleRepository.GetById(id);
 
             if(roleEntity == null)
@@ -79,7 +89,9 @@ namespace App.Services.IdentityManagement
 
         public void Insert(RoleEntry entry)
         {
-            //TODO: Check exit Role, permission,...
+            var userId = CurrentClaimsIdentity.GetUserId();
+            if (SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Create))
+                throw new PermissionException();
 
             // Validate data
             ValidateEntryData(entry);
@@ -131,7 +143,9 @@ namespace App.Services.IdentityManagement
 
         public void Update(int id, RoleEntry entry)
         {
-            //TODO: Check exit Role, permission,...
+            var userId = CurrentClaimsIdentity.GetUserId();
+            if (SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Modify))
+                throw new PermissionException();
 
             // Validate data
             ValidateEntryData(entry);
@@ -274,6 +288,7 @@ namespace App.Services.IdentityManagement
             {
                 if (isDisposing)
                 {
+                    SecurityService = null;
                     RoleRepository = null;
                 }
                 _disposed = true;

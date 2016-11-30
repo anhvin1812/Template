@@ -5,7 +5,10 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using App.Services;
+using App.Services.Dtos.IdentityManagement;
 using App.Services.IdentityManagement;
+using App.Website.Fillters;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace App.Website.Areas.Admin.Controllers
 {
@@ -28,7 +31,45 @@ namespace App.Website.Areas.Admin.Controllers
 
             return View(result);
         }
+        [System.Web.Mvc.OverrideAuthorization]
+        [ServiceAuthorization(AllowAnonymous = true)]
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
 
+        [System.Web.Mvc.OverrideAuthorization]
+        [ServiceAuthorization(AllowAnonymous = true)]
+        [System.Web.Mvc.HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LogOnModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            
+            var signIn = HttpContext.GetOwinContext().Get<Infrastructure.IdentityManagement.ApplicationSignInManager>();
+            var result = signIn.PasswordSignIn(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToLocal(returnUrl);
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(model);
+            }
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
         #region Dispose
 
