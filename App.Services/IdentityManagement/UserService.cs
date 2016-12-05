@@ -30,7 +30,9 @@ namespace App.Services.IdentityManagement
                 .Select(x => new UserSummary
                 {
                     Id = x.Id,
-                    UserName = x.UserName,
+                    Firstname = x.Firstname,
+                    Lastname = x.Lastname,
+                    Username = x.UserName,
                     Email = x.Email,
                     PhoneNumber = x.PhoneNumber,
                     Roles = UserRepository.GetRoleByUser(x.Id).ToList().Select(r=> new RoleDetails {RoleName = r.Name, RoleId = r.Id})

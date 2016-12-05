@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using App.Services;
 using App.Services.Dtos.IdentityManagement;
@@ -25,12 +24,37 @@ namespace App.Website.Areas.Admin.Controllers
 
         #endregion
 
-        public ActionResult Index([FromUri(Name = "p")] int? page = null, [FromUri(Name = "ps")] int? pageSize = null, [FromUri(Name = "rc")] int? recordCount = null)
+        public ActionResult Index(int? page = 1, int? pageSize = 10, int? recordCount = null)
         {
             var result = UserService.GetAllUser(page, pageSize, ref recordCount);
 
             return View(result);
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(UserEntry entry)
+        {
+            return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, UserEntry entry)
+        {
+            return View();
+        }
+
+        #region Login
+
         [System.Web.Mvc.OverrideAuthorization]
         [ServiceAuthorization(AllowAnonymous = true)]
         public ActionResult Login(string returnUrl)
@@ -70,6 +94,8 @@ namespace App.Website.Areas.Admin.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+    #endregion
 
         #region Dispose
 

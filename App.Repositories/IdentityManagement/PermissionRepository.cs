@@ -25,10 +25,11 @@ namespace App.Repositories.IdentityManagement
 
         public bool HasRoleClaim(int userId, string permissionCapability, ApplicationPermissions permission)
         {
-            return DatabaseContext.Get<User>().Where(u => u.Id == userId).Select(u=>u.UserRoles)
-                .Any(x=>x.Any(r=>r.RoleClaims.Any(c => c.ClaimType == permissionCapability 
-                                                    && (c.ClaimValue == permission.ToString() || c.ClaimValue == ApplicationPermissions.Super.ToString()) 
-                                                 )));
+            return DatabaseContext.Get<User>().Where(u => u.Id == userId)
+                                        .Select(u=>u.UserRoles.Where(x=>
+                                            x.RoleClaims.Any(c => c.ClaimType == permissionCapability 
+                                                        && (c.ClaimValue == permission.ToString() || c.ClaimValue == ApplicationPermissions.Super.ToString())
+                ))).Any();
         }
 
         #region Dispose
