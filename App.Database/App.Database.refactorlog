@@ -56,4 +56,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ClaimValue" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="f524a7ce-b895-4caf-ac49-e316506499eb" ChangeDateTime="02/08/2017 14:48:35">
+    <Property Name="ElementName" Value="[dbo].[Product].[Thumbnail]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Image" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8a23e3d2-627f-42a0-8f07-46ab329929aa" ChangeDateTime="02/08/2017 14:48:38">
+    <Property Name="ElementName" Value="[dbo].[Product].[Image]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Product]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Thumbnail" />
+  </Operation>
 </Operations>

@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\ProductManagementMap.cs" />
     <Compile Include="TestDb.cs" />
     <Compile Include="Mapping\PostMap.cs" />
     <Compile Include="MinhKhangDbInitializer.cs" />

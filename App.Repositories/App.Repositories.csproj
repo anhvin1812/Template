@@ -61,6 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\QueryableExtensions.cs" />
+    <Compile Include="ProductManagement\IProductCategoryRepository.cs" />
+    <Compile Include="ProductManagement\IProductRepository.cs" />
+    <Compile Include="ProductManagement\ProductCategoryRepository.cs" />
+    <Compile Include="ProductManagement\ProductRepository.cs" />
     <Compile Include="IdentityManagement\IPermissionRepository.cs" />
     <Compile Include="IdentityManagement\IRoleRepository.cs" />
     <Compile Include="IdentityManagement\PermissionRepository.cs" />

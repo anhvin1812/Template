@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[ProductStatus]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Status] NVARCHAR(255) NULL
+)

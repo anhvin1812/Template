@@ -1,0 +1,250 @@
+﻿@using System.Web.Optimization
+@using App.Core.Permission
+@model App.Services.Dtos.ProductManagement.ProductEntry
+@{
+    ViewBag.Title = "Product";
+}
+
+@section AddStyles{
+    <!-- iCheck for checkboxes and radio inputs -->
+    @*@Styles.Render("~/Admin/Content/iCheck")*@
+}
+
+@section ContentHeader
+{
+    <section class="content-header">
+        <h1>
+            Product Management
+            <small>add new role</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li>Product Management</li>
+            <li class="active">Product</li>
+        </ol>
+    </section>
+}
+
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "create-role-messages" })
+        </div>
+    </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">General information</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name)
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter product name" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description)
+                            @Html.TextAreaFor(m => m.Description, new {@class = "form-control", placeholder = "Enter description"})
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Price)
+                                    @Html.TextBoxFor(m => m.Price, new {@class = "form-control", placeholder = "Enter price"})
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.OldPrice)
+                                    @Html.TextBoxFor(m => m.OldPrice, new { @class = "form-control", placeholder = "Enter old price" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select name="details[cpu]" id="" class="form-control input-sm">
+                                        <option value="Core i5 2nd">Core i5 2nd</option>
+                                        <option>Acer</option>
+                                        <option>Asus</option>
+                                        <option>Dell</option>
+                                        <option>HP</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select name="details[cpu]" id="" class="form-control input-sm">
+                                        <option value="Core i5 2nd">Core i5 2nd</option>
+                                        <option>Acer</option>
+                                        <option>Asus</option>
+                                        <option>Dell</option>
+                                        <option>HP</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Specifications</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            @Html.TextAreaFor(x=>x.Specification, new { id = "txtSpecifications" })
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Featured image</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div id="wrapperUploadFeaturedImage" class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-success btn-sm btn-file">
+                                        <i class="fa fa-folder-open-o"></i> Browse...
+                                        @Html.TextBoxFor(x => x.Image, new { type = "file", id= "fileFeaturedImage" })
+                                    </span>
+                                </span>
+                                <input type="text" readonly="readonly" class="form-control input-sm input-file">
+                            </div><!-- /input-group -->
+                        </div>
+                        <div id="previewFeaturedImage" class="hidden">
+                            <img src="../images/product-1.jpg" class="img-responsive" style="max-width:200px">
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Gallery</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div id="wrapperUploadFeaturedImage" class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-success btn-sm btn-file">
+                                        <i class="fa fa-folder-open-o"></i> Browse...
+                                        @Html.TextBoxFor(x => x.Image, new { id = "fileGallery", type = "file", multiple="multiple" })
+                                    </span>
+                                </span>
+                                <input type="text" readonly="readonly" class="form-control input-sm input-file">
+                            </div><!-- /input-group -->
+                            <p class="help-block">Press <kbd>ctrl</kbd> to select multiple images.</p>
+                        </div>
+
+                        <ul id="previewGallery" class="list-inline">
+                            <li class="text-center">
+                                <img src="../images/product-1.jpg" class="img-thumbnail" width="70" alt="">
+                                <br>
+                                <a href="#">delete</a>
+                                <!-- /li-->
+                            <li class="text-center">
+                                <img src="../images/product-2.jpg" class="img-thumbnail" width="70" alt="">
+                                <br>
+                                <a href="#">Xóa</a>
+                                <!-- /li-->
+                            <li class="text-center">
+                                <img src="../images/product-3.jpg" class="img-thumbnail" width="70" alt="">
+                                <br>
+                                <a href="#">Xóa</a>
+                                <!-- /li-->
+                            <li class="text-center">
+                                <img src="../images/product-2.jpg" class="img-thumbnail" width="70" alt="">
+                                <br>
+                                <a href="#">Xóa</a>
+                                <!-- /li-->
+                        </ul>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            </div>
+        </div>
+
+
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-default" href="@Url.Action("Index", "Product")">Back to products</a>
+        </div>
+
+}
+
+
+
+@section AddScripts{
+    <!-- jQuery-validate -->
+    @Scripts.Render("~/Admin/Js/jqueryval")
+    <!-- CKEditor. -->
+    @Scripts.Render("~/ckeditor/ckeditor.js")
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            // CKeditor     
+            CKEDITOR.replace('txtSpecifications');
+
+            // featured image functions
+            $('#btnRemoveFeaturedImage').on('click', function (event) {
+                $('#previewFeaturedImage').addClass('hidden');
+                // do ajax function to remove featured image
+
+                $('#previewFeaturedImage img').attr('src', '');
+                $(this).remove();
+            });
+
+            // Custom file upload
+            $('#fileFeaturedImage').on('fileselect', function (event, numFiles, label) {
+                var input = $(this);
+                // show selected filename
+                var txt = input.parents().closest('.input-group').find('.input-file');
+                txt.val(label);
+                // show selected image
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#previewFeaturedImage img').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.get(0).files.item(0));
+
+                // show preview box
+                $('#previewFeaturedImage').removeClass('hidden');
+            });
+
+            $('#fileGallery').on('fileselect', function (event, numFiles, label) {
+                var input = $(this);
+                // show selected filename
+                var txt = $(this).parents().closest('.input-group').find('.input-file');
+                txt.val(label);
+                // show selected image
+                for (var i = 0; i < input.get(0).files.length; i++) {
+                    $('#previewGallery li.preupload').remove();
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#previewGallery').prepend('<li class="text-center preupload"><img src="' + e.target.result + '" class="img-thumbnail" width="70" height="70"><!-- /li-->');
+                        $('#previewGallery').trigger("create");
+                    }
+                    reader.readAsDataURL(input.get(0).files.item(i));
+                };
+
+            });
+        });
+
+        //
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = '';
+            for (var i = 0; i < input.get(0).files.length; i++) {
+                label += input.get(0).files.item(i).name.replace(/\\/g, '/').replace(/.*\//, '') + ', ';
+            };
+            input.trigger('fileselect', [numFiles, label.substring(0, label.length - 2)]);
+        });
+    </script>
+}
+

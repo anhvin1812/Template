@@ -57,7 +57,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +73,8 @@
     <Compile Include="EntityMapping\AutoMapperExtensions.cs" />
     <Compile Include="EntityMapping\MappingHelper.cs" />
     <Compile Include="EntityMapping\IdentityManagementMapping.cs" />
+    <Compile Include="ProductManagement\IProductService.cs" />
+    <Compile Include="ProductManagement\ProductService.cs" />
     <Compile Include="IdentityManagement\IRoleService.cs" />
     <Compile Include="IdentityManagement\IPermissionService.cs" />
     <Compile Include="IdentityManagement\IUserService.cs" />

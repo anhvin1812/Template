@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[ProductGallery]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Image] NVARCHAR(255) NOT NULL, 
+    [Thumbnail] NVARCHAR(255) NOT NULL
+)

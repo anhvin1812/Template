@@ -1,5 +1,6 @@
 ﻿using App.Data.EntityFramework;
 using App.Repositories.IdentityManagement;
+using App.Repositories.ProductManagement;
 using Autofac;
 
 namespace App.Repositories
@@ -12,6 +13,8 @@ namespace App.Repositories
             // User
             builder.RegisterType<UserRepository>().As<IUserRepository>().InstancePerDependency();
             builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerDependency();
+            builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerDependency();
+            builder.RegisterType<ProductCategoryRepository>().As<IProductCategoryRepository>().InstancePerDependency();
             //builder.RegisterType<SherpaRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.SherpaRoster).InstancePerDependency();
             //builder.RegisterType<GCrewRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.GCrewRoster).InstancePerDependency();
             

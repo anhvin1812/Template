@@ -65,6 +65,10 @@
     <Compile Include="IObjectState.cs" />
     <Compile Include="ObjecState.cs" />
     <Compile Include="Post\Category.cs" />
+    <Compile Include="ProductManagement\ProductGallery.cs" />
+    <Compile Include="ProductManagement\ProductStatus.cs" />
+    <Compile Include="ProductManagement\ProductCategory.cs" />
+    <Compile Include="ProductManagement\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

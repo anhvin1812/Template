@@ -39,6 +39,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,6 +64,7 @@
     <Compile Include="Common\ErrorExtraInfo.cs" />
     <Compile Include="Common\Error.cs" />
     <Compile Include="Common\DtoBase.cs" />
+    <Compile Include="ProductManagement\ProductEntry.cs" />
     <Compile Include="IdentityManagement\Role.cs" />
     <Compile Include="IdentityManagement\User.cs" />
     <Compile Include="IdentityManagement\LogOnModel.cs" />
