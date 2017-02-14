@@ -13,7 +13,8 @@ namespace App.Entities.IdentityManagement
         public string Lastname { get; set; }
         public string Address { get; set; }
 
-        
+        public virtual ICollection<Role> UserRoles { get; set; }
+
         [NotMapped]
         public ObjectState State { get; set; }
 

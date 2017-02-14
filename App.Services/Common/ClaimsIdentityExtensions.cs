@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using App.Core.Common;
+using Microsoft.AspNet.Identity;
 
 namespace App.Services.Common
 {
@@ -19,15 +21,15 @@ namespace App.Services.Common
         //    return networkClaim.Value.ToInt();
         //}
 
-        //public static int GetMemberId(this ClaimsPrincipal identity)
-        //{
-        //    var memberIdClaim = identity.Claims.FirstOrDefault(c => c.Type == Core.IdentityManagement.SherpaClaims.MemberId);
-        //    if (memberIdClaim == null)
-        //    {
-        //        throw new KeyNotFoundException();
-        //    }
-        //    return memberIdClaim.Value.ToInt();
-        //}
+        public static int GetUserId(this ClaimsPrincipal identity)
+        {
+            var userId = identity.Identity.GetUserId();
+            if (userId == null)
+            {
+                throw new KeyNotFoundException();
+            }
+            return userId.ToInt();
+        }
 
         //public static int? GetDefaultGroupId(this ClaimsPrincipal identity)
         //{

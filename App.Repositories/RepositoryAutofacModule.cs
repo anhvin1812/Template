@@ -15,6 +15,7 @@ namespace App.Repositories
             builder.RegisterType<RoleRepository>().As<IRoleRepository>().InstancePerDependency();
             builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerDependency();
             builder.RegisterType<ProductCategoryRepository>().As<IProductCategoryRepository>().InstancePerDependency();
+            builder.RegisterType<PermissionRepository>().As<IPermissionRepository>().InstancePerDependency();
             //builder.RegisterType<SherpaRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.SherpaRoster).InstancePerDependency();
             //builder.RegisterType<GCrewRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.GCrewRoster).InstancePerDependency();
             

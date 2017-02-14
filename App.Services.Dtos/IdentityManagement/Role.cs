@@ -24,6 +24,13 @@ namespace App.Services.Dtos.IdentityManagement
         public string Description { get; set; }
     }
 
+    public class RoleSelection : DtoBase
+    {
+        public int RoleId { get; set; }
+
+        public string RoleName { get; set; }
+    }
+
     public class RoleDetails : DtoBase
     {
         public int RoleId { get; set; }

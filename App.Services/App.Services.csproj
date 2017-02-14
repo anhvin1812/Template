@@ -75,9 +75,11 @@
     <Compile Include="EntityMapping\IdentityManagementMapping.cs" />
     <Compile Include="ProductManagement\IProductService.cs" />
     <Compile Include="ProductManagement\ProductService.cs" />
+    <Compile Include="IdentityManagement\ISecurityService.cs" />
     <Compile Include="IdentityManagement\IRoleService.cs" />
     <Compile Include="IdentityManagement\IPermissionService.cs" />
     <Compile Include="IdentityManagement\IUserService.cs" />
+    <Compile Include="IdentityManagement\SecurityService.cs" />
     <Compile Include="IdentityManagement\RoleService.cs" />
     <Compile Include="IdentityManagement\PermissionService.cs" />
     <Compile Include="IdentityManagement\UserService.cs" />

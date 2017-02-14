@@ -5,12 +5,21 @@
 @model IEnumerable<App.Services.Dtos.IdentityManagement.UserSummary>
 
 @section AddStyles{
-    @Styles.Render("~/Admin/Css/DataTable")
+    @*@Styles.Render("~/Admin/Css/DataTable")*@
 }
 
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Data Table With Full Features</h3>
+        @using (Html.BeginForm("Index", "User", FormMethod.Get))
+        {
+            <div class="input-group input-group-sm">
+                <input class="form-control" type="text">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-info btn-flat">Go</button>
+                </span>
+            </div>
+        }
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -40,36 +49,36 @@
                     }
                 </td>
                 <td>
-                    Delete, Edit
+                    <a class="btn btn-default btn-sm" href="">
+                        <i class="fa fa-fw fa-pencil"></i> Edit
+                    </a>
                 </td>
             </tr>
         }
         </tbody>
-            @*<tfoot>
-                <tr>
-                    <th>Rendering engine</th>
-                    <th>Browser</th>
-                    <th>Platform(s)</th>
-                    <th>Engine version</th>
-                    <th>CSS grade</th>
-                </tr>
-            </tfoot>*@
         </table>
+    </div><!-- /.box-body -->
+    <div class="box-footer clearfix">
+        <ul class="pagination no-margin pull-right">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
     </div>
-    <!-- /.box-body -->
-</div>
-<!-- /.box -->
+</div><!-- /.box -->
 
 
 @section AddScripts{
 
     <!-- DataTables -->
-    @Scripts.Render("~/Admin/Js/dataTable")
+    @*@Scripts.Render("~/Admin/Js/dataTable")
 
     <script>
       $(function () {
         $("#example1").DataTable();
       });
-    </script>
+    </script>*@
 }
 
