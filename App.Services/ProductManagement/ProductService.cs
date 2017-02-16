@@ -43,7 +43,7 @@ namespace App.Services.ProductManagement
                     Price = x.Price,
                     OldPrice = x.OldPrice,
                     Status = x.Status.Status,
-                    Thumbnail = x.Thumbnail,
+                    Thumbnail = x.Image.Thumbnail,
                     Category = x.Category.Name
                 });
             
@@ -67,8 +67,8 @@ namespace App.Services.ProductManagement
                 Category = product.Category.Name,
                 Price = product.Price,
                 OldPrice = product.OldPrice,
-                Image = product.Image,
-                Thumbnail = product.Thumbnail,
+                Image = product.Image.Image,
+                Thumbnail = product.Image.Thumbnail,
                 GalleryThumbnails = product.Gallery.Select(g=>g.Thumbnail).ToList(),
                 Gallery = product.Gallery.Select(g=>g.Image).ToList(),
             };
@@ -95,20 +95,26 @@ namespace App.Services.ProductManagement
                 };
 
                 // upload image
-                var image = UploadProductImage(entry.Image);
-                entity.Image = image;
+                var imageName = UploadGallery(entry.Image);
+                
+                entity.Image = new Gallery
+                {
+                    Image = imageName,
+                    Thumbnail = imageName,
+                    State = ObjectState.Added
+                };
 
                 // upload gallery
                 if (entry.Gallery != null && entry.Gallery.Any())
                 {
                     foreach (var gallery in entry.Gallery)
                     {
-                        var imageName = UploadGallery(gallery);
+                        var fileName = UploadGallery(gallery);
 
-                        entity.Gallery.Add(new ProductGallery
+                        entity.Gallery.Add(new Gallery
                         {
-                            Image = imageName,
-                            Thumbnail = imageName,
+                            Image = fileName,
+                            Thumbnail = fileName,
                             State = ObjectState.Added
                         });
                     }
@@ -218,7 +224,7 @@ namespace App.Services.ProductManagement
             return allPermissions.Any(x => x.ClaimType == roleClaim.ClaimType && x.ClaimValue == roleClaim.ClaimValue);
         }
 
-        private void ValidateEntryData(ProductEntry entry)
+        private void ValidateEntryData(Dtos.ProductManagement.ProductCategory entry)
         {
 
             if (entry == null)

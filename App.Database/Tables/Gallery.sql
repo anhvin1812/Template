@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ProductGallery]
+﻿CREATE TABLE [dbo].[Gallery]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Image] NVARCHAR(255) NOT NULL, 

@@ -5,8 +5,16 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
-	 config.language = 'vi';
-	// config.uiColor = '#AADC6E';
+	 config.language = 'en';
+    // config.uiColor = '#AADC6E';
+
+	 config.filebrowserBrowseUrl = '/ckfinder/ckfinder.html';
+	 config.filebrowserImageBrowseUrl = '/ckfinder/ckfinder.html?type=Images';
+	 config.filebrowserFlashBrowseUrl = '/ckfinder/ckfinder.html?type=Flash';
+	 config.filebrowserUploadUrl = '/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files';
+	 config.filebrowserImageUploadUrl = '/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images';
+	 config.filebrowserFlashUploadUrl = '/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash';
+
 	 config.toolbar =[
 	 	{ name: 'document', items: [ 'Source', '-', 'NewPage', 'Preview'] },
 	 	{ name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo' ] },

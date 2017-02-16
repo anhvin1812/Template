@@ -2,7 +2,7 @@
 
 namespace App.Entities.ProductManagement
 {
-    public class ProductGallery : EntityBase
+    public class Gallery : EntityBase
     {
         public int Id { get; set; }
         public string Image { get; set; }

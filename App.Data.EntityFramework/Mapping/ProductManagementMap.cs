@@ -32,8 +32,6 @@ namespace App.Data.EntityFramework.Mapping
 
                 // Properties
                 Property(t => t.Name).IsRequired();
-                Property(t => t.Image).IsOptional();
-                Property(t => t.Thumbnail).IsOptional();
                 Property(t => t.GalleryId).IsOptional();
                 Property(t => t.Price).IsRequired();
                 Property(t => t.OldPrice).IsOptional();
@@ -43,9 +41,16 @@ namespace App.Data.EntityFramework.Mapping
                 Property(t => t.Description).IsOptional();
 
                 // Relationships
+                HasOptional(t => t.Image).WithMany().HasForeignKey(t => t.GalleryId);
                 HasOptional(t => t.Category).WithMany().HasForeignKey(t => t.CategoryId);
                 HasRequired(t => t.Status).WithMany().HasForeignKey(t => t.StatusId);
-                HasRequired(t => t.Gallery).WithMany().HasForeignKey(t => t.GalleryId);
+                HasMany(t => t.Gallery).WithMany().Map(x =>
+                {
+                    x.ToTable("Products_Galleries");
+                    x.MapLeftKey("ProductId");
+                    x.MapRightKey("GalleryId");
+
+                });
             }
         }
 
@@ -76,10 +81,14 @@ namespace App.Data.EntityFramework.Mapping
                 Property(t => t.Name).IsRequired();
                 Property(t => t.Description).IsOptional();
                 Property(t => t.ParentId).IsOptional();
+                Property(t => t.IsDisabled).IsOptional();
+
+                // Relationships
+                HasOptional(t => t.Parent).WithMany().HasForeignKey(t => t.ParentId);
             }
         }
 
-        private class ProductGalleryMap : EntityTypeConfiguration<ProductGallery>
+        private class ProductGalleryMap : EntityTypeConfiguration<Gallery>
         {
             public ProductGalleryMap()
             {

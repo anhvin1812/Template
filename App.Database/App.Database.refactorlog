@@ -70,4 +70,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Thumbnail" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="5f28e2ae-157f-4435-91dd-1faca1ce7973" ChangeDateTime="02/16/2017 15:53:22">
+    <Property Name="ElementName" Value="[dbo].[Products_Categories].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Products_Categories]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProductId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8dbef7d5-55c6-4434-93cc-672a3c50c8f8" ChangeDateTime="02/16/2017 16:41:57">
+    <Property Name="ElementName" Value="[dbo].[ProductCategory].[IsDisable]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ProductCategory]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsDisabled" />
+  </Operation>
 </Operations>

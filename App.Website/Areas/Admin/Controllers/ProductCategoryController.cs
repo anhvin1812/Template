@@ -13,16 +13,16 @@ using App.Website.Fillters;
 
 namespace App.Website.Areas.Admin.Controllers
 {
-    public class ProductController : BaseController
+    public class ProductCategoryController : BaseController
     {
 
         #region Contractor
-        private IProductService ProductService { get; set; }
+        private IProductCategoryService ProductCategoryService { get; set; }
 
-        public ProductController(IProductService productService)
-            : base(new IService[] { productService })
+        public ProductCategoryController(IProductCategoryService productCategoryService)
+            : base(new IService[] { productCategoryService })
         {
-            ProductService = productService;
+            ProductCategoryService = productCategoryService;
         }
 
         #endregion
@@ -31,26 +31,28 @@ namespace App.Website.Areas.Admin.Controllers
         public ActionResult Index(int? page = null, int? pageSize = null)
         {
             int? recordCount = 0;
-            var result = ProductService.GetAll(page, pageSize, ref recordCount);
+            var result = ProductCategoryService.GetAll(page, pageSize, ref recordCount);
 
             return View(result);
         }
 
         public ActionResult Create()
         {
-            //var model = ProductService.In();
-
+            int? recordCount = 0;
+            var categories = ProductCategoryService.GetAll(null, null, ref recordCount);
+            ViewBag.ParentId = new SelectList(categories, "Id", "Name");
+            
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ErrorHandler(View = "Create")]
-        public ActionResult Create(ProductCategory entry)
+        public ActionResult Create(ProductCategoryEntry entry)
         {
             if (ModelState.IsValid)
             {
-                ProductService.Insert(entry);
+                ProductCategoryService.Insert(entry);
                 return RedirectToAction("Index");
             }
 
@@ -59,16 +61,27 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-           // var result = RoleService.GetRoleForEditing(id);
+            int? recordCount = 0;
+            var categories = ProductCategoryService.GetAll(null, null, ref recordCount);
+            ViewBag.ParentId = new SelectList(categories, "Id", "Name");
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ErrorHandler(View = "Edit")]
-        public ActionResult Edit(int id, RoleEntry entry)
+        public ActionResult Edit(int id, ProductCategoryEntry entry)
         {
-            //RoleService.Update(id, entry);
+            if (ModelState.IsValid)
+            {
+                ProductCategoryService.Insert(entry);
+                return RedirectToAction("Index");
+            }
+
+            int? recordCount = 0;
+            var categories = ProductCategoryService.GetAll(null, null, ref recordCount);
+            ViewBag.ParentId = new SelectList(categories, "Id", "Name");
 
             return RedirectToAction("Index");
         }
@@ -88,7 +101,7 @@ namespace App.Website.Areas.Admin.Controllers
             {
                 if (isDisposing)
                 {
-                    ProductService = null;
+                    ProductCategoryService = null;
                 }
                 _disposed = true;
             }

@@ -64,7 +64,8 @@
     <Compile Include="Common\ErrorExtraInfo.cs" />
     <Compile Include="Common\Error.cs" />
     <Compile Include="Common\DtoBase.cs" />
-    <Compile Include="ProductManagement\ProductEntry.cs" />
+    <Compile Include="ProductManagement\Product.cs" />
+    <Compile Include="ProductManagement\ProductCategory.cs" />
     <Compile Include="IdentityManagement\Role.cs" />
     <Compile Include="IdentityManagement\User.cs" />
     <Compile Include="IdentityManagement\LogOnModel.cs" />

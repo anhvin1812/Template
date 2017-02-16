@@ -7,8 +7,6 @@ namespace App.Entities.ProductManagement
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
-        public string Thumbnail { get; set; }
         public int? GalleryId { get; set; }
         public decimal Price { get; set; }
         public decimal? OldPrice { get; set; }
@@ -19,6 +17,7 @@ namespace App.Entities.ProductManagement
 
         public virtual ProductCategory Category { get; set; }
         public virtual ProductStatus Status { get; set; }
-        public virtual ICollection<ProductGallery> Gallery { get; set; }
+        public virtual Gallery Image { get; set; }
+        public virtual ICollection<Gallery> Gallery { get; set; }
     }
 }
