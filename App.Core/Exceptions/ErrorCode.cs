@@ -16,10 +16,12 @@ namespace App.Core.Exceptions
                 {ErrorCodeType.NoAccessData, "You do not have permission to access this data."},
                 {ErrorCodeType.DataNotFound, "Data not found."},
                 {ErrorCodeType.InvalidData, "Data is not valid."},
+                {ErrorCodeType.InvalidName, "Name is not valid."},
                 // Role
                 {ErrorCodeType.InvalidRoleName, "Role name is not valid."},
                 {ErrorCodeType.RoleNameIsUsed, "Role name is used."},
-                {ErrorCodeType.RoleIsNotExsted, "Role is not existed."}
+                {ErrorCodeType.RoleIsNotExsted, "Role is not existed."},
+                // Product
             };
         }
     }

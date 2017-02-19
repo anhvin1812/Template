@@ -7,6 +7,7 @@ namespace App.Repositories.ProductManagement
     public interface IProductCategoryRepository : IRepository
     {
         IEnumerable<ProductCategory> GetAll(int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<ProductCategory> GetByParentId(int? parentId);
         ProductCategory GetById(int id);
         void Insert(ProductCategory product);
         void Update(ProductCategory product);

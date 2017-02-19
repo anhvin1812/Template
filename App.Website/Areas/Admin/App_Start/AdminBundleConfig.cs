@@ -15,9 +15,7 @@ namespace App.Website.Areas.Admin.App_Start
                         getPath("Scripts/jQueryUI/jquery-ui.min.js")));
 
             bundles.Add(new ScriptBundle("~/Admin/Js/jqueryval").Include(
-                getPath("Scripts/jQuery-validate/jquery.validate.min.js"),
-                getPath("Scripts/jQuery-validate/jquery.validate.unobtrusive.min.js"),
-                getPath("Scripts/jQuery-validate/jquery.validate-vsdoc.js"),
+                getPath("Scripts/jQuery-validate/jquery.validate*"),
                 getPath("Scripts/jQuery-validate/bootstrap-style-validation.js")));
 
             bundles.Add(new ScriptBundle("~/Admin/Js/morrisCharts").Include(

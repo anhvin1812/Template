@@ -61,8 +61,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -298,6 +298,8 @@
     <Content Include="Areas\Admin\Content\Images\user6-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user7-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user8-128x128.jpg" />
+    <Content Include="Areas\Admin\Scripts\jQuery-validate\jquery.validate.js" />
+    <Content Include="Areas\Admin\Scripts\jQuery-validate\jquery.validate.unobtrusive.js" />
     <Content Include="Areas\Admin\Views\Shared\index.html" />
     <Content Include="Areas\Admin\product.html" />
     <Content Include="Areas\Admin\Scripts\bootstrap-slider\bootstrap-slider.js" />
@@ -1386,6 +1388,8 @@
     <Content Include="Content\images\1_zoom.jpg" />
     <Content Include="Content\images\2.jpg" />
     <Content Include="Content\images\3.jpg" />
+    <Content Include="Content\images\default-image.png" />
+    <Content Include="Content\images\default-thumbnail.png" />
     <Content Include="Content\images\facebook-footer.png" />
     <Content Include="Content\images\facebook.png" />
     <Content Include="Content\images\google.png" />
@@ -1528,6 +1532,9 @@
     <Content Include="ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <Content Include="ckeditor\samples\sample_posteddata.php" />
     <Content Include="ckeditor\skins\moono\readme.md" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\product-scripts.js" />
     <Content Include="Scripts\common.js" />

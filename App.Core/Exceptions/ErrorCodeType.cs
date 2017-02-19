@@ -14,10 +14,14 @@ namespace App.Core.Exceptions
         NoAccessData = 4,
         DataNotFound = 5,
         InvalidData = 6,
+        InvalidName = 7,
         
         // Role
-        InvalidRoleName = 7,
-        RoleNameIsUsed = 8,
-        RoleIsNotExsted = 9,
+        InvalidRoleName = 20,
+        RoleNameIsUsed = 21,
+        RoleIsNotExsted = 22,
+
+        // Product
+        InvalidProductCategoryName = 30,
     }
 }

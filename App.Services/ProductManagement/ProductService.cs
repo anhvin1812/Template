@@ -92,17 +92,22 @@ namespace App.Services.ProductManagement
                     Price = entry.Price,
                     OldPrice = entry.OldPrice,
                     CategoryId = entry.CategoryId,
+                    StatusId = entry.StatusId,
+                    Gallery = new List<Gallery>()
                 };
 
                 // upload image
-                var imageName = UploadGallery(entry.Image);
-                
-                entity.Image = new Gallery
+                if (entry.Image != null)
                 {
-                    Image = imageName,
-                    Thumbnail = imageName,
-                    State = ObjectState.Added
-                };
+                    var imageName = UploadGallery(entry.Image);
+
+                    entity.Image = new Gallery
+                    {
+                        Image = imageName,
+                        Thumbnail = imageName,
+                        State = ObjectState.Added
+                    };
+                }
 
                 // upload gallery
                 if (entry.Gallery != null && entry.Gallery.Any())
@@ -187,7 +192,24 @@ namespace App.Services.ProductManagement
         }
 
 
+        #region Product Status
+
+        public IEnumerable<ProductStatusSummary> GetAllStatus()
+        {
+            var results = ProductRepository.GetAllStatus();
+
+            return results.Select(x => new ProductStatusSummary
+            {
+                Id = x.Id,
+                Status = x.Status
+            });
+        }
         #endregion
+
+
+
+        #endregion
+
 
         #region Private Methods
 
@@ -224,7 +246,7 @@ namespace App.Services.ProductManagement
             return allPermissions.Any(x => x.ClaimType == roleClaim.ClaimType && x.ClaimValue == roleClaim.ClaimValue);
         }
 
-        private void ValidateEntryData(Dtos.ProductManagement.ProductCategory entry)
+        private void ValidateEntryData(ProductEntry entry)
         {
 
             if (entry == null)
@@ -240,7 +262,7 @@ namespace App.Services.ProductManagement
             {
                 var violations = new List<ErrorExtraInfo>
                 {
-                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidRoleName, Property = "Name"}
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Name"}
                 };
                 throw new ValidationError(violations);
             }

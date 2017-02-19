@@ -10,7 +10,7 @@ namespace App.Entities.ProductManagement
         public int? GalleryId { get; set; }
         public decimal Price { get; set; }
         public decimal? OldPrice { get; set; }
-        public int? StatusId { get; set; }
+        public int StatusId { get; set; }
         public string Description { get; set; }
         public string Specifications { get; set; }
         public int? CategoryId { get; set; }

@@ -87,7 +87,8 @@ namespace App.Website.Fillters
                 {
                     MasterName = "_Layout",
                     ViewName = this.View,
-                    ViewData = viewData
+                    ViewData = viewData,
+                    TempData = context.Controller.TempData
                 };
 
                 context.ExceptionHandled = true;

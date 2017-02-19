@@ -18,11 +18,13 @@ namespace App.Website.Areas.Admin.Controllers
 
         #region Contractor
         private IProductService ProductService { get; set; }
+        private IProductCategoryService ProductCategoryService { get; set; }
 
-        public ProductController(IProductService productService)
-            : base(new IService[] { productService })
+        public ProductController(IProductService productService, IProductCategoryService productCategoryService)
+            : base(new IService[] { productService, productCategoryService })
         {
             ProductService = productService;
+            ProductCategoryService = productCategoryService;
         }
 
         #endregion
@@ -38,7 +40,11 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            //var model = ProductService.In();
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            var status = ProductService.GetAllStatus().ToList();
+
+            TempData["CategoryId"] = new SelectList(options.Items, options.DataValueField, options.DataTextField);
+            TempData["StatusId"] = new SelectList(status, "Id", "Status");
 
             return View();
         }
@@ -46,7 +52,7 @@ namespace App.Website.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ErrorHandler(View = "Create")]
-        public ActionResult Create(ProductCategory entry)
+        public ActionResult Create(ProductEntry entry)
         {
             if (ModelState.IsValid)
             {
@@ -54,12 +60,23 @@ namespace App.Website.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            var status = ProductService.GetAllStatus().ToList();
+
+            TempData["CategoryId"] = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.CategoryId);
+            TempData["StatusId"] = new SelectList(status, "Id", "Status", entry.StatusId);
+
             return View(entry);
         }
 
         public ActionResult Edit(int id)
         {
-           // var result = RoleService.GetRoleForEditing(id);
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            var status = ProductService.GetAllStatus().ToList();
+
+            //ViewBag.CategoryId = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.CategoryId);
+            //ViewBag.StatusId = new SelectList(status, "Id", "Status", entry.StatusId);
+
             return View();
         }
 
@@ -89,6 +106,7 @@ namespace App.Website.Areas.Admin.Controllers
                 if (isDisposing)
                 {
                     ProductService = null;
+                    ProductCategoryService = null;
                 }
                 _disposed = true;
             }

@@ -11,5 +11,11 @@ namespace App.Repositories.ProductManagement
         void Insert(Product product);
         void Update(Product product);
         void Delete(int id);
+
+        #region Product Status
+
+        IEnumerable<ProductStatus> GetAllStatus();
+
+        #endregion
     }
 }

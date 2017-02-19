@@ -51,12 +51,23 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-user"></i>
-                    <span>Người dùng</span>
+                    <span>Users Management</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="@Url.Action("Index", "Role")"><i class="fa fa-users"></i> Vai trò</a></li>
-                    <li><a href="@Url.Action("Index", "User")"><i class="fa fa-user"></i> Người dùng</a></li>
+                    <li><a href="@Url.Action("Index", "Role")"><i class="fa fa-users"></i> Roles</a></li>
+                    <li><a href="@Url.Action("Index", "User")"><i class="fa fa-user"></i> Users</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span>Products Management</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Index", "Product")"><i class="fa fa-users"></i> Products</a></li>
+                    <li><a href="@Url.Action("Index", "ProductCategory")"><i class="fa fa-user"></i> Categories</a></li>
                 </ul>
             </li>
             <li class="treeview">

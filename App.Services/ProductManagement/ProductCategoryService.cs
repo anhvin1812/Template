@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Transactions;
 using System.Web;
+using System.Web.UI.WebControls;
 using App.Core.Configuration;
 using App.Core.Exceptions;
 using App.Core.Repositories;
@@ -15,6 +16,7 @@ using App.Repositories.IdentityManagement;
 using App.Repositories.ProductManagement;
 using App.Services.Dtos.IdentityManagement;
 using App.Services.Dtos.ProductManagement;
+using App.Services.Dtos.UI;
 
 namespace App.Services.ProductManagement
 {
@@ -33,25 +35,52 @@ namespace App.Services.ProductManagement
 
         #region Public Methods
 
-        public IEnumerable<ProductCategoryDetail> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<ProductCategorySummary> GetAll(int? page, int? pageSize, ref int? recordCount)
         {
             var categories = ProductCategoryRepository.GetAll(page, pageSize, ref recordCount)
-                .Select(x => new ProductCategoryDetail
+                .Select(x => new ProductCategorySummary
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Description = x.Description,
-                    IsDisabled = x.Parent.IsDisabled,
-                    Parent = x.Parent == null ? null : new ProductCategoryDetail
-                    {
-                        Id = x.Parent.Id,
-                        Name = x.Parent.Name,
-                        Description = x.Parent.Description,
-                        IsDisabled = x.Parent.IsDisabled
-                    }
+                    IsDisabled = x.IsDisabled ?? false
                 });
-            
+
             return categories;
+        }
+
+        /// <summary>
+        /// parrentId is null to get all categories
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <param name="currentId">to disable all under categories and itself</param>
+        /// <param name="isDisabled"></param>
+        /// <returns></returns>
+        public SelectListOptions GetOptionsForDropdownList(int? parentId, int? currentId = null, bool? isDisabled = null)
+        {
+            int? recordCount = 0;
+            var allCategories = ProductCategoryRepository.GetAll(null, null, ref recordCount);
+
+            allCategories = isDisabled.HasValue ?
+                isDisabled.Value ? allCategories.Where(x => x.IsDisabled == true) : allCategories.Where(x => x.IsDisabled != true)
+                : allCategories;
+
+            var results = GetCategoryForDropdown(allCategories, parentId, string.Empty);
+            var disabledValues = new List<int>();
+
+            if (currentId.HasValue)
+            {
+                disabledValues.Add(currentId.Value);
+                disabledValues.AddRange(GetCategoryForDropdown(results, currentId.Value, string.Empty).Select(x=>x.Id).ToList());
+            }
+
+            return new SelectListOptions
+            {
+                Items = results,
+                DisabledValues = disabledValues,
+                DataValueField = "Id",
+                DataTextField = "Name"
+            };
         }
 
         public ProductCategoryDetail GetById(int id)
@@ -77,13 +106,29 @@ namespace App.Services.ProductManagement
             };
         }
 
+        public ProductCategoryEntry GetCategoryForEditing(int id)
+        {
+            var category = ProductCategoryRepository.GetById(id);
+
+            if (category == null)
+                throw new DataNotFoundException();
+
+            return new ProductCategoryEntry
+            {
+                Name = category.Name,
+                Description = category.Description,
+                IsDisabled = category.IsDisabled,
+               ParentId = category.ParentId
+            };
+        }
+
 
         public void Insert(ProductCategoryEntry entry)
         {
             //TODO: Check exit Role, permission,...
 
             // Validate data
-            //ValidateEntryData(entry);
+            ValidateEntryData(entry);
 
             //TODO: CHeck parent existed
 
@@ -105,7 +150,7 @@ namespace App.Services.ProductManagement
             //TODO: Check exit Role, permission,...
 
             // Validate data
-            //ValidateEntryData(entry);
+            ValidateEntryData(entry);
 
             //TODO: CHeck parent existed
 
@@ -126,6 +171,28 @@ namespace App.Services.ProductManagement
         #endregion
 
         #region Private Methods
+        private void ValidateEntryData(ProductCategoryEntry entry)
+        {
+
+            if (entry == null)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidData}
+                };
+                throw new ValidationError(violations);
+            }
+
+            if (string.IsNullOrWhiteSpace(entry.Name))
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Name"}
+                };
+                throw new ValidationError(violations);
+            }
+        }
+
         private void ValidateEntityData(Role entity)
         {
             if (entity == null)
@@ -136,6 +203,28 @@ namespace App.Services.ProductManagement
                 };
                 throw new ValidationError(violations);
             }
+        }
+
+        private List<ProductCategory> GetCategoryForDropdown(IEnumerable<ProductCategory> allCategories, int? parentId, string paddingString)
+        {
+            var categories = new List<ProductCategory>();
+
+            var rootCategories = allCategories.Where(x => x.ParentId == parentId);
+            if (rootCategories.Any())
+            {
+                foreach (var c in rootCategories)
+                {
+                    c.Name = HttpUtility.HtmlDecode(paddingString + c.Name);
+                    categories.Add(c);
+
+                    if (allCategories.Any(x => x.ParentId == c.Id))
+                    {
+                        categories.AddRange(GetCategoryForDropdown(allCategories, c.Id, $"{paddingString}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"));
+                    }
+                }
+            }
+
+            return categories;
         }
 
         #endregion

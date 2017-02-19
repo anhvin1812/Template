@@ -3,3 +3,8 @@
 .validation-summary-valid {
     display: none;
 }
+
+
+.vertical-middle {
+     vertical-align: middle;
+}

@@ -55,5 +55,14 @@ namespace App.Repositories.ProductManagement
         {
             DatabaseContext.Delete<Product>(id);
         }
+
+        #region Product Status
+
+        public IEnumerable<ProductStatus> GetAllStatus()
+        {
+            return DatabaseContext.Get<ProductStatus>();
+        }
+
+        #endregion
     }
 }

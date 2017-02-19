@@ -9,12 +9,12 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-IF NOT EXISTS(SELECT * FROM dbo.ProductStatus WHERE Status = 'Còn hàng')
+IF NOT EXISTS(SELECT 1 FROM dbo.ProductStatus WHERE Status = N'Còn hàng')
 BEGIN
 	Insert into ProductStatus values(N'Còn hàng')
 END
 
-IF NOT EXISTS(SELECT * FROM dbo.ProductStatus WHERE Status = 'Hết hàng')
+IF NOT EXISTS(SELECT 1 FROM dbo.ProductStatus WHERE Status = N'Hết hàng')
 BEGIN
 	Insert into ProductStatus values(N'Hết hàng')
 END

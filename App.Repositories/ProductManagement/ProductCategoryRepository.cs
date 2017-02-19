@@ -36,6 +36,13 @@ namespace App.Repositories.ProductManagement
             return result;
         }
 
+        public IEnumerable<ProductCategory> GetByParentId(int? parentId)
+        {
+            var result = DatabaseContext.Get<ProductCategory>().Where(t=>t.ParentId == parentId);
+
+            return result;
+        }
+
         public ProductCategory GetById(int id)
         {
             return DatabaseContext.Get<ProductCategory>().FirstOrDefault(t=>t.Id == id);

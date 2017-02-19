@@ -32,7 +32,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "create-role-messages" })
+            @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "error-messages" })
         </div>
     </div>
 
@@ -58,30 +58,18 @@
                                     @Html.TextBoxFor(m => m.Price, new {@class = "form-control", placeholder = "Enter price"})
                                 </div>
                                 <div class="form-group">
-                                    @Html.LabelFor(m => m.OldPrice)
+                                    @Html.LabelFor(m => m.OldPrice, "Old price")
                                     @Html.TextBoxFor(m => m.OldPrice, new { @class = "form-control", placeholder = "Enter old price" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Category</label>
-                                    <select name="details[cpu]" id="" class="form-control input-sm">
-                                        <option value="Core i5 2nd">Core i5 2nd</option>
-                                        <option>Acer</option>
-                                        <option>Asus</option>
-                                        <option>Dell</option>
-                                        <option>HP</option>
-                                    </select>
+                                    @Html.LabelFor(m=>m.CategoryId, "Category")
+                                    @Html.DropDownListFor(m => m.CategoryId, (SelectList)TempData.Peek("CategoryId"), string.Empty, new { @class = "form-control" })
                                 </div>
                                 <div class="form-group">
-                                    <label>Status</label>
-                                    <select name="details[cpu]" id="" class="form-control input-sm">
-                                        <option value="Core i5 2nd">Core i5 2nd</option>
-                                        <option>Acer</option>
-                                        <option>Asus</option>
-                                        <option>Dell</option>
-                                        <option>HP</option>
-                                    </select>
+                                    @Html.LabelFor(m => m.StatusId, "Status")
+                                    @Html.DropDownListFor(m => m.StatusId, (SelectList)TempData.Peek("StatusId"), new { @class = "form-control" })
                                 </div>
                             </div>
                         </div>
@@ -118,7 +106,7 @@
                             </div><!-- /input-group -->
                         </div>
                         <div id="previewFeaturedImage" class="hidden">
-                            <img src="../images/product-1.jpg" class="img-responsive" style="max-width:200px">
+                            <img src="@Url.Content("~/Content/images/default-thumbnail.png")" class="img-responsive" style="max-width:200px">
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -133,7 +121,7 @@
                                 <span class="input-group-btn">
                                     <span class="btn btn-success btn-sm btn-file">
                                         <i class="fa fa-folder-open-o"></i> Browse...
-                                        @Html.TextBoxFor(x => x.Image, new { id = "fileGallery", type = "file", multiple="multiple" })
+                                        @Html.TextBoxFor(x => x.Gallery, new { id = "fileGallery", type = "file", multiple="multiple" })
                                     </span>
                                 </span>
                                 <input type="text" readonly="readonly" class="form-control input-sm input-file">
@@ -142,26 +130,6 @@
                         </div>
 
                         <ul id="previewGallery" class="list-inline">
-                            <li class="text-center">
-                                <img src="../images/product-1.jpg" class="img-thumbnail" width="70" alt="">
-                                <br>
-                                <a href="#">delete</a>
-                                <!-- /li-->
-                            <li class="text-center">
-                                <img src="../images/product-2.jpg" class="img-thumbnail" width="70" alt="">
-                                <br>
-                                <a href="#">Xóa</a>
-                                <!-- /li-->
-                            <li class="text-center">
-                                <img src="../images/product-3.jpg" class="img-thumbnail" width="70" alt="">
-                                <br>
-                                <a href="#">Xóa</a>
-                                <!-- /li-->
-                            <li class="text-center">
-                                <img src="../images/product-2.jpg" class="img-thumbnail" width="70" alt="">
-                                <br>
-                                <a href="#">Xóa</a>
-                                <!-- /li-->
                         </ul>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->

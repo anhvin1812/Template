@@ -47,18 +47,18 @@
                 @foreach (var m in Model)
                 {
                     <tr>
-                        <td>@i</td>
-                        <td>
-                            <img width="100" src="@Url.Content($"{Settings.ConfigurationProvider.DirectoryProductThumbnail}/{m.Thumbnail}")" />
+                        <td class="vertical-middle">@i</td>
+                        <td class="vertical-middle">
+                            <img width="80" src="@Url.Content($"{Settings.ConfigurationProvider.DirectoryProductThumbnail}/{m.Thumbnail}")" />
                         </td>
-                        <td>@m.Name</td>
-                        <td>
+                        <td class="vertical-middle">@m.Name</td>
+                        <td class="vertical-middle">
                             @m.Price
-                            @(m.OldPrice > 0 ? $"</br>{m.OldPrice}" : string.Empty)
+                            @(Html.Raw( m.OldPrice > 0 ? $"</br>{m.OldPrice}" : string.Empty) )
                         </td>
-                        <td>@m.Category</td>
-                        <td>@m.Status</td>
-                        <td>
+                        <td class="vertical-middle">@m.Category</td>
+                        <td class="vertical-middle">@m.Status</td>
+                        <td class="vertical-middle">
                             <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "Product", new {id = m.Id})">
                                 <i class="fa fa-fw fa-pencil"></i> Edit
                             </a>

@@ -18,7 +18,7 @@ namespace App.Data.EntityFramework.Mapping
             modelBuilder.Configurations.Add(new ProductMap());
             modelBuilder.Configurations.Add(new ProductCategoryMap());
             modelBuilder.Configurations.Add(new ProductStatusMap());
-            modelBuilder.Configurations.Add(new ProductGalleryMap());
+            modelBuilder.Configurations.Add(new GalleryMap());
         }
 
         private class ProductMap : EntityTypeConfiguration<Product>
@@ -35,7 +35,7 @@ namespace App.Data.EntityFramework.Mapping
                 Property(t => t.GalleryId).IsOptional();
                 Property(t => t.Price).IsRequired();
                 Property(t => t.OldPrice).IsOptional();
-                Property(t => t.StatusId).IsOptional();
+                Property(t => t.StatusId).IsRequired();
                 Property(t => t.Specifications).IsOptional();
                 Property(t => t.CategoryId).IsOptional();
                 Property(t => t.Description).IsOptional();
@@ -88,11 +88,11 @@ namespace App.Data.EntityFramework.Mapping
             }
         }
 
-        private class ProductGalleryMap : EntityTypeConfiguration<Gallery>
+        private class GalleryMap : EntityTypeConfiguration<Gallery>
         {
-            public ProductGalleryMap()
+            public GalleryMap()
             {
-                ToTable("ProductGallery");
+                ToTable("Gallery");
                 // Primary Key
                 HasKey(t => t.Id);
                 Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);

@@ -38,9 +38,8 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            int? recordCount = 0;
-            var categories = ProductCategoryService.GetAll(null, null, ref recordCount);
-            ViewBag.ParentId = new SelectList(categories, "Id", "Name");
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            ViewBag.Parents = new SelectList(options.Items, options.DataValueField, options.DataTextField);
             
             return View();
         }
@@ -56,16 +55,20 @@ namespace App.Website.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            ViewBag.Parents = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.ParentId);
+
             return View(entry);
         }
 
         public ActionResult Edit(int id)
         {
-            int? recordCount = 0;
-            var categories = ProductCategoryService.GetAll(null, null, ref recordCount);
-            ViewBag.ParentId = new SelectList(categories, "Id", "Name");
+            var model = ProductCategoryService.GetCategoryForEditing(id);
 
-            return View();
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, id);
+            ViewBag.Parents = new SelectList(options.Items, options.DataValueField, options.DataTextField, model.ParentId, options.DisabledValues);
+
+            return View(model);
         }
 
         [HttpPost]
@@ -75,15 +78,14 @@ namespace App.Website.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                ProductCategoryService.Insert(entry);
+                ProductCategoryService.Update(id, entry);
                 return RedirectToAction("Index");
             }
 
-            int? recordCount = 0;
-            var categories = ProductCategoryService.GetAll(null, null, ref recordCount);
-            ViewBag.ParentId = new SelectList(categories, "Id", "Name");
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, id);
+            ViewBag.Parents = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.ParentId, options.DisabledValues);
 
-            return RedirectToAction("Index");
+            return View(entry);
         }
 
         public ActionResult Delete(int id)

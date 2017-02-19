@@ -1,25 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using System.Web.Mvc;
 using App.Services.Dtos.Common;
 
 namespace App.Services.Dtos.ProductManagement
 {
     public class ProductEntry : DtoBase
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter product name.")]
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [AllowHtml]
         public string Specification { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter price.")]
         public decimal Price { get; set; }
-        public decimal OldPrice { get; set; }
+        public decimal? OldPrice { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please select a status.")]
         public int StatusId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please select a category.")]
         public int CategoryId { get; set; }
 
         public HttpPostedFileBase Image { get; set; }
