@@ -1,0 +1,90 @@
+﻿@using System.Activities.Statements
+@using System.Web.Optimization
+@model IEnumerable<App.Services.Dtos.ProductManagement.ProductCategorySummary>
+@{
+    ViewBag.Title = "Product Categories";
+}
+
+@section AddStyles{
+    @Styles.Render("~/Admin/Css/DataTable")
+}
+
+@section ContentHeader
+{
+<section class="content-header">
+    <h1>
+        Product Categories Management
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>Products</li>
+        <li class="active">Categories</li>
+    </ol>
+</section>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            <a class="btn btn-block btn-primary" href="@Url.Action("Create", "ProductCategory")">Add new category</a>
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @if (Model.Any())
+        {
+            <table class="table table-hover table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Disabled</th>
+                    <th></th>
+                </tr>
+                @{ int i = 1; }
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@m.Name</td>
+                        <td>@m.Description</td>
+                        <td>@m.IsDisabled</td>
+                        <td>
+                            <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "ProductCategory", new {id = m.Id})">
+                                <i class="fa fa-fw fa-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            </table>
+        }
+        
+    </div>
+    <!-- /.box-body -->
+    @*<div class="box-footer clearfix">
+        <ul class="pagination no-margin pull-right">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>*@
+</div>
+<!-- /.box -->
+
+
+@section AddScripts{
+
+    <!-- DataTables -->
+    @Scripts.Render("~/Admin/Js/dataTable")
+
+    <script>
+      $(function () {
+        $("#example1").DataTable();
+      });
+    </script>
+}
+
