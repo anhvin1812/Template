@@ -13,7 +13,7 @@ namespace App.Services.Dtos.ProductManagement
         public string Description { get; set; }
 
         [AllowHtml]
-        public string Specification { get; set; }
+        public string Specifications { get; set; }
 
         [Required(ErrorMessage = "Please enter price.")]
         public decimal Price { get; set; }
@@ -34,11 +34,12 @@ namespace App.Services.Dtos.ProductManagement
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Specification { get; set; }
+        public string Specifications { get; set; }
+        public string Thumbnail { get; set; }
 
         [Required]
         public decimal Price { get; set; }
-        public decimal OldPrice { get; set; }
+        public decimal? OldPrice { get; set; }
 
         [Required]
         public int StatusId { get; set; }

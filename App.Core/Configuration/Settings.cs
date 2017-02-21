@@ -1,5 +1,4 @@
-﻿using Sherpa.Core;
-
+﻿
 namespace App.Core.Configuration
 {
     /// <summary>

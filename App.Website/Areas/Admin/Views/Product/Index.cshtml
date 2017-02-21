@@ -1,5 +1,6 @@
 ﻿@using System.Web.Optimization
 @using App.Core.Configuration
+@using Microsoft.Ajax.Utilities
 @model IEnumerable<App.Services.Dtos.ProductManagement.ProductSummary>
 @{
     ViewBag.Title = "Products";
@@ -49,12 +50,19 @@
                     <tr>
                         <td class="vertical-middle">@i</td>
                         <td class="vertical-middle">
-                            <img width="80" src="@Url.Content($"{Settings.ConfigurationProvider.DirectoryProductThumbnail}/{m.Thumbnail}")" />
+                            @{
+                                var imgUrl = m.Thumbnail.IsNullOrWhiteSpace() ? Settings.ConfigurationProvider.DefaultGalleryThumbnail : $"{Settings.ConfigurationProvider.DirectoryProductThumbnail}/{m.Thumbnail}";
+                            }
+                            <img width="80" src="@Url.Content(imgUrl)"/>
                         </td>
                         <td class="vertical-middle">@m.Name</td>
-                        <td class="vertical-middle">
-                            @m.Price
-                            @(Html.Raw( m.OldPrice > 0 ? $"</br>{m.OldPrice}" : string.Empty) )
+                        <td class="vertical-middle text-center">
+                            <h4 class="text-red">@m.Price</h4>
+                            @if (m.OldPrice > 0)
+                            {
+                                <span class="text-muted underline">@m.OldPrice</span>
+                            }
+                            @*@(Html.Raw(m.OldPrice > 0 ? $"</br><span class=\"text-muted underline\">{m.OldPrice}</span>" : string.Empty) )*@
                         </td>
                         <td class="vertical-middle">@m.Category</td>
                         <td class="vertical-middle">@m.Status</td>

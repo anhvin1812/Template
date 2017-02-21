@@ -97,6 +97,8 @@
     <Compile Include="EntityMapping\AutoMapperExtensions.cs" />
     <Compile Include="EntityMapping\MappingHelper.cs" />
     <Compile Include="EntityMapping\IdentityManagementMapping.cs" />
+    <Compile Include="Gallery\IGalleryService.cs" />
+    <Compile Include="Gallery\GalleryService.cs" />
     <Compile Include="ProductManagement\IProductCategoryService.cs" />
     <Compile Include="ProductManagement\IProductService.cs" />
     <Compile Include="ProductManagement\ProductCategoryService.cs" />

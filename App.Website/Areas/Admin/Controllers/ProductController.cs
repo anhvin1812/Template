@@ -43,8 +43,8 @@ namespace App.Website.Areas.Admin.Controllers
             var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
             var status = ProductService.GetAllStatus().ToList();
 
-            TempData["CategoryId"] = new SelectList(options.Items, options.DataValueField, options.DataTextField);
-            TempData["StatusId"] = new SelectList(status, "Id", "Status");
+            ViewBag.CategoryId = new SelectList(options.Items, options.DataValueField, options.DataTextField);
+            ViewBag.StatusId = new SelectList(status, "Id", "Status");
 
             return View();
         }
@@ -54,40 +54,45 @@ namespace App.Website.Areas.Admin.Controllers
         [ErrorHandler(View = "Create")]
         public ActionResult Create(ProductEntry entry)
         {
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            var status = ProductService.GetAllStatus().ToList();
+
+            ViewBag.Categories = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.CategoryId);
+            ViewBag.Status = new SelectList(status, "Id", "Status", entry.StatusId);
+
             if (ModelState.IsValid)
             {
                 ProductService.Insert(entry);
                 return RedirectToAction("Index");
             }
-
-            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
-            var status = ProductService.GetAllStatus().ToList();
-
-            TempData["CategoryId"] = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.CategoryId);
-            TempData["StatusId"] = new SelectList(status, "Id", "Status", entry.StatusId);
-
+            
             return View(entry);
         }
 
         public ActionResult Edit(int id)
         {
+            var model = ProductService.GetProductForEditing(id);
             var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
             var status = ProductService.GetAllStatus().ToList();
 
-            //ViewBag.CategoryId = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.CategoryId);
-            //ViewBag.StatusId = new SelectList(status, "Id", "Status", entry.StatusId);
+            ViewBag.Categories = new SelectList(options.Items, options.DataValueField, options.DataTextField, model.CategoryId);
+            ViewBag.Status = new SelectList(status, "Id", "Status", model.StatusId);
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ErrorHandler(View = "Edit")]
-        public ActionResult Edit(int id, RoleEntry entry)
+        public ActionResult Edit(int id, ProductUpdateEntry entry)
         {
-            //RoleService.Update(id, entry);
+            if (ModelState.IsValid)
+            {
+                ProductService.Update(id, entry);
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+            return View("Index");
         }
 
         public ActionResult Delete(int id)

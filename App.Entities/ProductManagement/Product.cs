@@ -13,7 +13,7 @@ namespace App.Entities.ProductManagement
         public int StatusId { get; set; }
         public string Description { get; set; }
         public string Specifications { get; set; }
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public virtual ProductCategory Category { get; set; }
         public virtual ProductStatus Status { get; set; }

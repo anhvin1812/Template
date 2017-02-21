@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Repositories;
+using App.Services.Gallery;
 using App.Services.IdentityManagement;
 using App.Services.ProductManagement;
 using Autofac;
@@ -28,6 +29,7 @@ namespace App.Services
             // Product
             builder.RegisterType<ProductService>().As<IProductService>().InstancePerDependency();
             builder.RegisterType<ProductCategoryService>().As<IProductCategoryService>().InstancePerDependency();
+            builder.RegisterType<GalleryService>().As<IGalleryService>().InstancePerDependency();
 
             //builder.RegisterType<RedCatMemberFactory>().As<IThirdPartyProviderMemberFactory<RedCatMember>>().InstancePerLifetimeScope();
             //builder.RegisterType<Talent2MemberFactory>().As<IThirdPartyProviderMemberFactory<Talent2Member>>().InstancePerLifetimeScope();

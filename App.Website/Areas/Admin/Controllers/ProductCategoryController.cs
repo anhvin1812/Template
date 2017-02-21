@@ -49,16 +49,16 @@ namespace App.Website.Areas.Admin.Controllers
         [ErrorHandler(View = "Create")]
         public ActionResult Create(ProductCategoryEntry entry)
         {
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            ViewBag.Parents = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.ParentId);
+
             if (ModelState.IsValid)
             {
                 ProductCategoryService.Insert(entry);
                 return RedirectToAction("Index");
             }
 
-            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
-            ViewBag.Parents = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.ParentId);
-
-            return View(entry);
+           return View(entry);
         }
 
         public ActionResult Edit(int id)
@@ -76,14 +76,14 @@ namespace App.Website.Areas.Admin.Controllers
         [ErrorHandler(View = "Edit")]
         public ActionResult Edit(int id, ProductCategoryEntry entry)
         {
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, id);
+            ViewBag.Parents = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.ParentId, options.DisabledValues);
+
             if (ModelState.IsValid)
             {
                 ProductCategoryService.Update(id, entry);
                 return RedirectToAction("Index");
             }
-
-            var options = ProductCategoryService.GetOptionsForDropdownList(null, id);
-            ViewBag.Parents = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.ParentId, options.DisabledValues);
 
             return View(entry);
         }

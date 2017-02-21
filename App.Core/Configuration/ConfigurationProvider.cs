@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
-using App.Core.Configuration;
 
-namespace Sherpa.Core
+namespace App.Core.Configuration
 {
     public class ConfigurationProvider: IConfigurationProvider
     {
@@ -45,6 +44,22 @@ namespace Sherpa.Core
             get
             {
                 return GetAppSetting("DirectoryGalleryThumbnail").Trim();
+            }
+        }
+
+        public string DefaultGalleryImage
+        {
+            get
+            {
+                return GetAppSetting("DefaultGalleryImage").Trim();
+            }
+        }
+
+        public string DefaultGalleryThumbnail
+        {
+            get
+            {
+                return GetAppSetting("DefaultGalleryThumbnail").Trim();
             }
         }
     }

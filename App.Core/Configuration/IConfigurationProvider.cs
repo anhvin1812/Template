@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Sherpa.Core
+﻿namespace App.Core.Configuration
 {
     public interface IConfigurationProvider
     {
@@ -12,6 +6,8 @@ namespace Sherpa.Core
         string DirectoryProductThumbnail { get; }
         string DirectoryGalleryImage { get; }
         string DirectoryGalleryThumbnail { get; }
+        string DefaultGalleryThumbnail { get; }
+        string DefaultGalleryImage { get; }
        
     }
 }

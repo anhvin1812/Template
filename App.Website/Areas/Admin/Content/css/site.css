@@ -4,7 +4,10 @@
     display: none;
 }
 
-
+/* Helper */
 .vertical-middle {
      vertical-align: middle;
+}
+.underline {
+    text-decoration: line-through;
 }

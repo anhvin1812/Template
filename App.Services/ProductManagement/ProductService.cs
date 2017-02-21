@@ -11,10 +11,11 @@ using App.Core.Repositories;
 using App.Entities;
 using App.Entities.IdentityManagement;
 using App.Entities.ProductManagement;
-using App.Repositories.IdentityManagement;
 using App.Repositories.ProductManagement;
-using App.Services.Dtos.IdentityManagement;
+using App.Services.Dtos.Gallery;
 using App.Services.Dtos.ProductManagement;
+using App.Services.Gallery;
+using Gallery= App.Entities.ProductManagement.Gallery;
 
 namespace App.Services.ProductManagement
 {
@@ -22,11 +23,13 @@ namespace App.Services.ProductManagement
     {
         #region Contructor
         private IProductRepository ProductRepository { get; set; }
+        private IGalleryService GalleryService { get; set; }
 
-        public ProductService(IUnitOfWork unitOfWork, IProductRepository productRepository)
-            : base(unitOfWork, new IRepository[] { productRepository }, new IService[] { })
+        public ProductService(IUnitOfWork unitOfWork, IProductRepository productRepository, IGalleryService galleryService)
+            : base(unitOfWork, new IRepository[] { productRepository }, new IService[] { galleryService })
         {
             ProductRepository = productRepository;
+            GalleryService = galleryService;
         }
 
         #endregion
@@ -74,6 +77,25 @@ namespace App.Services.ProductManagement
             };
         }
 
+        public ProductUpdateEntry GetProductForEditing(int id)
+        {
+            var product = ProductRepository.GetById(id);
+
+            if (product == null)
+                throw new DataNotFoundException();
+
+            return new ProductUpdateEntry
+            {
+                Name = product.Name,
+                Description = product.Description,
+                Specifications = product.Specifications,
+                StatusId = product.StatusId,
+                CategoryId = product.CategoryId,
+                Price = product.Price,
+                OldPrice = product.OldPrice,
+                Thumbnail = product.Image.Thumbnail,
+            };
+        }
 
         public void Insert(ProductEntry entry)
         {
@@ -88,12 +110,12 @@ namespace App.Services.ProductManagement
                 {
                     Name = entry.Name,
                     Description = entry.Description,
-                    Specifications = entry.Specification,
+                    Specifications = entry.Specifications,
                     Price = entry.Price,
                     OldPrice = entry.OldPrice,
                     CategoryId = entry.CategoryId,
                     StatusId = entry.StatusId,
-                    Gallery = new List<Gallery>()
+                    Gallery = new List<App.Entities.ProductManagement.Gallery>()
                 };
 
                 // upload image
@@ -101,7 +123,7 @@ namespace App.Services.ProductManagement
                 {
                     var imageName = UploadGallery(entry.Image);
 
-                    entity.Image = new Gallery
+                    entity.Image = new Entities.ProductManagement.Gallery
                     {
                         Image = imageName,
                         Thumbnail = imageName,
@@ -116,7 +138,7 @@ namespace App.Services.ProductManagement
                     {
                         var fileName = UploadGallery(gallery);
 
-                        entity.Gallery.Add(new Gallery
+                        entity.Gallery.Add(new Entities.ProductManagement.Gallery
                         {
                             Image = fileName,
                             Thumbnail = fileName,
@@ -138,57 +160,74 @@ namespace App.Services.ProductManagement
         {
             //TODO: Check exit Role, permission,...
 
+            var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Name"},
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidData, Property = "entry"}
+                };
+            throw new ValidationError(violations);
+
             // Validate data
-            //ValidateEntryData(entry);
+            ValidateUpdateEntryData(entry);
 
-            //var roleEntity = RoleRepository.GetById(id);
+            var entity = ProductRepository.GetById(id);
+            if(entity == null)
+                throw new DataNotFoundException();
 
-            //// Validate entity
-            //ValidateEntityData(roleEntity);
+            using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
+            {
+                entity.Name = entry.Name;
+                entity.Description = entry.Description;
+                entity.Specifications = entry.Specifications;
+                entity.Price = entry.Price;
+                entity.OldPrice = entry.OldPrice;
+                entity.CategoryId = entry.CategoryId;
+                entity.StatusId = entry.StatusId;
+                
+                // upload image
+                if (entry.Image != null)
+                {
+                    var imageName = UploadGallery(entry.Image);
 
-            //// Check existed name
-            //var roleForValidation = RoleRepository.GetByName(entry.RoleName);
-            //if (roleForValidation != null && roleForValidation.Id != roleEntity.Id)
-            //{
-            //    var violations = new List<ErrorExtraInfo>
-            //    {
-            //        new ErrorExtraInfo {Code = ErrorCodeType.RoleNameIsUsed, Property = "RoleName"}
-            //    };
-            //    throw new ValidationError(violations);
-            //}
+                    if (entity.Image != null)
+                    {
+                        entity.Image.Image = imageName;
+                        entity.Image.Thumbnail = imageName;
+                        entity.Image.State = ObjectState.Modified;
+                    }
+                    else
+                    {
+                        entity.Image = new Entities.ProductManagement.Gallery
+                        {
+                            Image = imageName,
+                            Thumbnail = imageName,
+                            State = ObjectState.Added
+                        };
+                    }
+                    
+                }
 
-            //var roleClaims = entry.RoleClaims.Where(x => x.IsChecked);
-            //using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
-            //{
-            //    // Remmove old claims
-            //    var oldClaims = RoleRepository.GetRoleClaimsByRoleId(roleEntity.Id);
-            //    foreach (var claim in oldClaims)
-            //    {
-            //        RoleRepository.DeleteRoleClaim(claim.Id);
-            //    }
+                // upload gallery
+                if (entry.Gallery != null && entry.Gallery.Any())
+                {
+                    foreach (var gallery in entry.Gallery)
+                    {
+                        var fileName = UploadGallery(gallery);
 
-            //    // Add new claims into role
-            //    if (roleClaims != null && roleClaims.Any())
-            //    {
-            //        foreach (var roleClaim in roleClaims)
-            //        {
-            //            RoleRepository.InsertRoleClaim(new RoleClaim
-            //            {
-            //                RoleId = roleEntity.Id,
-            //                ClaimType = roleClaim.ClaimType,
-            //                ClaimValue = roleClaim.ClaimValue
-            //            });
-            //        }
-            //    }
-            //    // Update role
-            //    roleEntity.Name = entry.RoleName;
-            //    roleEntity.Description = entry.Description;
+                        entity.Gallery.Add(new Entities.ProductManagement.Gallery
+                        {
+                            Image = fileName,
+                            Thumbnail = fileName,
+                            State = ObjectState.Added
+                        });
+                    }
+                }
 
-            //    RoleRepository.Update(roleEntity);
-            //    Save();
+                ProductRepository.Insert(entity);
+                Save();
 
-            //    transactionScope.Complete();
-            //}
+                transactionScope.Complete();
+            }
         }
 
 
@@ -206,6 +245,36 @@ namespace App.Services.ProductManagement
         }
         #endregion
 
+        #region Products Gallery
+
+        public IEnumerable<GallerySummary> GetGalleryByProductId(int id)
+        {
+            var entity = ProductRepository.GetById(id);
+            if(entity==null)
+                throw new DataNotFoundException();
+
+            return entity.Gallery.Select(x => new GallerySummary
+            {
+                Id = x.Id,
+                Image = x.Image,
+                Thumbnail = x.Thumbnail
+            });
+        }
+
+        public void DeleteProductGallery(int productId, int galleryId)
+        {
+            var entity = ProductRepository.GetById(productId);
+            if (entity == null)
+                throw new DataNotFoundException();
+
+            if (entity.Gallery.Any(x=>x.Id == galleryId))
+            {
+                GalleryService.Delete(galleryId);
+            }
+        }
+
+        #endregion
+
 
 
         #endregion
@@ -213,22 +282,9 @@ namespace App.Services.ProductManagement
 
         #region Private Methods
 
-        private string UploadProductImage(HttpPostedFileBase image)
-        {
-            var imageName = $"Product_{DateTime.Now.ToString("yyyyMMddHHmmss")}.{ Path.GetExtension(image.FileName)}";
-            Image img = Image.FromStream(image.InputStream);
-            Image thumb = img.GetThumbnailImage(270, 270, () => false, IntPtr.Zero);
-
-
-            img.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryProductImage}/{imageName}"));
-            thumb.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryProductThumbnail}/{imageName}"));
-
-            return imageName;
-        }
-
         private string UploadGallery(HttpPostedFileBase image)
         {
-            var imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmss")}.{ Path.GetExtension(image.FileName)}";
+            var imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmss")}{ Path.GetExtension(image.FileName)}";
             Image img = Image.FromStream(image.InputStream);
             Image thumb = img.GetThumbnailImage(270, 270, () => false, IntPtr.Zero);
 
@@ -237,13 +293,6 @@ namespace App.Services.ProductManagement
             thumb.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{imageName}"));
 
             return imageName;
-        }
-
-
-
-        private bool IsChecked(RoleClaim roleClaim, List<RoleClaimSummary> allPermissions)
-        {
-            return allPermissions.Any(x => x.ClaimType == roleClaim.ClaimType && x.ClaimValue == roleClaim.ClaimValue);
         }
 
         private void ValidateEntryData(ProductEntry entry)
@@ -268,13 +317,22 @@ namespace App.Services.ProductManagement
             }
         }
 
-        private void ValidateEntityData(Role entity)
+        private void ValidateUpdateEntryData(ProductUpdateEntry entry)
         {
-            if (entity == null)
+            if (entry == null)
             {
                 var violations = new List<ErrorExtraInfo>
                 {
-                    new ErrorExtraInfo {Code = ErrorCodeType.RoleIsNotExsted}
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidData}
+                };
+                throw new ValidationError(violations);
+            }
+
+            if (string.IsNullOrWhiteSpace(entry.Name))
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Name"}
                 };
                 throw new ValidationError(violations);
             }
@@ -294,6 +352,7 @@ namespace App.Services.ProductManagement
                 if (isDisposing)
                 {
                     ProductRepository = null;
+                    GalleryService = null;
                 }
                 _disposed = true;
             }
