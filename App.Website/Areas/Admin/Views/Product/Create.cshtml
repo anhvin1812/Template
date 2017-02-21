@@ -15,7 +15,7 @@
     <section class="content-header">
         <h1>
             Product Management
-            <small>add new role</small>
+            <small>add</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -65,11 +65,11 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     @Html.LabelFor(m=>m.CategoryId, "Category")
-                                    @Html.DropDownListFor(m => m.CategoryId, (SelectList)TempData.Peek("CategoryId"), string.Empty, new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.CategoryId, (SelectList)ViewBag.Categories, string.Empty, new { @class = "form-control" })
                                 </div>
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.StatusId, "Status")
-                                    @Html.DropDownListFor(m => m.StatusId, (SelectList)TempData.Peek("StatusId"), new { @class = "form-control" })
+                                    @Html.DropDownListFor(m => m.StatusId, (SelectList)ViewBag.Status, new { @class = "form-control" })
                                 </div>
                             </div>
                         </div>

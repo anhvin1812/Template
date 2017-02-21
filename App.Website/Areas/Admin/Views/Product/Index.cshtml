@@ -51,7 +51,7 @@
                         <td class="vertical-middle">@i</td>
                         <td class="vertical-middle">
                             @{
-                                var imgUrl = m.Thumbnail.IsNullOrWhiteSpace() ? Settings.ConfigurationProvider.DefaultGalleryThumbnail : $"{Settings.ConfigurationProvider.DirectoryProductThumbnail}/{m.Thumbnail}";
+                                var imgUrl = m.Thumbnail.IsNullOrWhiteSpace() ? Settings.ConfigurationProvider.DefaultGalleryThumbnail : $"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{m.Thumbnail}";
                             }
                             <img width="80" src="@Url.Content(imgUrl)"/>
                         </td>

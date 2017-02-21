@@ -284,7 +284,7 @@ namespace App.Services.ProductManagement
 
         private string UploadGallery(HttpPostedFileBase image)
         {
-            var imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmss")}{ Path.GetExtension(image.FileName)}";
+            var imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{ Path.GetExtension(image.FileName)}";
             Image img = Image.FromStream(image.InputStream);
             Image thumb = img.GetThumbnailImage(270, 270, () => false, IntPtr.Zero);
 

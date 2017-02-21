@@ -1,5 +1,6 @@
 ﻿@using System.Web.Optimization
 @using App.Core.Configuration
+@using App.Services.Dtos.Gallery
 @using Microsoft.Ajax.Utilities
 @model App.Services.Dtos.ProductManagement.ProductUpdateEntry
 @{
@@ -16,7 +17,7 @@
     <section class="content-header">
         <h1>
             Product Management
-            <small>add new role</small>
+            <small>edit</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -27,7 +28,7 @@
 }
 
 
-@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -66,11 +67,11 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.CategoryId, "Category")
-                                @Html.DropDownListFor(m => m.CategoryId, (SelectList)TempData.Peek("Categories"), string.Empty, new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.CategoryId, (SelectList)ViewBag.Categories, string.Empty, new { @class = "form-control" })
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(m => m.StatusId, "Status")
-                                @Html.DropDownListFor(m => m.StatusId, (SelectList)TempData.Peek("Status"), new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.StatusId, (SelectList)ViewBag.Status, new { @class = "form-control" })
                             </div>
                         </div>
                     </div>
@@ -106,9 +107,9 @@
                             <input type="text" readonly="readonly" class="form-control input-sm input-file">
                         </div><!-- /input-group -->
                     </div>
-                    <div id="previewFeaturedImage" class="hidden">
+                    <div id="previewFeaturedImage" class="">
                         @{
-                            var imgUrl = Model.Thumbnail.IsNullOrWhiteSpace() ? Settings.ConfigurationProvider.DefaultGalleryThumbnail : $"{Settings.ConfigurationProvider.DirectoryProductThumbnail}/{Model.Thumbnail}";
+                            var imgUrl = Model.Thumbnail.IsNullOrWhiteSpace() ? Settings.ConfigurationProvider.DefaultGalleryThumbnail : $"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{Model.Thumbnail}";
                         }
                         <img src="@Url.Content(imgUrl)" class="img-responsive" style="max-width: 200px">
                     </div>
@@ -132,8 +133,19 @@
                         </div><!-- /input-group -->
                         <p class="help-block">Press <kbd>ctrl</kbd> to select multiple images.</p>
                     </div>
+                   
+                    <ul id="previewGallery" class="list-inline">
+                        @foreach (var g in (IEnumerable<GallerySummary>)ViewBag.Gallery)
+                        {
+                            <li class="text-center">
+                                <img src="@Url.Content($"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{g.Thumbnail}")" class="img-thumbnail" width="70" alt="">
+                                <br>
+                                <a href="#" data-gallery-id="@g.Id" data-productid="@Request.QueryString["id"]">Delete</a>
+                            </li>
+                        }
 
-                    <ul id="previewGallery" class="list-inline"></ul>
+
+                    </ul>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>

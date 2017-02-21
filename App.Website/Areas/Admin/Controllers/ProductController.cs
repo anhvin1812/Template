@@ -74,9 +74,11 @@ namespace App.Website.Areas.Admin.Controllers
             var model = ProductService.GetProductForEditing(id);
             var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
             var status = ProductService.GetAllStatus().ToList();
+            var gallery = ProductService.GetGalleryByProductId(id);
 
             ViewBag.Categories = new SelectList(options.Items, options.DataValueField, options.DataTextField, model.CategoryId);
             ViewBag.Status = new SelectList(status, "Id", "Status", model.StatusId);
+            ViewBag.Gallery = gallery;
 
             return View(model);
         }
@@ -86,6 +88,14 @@ namespace App.Website.Areas.Admin.Controllers
         [ErrorHandler(View = "Edit")]
         public ActionResult Edit(int id, ProductUpdateEntry entry)
         {
+            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            var status = ProductService.GetAllStatus().ToList();
+            var gallery = ProductService.GetGalleryByProductId(id);
+
+            ViewBag.Categories = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.CategoryId);
+            ViewBag.Status = new SelectList(status, "Id", "Status", entry.StatusId);
+            ViewBag.Gallery = gallery;
+
             if (ModelState.IsValid)
             {
                 ProductService.Update(id, entry);
