@@ -298,6 +298,8 @@
     <Content Include="Areas\Admin\Content\Images\user6-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user7-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user8-128x128.jpg" />
+    <Content Include="Areas\Admin\Scripts\App\common.js" />
+    <Content Include="Areas\Admin\Scripts\App\product.js" />
     <Content Include="Areas\Admin\Scripts\jQuery-validate\jquery.validate.js" />
     <Content Include="Areas\Admin\Scripts\jQuery-validate\jquery.validate.unobtrusive.js" />
     <Content Include="Areas\Admin\Views\Shared\index.html" />

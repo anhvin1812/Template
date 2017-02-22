@@ -52,18 +52,22 @@ namespace App.Website.Areas.Admin.App_Start
                       getPath("Scripts/js/active-iCheck.js")));
 
             bundles.Add(new ScriptBundle("~/Admin/Js/app").Include(
-                      getPath("Scripts/js/app.min.js")));
+                      getPath("Scripts/js/app.min.js"),
+                      getPath("Scripts/App/common.js")));
 
             bundles.Add(new ScriptBundle("~/Admin/Js/dataTable").Include(
                       getPath("Scripts/datatables/jquery.dataTables.min.js"),
                       getPath("Scripts/datatables/dataTables.bootstrap.min.js")));
 
-              //bundles.Add(new ScriptBundle("~/js/morris-charts").Include(
-              //            "~/Scripts/jquery.validate*"));
+            bundles.Add(new ScriptBundle("~/Admin/App/product").Include(
+                      getPath("Scripts/App/product.js")));
 
-              // Use the development version of Modernizr to develop with and learn from. Then, when you're
-              // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-              bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+            //bundles.Add(new ScriptBundle("~/js/morris-charts").Include(
+            //            "~/Scripts/jquery.validate*"));
+
+            // Use the development version of Modernizr to develop with and learn from. Then, when you're
+            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(

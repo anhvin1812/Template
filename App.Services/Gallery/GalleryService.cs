@@ -59,7 +59,7 @@ namespace App.Services.Gallery
 
         private void DeleteGalleryThumbnail(string fileName)
         {
-            string fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{fileName}");
+            string fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{fileName}");
             if (File.Exists(fullPath))
             {
                 File.Delete(fullPath);

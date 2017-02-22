@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using App.Core.Permission;
 using App.Services;
+using App.Services.Dtos.Common;
 using App.Services.Dtos.IdentityManagement;
 using App.Services.Dtos.ProductManagement;
 using App.Services.IdentityManagement;
@@ -72,7 +73,7 @@ namespace App.Website.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var model = ProductService.GetProductForEditing(id);
-            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            var options = ProductCategoryService.GetOptionsForDropdownList(null);
             var status = ProductService.GetAllStatus().ToList();
             var gallery = ProductService.GetGalleryByProductId(id);
 
@@ -84,11 +85,11 @@ namespace App.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]  
         [ErrorHandler(View = "Edit")]
         public ActionResult Edit(int id, ProductUpdateEntry entry)
         {
-            var options = ProductCategoryService.GetOptionsForDropdownList(null, null);
+            var options = ProductCategoryService.GetOptionsForDropdownList(null);
             var status = ProductService.GetAllStatus().ToList();
             var gallery = ProductService.GetGalleryByProductId(id);
 
@@ -109,6 +110,16 @@ namespace App.Website.Areas.Admin.Controllers
         {
             return View();
         }
+
+        #region Gallery
+        [HttpPost]
+        public ActionResult DeleteGallery(int productId, int galleryId)
+        {
+            ProductService.DeleteProductGallery(productId, galleryId);
+
+            return Json(new SuccessResult());
+        }
+        #endregion
 
         #region Dispose
         private bool _disposed;

@@ -86,6 +86,7 @@ namespace App.Services.ProductManagement
 
             return new ProductUpdateEntry
             {
+                Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
                 Specifications = product.Specifications,
@@ -160,13 +161,6 @@ namespace App.Services.ProductManagement
         {
             //TODO: Check exit Role, permission,...
 
-            var violations = new List<ErrorExtraInfo>
-                {
-                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Name"},
-                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidData, Property = "entry"}
-                };
-            throw new ValidationError(violations);
-
             // Validate data
             ValidateUpdateEntryData(entry);
 
@@ -212,6 +206,8 @@ namespace App.Services.ProductManagement
                 {
                     foreach (var gallery in entry.Gallery)
                     {
+                        if (gallery == null) continue;
+
                         var fileName = UploadGallery(gallery);
 
                         entity.Gallery.Add(new Entities.ProductManagement.Gallery
@@ -223,7 +219,7 @@ namespace App.Services.ProductManagement
                     }
                 }
 
-                ProductRepository.Insert(entity);
+                ProductRepository.Update(entity);
                 Save();
 
                 transactionScope.Complete();
@@ -267,9 +263,13 @@ namespace App.Services.ProductManagement
             if (entity == null)
                 throw new DataNotFoundException();
 
-            if (entity.Gallery.Any(x=>x.Id == galleryId))
+            var gallery = entity.Gallery.FirstOrDefault(x => x.Id == galleryId);
+            if (gallery != null)
             {
+                entity.Gallery.Remove(gallery);
                 GalleryService.Delete(galleryId);
+
+                Save();
             }
         }
 
@@ -288,6 +288,15 @@ namespace App.Services.ProductManagement
             Image img = Image.FromStream(image.InputStream);
             Image thumb = img.GetThumbnailImage(270, 270, () => false, IntPtr.Zero);
 
+            var fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
+
+            var index = 1;
+            while (File.Exists(fullPath))
+            {
+                imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}_{index}{ Path.GetExtension(image.FileName)}";
+                fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
+                index++;
+            }
 
             img.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}"));
             thumb.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{imageName}"));

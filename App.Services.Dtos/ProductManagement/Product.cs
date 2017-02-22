@@ -31,9 +31,12 @@ namespace App.Services.Dtos.ProductManagement
 
     public class ProductUpdateEntry : DtoBase
     {
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [AllowHtml]
         public string Specifications { get; set; }
         public string Thumbnail { get; set; }
 
