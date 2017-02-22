@@ -9,6 +9,7 @@ using App.Core.Exceptions;
 using App.Core.Repositories;
 using App.Entities.IdentityManagement;
 using App.Entities.ProductManagement;
+using App.Infrastructure.File;
 using App.Repositories.ProductManagement;
 using App.Services.Dtos.ProductManagement;
 
@@ -36,8 +37,7 @@ namespace App.Services.Gallery
                 throw new DataNotFoundException();
 
             // delete files from server
-            DeleteGalleryImage(entity.Image);
-            DeleteGalleryThumbnail(entity.Thumbnail);
+            GalleryHelper.DeleteGallery(entity.Image, entity.Thumbnail);
 
             GalleryRepository.Delete(id);
             Save();
@@ -48,23 +48,6 @@ namespace App.Services.Gallery
 
         #region Private Methods
 
-        private void DeleteGalleryImage(string fileName)
-        {
-            var fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{fileName}");
-            if (File.Exists(fullPath))
-            {
-                File.Delete(fullPath);
-            }
-        }
-
-        private void DeleteGalleryThumbnail(string fileName)
-        {
-            string fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{fileName}");
-            if (File.Exists(fullPath))
-            {
-                File.Delete(fullPath);
-            }
-        }
 
         #endregion
 

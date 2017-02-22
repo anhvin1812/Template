@@ -126,6 +126,10 @@
       <Project>{252eafcd-1245-43f6-8f30-a0219bf26474}</Project>
       <Name>App.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\App.Infrastructure\App.Infrastructure.csproj">
+      <Project>{002a2c84-b10c-4c92-bf46-a3800cc0aeb7}</Project>
+      <Name>App.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\App.Repositories\App.Repositories.csproj">
       <Project>{27929fe0-67a4-47e3-bb99-d449e3c789a2}</Project>
       <Name>App.Repositories</Name>

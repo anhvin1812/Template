@@ -11,6 +11,7 @@ using App.Core.Repositories;
 using App.Entities;
 using App.Entities.IdentityManagement;
 using App.Entities.ProductManagement;
+using App.Infrastructure.File;
 using App.Repositories.ProductManagement;
 using App.Services.Dtos.Gallery;
 using App.Services.Dtos.ProductManagement;
@@ -122,7 +123,7 @@ namespace App.Services.ProductManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var imageName = UploadGallery(entry.Image);
+                    var imageName = GalleryHelper.UploadGallery(entry.Image);
 
                     entity.Image = new Entities.ProductManagement.Gallery
                     {
@@ -137,7 +138,7 @@ namespace App.Services.ProductManagement
                 {
                     foreach (var gallery in entry.Gallery)
                     {
-                        var fileName = UploadGallery(gallery);
+                        var fileName = GalleryHelper.UploadGallery(gallery);
 
                         entity.Gallery.Add(new Entities.ProductManagement.Gallery
                         {
@@ -181,7 +182,7 @@ namespace App.Services.ProductManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var imageName = UploadGallery(entry.Image);
+                    var imageName = GalleryHelper.UploadGallery(entry.Image);
 
                     if (entity.Image != null)
                     {
@@ -208,7 +209,7 @@ namespace App.Services.ProductManagement
                     {
                         if (gallery == null) continue;
 
-                        var fileName = UploadGallery(gallery);
+                        var fileName = GalleryHelper.UploadGallery(gallery);
 
                         entity.Gallery.Add(new Entities.ProductManagement.Gallery
                         {
@@ -281,28 +282,6 @@ namespace App.Services.ProductManagement
 
 
         #region Private Methods
-
-        private string UploadGallery(HttpPostedFileBase image)
-        {
-            var imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{ Path.GetExtension(image.FileName)}";
-            Image img = Image.FromStream(image.InputStream);
-            Image thumb = img.GetThumbnailImage(270, 270, () => false, IntPtr.Zero);
-
-            var fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
-
-            var index = 1;
-            while (File.Exists(fullPath))
-            {
-                imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}_{index}{ Path.GetExtension(image.FileName)}";
-                fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
-                index++;
-            }
-
-            img.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}"));
-            thumb.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{imageName}"));
-
-            return imageName;
-        }
 
         private void ValidateEntryData(ProductEntry entry)
         {
