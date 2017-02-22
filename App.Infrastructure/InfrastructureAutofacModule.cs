@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using App.Core.Repositories;
 using App.Data.EntityFramework;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using App.Infrastructure.IdentityManagement;
 using Autofac;
 using Microsoft.AspNet.Identity;

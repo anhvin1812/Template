@@ -7,7 +7,7 @@ using System.Web;
 using App.Core.Configuration;
 using App.Core.Exceptions;
 using App.Core.Repositories;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using App.Entities.ProductManagement;
 using App.Infrastructure.File;
 using App.Repositories.ProductManagement;

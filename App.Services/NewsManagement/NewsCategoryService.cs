@@ -1,44 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
 using System.Web;
-using System.Web.UI.WebControls;
-using App.Core.Configuration;
 using App.Core.Exceptions;
 using App.Core.Repositories;
-using App.Entities;
+using App.Entities.NewsManagement;
 using App.Entities.ProductManagement;
-using App.Entities.ProductManagement;
-using App.Repositories.IdentityManagement;
+using App.Repositories.NewsManagement;
 using App.Repositories.ProductManagement;
-using App.Services.Dtos.IdentityManagement;
+using App.Services.Dtos.NewsManagement;
 using App.Services.Dtos.ProductManagement;
 using App.Services.Dtos.UI;
 
-namespace App.Services.ProductManagement
+namespace App.Services.NewsManagement
 {
-    public class ProductCategoryService : ServiceBase, IProductCategoryService
+    public class NewsCategoryService : ServiceBase, INewsCategoryService
     {
         #region Contructor
-        private IProductCategoryRepository ProductCategoryRepository { get; set; }
+        private INewsCategoryRepository NewsCategoryRepository { get; set; }
 
-        public ProductCategoryService(IUnitOfWork unitOfWork, IProductCategoryRepository productCategoryRepository)
-            : base(unitOfWork, new IRepository[] { productCategoryRepository }, new IService[] { })
+        public NewsCategoryService(IUnitOfWork unitOfWork, INewsCategoryRepository newsCategoryRepository)
+            : base(unitOfWork, new IRepository[] { newsCategoryRepository }, new IService[] { })
         {
-            ProductCategoryRepository = productCategoryRepository;
+            NewsCategoryRepository = newsCategoryRepository;
         }
 
         #endregion
 
         #region Public Methods
 
-        public IEnumerable<ProductCategorySummary> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<NewsCategorySummary> GetAll(int? page, int? pageSize, ref int? recordCount)
         {
-            var categories = ProductCategoryRepository.GetAll(page, pageSize, ref recordCount)
-                .Select(x => new ProductCategorySummary
+            var categories = NewsCategoryRepository.GetAll(page, pageSize, ref recordCount)
+                .Select(x => new NewsCategorySummary
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -59,7 +52,7 @@ namespace App.Services.ProductManagement
         public SelectListOptions GetOptionsForDropdownList(int? parentId, int? currentId = null, bool? isDisabled = null)
         {
             int? recordCount = 0;
-            var allCategories = ProductCategoryRepository.GetAll(null, null, ref recordCount);
+            var allCategories = NewsCategoryRepository.GetAll(null, null, ref recordCount);
 
             allCategories = isDisabled.HasValue ?
                 isDisabled.Value ? allCategories.Where(x => x.IsDisabled == true) : allCategories.Where(x => x.IsDisabled != true)
@@ -83,20 +76,20 @@ namespace App.Services.ProductManagement
             };
         }
 
-        public ProductCategoryDetail GetById(int id)
+        public NewsCategoryDetail GetById(int id)
         {
-            var category = ProductCategoryRepository.GetById(id);
+            var category = NewsCategoryRepository.GetById(id);
 
             if (category == null)
                 throw new DataNotFoundException();
 
-            return new ProductCategoryDetail
+            return new NewsCategoryDetail
             {
                 Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
                 IsDisabled = category.IsDisabled,
-                Parent = category.Parent == null ? null : new ProductCategoryDetail
+                Parent = category.Parent == null ? null : new NewsCategoryDetail
                 {
                     Id = category.Parent.Id,
                     Name = category.Parent.Name,
@@ -106,14 +99,14 @@ namespace App.Services.ProductManagement
             };
         }
 
-        public ProductCategoryEntry GetCategoryForEditing(int id)
+        public NewsCategoryEntry GetCategoryForEditing(int id)
         {
-            var category = ProductCategoryRepository.GetById(id);
+            var category = NewsCategoryRepository.GetById(id);
 
             if (category == null)
                 throw new DataNotFoundException();
 
-            return new ProductCategoryEntry
+            return new NewsCategoryEntry
             {
                 Name = category.Name,
                 Description = category.Description,
@@ -123,7 +116,7 @@ namespace App.Services.ProductManagement
         }
 
 
-        public void Insert(ProductCategoryEntry entry)
+        public void Insert(NewsCategoryEntry entry)
         {
             //TODO: Check exit Role, permission,...
 
@@ -133,7 +126,7 @@ namespace App.Services.ProductManagement
             //TODO: CHeck parent existed
 
 
-            var entity = new ProductCategory
+            var entity = new NewsCategory
             {
                 Name = entry.Name,
                 Description = entry.Description,
@@ -141,11 +134,11 @@ namespace App.Services.ProductManagement
                 IsDisabled = entry.IsDisabled
             };
 
-            ProductCategoryRepository.Insert(entity);
+            NewsCategoryRepository.Insert(entity);
             Save();
         }
 
-        public void Update(int id, ProductCategoryEntry entry)
+        public void Update(int id, NewsCategoryEntry entry)
         {
             //TODO: Check exit Role, permission,...
 
@@ -154,7 +147,7 @@ namespace App.Services.ProductManagement
 
             //TODO: CHeck parent existed
 
-            var entity = ProductCategoryRepository.GetById(id);
+            var entity = NewsCategoryRepository.GetById(id);
             if (entity == null)
                 throw new DataNotFoundException();
 
@@ -163,7 +156,7 @@ namespace App.Services.ProductManagement
             entity.ParentId = entry.ParentId;
             entity.IsDisabled = entry.IsDisabled;
 
-            ProductCategoryRepository.Update(entity);
+            NewsCategoryRepository.Update(entity);
             Save();
         }
 
@@ -171,7 +164,7 @@ namespace App.Services.ProductManagement
         #endregion
 
         #region Private Methods
-        private void ValidateEntryData(ProductCategoryEntry entry)
+        private void ValidateEntryData(NewsCategoryEntry entry)
         {
 
             if (entry == null)
@@ -205,9 +198,9 @@ namespace App.Services.ProductManagement
             }
         }
 
-        private List<ProductCategory> GetCategoryForDropdown(IEnumerable<ProductCategory> allCategories, int? parentId, string paddingString)
+        private List<NewsCategory> GetCategoryForDropdown(IEnumerable<NewsCategory> allCategories, int? parentId, string paddingString)
         {
-            var categories = new List<ProductCategory>();
+            var categories = new List<NewsCategory>();
 
             var rootCategories = allCategories.Where(x => x.ParentId == parentId);
             if (rootCategories.Any())
@@ -239,7 +232,7 @@ namespace App.Services.ProductManagement
             {
                 if (isDisposing)
                 {
-                    ProductCategoryRepository = null;
+                    NewsCategoryRepository = null;
                 }
                 _disposed = true;
             }

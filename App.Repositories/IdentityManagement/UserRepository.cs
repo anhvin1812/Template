@@ -6,11 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using App.Core.Repositories;
 using App.Data.EntityFramework;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using App.Infrastructure.IdentityManagement;
 using App.Repositories.Common;
 using Microsoft.AspNet.Identity;
-using User = App.Entities.IdentityManagement.User;
+using User = App.Entities.ProductManagement.User;
 
 namespace App.Repositories.IdentityManagement
 {

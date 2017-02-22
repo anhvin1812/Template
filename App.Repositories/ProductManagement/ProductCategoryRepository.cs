@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using App.Core.Repositories;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using App.Entities.ProductManagement;
 using App.Infrastructure.IdentityManagement;
 using App.Repositories.Common;

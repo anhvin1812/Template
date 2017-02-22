@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Diagnostics;
 using App.Data.EntityFramework.Mapping;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 
 namespace App.Data.EntityFramework
 {

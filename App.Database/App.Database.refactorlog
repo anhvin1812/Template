@@ -84,4 +84,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="IsDisabled" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="971ac52c-6905-4436-a21c-a5025f73419a" ChangeDateTime="02/22/2017 15:55:37">
+    <Property Name="ElementName" Value="[dbo].[News].[TimeViews]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[News]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Views" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6180c35d-ec7c-42cb-9fde-6055a143640c" ChangeDateTime="02/22/2017 16:07:07">
+    <Property Name="ElementName" Value="[dbo].[News].[CreatedById]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[News]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UpdatedById" />
+  </Operation>
 </Operations>

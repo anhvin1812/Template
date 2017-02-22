@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using App.Data.EntityFramework;
 using App.Entities;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;

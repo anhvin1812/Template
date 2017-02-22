@@ -6,7 +6,7 @@ using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 
 namespace App.Data.EntityFramework.Mapping
 {

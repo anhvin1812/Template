@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using App.Core.Permission;
 using App.Core.Repositories;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using App.Infrastructure.IdentityManagement;
 using Microsoft.AspNet.Identity;
-using User = App.Entities.IdentityManagement.User;
+using User = App.Entities.ProductManagement.User;
 
 namespace App.Repositories.IdentityManagement
 {

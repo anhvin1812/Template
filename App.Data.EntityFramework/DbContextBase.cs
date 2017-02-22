@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using App.Core.Repositories;
 using App.Entities;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Data.EntityFramework

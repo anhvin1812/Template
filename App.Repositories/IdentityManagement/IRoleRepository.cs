@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Core.Repositories;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 
 
 namespace App.Repositories.IdentityManagement

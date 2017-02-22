@@ -113,6 +113,8 @@
     <Compile Include="Common\Error.cs" />
     <Compile Include="Common\DtoBase.cs" />
     <Compile Include="Gallery\Gallery.cs" />
+    <Compile Include="NewsManagement\News.cs" />
+    <Compile Include="NewsManagement\NewsCategory.cs" />
     <Compile Include="ProductManagement\ProductStatus.cs" />
     <Compile Include="ProductManagement\Product.cs" />
     <Compile Include="ProductManagement\ProductCategory.cs" />

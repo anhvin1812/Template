@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 
 namespace App.Entities.ProductManagement
 {

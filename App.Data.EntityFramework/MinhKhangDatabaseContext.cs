@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using App.Core.Repositories;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Data.EntityFramework

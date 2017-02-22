@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace App.Entities.IdentityManagement
+namespace App.Entities.ProductManagement
 {
     public class User : IdentityUser<int, UserLogin, UserRole, UserClaim>, IObjectState
     {

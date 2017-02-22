@@ -8,7 +8,7 @@ using App.Core.Exceptions;
 using App.Core.Permission;
 using App.Core.Repositories;
 using App.Entities;
-using App.Entities.IdentityManagement;
+using App.Entities.ProductManagement;
 using App.Repositories.IdentityManagement;
 using App.Services.Common;
 using App.Services.Dtos.IdentityManagement;
