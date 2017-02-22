@@ -1,5 +1,6 @@
 ﻿@using System.Web.Optimization
 @using App.Core.Configuration
+@using App.Infrastructure.File
 @using App.Services.Dtos.Gallery
 @using Microsoft.Ajax.Utilities
 @model App.Services.Dtos.ProductManagement.ProductUpdateEntry
@@ -108,10 +109,7 @@
                         </div><!-- /input-group -->
                     </div>
                     <div id="previewFeaturedImage" class="">
-                        @{
-                            var imgUrl = Model.Thumbnail.IsNullOrWhiteSpace() ? Settings.ConfigurationProvider.DefaultGalleryThumbnail : $"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{Model.Thumbnail}";
-                        }
-                        <img src="@Url.Content(imgUrl)" class="img-responsive" style="max-width: 200px">
+                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(Model.Thumbnail))" class="img-responsive" style="max-width: 200px">
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -151,7 +149,6 @@
         </div>
     </div>
 
-
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Save</button>
         <a class="btn btn-default" href="@Url.Action("Index", "Product")">Back to products</a>
@@ -160,8 +157,6 @@
     @Html.Hidden("DeleteGalleryUrl", Url.Action("DeleteGallery", "Product"), new { id = "DeleteGalleryUrl" })
 
 }
-
-
 
 @section AddScripts{
     <!-- jQuery-validate -->

@@ -11,6 +11,25 @@ namespace App.Infrastructure.File
 
     public static class GalleryHelper
     {
+        public static string GetImagePath(string fileName)
+        {
+            var imgPath = string.IsNullOrWhiteSpace(fileName) 
+                ? Settings.ConfigurationProvider.DefaultGalleryImage 
+                : $"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{fileName}";
+
+            return imgPath;
+        }
+
+        public static string GetThumbnailPath(string fileName)
+        {
+            var imgPath = string.IsNullOrWhiteSpace(fileName)
+                ? Settings.ConfigurationProvider.DefaultGalleryThumbnail
+                : $"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{fileName}";
+
+            return imgPath;
+        }
+
+
         public static string UploadGallery(HttpPostedFileBase image)
         {
             if(image ==null)

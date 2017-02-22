@@ -66,15 +66,18 @@ namespace App.Services.ProductManagement
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
-                Specification = product.Specifications,
+                Specifications = product.Specifications,
                 Status = product.Status.Status,
                 Category = product.Category.Name,
                 Price = product.Price,
                 OldPrice = product.OldPrice,
                 Image = product.Image.Image,
                 Thumbnail = product.Image.Thumbnail,
-                GalleryThumbnails = product.Gallery.Select(g=>g.Thumbnail).ToList(),
-                Gallery = product.Gallery.Select(g=>g.Image).ToList(),
+                Gallery = product.Gallery.Select(g=> new GallerySummary{
+                    Id = g.Id,
+                    Image = g.Image,
+                    Thumbnail = g.Thumbnail
+                }).ToList()
             };
         }
 

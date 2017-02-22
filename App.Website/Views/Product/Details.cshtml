@@ -1,6 +1,11 @@
-﻿@{
+﻿@using System.Globalization
+@using App.Infrastructure.File
+@using Microsoft.Ajax.Utilities
+@using Microsoft.Security.Application
+@model App.Services.Dtos.ProductManagement.ProductDetail
+@{
     ViewBag.Title = "Sản phẩm | Minh Khang Store";
-    ViewBag.ContentCssClass = "page-product";
+    //ViewBag.ContentCssClass = "page-product";
 }
 
 @section AddStyles{
@@ -72,43 +77,62 @@
         <div class="col-md-6">
             <div class="gallery">
                 <div class="product-image easyzoom easyzoom--overlay">
-                    <a href="images/1_zoom.jpg">
-                        <img src="/content/images/1.jpg" alt="" />
+                    <a href="@Url.Content(GalleryHelper.GetImagePath(Model.Image))">
+                        <img class="img-responsive" src="@Url.Content(GalleryHelper.GetImagePath(Model.Image))" alt="@Model.Name"/>
                     </a>
                 </div>
-                <div class="wrap-thumbnails">
-                    <div class="thumbnails">
-                        <div class="slide active" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                            <img src="/content/images/sm1.jpg">
-                        </div>
-                        <div class="slide" data-zoom="images/2.jpg" data-standard="images/2.jpg">
-                            <img src="/content/images/sm2.jpg">
-                        </div>
-                        <div class="slide" data-zoom="images/3.jpg" data-standard="images/3.jpg">
-                            <img src="/content/images/sm3.jpg">
-                        </div>
-                        <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                            <img src="/content/images/sm1.jpg">
-                        </div>
-                        <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                            <img src="/content/images/sm1.jpg">
-                        </div>
-                        <div class="slide" data-zoom="images/2.jpg" data-standard="images/2.jpg">
-                            <img src="/content/images/sm2.jpg">
-                        </div>
-                        <div class="slide" data-zoom="images/3.jpg" data-standard="images/3.jpg">
-                            <img src="/content/images/sm3.jpg">
-                        </div>
-                        <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                            <img src="/content/images/sm1.jpg">
-                        </div>
-                        <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                            <img src="/content/images/sm1.jpg">
-                        </div>
+                <div>
+                    <div class="wrap-thumbnails">
+                        <div class="thumbnails">
+                            @{
+                                var i = 0;
+                            }
+                            @if (!Model.Image.IsNullOrWhiteSpace())
+                            {
+                                <div class="slide active" data-zoom="@Url.Content(GalleryHelper.GetImagePath(Model.Image))" data-standard="@Url.Content(GalleryHelper.GetImagePath(Model.Image))">
+                                    <img src="@Url.Content(GalleryHelper.GetThumbnailPath(Model.Thumbnail))">
+                                </div>
+                                i++;
+                            }
+
+                            @foreach (var g in Model.Gallery)
+                            {
+                                <div class="slide @(i == 0 ? "active" : "" )" data-zoom="@Url.Content(GalleryHelper.GetImagePath(g.Image))" data-standard="@Url.Content(GalleryHelper.GetImagePath(g.Image))">
+                                    <img src="@Url.Content(GalleryHelper.GetThumbnailPath(g.Thumbnail))">
+                                </div>
+                                i++;
+                            }
+
+
+                            @*<div class="slide" data-zoom="images/2.jpg" data-standard="images/2.jpg">
+                        <img src="/content/images/sm2.jpg">
                     </div>
-                    <div class="thumbnails-controls">
-                        <span id="slider-prev"></span>
-                        <span id="slider-next"></span>
+                    <div class="slide" data-zoom="images/3.jpg" data-standard="images/3.jpg">
+                        <img src="/content/images/sm3.jpg">
+                    </div>
+                    <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                        <img src="/content/images/sm1.jpg">
+                    </div>
+                    <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                        <img src="/content/images/sm1.jpg">
+                    </div>
+                    <div class="slide" data-zoom="images/2.jpg" data-standard="images/2.jpg">
+                        <img src="/content/images/sm2.jpg">
+                    </div>
+                    <div class="slide" data-zoom="images/3.jpg" data-standard="images/3.jpg">
+                        <img src="/content/images/sm3.jpg">
+                    </div>
+                    <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                        <img src="/content/images/sm1.jpg">
+                    </div>
+                    <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
+                        <img src="/content/images/sm1.jpg">
+                    </div>*@
+                        </div>
+                        <div class="thumbnails-controls">
+                            <span id="slider-prev"></span>
+                            <span id="slider-next"></span>
+                        </div>
                     </div>
                 </div>
             </div><!-- /.gallery-->
@@ -116,12 +140,13 @@
         <div class="col-md-6">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3 class="product-name">Hourglass Jersey</h3>
+                    <h3 class="product-name">@Model.Name</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="sort-description">
+                        @Model.Description
                         Suspendisse posuere arcu diam, id accumsan eros pharetra ac. Nulla enim risus, facilisis bibendum gravida eget, lacinia id purus. Suspendisse posuere arcu diam, id accumsan eros pharetra ac. Nulla enim risus, facilisis bibendum gravida eget, lacinia id purus. Susp endisse posuere arcu diam, id accumsan eros pharetra ac.
                     </div>
                 </div>
@@ -130,16 +155,18 @@
                 <div class="col-sm-12">
                     <div class="status-box">
                         <span class="title">Tình trạng :</span>
-                        <span class="label label-success">Còn hàng</span>
+                        <span class="label label-success">@Model.Status</span>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="price-box">
-                        <span class="price">12,000,000 đ</span>
-                        <br />
-                        <span class="old-price">15,000,000 đ</span>
+                        <span class="price">@Model.Price.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
+                        @if (Model.OldPrice.HasValue) { 
+                            <br />
+                            <span class="old-price">@Model.OldPrice.Value.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
+                        }
                     </div>
                 </div>
             </div>
@@ -193,10 +220,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="home">
-                        dsadsads
-                        <p>dsadsadsadsa</p>
-                        <p>dsadsadsadsa</p>
-                        <p>dsadsadsadsa</p>
+                        @Html.Raw(Sanitizer.GetSafeHtmlFragment(Model.Specifications))
                     </div>
                 </div>
             </div><!-- /#specification-->
@@ -220,98 +244,7 @@
         </div>
     </div>
 </div><!-- /#product-->
-<div class="title-section">
-    <h3>
-        Sản phẩm liên quan
-    </h3>
-</div>
-<ul class="product-list clearfix">
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-</ul>
+@Html.Partial("_RelatedProducts")
 
 @section AddScript{
     <!-- Bxslider -->

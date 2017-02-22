@@ -1,5 +1,6 @@
 ﻿@using System.Web.Optimization
 @using App.Core.Permission
+@using App.Infrastructure.File
 @model App.Services.Dtos.ProductManagement.ProductEntry
 @{
     ViewBag.Title = "Product";
@@ -106,7 +107,7 @@
                             </div><!-- /input-group -->
                         </div>
                         <div id="previewFeaturedImage" class="hidden">
-                            <img src="@Url.Content("~/Content/images/default-thumbnail.png")" class="img-responsive" style="max-width:200px">
+                            <img src="@Url.Content(GalleryHelper.GetThumbnailPath(string.Empty))" class="img-responsive" style="max-width:200px">
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -151,67 +152,13 @@
     @Scripts.Render("~/Admin/Js/jqueryval")
     <!-- CKEditor. -->
     @Scripts.Render("~/ckeditor/ckeditor.js")
+    <!-- Product -->
+    @Scripts.Render("~/Admin/App/product")
 
     <script type="text/javascript">
         jQuery(function ($) {
             // CKeditor     
             CKEDITOR.replace('txtSpecifications');
-
-            // featured image functions
-            $('#btnRemoveFeaturedImage').on('click', function (event) {
-                $('#previewFeaturedImage').addClass('hidden');
-                // do ajax function to remove featured image
-
-                $('#previewFeaturedImage img').attr('src', '');
-                $(this).remove();
-            });
-
-            // Custom file upload
-            $('#fileFeaturedImage').on('fileselect', function (event, numFiles, label) {
-                var input = $(this);
-                // show selected filename
-                var txt = input.parents().closest('.input-group').find('.input-file');
-                txt.val(label);
-                // show selected image
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#previewFeaturedImage img').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.get(0).files.item(0));
-
-                // show preview box
-                $('#previewFeaturedImage').removeClass('hidden');
-            });
-
-            $('#fileGallery').on('fileselect', function (event, numFiles, label) {
-                var input = $(this);
-                // show selected filename
-                var txt = $(this).parents().closest('.input-group').find('.input-file');
-                txt.val(label);
-                // show selected image
-                for (var i = 0; i < input.get(0).files.length; i++) {
-                    $('#previewGallery li.preupload').remove();
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#previewGallery').prepend('<li class="text-center preupload"><img src="' + e.target.result + '" class="img-thumbnail" width="70" height="70"><!-- /li-->');
-                        $('#previewGallery').trigger("create");
-                    }
-                    reader.readAsDataURL(input.get(0).files.item(i));
-                };
-
-            });
-        });
-
-        //
-        $(document).on('change', '.btn-file :file', function () {
-            var input = $(this),
-            numFiles = input.get(0).files ? input.get(0).files.length : 1,
-            label = '';
-            for (var i = 0; i < input.get(0).files.length; i++) {
-                label += input.get(0).files.item(i).name.replace(/\\/g, '/').replace(/.*\//, '') + ', ';
-            };
-            input.trigger('fileselect', [numFiles, label.substring(0, label.length - 2)]);
         });
     </script>
 }

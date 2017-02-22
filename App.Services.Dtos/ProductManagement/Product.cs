@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 using App.Services.Dtos.Common;
+using App.Services.Dtos.Gallery;
 
 namespace App.Services.Dtos.ProductManagement
 {
@@ -75,12 +76,11 @@ namespace App.Services.Dtos.ProductManagement
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Specification { get; set; }
+        public string Specifications { get; set; }
 
         public string Image { get; set; }
         public string Thumbnail { get; set; }
-        public List<string> GalleryThumbnails { get; set; }
-        public List<string> Gallery { get; set; }
+        public List<GallerySummary> Gallery { get; set; }
 
         public string Status { get; set; }
         public string Category { get; set; }

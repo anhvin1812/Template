@@ -325,6 +325,9 @@ header {
     border: 1px solid #eee;
     margin-bottom: 20px;
 }
+.product-image > a {
+    display: block;
+}
 
 .wrap-thumbnails {
     position: relative;

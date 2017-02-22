@@ -1,4 +1,5 @@
-﻿@using System.Web.Optimization
+﻿@using System.Globalization
+@using System.Web.Optimization
 @using App.Core.Configuration
 @using Microsoft.Ajax.Utilities
 @model IEnumerable<App.Services.Dtos.ProductManagement.ProductSummary>
@@ -57,10 +58,10 @@
                         </td>
                         <td class="vertical-middle">@m.Name</td>
                         <td class="vertical-middle text-center">
-                            <h4 class="text-red">@m.Price.ToString("N0")</h4>
+                            <h4 class="text-red">@m.Price.ToString("N0", CultureInfo.CreateSpecificCulture("vi-VN"))</h4>
                             @if (m.OldPrice > 0)
                             {
-                                <span class="text-muted underline">@m.OldPrice.Value.ToString("N0")</span>
+                                <span class="text-muted underline">@m.OldPrice.Value.ToString("N0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
                             }
                             @*@(Html.Raw(m.OldPrice > 0 ? $"</br><span class=\"text-muted underline\">{m.OldPrice}</span>" : string.Empty) )*@
                         </td>

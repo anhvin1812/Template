@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -23,6 +24,8 @@ namespace App.Website
             WebAutofacConfig.ConfigureContainer();
 
             ModelBinders.Binders.DefaultBinder = new AppModelBinder();
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("vi-VN");
 
             //ExceptionHandlingConfig.RegisterExceptionHandler(GlobalConfiguration.Configuration);
 

@@ -3,11 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using App.Services;
+using App.Services.ProductManagement;
 
 namespace App.Website.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
+        #region Contractor
+        private IProductService ProductService { get; set; }
+
+        public ProductController(IProductService productService)
+            :base(new IService[]{productService})
+        {
+            ProductService = productService;
+        }
+        #endregion
+
+
         // GET: Product
         public ActionResult Index()
         {
@@ -23,7 +36,8 @@ namespace App.Website.Controllers
         // GET: Product/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var model = ProductService.GetById(id);
+            return View(model);
         }
 
         // GET: Product/Create
@@ -91,5 +105,25 @@ namespace App.Website.Controllers
                 return View();
             }
         }
+
+
+
+        #region Dispose
+        private bool _disposed;
+
+        [NonAction]
+        protected override void Dispose(bool isDisposing)
+        {
+            if (!_disposed)
+            {
+                if (isDisposing)
+                {
+                    ProductService = null;
+                }
+                _disposed = true;
+            }
+            base.Dispose(isDisposing);
+        }
+        #endregion
     }
 }
