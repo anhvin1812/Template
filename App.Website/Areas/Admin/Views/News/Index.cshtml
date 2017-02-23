@@ -1,0 +1,90 @@
+﻿@using System.Globalization
+@using System.Web.Optimization
+@using App.Core.Configuration
+@using Microsoft.Ajax.Utilities
+@model IEnumerable<App.Services.Dtos.NewsManagement.NewsSummary>
+@{
+    ViewBag.Title = "News";
+}
+
+@section AddStyles{
+    @Styles.Render("~/Admin/Css/DataTable")
+}
+
+@section ContentHeader
+{
+<section class="content-header">
+    <h1>
+        News Management
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>News Management</li>
+        <li class="active">News</li>
+    </ol>
+</section>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            <a class="btn btn-block btn-primary" href="@Url.Action("Create", "News")">Add a news</a>
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @if (Model.Any())
+        {
+            <table class="table table-hover table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Created date</th>
+                    <th>Updated date</th>
+                    <th>Updated by</th>
+                    <th></th>
+                </tr>
+                @{ int i = 1; }
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td class="vertical-middle">@i</td>
+                        <td class="vertical-middle">@m.Title</td>
+                        <td class="vertical-middle">@m.Category</td>
+                        <td class="vertical-middle">@m.CreatedDate</td>
+                        <td class="vertical-middle">@m.UpdatedDate</td>
+                        <td class="vertical-middle">@m.UpdatedBy</td>
+                        <td class="vertical-middle">
+                            <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "News", new {id = m.Id})">
+                                <i class="fa fa-fw fa-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            </table>
+        }
+        
+    </div>
+    <!-- /.box-body -->
+    @*<div class="box-footer clearfix">
+        <ul class="pagination no-margin pull-right">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>*@
+</div>
+<!-- /.box -->
+
+
+@section AddScripts{
+
+    <!-- DataTables -->
+    @Scripts.Render("~/Admin/Js/dataTable")
+}
+

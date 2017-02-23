@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using App.Repositories;
 using App.Services.Gallery;
 using App.Services.IdentityManagement;
+using App.Services.NewsManagement;
 using App.Services.ProductManagement;
 using Autofac;
 
@@ -30,7 +31,9 @@ namespace App.Services
             builder.RegisterType<ProductService>().As<IProductService>().InstancePerDependency();
             builder.RegisterType<ProductCategoryService>().As<IProductCategoryService>().InstancePerDependency();
             builder.RegisterType<GalleryService>().As<IGalleryService>().InstancePerDependency();
-
+            // News
+            builder.RegisterType<NewsService>().As<INewsService>().InstancePerDependency();
+            builder.RegisterType<NewsCategoryService>().As<INewsCategoryService>().InstancePerDependency();
             //builder.RegisterType<RedCatMemberFactory>().As<IThirdPartyProviderMemberFactory<RedCatMember>>().InstancePerLifetimeScope();
             //builder.RegisterType<Talent2MemberFactory>().As<IThirdPartyProviderMemberFactory<Talent2Member>>().InstancePerLifetimeScope();
             //builder.RegisterType<KeyPayMemberFactory>().As<IThirdPartyProviderMemberFactory<KeyPayMember>>().InstancePerLifetimeScope();

@@ -53,7 +53,7 @@ namespace App.Data.EntityFramework
             // Mapping
             IdentityManagementMap.Configure(modelBuilder);
             ProductManagementMap.Configure(modelBuilder);
-            PostMap.Configure(modelBuilder);
+            NewsManagementMap.Configure(modelBuilder);
 
         }
 

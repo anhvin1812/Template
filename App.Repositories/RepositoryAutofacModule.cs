@@ -1,5 +1,6 @@
 ﻿using App.Data.EntityFramework;
 using App.Repositories.IdentityManagement;
+using App.Repositories.NewsManagement;
 using App.Repositories.ProductManagement;
 using Autofac;
 
@@ -18,6 +19,9 @@ namespace App.Repositories
             builder.RegisterType<ProductRepository>().As<IProductRepository>().InstancePerDependency();
             builder.RegisterType<ProductCategoryRepository>().As<IProductCategoryRepository>().InstancePerDependency();
             builder.RegisterType<GalleryRepository>().As<IGalleryRepository>().InstancePerDependency();
+            // News
+            builder.RegisterType<NewsRepository>().As<INewsRepository>().InstancePerDependency();
+            builder.RegisterType<NewsCategoryRepository>().As<INewsCategoryRepository>().InstancePerDependency();
 
             //builder.RegisterType<SherpaRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.SherpaRoster).InstancePerDependency();
             //builder.RegisterType<GCrewRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.GCrewRoster).InstancePerDependency();

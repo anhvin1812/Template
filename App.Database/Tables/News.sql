@@ -10,8 +10,9 @@
     [CreatedDate] DATETIME NOT NULL, 
     [UpdatedDate] DATETIME NULL, 
     [DeletedDate] DATETIME NULL, 
-    
     [UpdatedById] INT NOT NULL, 
+
     CONSTRAINT [FK_News_Gallery] FOREIGN KEY ([GalleryId]) REFERENCES [Gallery]([Id]), 
-    CONSTRAINT [FK_News_NewsCategory] FOREIGN KEY ([CategoryId]) REFERENCES [NewsCategory]([Id])
+    CONSTRAINT [FK_News_NewsCategory] FOREIGN KEY ([CategoryId]) REFERENCES [NewsCategory]([Id]),
+    CONSTRAINT [FK_News_User] FOREIGN KEY ([UpdatedById]) REFERENCES [User]([Id])
 )

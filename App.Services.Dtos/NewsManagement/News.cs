@@ -9,7 +9,7 @@ namespace App.Services.Dtos.NewsManagement
     public class NewsEntry : DtoBase
     {
         [Required(ErrorMessage = "Please enter title.")]
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
 
         [AllowHtml]
@@ -27,6 +27,7 @@ namespace App.Services.Dtos.NewsManagement
         [Required]
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Thumbnail { get; set; }
 
         [AllowHtml]
         public string Content { get; set; }
@@ -43,7 +44,7 @@ namespace App.Services.Dtos.NewsManagement
 
         public string Title { get; set; }
 
-        public string Thumbnail { get; set; }
+        public string Image { get; set; }
 
         public string Category { get; set; }
 

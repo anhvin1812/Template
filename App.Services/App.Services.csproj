@@ -100,9 +100,9 @@
     <Compile Include="Gallery\IGalleryService.cs" />
     <Compile Include="Gallery\GalleryService.cs" />
     <Compile Include="NewsManagement\INewsCategoryService.cs" />
-    <Compile Include="NewsManagement\IProductService.cs" />
+    <Compile Include="NewsManagement\INewsService.cs" />
     <Compile Include="NewsManagement\NewsCategoryService.cs" />
-    <Compile Include="NewsManagement\ProductService.cs" />
+    <Compile Include="NewsManagement\NewsService.cs" />
     <Compile Include="ProductManagement\IProductCategoryService.cs" />
     <Compile Include="ProductManagement\IProductService.cs" />
     <Compile Include="ProductManagement\ProductCategoryService.cs" />

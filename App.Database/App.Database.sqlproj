@@ -84,6 +84,6 @@
     <RefactorLog Include="App.Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Database.publish.xml" />
+    <None Include="App.Database.dev.publish.xml" />
   </ItemGroup>
 </Project>

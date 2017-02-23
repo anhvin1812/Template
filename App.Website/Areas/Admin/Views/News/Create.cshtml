@@ -1,9 +1,9 @@
 ﻿@using System.Web.Optimization
 @using App.Core.Permission
 @using App.Infrastructure.File
-@model App.Services.Dtos.ProductManagement.ProductEntry
+@model App.Services.Dtos.NewsManagement.NewsEntry
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "News";
 }
 
 @section AddStyles{
@@ -15,19 +15,19 @@
 {
     <section class="content-header">
         <h1>
-            Product Management
+            News Management
             <small>add</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>Product Management</li>
-            <li class="active">Product</li>
+            <li>News Management</li>
+            <li class="active">News</li>
         </ol>
     </section>
 }
 
 
-@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -45,45 +45,27 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Name)
-                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter product name" })
+                            @Html.LabelFor(m => m.Title)
+                            @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Enter title" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Description)
                             @Html.TextAreaFor(m => m.Description, new {@class = "form-control", placeholder = "Enter description"})
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Price)
-                                    @Html.TextBoxFor(m => m.Price, new {@class = "form-control", placeholder = "Enter price"})
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.OldPrice, "Old price")
-                                    @Html.TextBoxFor(m => m.OldPrice, new { @class = "form-control", placeholder = "Enter old price" })
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    @Html.LabelFor(m=>m.CategoryId, "Category")
-                                    @Html.DropDownListFor(m => m.CategoryId, (SelectList)ViewBag.Categories, string.Empty, new { @class = "form-control" })
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.StatusId, "Status")
-                                    @Html.DropDownListFor(m => m.StatusId, (SelectList)ViewBag.Status, new { @class = "form-control" })
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.CategoryId, "Category")
+                            @Html.DropDownListFor(m => m.CategoryId, (SelectList)ViewBag.Categories, string.Empty, new { @class = "form-control" })
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
 
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Specifications</h3>
+                        <h3 class="box-title">Content</h3>
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            @Html.TextAreaFor(x=>x.Specifications, new { id = "txtSpecifications" })
+                            @Html.TextAreaFor(x=>x.Content, new { id = "txtContent" })
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -111,36 +93,13 @@
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
-
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Gallery</h3>
-                    </div>
-                    <div class="box-body">
-                        <div class="form-group">
-                            <div id="wrapperUploadFeaturedImage" class="input-group">
-                                <span class="input-group-btn">
-                                    <span class="btn btn-success btn-sm btn-file">
-                                        <i class="fa fa-folder-open-o"></i> Browse...
-                                        @Html.TextBoxFor(x => x.Gallery, new { id = "fileGallery", type = "file", multiple="multiple" })
-                                    </span>
-                                </span>
-                                <input type="text" readonly="readonly" class="form-control input-sm input-file">
-                            </div><!-- /input-group -->
-                            <p class="help-block">Press <kbd>ctrl</kbd> to select multiple images.</p>
-                        </div>
-
-                        <ul id="previewGallery" class="list-inline">
-                        </ul>
-                    </div><!-- /.box-body -->
-                </div><!-- /.box -->
             </div>
         </div>
 
 
         <div class="box-footer">
             <button type="submit" class="btn btn-primary">Save</button>
-            <a class="btn btn-default" href="@Url.Action("Index", "Product")">Back to products</a>
+            <a class="btn btn-default" href="@Url.Action("Index", "News")">Back to news</a>
         </div>
 
 }
@@ -158,7 +117,7 @@
     <script type="text/javascript">
         jQuery(function ($) {
             // CKeditor     
-            CKEDITOR.replace('txtSpecifications');
+            CKEDITOR.replace('txtContent');
         });
     </script>
 }
