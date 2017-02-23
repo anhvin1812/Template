@@ -1629,6 +1629,7 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Product\_RelatedProducts.cshtml" />
+    <Content Include="Views\Product\_Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

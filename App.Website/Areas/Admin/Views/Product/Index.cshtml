@@ -58,10 +58,10 @@
                         </td>
                         <td class="vertical-middle">@m.Name</td>
                         <td class="vertical-middle text-center">
-                            <h4 class="text-red">@m.Price.ToString("N0", CultureInfo.CreateSpecificCulture("vi-VN"))</h4>
+                            <h4 class="text-red">@m.Price.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))</h4>
                             @if (m.OldPrice > 0)
                             {
-                                <span class="text-muted underline">@m.OldPrice.Value.ToString("N0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
+                                <span class="text-muted underline">@m.OldPrice.Value.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
                             }
                             @*@(Html.Raw(m.OldPrice > 0 ? $"</br><span class=\"text-muted underline\">{m.OldPrice}</span>" : string.Empty) )*@
                         </td>

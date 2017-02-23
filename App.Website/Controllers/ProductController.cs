@@ -22,9 +22,12 @@ namespace App.Website.Controllers
 
 
         // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(int? page = null, int? pageSize = null)
         {
-            return View();
+            int? recordCount = 0;
+            var result = ProductService.GetAll(page, pageSize, ref recordCount);
+
+            return View(result);
         }
 
         // GET: Product/Category/5

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using System.Globalization
+@using App.Infrastructure.File
+@model IEnumerable<App.Services.Dtos.ProductManagement.ProductSummary>
+@{
     ViewBag.Title = "Sản phẩm | Minh Khang Store";
     ViewBag.ContentCssClass = "page-product";
 }
@@ -6,36 +9,7 @@
 @section PageTitle{
     <div class="title-section title-section-advanced title-section-product clearfix">
         <div class="title-section-left">
-            <div id="categories">
-                <div class="filter-button">
-                    <span class="filter-button-open glyphicon glyphicon-menu-hamburger"></span>
-                    <span class="filter-button-close glyphicon glyphicon-remove"></span>
-                </div>
-                <div class="slide-navigation">
-                    <ul>
-                        <li><a>Apple</a></li>
-                        <li><a>Samsung</a></li>
-                        <li>
-                            <a>Nokia</a>
-                            <ul>
-                                <li><a>Popular</a></li>
-                                <li><a>N-series</a></li>
-                                <li>
-                                    <a>Touch</a>
-                                    <ul>
-                                        <li><a>Popular</a></li>
-                                        <li><a>N-series</a></li>
-                                        <li><a>Touch</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a>HTC</a></li>
-                        <li><a>Blackberry</a></li>
-                        <li><a>Microsoft</a></li>
-                    </ul>
-                </div>
-            </div>
+            @Html.Partial("_Category")
             <h3>Sản phẩm</h3>
         </div>
         <div class="title-section-right">
@@ -62,95 +36,124 @@
     </div><!-- /.title-section-->
 }
 
-<ul class="product-list clearfix">
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-</ul>
-
-@section AddScript{
-    <!-- slide menu -->
-    <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
+@if (Model != null && Model.Any())
+{
+    <ul class="product-list clearfix">
+        @foreach (var m in Model)
+        {
+            var detailUrl = Url.Action("Details", "Product", new {id = m.Id});
+            <li class="item">
+                <a class="name" href="@detailUrl">@m.Name</a>
+                <div class="image">
+                    <a href="@detailUrl">
+                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Thumbnail))" alt="@m.Name" />
+                    </a>
+                </div>
+                <div class="price">
+                    @if (m.OldPrice.HasValue)
+                    {
+                        <span class="price-old">@m.OldPrice.Value.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
+                        <br />
+                    }
+                    <span class="price-new">@m.Price.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-info">Đặt mua</button>
+                    <a class="btn btn-info" href="@detailUrl">Chi tiết</a>
+                </div>
+            </li>
+        }
+    </ul>
 }
+        @*<ul class="product-list clearfix">
+            <li class="item">
+                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+                <div class="image">
+                    <a href="#">
+                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
+                    </a>
+                </div>
+                <div class="price">
+                    <span class="price-old">1,200,000</span>
+                    <br />
+                    <span class="price-new">1,100,000</span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-info">Đặt mua</button>
+                    <button type="button" class="btn btn-info">Chi tiết</button>
+                </div>
+            </li>
+            <li class="item">
+                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+                <div class="image">
+                    <a href="#">
+                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
+                    </a>
+                </div>
+                <div class="price">
+                    <span class="price-old">1,200,000</span>
+                    <br />
+                    <span class="price-new">1,100,000</span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-info">Đặt mua</button>
+                    <button type="button" class="btn btn-info">Chi tiết</button>
+                </div>
+            </li>
+            <li class="item">
+                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+                <div class="image">
+                    <a href="#">
+                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
+                    </a>
+                </div>
+                <div class="price">
+                    <span class="price-old">1,200,000</span>
+                    <br />
+                    <span class="price-new">1,100,000</span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-info">Đặt mua</button>
+                    <button type="button" class="btn btn-info">Chi tiết</button>
+                </div>
+            </li>
+            <li class="item">
+                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+                <div class="image">
+                    <a href="#">
+                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
+                    </a>
+                </div>
+                <div class="price">
+                    <span class="price-old">1,200,000</span>
+                    <br />
+                    <span class="price-new">1,100,000</span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-info">Đặt mua</button>
+                    <button type="button" class="btn btn-info">Chi tiết</button>
+                </div>
+            </li>
+            <li class="item">
+                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
+                <div class="image">
+                    <a href="#">
+                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
+                    </a>
+                </div>
+                <div class="price">
+                    <span class="price-old">1,200,000</span>
+                    <br />
+                    <span class="price-new">1,100,000</span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-info">Đặt mua</button>
+                    <button type="button" class="btn btn-info">Chi tiết</button>
+                </div>
+            </li>
+        </ul>*@
+
+        @section AddScript{
+            <!-- slide menu -->
+            <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
+        }
