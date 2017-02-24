@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
+using App.Core.Html;
 using App.Services.Dtos.Common;
 
 namespace App.Services.Dtos.ProductManagement
@@ -27,11 +28,13 @@ namespace App.Services.Dtos.ProductManagement
         public ProductCategoryDetail Parent { get; set; }
     }
 
-    public class ProductCategorySummary : DtoBase
+    public class ProductCategorySummary : DtoBase, ICategory
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public int? ParentId { get; set; }
 
         public string Description { get; set; }
 

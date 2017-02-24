@@ -12,11 +12,13 @@ namespace App.Website.Controllers
     {
         #region Contractor
         private IProductService ProductService { get; set; }
+        private IProductCategoryService ProductCategoryService { get; set; }
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IProductCategoryService productCategoryService)
             :base(new IService[]{productService})
         {
             ProductService = productService;
+            ProductCategoryService = productCategoryService;
         }
         #endregion
 
@@ -26,6 +28,8 @@ namespace App.Website.Controllers
         {
             int? recordCount = 0;
             var result = ProductService.GetAll(page, pageSize, ref recordCount);
+
+            ViewBag.Categories = ProductCategoryService.GetAll(null, null, ref recordCount);
 
             return View(result);
         }

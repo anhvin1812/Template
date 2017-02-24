@@ -42,6 +42,7 @@ namespace App.Services.ProductManagement
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    ParentId = x.ParentId,
                     Description = x.Description,
                     IsDisabled = x.IsDisabled ?? false
                 });

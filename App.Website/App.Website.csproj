@@ -225,6 +225,7 @@
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Common\HtmlExtensions.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -1635,7 +1636,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Html\" />
-    <Folder Include="Common\" />
     <Folder Include="Content\FileUpload\CKEditor\" />
     <Folder Include="Content\FileUpload\Galleries\Images\" />
     <Folder Include="Content\FileUpload\Galleries\Thumbnails\" />

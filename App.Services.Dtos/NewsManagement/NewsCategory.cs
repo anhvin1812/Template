@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using App.Core.Html;
 using App.Services.Dtos.Common;
 
 namespace App.Services.Dtos.NewsManagement
@@ -25,11 +26,13 @@ namespace App.Services.Dtos.NewsManagement
         public NewsCategoryDetail Parent { get; set; }
     }
 
-    public class NewsCategorySummary : DtoBase
+    public class NewsCategorySummary : DtoBase, ICategory
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public int? ParentId { get; set; }
 
         public string Description { get; set; }
 

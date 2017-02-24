@@ -35,6 +35,7 @@ namespace App.Services.NewsManagement
                 {
                     Id = x.Id,
                     Name = x.Name,
+                    ParentId = x.ParentId,
                     Description = x.Description,
                     IsDisabled = x.IsDisabled ?? false
                 });

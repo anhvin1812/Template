@@ -1,15 +1,28 @@
 ﻿@using System.Globalization
 @using App.Infrastructure.File
+@using App.Services.Dtos.ProductManagement
+@using App.Website.Common
 @model IEnumerable<App.Services.Dtos.ProductManagement.ProductSummary>
 @{
     ViewBag.Title = "Sản phẩm | Minh Khang Store";
     ViewBag.ContentCssClass = "page-product";
+    var categories = ViewBag.Categories != null ? (IEnumerable<ProductCategorySummary>)ViewBag.Categories : null;
 }
 
 @section PageTitle{
     <div class="title-section title-section-advanced title-section-product clearfix">
         <div class="title-section-left">
-            @Html.Partial("_Category")
+            <div id="categories">
+                <div class="filter-button">
+                    <span class="filter-button-open glyphicon glyphicon-menu-hamburger"></span>
+                    <span class="filter-button-close glyphicon glyphicon-remove"></span>
+                </div>
+                <div class="slide-navigation">
+                    @categories.TreeMenu("categories-menu", null, Url.Action("Category", "Product"))
+                </div>
+            </div>
+            
+            @*@Html.Partial("_Category")*@
             <h3>Sản phẩm</h3>
         </div>
         <div class="title-section-right">
