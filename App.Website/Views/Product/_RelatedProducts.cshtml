@@ -1,92 +1,13 @@
-﻿<div class="title-section">
-    <h3>
-        Sản phẩm liên quan
-    </h3>
-</div>
-<ul class="product-list clearfix">
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-    <li class="item">
-        <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-        <div class="image">
-            <a href="#">
-                <img src="/content/images/product-10-270x270.png" alt="Alternate Text" />
-            </a>
-        </div>
-        <div class="price">
-            <span class="price-old">1,200,000</span>
-            <br />
-            <span class="price-new">1,100,000</span>
-        </div>
-        <div class="actions">
-            <button type="button" class="btn btn-info">Đặt mua</button>
-            <button type="button" class="btn btn-info">Chi tiết</button>
-        </div>
-    </li>
-</ul>
+﻿@using System.Globalization
+@using App.Infrastructure.File
+@model IEnumerable<App.Services.Dtos.ProductManagement.ProductSummary>
+
+@if (Model.Any())
+{
+    <div class="title-section">
+        <h3>
+            Sản phẩm liên quan
+        </h3>
+    </div>
+    @Html.Partial("_ProductList", Model)
+}

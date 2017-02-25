@@ -1,4 +1,4 @@
-﻿namespace App.Core.Html
+﻿namespace App.Core.DataModels
 {
     public interface ICategory  
     {

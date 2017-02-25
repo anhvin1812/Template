@@ -1,0 +1,32 @@
+﻿@using System.Globalization
+@using App.Infrastructure.File
+@model IEnumerable<App.Services.Dtos.ProductManagement.ProductSummary>
+
+@if (Model.Any()) { 
+    <ul class="product-list clearfix">
+        @foreach (var m in Model)
+        {
+            var detailUrl = Url.Action("Details", "Product", new {id = m.Id});
+            <li class="item">
+                <a class="name" href="@detailUrl">@m.Name</a>
+                <div class="image">
+                    <a href="@detailUrl">
+                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Thumbnail))" alt="@m.Name"/>
+                    </a>
+                </div>
+                <div class="price">
+                    @if (m.OldPrice.HasValue)
+                    {
+                        <span class="price-old">@m.OldPrice.Value.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
+                        <br/>
+                    }
+                    <span class="price-new">@m.Price.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))</span>
+                </div>
+                <div class="actions">
+                    <button type="button" class="btn btn-info">Đặt mua</button>
+                    <a class="btn btn-info" href="@detailUrl">Chi tiết</a>
+                </div>
+            </li>
+        }
+    </ul>
+}

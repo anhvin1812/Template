@@ -28,7 +28,7 @@ namespace App.Repositories.NewsManagement
 
             if (page != null && pageSize != null)
             {
-                result = result.ApplyPaging(page.Value, pageSize.Value);
+                result = result.OrderByDescending(t => t.Id).ApplyPaging(page.Value, pageSize.Value);
             }
 
             return result;

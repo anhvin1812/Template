@@ -34,7 +34,7 @@ namespace App.Website.Areas.Admin.Controllers
         public ActionResult Index(int? page = null, int? pageSize = null)
         {
             int? recordCount = 0;
-            var result = ProductService.GetAll(page, pageSize, ref recordCount);
+            var result = ProductService.GetAll(string.Empty, null, page, pageSize, ref recordCount);
 
             return View(result);
         }

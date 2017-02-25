@@ -244,7 +244,8 @@
         </div>
     </div>
 </div><!-- /#product-->
-@Html.Partial("_RelatedProducts")
+
+@Html.Action("RelatedProducts", "Product", new {productId = Model.Id, categoryId = Model.CategoryId, maxRecords = 10})
 
 @section AddScript{
     <!-- Bxslider -->

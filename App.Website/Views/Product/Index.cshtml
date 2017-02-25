@@ -7,6 +7,7 @@
     ViewBag.Title = "Sản phẩm | Minh Khang Store";
     ViewBag.ContentCssClass = "page-product";
     var categories = ViewBag.Categories != null ? (IEnumerable<ProductCategorySummary>)ViewBag.Categories : null;
+    var categoryId = ViewBag.CategoryId != null ? (int?)ViewBag.CategoryId : null; ;
 }
 
 @section PageTitle{
@@ -18,11 +19,9 @@
                     <span class="filter-button-close glyphicon glyphicon-remove"></span>
                 </div>
                 <div class="slide-navigation">
-                    @categories.TreeMenu("categories-menu", null, Url.Action("Category", "Product"))
+                    @categories.TreeMenu("categories-menu", null,"/Product/Category/{0}",null, categoryId)
                 </div>
             </div>
-            
-            @*@Html.Partial("_Category")*@
             <h3>Sản phẩm</h3>
         </div>
         <div class="title-section-right">

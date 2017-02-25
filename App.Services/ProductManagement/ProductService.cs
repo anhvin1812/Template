@@ -37,9 +37,9 @@ namespace App.Services.ProductManagement
 
         #region Public Methods
 
-        public IEnumerable<ProductSummary> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<ProductSummary> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount)
         {
-            var products = ProductRepository.GetAll(page, pageSize, ref recordCount)
+            var products = ProductRepository.GetAll(keyword, categoryId, page, pageSize, ref recordCount)
                 .Select(x => new ProductSummary
                 {
                     Id = x.Id,
@@ -50,7 +50,24 @@ namespace App.Services.ProductManagement
                     Thumbnail = x.Image.Thumbnail,
                     Category = x.Category.Name
                 });
-            
+
+            return products;
+        }
+
+        public IEnumerable<ProductSummary> GetRelatedProducts(int productId, int categoryId, int? maxRecords = null)
+        {
+            var products = ProductRepository.GetRelatedProducts(productId, categoryId, maxRecords)
+                .Select(x => new ProductSummary
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Price = x.Price,
+                    OldPrice = x.OldPrice,
+                    Status = x.Status.Status,
+                    Thumbnail = x.Image.Thumbnail,
+                    Category = x.Category.Name
+                });
+
             return products;
         }
 
@@ -68,6 +85,7 @@ namespace App.Services.ProductManagement
                 Description = product.Description,
                 Specifications = product.Specifications,
                 Status = product.Status.Status,
+                CategoryId = product.CategoryId,
                 Category = product.Category.Name,
                 Price = product.Price,
                 OldPrice = product.OldPrice,

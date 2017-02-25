@@ -560,11 +560,11 @@ header {
     -o-transition: all 0.3s ease 0s;
     transition: all 0.3s ease 0s;
 }
-.slide-navigation li.active a {
+.slide-navigation li.active > a {
     position: relative;
     padding-left: 25px;
 }
-.slide-navigation li.active a:before {
+.slide-navigation li.active > a:before {
     font-weight: bold;
     position: absolute;
     left: 0;

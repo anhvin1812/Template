@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\EntityExtensions.cs" />
     <Compile Include="Common\QueryableExtensions.cs" />
     <Compile Include="NewsManagement\INewsCategoryRepository.cs" />
     <Compile Include="NewsManagement\INewsRepository.cs" />

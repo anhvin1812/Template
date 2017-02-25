@@ -83,6 +83,7 @@ namespace App.Services.Dtos.ProductManagement
         public List<GallerySummary> Gallery { get; set; }
 
         public string Status { get; set; }
+        public int CategoryId { get; set; }
         public string Category { get; set; }
 
         public decimal Price { get; set; }

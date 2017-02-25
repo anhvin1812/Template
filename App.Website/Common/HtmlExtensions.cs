@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using App.Core.Html;
+using App.Core.DataModels;
 
 namespace App.Website.Common
 {
     public static class HtmlExtensions
     {
-        public static MvcHtmlString TreeMenu(this IEnumerable<ICategory> categories, string id, string cssClass, string link, int? rootId = null, int? selectedValue = null)
+        public static MvcHtmlString TreeMenu(this IEnumerable<ICategory> categories, string id, string cssClass, string linkFormat, int? rootId = null, int? selectedValue = null)
         {
             if(categories == null || !categories.Any())
                 return new MvcHtmlString(string.Empty);
 
-            var tags = GenerateTreeMenu(categories, id, cssClass, link, rootId, selectedValue);
+            var tags = GenerateTreeMenu(categories, id, cssClass, linkFormat, rootId, selectedValue);
 
             return new MvcHtmlString(tags.ToString(TagRenderMode.Normal));
         }
 
-        private static TagBuilder GenerateTreeMenu(IEnumerable<ICategory> categories, string id, string cssClass, string link, int? rootId = null, int? selectedValue = null)
+        private static TagBuilder GenerateTreeMenu(IEnumerable<ICategory> categories, string id, string cssClass, string linkFormat, int? rootId = null, int? selectedValue = null)
         {
             var ul = new TagBuilder("ul");
             ul.GenerateId(id);
@@ -36,14 +36,14 @@ namespace App.Website.Common
 
                     var a = new TagBuilder("a");
                     a.SetInnerText(c.Name);
-                    a.MergeAttribute("href", isSelectedItem ? "javascript:;" : $"{link}/{c.Id}");
+                    a.MergeAttribute("href", isSelectedItem ? "javascript:;" : string.Format(linkFormat, c.Id) );
 
                     li.InnerHtml = a.ToString(TagRenderMode.Normal);
 
                     if (categories.Any(x => x.ParentId == c.Id))
                     {
                         li.AddCssClass("treeview");
-                        var subMenu = GenerateTreeMenu(categories, string.Empty, "treeview-menu", link, c.Id, selectedValue).ToString(TagRenderMode.Normal);
+                        var subMenu = GenerateTreeMenu(categories, string.Empty, "treeview-menu", linkFormat, c.Id, selectedValue).ToString(TagRenderMode.Normal);
                         li.InnerHtml = $"{li.InnerHtml}{subMenu}";
                     }
                    

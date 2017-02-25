@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity.Migrations.Builders;
+﻿using App.Core.DataModels;
 
 namespace App.Entities.ProductManagement
 {
-    public class ProductCategory : EntityBase
+    public class ProductCategory : EntityBase, ICategory
     {
         public int Id { get; set; }
 

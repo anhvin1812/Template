@@ -1,6 +1,8 @@
-﻿namespace App.Entities.NewsManagement
+﻿using App.Core.DataModels;
+
+namespace App.Entities.NewsManagement
 {
-    public class NewsCategory : EntityBase
+    public class NewsCategory : EntityBase, ICategory
     {
         public int Id { get; set; }
 

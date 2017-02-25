@@ -98,7 +98,7 @@
     <Compile Include="Exceptions\ErrorExtraInfo.cs" />
     <Compile Include="Exceptions\DataNotFoundException.cs" />
     <Compile Include="Exceptions\ValidationError.cs" />
-    <Compile Include="Html\ICategory.cs" />
+    <Compile Include="DataModels\ICategory.cs" />
     <Compile Include="Permission\ApplicationPermissionCapabilities.cs" />
     <Compile Include="Permission\ApplicationPermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

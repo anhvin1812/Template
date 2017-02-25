@@ -27,17 +27,32 @@ namespace App.Website.Controllers
         public ActionResult Index(int? page = null, int? pageSize = null)
         {
             int? recordCount = 0;
-            var result = ProductService.GetAll(page, pageSize, ref recordCount);
+            var result = ProductService.GetAll(null,null, page, pageSize, ref recordCount);
 
             ViewBag.Categories = ProductCategoryService.GetAll(null, null, ref recordCount);
 
             return View(result);
         }
 
+        // GET: Product/NewProducts/5
+        public ActionResult NewProducts(int? maxRecords = null)
+        {
+            int? recordCount = 0;
+            var result = ProductService.GetAll(null, null, 1, maxRecords, ref recordCount);
+
+            return View("_ProductList", result);
+        }
+
         // GET: Product/Category/5
         public ActionResult Category(int id)
         {
-            return View();
+            int? recordCount = 0;
+            var result = ProductService.GetAll(null, id,null, null, ref recordCount);
+
+            ViewBag.Categories = ProductCategoryService.GetAll(null, null, ref recordCount);
+            ViewBag.CategoryId = id;
+
+            return View("Index", result);
         }
 
         // GET: Product/Details/5
@@ -45,6 +60,14 @@ namespace App.Website.Controllers
         {
             var model = ProductService.GetById(id);
             return View(model);
+        }
+
+        // GET: Product/RelatedProducts/5
+        public ActionResult RelatedProducts(int productId, int categoryId, int? maxRecords = null)
+        {
+            var result = ProductService.GetRelatedProducts(productId, categoryId, maxRecords);
+
+            return PartialView("_RelatedProducts", result);
         }
 
         // GET: Product/Create

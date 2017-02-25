@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using App.Core.Html;
+using App.Core.DataModels;
 using App.Services.Dtos.Common;
 
 namespace App.Services.Dtos.NewsManagement
