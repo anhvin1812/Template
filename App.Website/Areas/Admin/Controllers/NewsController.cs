@@ -33,10 +33,10 @@ namespace App.Website.Areas.Admin.Controllers
         #endregion
 
 
-        public ActionResult Index(int? page = null, int? pageSize = null)
+        public ActionResult Index(string keyword, int? categoryId = null, int? page = null, int? pageSize = null)
         {
             int? recordCount = 0;
-            var result = NewsService.GetAll(page, pageSize, ref recordCount);
+            var result = NewsService.GetAll(keyword, categoryId, page, pageSize, ref recordCount);
 
             return View(result);
         }

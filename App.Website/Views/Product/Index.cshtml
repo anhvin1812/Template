@@ -2,12 +2,14 @@
 @using App.Infrastructure.File
 @using App.Services.Dtos.ProductManagement
 @using App.Website.Common
-@model IEnumerable<App.Services.Dtos.ProductManagement.ProductSummary>
+@model IEnumerable<ProductSummary>
 @{
-    ViewBag.Title = "Sản phẩm | Minh Khang Store";
-    ViewBag.ContentCssClass = "page-product";
     var categories = ViewBag.Categories != null ? (IEnumerable<ProductCategorySummary>)ViewBag.Categories : null;
-    var categoryId = ViewBag.CategoryId != null ? (int?)ViewBag.CategoryId : null; ;
+    var categoryId = ViewBag.CategoryId != null ? (int?)ViewBag.CategoryId : null;
+    var categoryName = ViewBag.CategoryName != null ? (string)ViewBag.CategoryName : "Sản phẩm";
+
+    ViewBag.Title = $"{categoryName} | Minh Khang Store";
+    ViewBag.ContentCssClass = "page-product";
 }
 
 @section PageTitle{
@@ -22,7 +24,7 @@
                     @categories.TreeMenu("categories-menu", null,"/Product/Category/{0}",null, categoryId)
                 </div>
             </div>
-            <h3>Sản phẩm</h3>
+            <h3>@categoryName</h3>
         </div>
         <div class="title-section-right">
             <div class="shop-display-count">
@@ -77,95 +79,9 @@
         }
     </ul>
 }
-        @*<ul class="product-list clearfix">
-            <li class="item">
-                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-                <div class="image">
-                    <a href="#">
-                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-                    </a>
-                </div>
-                <div class="price">
-                    <span class="price-old">1,200,000</span>
-                    <br />
-                    <span class="price-new">1,100,000</span>
-                </div>
-                <div class="actions">
-                    <button type="button" class="btn btn-info">Đặt mua</button>
-                    <button type="button" class="btn btn-info">Chi tiết</button>
-                </div>
-            </li>
-            <li class="item">
-                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-                <div class="image">
-                    <a href="#">
-                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-                    </a>
-                </div>
-                <div class="price">
-                    <span class="price-old">1,200,000</span>
-                    <br />
-                    <span class="price-new">1,100,000</span>
-                </div>
-                <div class="actions">
-                    <button type="button" class="btn btn-info">Đặt mua</button>
-                    <button type="button" class="btn btn-info">Chi tiết</button>
-                </div>
-            </li>
-            <li class="item">
-                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-                <div class="image">
-                    <a href="#">
-                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-                    </a>
-                </div>
-                <div class="price">
-                    <span class="price-old">1,200,000</span>
-                    <br />
-                    <span class="price-new">1,100,000</span>
-                </div>
-                <div class="actions">
-                    <button type="button" class="btn btn-info">Đặt mua</button>
-                    <button type="button" class="btn btn-info">Chi tiết</button>
-                </div>
-            </li>
-            <li class="item">
-                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-                <div class="image">
-                    <a href="#">
-                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-                    </a>
-                </div>
-                <div class="price">
-                    <span class="price-old">1,200,000</span>
-                    <br />
-                    <span class="price-new">1,100,000</span>
-                </div>
-                <div class="actions">
-                    <button type="button" class="btn btn-info">Đặt mua</button>
-                    <button type="button" class="btn btn-info">Chi tiết</button>
-                </div>
-            </li>
-            <li class="item">
-                <a class="name" href="#">Apple-iPhone-5s-32GB</a>
-                <div class="image">
-                    <a href="#">
-                        <img src="content/images/product-10-270x270.png" alt="Alternate Text" />
-                    </a>
-                </div>
-                <div class="price">
-                    <span class="price-old">1,200,000</span>
-                    <br />
-                    <span class="price-new">1,100,000</span>
-                </div>
-                <div class="actions">
-                    <button type="button" class="btn btn-info">Đặt mua</button>
-                    <button type="button" class="btn btn-info">Chi tiết</button>
-                </div>
-            </li>
-        </ul>*@
+   
 
-        @section AddScript{
-            <!-- slide menu -->
-            <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
-        }
+@section AddScript{
+    <!-- slide menu -->
+    <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
+}

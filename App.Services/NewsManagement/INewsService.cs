@@ -7,7 +7,8 @@ namespace App.Services.NewsManagement
 {
     public interface INewsService : IService
     {
-        IEnumerable<NewsSummary> GetAll(int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<NewsSummary> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<NewsSummary> GetRelatedNews(int newsId, int categoryId, int? maxRecords = null);
         NewsDetail GetById(int id);
         NewsUpdateEntry GetProductForEditing(int id);
         void Insert(NewsEntry entry);

@@ -1,0 +1,13 @@
+﻿@using System.Globalization
+@using App.Infrastructure.File
+@model IEnumerable<App.Services.Dtos.NewsManagement.NewsSummary>
+
+@if (Model.Any())
+{
+    <div class="title-section">
+        <h3>
+            Sản phẩm liên quan
+        </h3>
+    </div>
+    @Html.Partial("_NewsList", Model)
+}

@@ -15,7 +15,7 @@ namespace App.Website.Controllers
         private IProductCategoryService ProductCategoryService { get; set; }
 
         public ProductController(IProductService productService, IProductCategoryService productCategoryService)
-            :base(new IService[]{productService})
+            :base(new IService[]{productService, productCategoryService })
         {
             ProductService = productService;
             ProductCategoryService = productCategoryService;
@@ -49,8 +49,10 @@ namespace App.Website.Controllers
             int? recordCount = 0;
             var result = ProductService.GetAll(null, id,null, null, ref recordCount);
 
-            ViewBag.Categories = ProductCategoryService.GetAll(null, null, ref recordCount);
+            var categories = ProductCategoryService.GetAll(null, null, ref recordCount);
+            ViewBag.Categories = categories;
             ViewBag.CategoryId = id;
+            ViewBag.CategoryName = categories.FirstOrDefault(x=>x.Id==id)?.Name;
 
             return View("Index", result);
         }
@@ -59,6 +61,10 @@ namespace App.Website.Controllers
         public ActionResult Details(int id)
         {
             var model = ProductService.GetById(id);
+
+            int? recordCount = 0;
+            ViewBag.Categories = ProductCategoryService.GetAll(null, null, ref recordCount);
+
             return View(model);
         }
 

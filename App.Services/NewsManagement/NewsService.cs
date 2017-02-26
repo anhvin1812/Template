@@ -33,9 +33,9 @@ namespace App.Services.NewsManagement
 
         #region Public Methods
 
-        public IEnumerable<NewsSummary> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<NewsSummary> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount)
         {
-            var news = NewsRepository.GetAll(page, pageSize, ref recordCount)
+            var news = NewsRepository.GetAll(keyword, categoryId, page, pageSize, ref recordCount)
                 .Select(x => new NewsSummary
                 {
                     Id = x.Id,
@@ -48,6 +48,23 @@ namespace App.Services.NewsManagement
                 });
             
             return news;
+        }
+
+        public IEnumerable<NewsSummary> GetRelatedNews(int newsId, int categoryId, int? maxRecords = null)
+        {
+            var products = NewsRepository.GetRelatedNews(newsId, categoryId, maxRecords)
+                .Select(x => new NewsSummary
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Image = x.Image.Thumbnail,
+                    Category = x.Category.Name,
+                    CreatedDate = x.CreatedDate,
+                    UpdatedDate = x.UpdatedDate,
+                    UpdatedBy = x.Editor.Firstname
+                });
+
+            return products;
         }
 
         public NewsDetail GetById(int id)
@@ -63,6 +80,7 @@ namespace App.Services.NewsManagement
                 Title = news.Title,
                 Content = news.Content,
                 CategoryId = news.CategoryId,
+                Category = news.Category.Name,
                 CreatedDate = news.CreatedDate,
                 UpdatedDate = news.UpdatedDate,
                 UpdatedBy = news.Editor.Firstname

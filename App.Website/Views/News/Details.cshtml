@@ -1,0 +1,68 @@
+﻿@using App.Services.Dtos.NewsManagement
+@using App.Website.Common
+@using Microsoft.Security.Application
+@model NewsDetail
+@{
+    ViewBag.Title = $"{Model.Title} | Minh Khang Store";
+    ViewBag.ContentCssClass = "page-product";
+    var categories = ViewBag.Categories != null ? (IEnumerable<NewsCategorySummary>)ViewBag.Categories : null;
+}
+
+@section AddStyles{
+    <link href="@Url.Content("~/Scripts/jquery.bxslider/jquery.bxslider.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Scripts/EasyZoom/css/easyzoom.css")" rel="stylesheet">
+}
+
+@section PageTitle{
+    <div class="title-section title-section-advanced title-section-product clearfix">
+        <div class="title-section-left">
+            <div id="categories">
+                <div class="filter-button">
+                    <span class="filter-button-open glyphicon glyphicon-menu-hamburger"></span>
+                    <span class="filter-button-close glyphicon glyphicon-remove"></span>
+                </div>
+                <div class="slide-navigation">
+                    @categories.TreeMenu("categories-menu", null, "/News/Category/{0}",null, Model.CategoryId)
+                </div>
+            </div>
+            <h3>@Model.Category</h3>
+        </div>
+        <div style="clear: both"></div>
+    </div><!-- /.title-section-->
+}
+
+<div id="article">
+    <h1 class="art-title">@Model.Title</h1>
+    <div class="art-info text-warning">
+        <span class="uploader"><span class="glyphicon glyphicon-user"></span><a href="javascript:;">@Model.UpdatedBy</a></span>
+        <span class="date"><span class="glyphicon glyphicon-calendar"></span> @Model.CreatedDate.ToString("dd/MM/yyyy HH:mm")</span>
+    </div>  
+    <div class="art-content">
+        @Html.Raw(Sanitizer.GetSafeHtmlFragment(Model.Content))
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="comments">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a role="tab">Bình luận</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active">
+                        <!-- Facebook comments plugin-->
+                        <div class="fb-comments" data-href="http://xem.vn/photo/177433?ref=r2" data-width="100%" data-numposts="5"></div>
+                    </div>
+                </div>
+            </div><!-- /#specification-->
+        </div>
+    </div>
+</div><!-- /#article -->
+
+@Html.Action("RelatedNews", "News", new {productId = Model.Id, categoryId = Model.CategoryId, maxRecords = 10})
+
+@section AddScript{
+    <!-- Slide menu -->
+    <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
+}

@@ -1,11 +1,15 @@
 ﻿@using System.Globalization
 @using App.Infrastructure.File
+@using App.Services.Dtos.ProductManagement
+@using App.Website.Common
 @using Microsoft.Ajax.Utilities
 @using Microsoft.Security.Application
-@model App.Services.Dtos.ProductManagement.ProductDetail
+@model ProductDetail
 @{
-    ViewBag.Title = "Sản phẩm | Minh Khang Store";
-    //ViewBag.ContentCssClass = "page-product";
+    var categories = ViewBag.Categories != null ? (IEnumerable<ProductCategorySummary>)ViewBag.Categories : null;
+
+    ViewBag.Title = $"{Model.Category} | Minh Khang Store";
+    ViewBag.ContentCssClass = "page-product";
 }
 
 @section AddStyles{
@@ -14,7 +18,7 @@
 }
 
 @section PageTitle{
-    <div class="title-section title-section-product clearfix">
+    <div class="title-section title-section-advanced title-section-product clearfix">
         <div class="title-section-left">
             <div id="categories">
                 <div class="filter-button">
@@ -22,55 +26,15 @@
                     <span class="filter-button-close glyphicon glyphicon-remove"></span>
                 </div>
                 <div class="slide-navigation">
-                    <ul>
-                        <li><a>Apple</a></li>
-                        <li><a>Samsung</a></li>
-                        <li>
-                            <a>Nokia</a>
-                            <ul>
-                                <li><a>Popular</a></li>
-                                <li><a>N-series</a></li>
-                                <li>
-                                    <a>Touch</a>
-                                    <ul>
-                                        <li><a>Popular</a></li>
-                                        <li><a>N-series</a></li>
-                                        <li><a>Touch</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a>HTC</a></li>
-                        <li><a>Blackberry</a></li>
-                        <li><a>Microsoft</a></li>
-                    </ul>
+                    @categories.TreeMenu("categories-menu", null, "/Product/Category/{0}", null, Model.CategoryId)
                 </div>
             </div>
-            <h3>Sản phẩm</h3>
+            <h3>@Model.Category</h3>
         </div>
-        <div class="title-section-right">
-            <div class="shop-display-count">
-                Hiển thị
-                <span>
-                    <span id="display_num">4</span>
-                    sản phẩm
-                </span>
-            </div>
-            <div class="sort-select">
-                <select id="shop-sort" class="sort-by">
-                    <option value="price-ascending">Giá: tăng dần</option>
-                    <option value="price-descending">Giá: giảm dần</option>
-                    <option value="title-ascending">A-Z</option>
-                    <option value="title-descending">Z-A</option>
-                    <option value="created-ascending">Mới nhất</option>
-                    <option value="created-descending">Cũ nhất</option>
-                </select>
-            </div>
-        </div>
-
         <div style="clear: both"></div>
     </div><!-- /.title-section-->
 }
+
 
 <div id="product">
     <div class="row">
@@ -102,32 +66,7 @@
                                 </div>
                                 i++;
                             }
-
-
-                            @*<div class="slide" data-zoom="images/2.jpg" data-standard="images/2.jpg">
-                        <img src="/content/images/sm2.jpg">
-                    </div>
-                    <div class="slide" data-zoom="images/3.jpg" data-standard="images/3.jpg">
-                        <img src="/content/images/sm3.jpg">
-                    </div>
-                    <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                        <img src="/content/images/sm1.jpg">
-                    </div>
-                    <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                        <img src="/content/images/sm1.jpg">
-                    </div>
-                    <div class="slide" data-zoom="images/2.jpg" data-standard="images/2.jpg">
-                        <img src="/content/images/sm2.jpg">
-                    </div>
-                    <div class="slide" data-zoom="images/3.jpg" data-standard="images/3.jpg">
-                        <img src="/content/images/sm3.jpg">
-                    </div>
-                    <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                        <img src="/content/images/sm1.jpg">
-                    </div>
-                    <div class="slide" data-zoom="images/1.jpg" data-standard="images/1.jpg">
-                        <img src="/content/images/sm1.jpg">
-                    </div>*@
+                            
                         </div>
                         <div class="thumbnails-controls">
                             <span id="slider-prev"></span>

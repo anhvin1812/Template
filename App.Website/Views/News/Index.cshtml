@@ -1,0 +1,57 @@
+﻿@using System.Globalization
+@using App.Infrastructure.File
+@using App.Services.Dtos.NewsManagement
+@using App.Website.Common
+@model IEnumerable<NewsSummary>
+@{
+    ViewBag.Title = "Tin tuwcs | Minh Khang Store";
+    ViewBag.ContentCssClass = "page-product";
+    var categories = ViewBag.Categories != null ? (IEnumerable<NewsCategorySummary>)ViewBag.Categories : null;
+    var categoryId = ViewBag.CategoryId != null ? (int?)ViewBag.CategoryId : null; 
+    var categoryName = ViewBag.CategoryName != null ? (string)ViewBag.CategoryName : "Tin tức"; 
+}
+
+@section PageTitle{
+    <div class="title-section title-section-advanced title-section-product clearfix">
+        <div class="title-section-left">
+            <div id="categories">
+                <div class="filter-button">
+                    <span class="filter-button-open glyphicon glyphicon-menu-hamburger"></span>
+                    <span class="filter-button-close glyphicon glyphicon-remove"></span>
+                </div>
+                <div class="slide-navigation">
+                    @categories.TreeMenu("categories-menu", null,"/News/Category/{0}",null, categoryId)
+                </div>
+            </div>
+            <h3>@categoryName</h3>
+        </div>
+        <div class="title-section-right">
+            <div class="shop-display-count">
+                Hiển thị
+                <span>
+                    <span id="display_num">4</span>
+                    tin
+                </span>
+            </div>
+            <div class="sort-select">
+                <select id="shop-sort" class="sort-by">
+                    <option value="created-ascending">Mới nhất</option>
+                    <option value="created-descending">Cũ nhất</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="clear: both"></div>
+    </div><!-- /.title-section-->
+}
+<div id="article">
+    @if (Model != null && Model.Any())
+    {
+        @Html.Partial("_NewsList", Model)
+    }
+</div><!--#article-->
+
+@section AddScript{
+    <!-- slide menu -->
+    <script src="@Url.Content("~/Scripts/cat-menu-scripts.js")"></script>
+}

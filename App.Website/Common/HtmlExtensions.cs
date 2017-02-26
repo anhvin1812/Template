@@ -29,14 +29,13 @@ namespace App.Website.Common
                 foreach (var c in parentCategories)
                 {
                     var li = new TagBuilder("li");
-                    var isSelectedItem = c.Id == selectedValue;
 
-                    if (isSelectedItem)
+                    if (c.Id == selectedValue)
                         li.AddCssClass("active");
 
                     var a = new TagBuilder("a");
                     a.SetInnerText(c.Name);
-                    a.MergeAttribute("href", isSelectedItem ? "javascript:;" : string.Format(linkFormat, c.Id) );
+                    a.MergeAttribute("href", string.Format(linkFormat, c.Id) );
 
                     li.InnerHtml = a.ToString(TagRenderMode.Normal);
 

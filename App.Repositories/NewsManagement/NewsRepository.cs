@@ -17,9 +17,21 @@ namespace App.Repositories.NewsManagement
         {
         }
 
-        public IEnumerable<News> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<News> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount)
         {
             var result = DatabaseContext.Get<News>();
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                result = result.Where(t => t.Title.Contains(keyword) || t.Description.Contains(keyword));
+            }
+
+            if (categoryId.HasValue)
+            {
+                var lstHereditaryIds = DatabaseContext.Get<NewsCategory>().GetHereditaryIds(categoryId.Value);
+
+                result = result.Where(t => lstHereditaryIds.Contains(t.CategoryId));
+            }
 
             if (recordCount != null)
             {
@@ -29,6 +41,21 @@ namespace App.Repositories.NewsManagement
             if (page != null && pageSize != null)
             {
                 result = result.OrderByDescending(t => t.Id).ApplyPaging(page.Value, pageSize.Value);
+            }
+
+            return result;
+        }
+
+        public IEnumerable<News> GetRelatedNews(int newsId, int categoryId, int? maxRecords = null)
+        {
+            var result = DatabaseContext.Get<News>().Where(t => t.Id != newsId);
+
+            var lstHereditaryIds = DatabaseContext.Get<NewsCategory>().GetHereditaryIds(categoryId);
+            result = result.Where(t => lstHereditaryIds.Contains(t.CategoryId));
+
+            if (maxRecords.HasValue)
+            {
+                result = result.Take(maxRecords.Value);
             }
 
             return result;

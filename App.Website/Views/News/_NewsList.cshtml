@@ -1,0 +1,52 @@
+﻿@using System.Globalization
+@using App.Infrastructure.File
+@model IEnumerable<App.Services.Dtos.NewsManagement.NewsSummary>
+
+@if (Model.Any())
+{
+    <ul class="news-list clearfix">
+
+        @foreach (var m in Model)
+        {
+            var detailUrl = Url.Action("Details", "News", new { id = m.Id });
+
+            <li class="item">
+                <div class="media-left">
+                    <a class="news-image" href="@detailUrl">
+                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Image))" alt="@m.Title" />
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4>
+                        <a href="@detailUrl">@m.Title</a>
+                    </h4>
+                    <p>
+                        <span class="label label-info">@m.Category</span>
+                        <span>@m.CreatedDate.ToString("dd/MM/yyyy HH:mm")</span>
+                    </p>
+                    <p>@m.Description</p>
+                    <p class="text-right"><a class="" href="@detailUrl">Chi tiết..</a></p>
+                </div>
+            </li>
+
+            <li class="item">
+                <div class="media-left">
+                    <a class="news-image" href="@detailUrl">
+                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Image))" alt="@m.Title" />
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4>
+                        <a href="@detailUrl">@m.Title</a>
+                    </h4>
+                    <p>
+                        <span class="label label-info">@m.Category</span>
+                        <span>@m.CreatedDate.ToString("dd/MM/yyyy HH:mm")</span>
+                    </p>
+                    <p>@m.Description</p>
+                    <p class="text-right"><a class="" href="@detailUrl">Chi tiết..</a></p>
+                </div>
+            </li>
+        }
+    </ul>
+}

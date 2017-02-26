@@ -685,13 +685,12 @@ select.sort-by option:hover {
     margin-bottom: 20px;
 }
 #article > .art-info {
-    color: #44a08c;
     margin-bottom: 20px;
 }
-#article > .art-info a {
-    font-weight: bold;
-    color: #44a08c;
+.art-info .uploader {
+    margin-right: 15px;
 }
+
 #article > .art-content {
     text-align: justify;
     margin-bottom: 25px;
@@ -699,6 +698,21 @@ select.sort-by option:hover {
 #article > .art-content img {
     max-height: 100%;
     max-width: 100%;
+}
+ul.news-list {
+    list-style: none;
+}
+.news-list > .item {
+    border-bottom: 1px solid #ccc;
+    padding: 0 0 10px 0;
+    margin-bottom: 20px;
+}
+.news-list > .item:last-child {
+    border-bottom: none;
+}
+.news-list .news-image img {
+    width: 110px;
+    border-radius: 5px;
 }
 
 
