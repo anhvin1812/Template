@@ -1,0 +1,40 @@
+﻿ @using App.Infrastructure.File 
+@model App.Services.Dtos.NewsManagement.NewsDetail
+
+@{
+    var url = Request?.Url.OriginalString;
+    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetImagePath(Model.Thumbnail))).OriginalString;
+    var largeImage = new Uri(Request?.Url, Url.Content(GalleryHelper.GetImagePath(Model.Image))).OriginalString;
+
+    Model.UpdatedDate = Model.UpdatedDate ?? DateTime.Now;
+}
+
+<!-- Place this data between the <head> tags of your website -->
+<meta name="description" content="@Model.Description" />
+
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="@Model.Title">
+<meta itemprop="description" content="@Model.Description">
+<meta itemprop="image" content="@image">
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Minh Khang Store">
+<meta name="twitter:title" content="@Model.Title">
+<meta name="twitter:description" content="@Model.Description">
+<meta name="twitter:creator" content="@Model.UpdatedBy">
+<!-- Twitter summary card with large image must be at least 280x150px -->
+<meta name="twitter:image:src" content="@largeImage">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="@Model.Title" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="@url" />
+<meta property="og:image" content="@image" />
+<meta property="og:description" content="@Model.Description" />
+<meta property="og:site_name" content="Minh Khang Store" />
+<meta property="article:published_time" content="@Model.CreatedDate.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
+<meta property="article:modified_time" content="@Model.UpdatedDate.Value.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
+<meta property="article:section" content="Minh Khang Store" />
+<meta property="article:tag" content="Minh Khang Store" />
+<meta property="fb:admins" content="Facebook numberic ID" /> 

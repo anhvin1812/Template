@@ -124,6 +124,8 @@
     <Compile Include="JsonConverters\JsonCreationConverter.cs" />
     <Compile Include="JsonConverters\ResultConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocialMediaTag\ArticleSocialMediaTag.cs" />
+    <Compile Include="SocialMediaTag\ProductSocialMediaTag.cs" />
     <Compile Include="UI\SelectListOptions.cs" />
   </ItemGroup>
   <ItemGroup>

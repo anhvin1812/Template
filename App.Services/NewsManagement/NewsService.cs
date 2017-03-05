@@ -78,6 +78,9 @@ namespace App.Services.NewsManagement
             {
                 Id = news.Id,
                 Title = news.Title,
+                Description = news.Description,
+                Thumbnail = news.Image.Thumbnail,
+                Image = news.Image.Image,
                 Content = news.Content,
                 CategoryId = news.CategoryId,
                 Category = news.Category.Name,

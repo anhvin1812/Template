@@ -37,7 +37,9 @@ namespace App.Infrastructure.File
 
             var imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{ Path.GetExtension(image.FileName)}";
             Image img = Image.FromStream(image.InputStream);
-            Image thumb = img.GetThumbnailImage(270, 270, () => false, IntPtr.Zero);
+
+            var thumbHeight = 300*img.Height/img.Width;
+            Image thumb = img.GetThumbnailImage(300, thumbHeight, () => false, IntPtr.Zero);
 
             var fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
 

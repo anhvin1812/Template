@@ -1635,6 +1635,8 @@
     <Content Include="Views\News\_RelatedNews.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Shared\_ProductSocialMediaTag.cshtml" />
+    <Content Include="Views\Shared\_ArticleSocialMediaTag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

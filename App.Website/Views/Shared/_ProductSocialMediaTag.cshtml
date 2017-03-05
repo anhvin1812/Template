@@ -1,0 +1,38 @@
+﻿@using System.Globalization
+@using App.Infrastructure.File
+@model App.Services.Dtos.ProductManagement.ProductDetail
+
+@{
+    var url = Request?.Url.OriginalString;
+    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetImagePath(Model.Image))).OriginalString;
+}
+
+<!-- Place this data between the <head> tags of your website -->
+<meta name="description" content="@Model.Description" />
+
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="@Model.Name">
+<meta itemprop="description" content="@Model.Description">
+<meta itemprop="image" content="@image">
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="product">
+<meta name="twitter:site" content="Minh Khang Store">
+<meta name="twitter:title" content="@Model.Name">
+<meta name="twitter:description" content="@Model.Description">
+<meta name="twitter:creator" content="Minh Khang Store">
+<meta name="twitter:image" content="@image">
+<meta name="twitter:data1" content="@Model.Price.ToString("C0", CultureInfo.CreateSpecificCulture("vi-VN"))">
+<meta name="twitter:label1" content="Price">
+@*<meta name="twitter:data2" content="Black">
+<meta name="twitter:label2" content="Color">*@
+
+<!-- Open Graph data -->
+<meta property="og:title" content="@Model.Name" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="@url" />
+<meta property="og:image" content="@image" />
+<meta property="og:description" content="@Model.Description" />
+<meta property="og:site_name" content="Minh Khang Store" />
+<meta property="og:price:amount" content="@Model.Price.ToString("n", CultureInfo.CreateSpecificCulture("vi-VN"))" />
+<meta property="og:price:currency" content="VND" /> 

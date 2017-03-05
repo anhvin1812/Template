@@ -1,4 +1,6 @@
-﻿@using App.Services.Dtos.NewsManagement
+﻿@using App.Infrastructure.File
+@using App.Services.Dtos.NewsManagement
+@using App.Services.Dtos.SocialMediaTag
 @using App.Website.Common
 @using Microsoft.Security.Application
 @model NewsDetail
@@ -8,9 +10,26 @@
     var categories = ViewBag.Categories != null ? (IEnumerable<NewsCategorySummary>)ViewBag.Categories : null;
 }
 
+@section SocialMediaTag{
+    @Html.Partial("_ArticleSocialMediaTag", Model)
+}
+
 @section AddStyles{
     <link href="@Url.Content("~/Scripts/jquery.bxslider/jquery.bxslider.css")" rel="stylesheet">
     <link href="@Url.Content("~/Scripts/EasyZoom/css/easyzoom.css")" rel="stylesheet">
+}
+
+@section AfterBody{
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=860970487280989";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 }
 
 @section PageTitle{
@@ -52,7 +71,7 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active">
                         <!-- Facebook comments plugin-->
-                        <div class="fb-comments" data-href="http://xem.vn/photo/177433?ref=r2" data-width="100%" data-numposts="5"></div>
+                        <div class="fb-comments" data-href="@Request?.Url.OriginalString" data-width="100%" data-numposts="5"></div>
                     </div>
                 </div>
             </div><!-- /#specification-->
