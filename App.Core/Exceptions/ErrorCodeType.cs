@@ -23,5 +23,11 @@ namespace App.Core.Exceptions
 
         // Product
         InvalidProductCategoryName = 30,
+
+        // User
+        InvalidFirstName = 100,
+        InvalidLastName = 101,
+        InvalidEmail = 102,
+        EmailIsUsed = 103,
     }
 }

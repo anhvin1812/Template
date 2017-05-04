@@ -94,6 +94,7 @@
     <Compile Include="Common\ClaimsIdentityExtensions.cs" />
     <Compile Include="Common\EntityBaseExtensions.cs" />
     <Compile Include="Common\DtoExtensions..cs" />
+    <Compile Include="Common\Validations\ValidationHelper.cs" />
     <Compile Include="EntityMapping\AutoMapperExtensions.cs" />
     <Compile Include="EntityMapping\MappingHelper.cs" />
     <Compile Include="EntityMapping\IdentityManagementMapping.cs" />

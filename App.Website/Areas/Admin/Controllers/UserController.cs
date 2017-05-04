@@ -15,11 +15,13 @@ namespace App.Website.Areas.Admin.Controllers
     {
         #region Contractor
         private IUserService UserService { get; set; }
+        private IRoleService RoleService { get; set; }
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IRoleService roleService)
             : base(new IService[] { userService })
         {
             UserService = userService;
+            RoleService = roleService;
         }
 
         #endregion
@@ -37,20 +39,44 @@ namespace App.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ErrorHandler(View = "Create")]
         public ActionResult Create(UserEntry entry)
         {
-            return View();
+            var options = RoleService.GetOptionsForDropdownList();
+            ViewBag.Roles = new SelectList(options.Items, options.DataValueField, options.DataTextField, options.SelectedValues);
+
+            if (ModelState.IsValid)
+            {
+                UserService.Insert(entry);
+                return RedirectToAction("Index");
+            }
+
+            return View(entry);
         }
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var options = RoleService.GetOptionsForDropdownList();
+            ViewBag.Roles = new SelectList(options.Items, options.DataValueField, options.DataTextField, options.SelectedValues);
+
+            var user = UserService.GetById(id);
+            return View(DetailToEntry(user));
         }
 
         [HttpPost]
         public ActionResult Edit(int id, UserEntry entry)
         {
-            return View();
+            var options = RoleService.GetOptionsForDropdownList();
+            ViewBag.Roles = new SelectList(options.Items, options.DataValueField, options.DataTextField, options.SelectedValues);
+
+            if (ModelState.IsValid)
+            {
+                UserService.Insert(entry);
+                return RedirectToAction("Index");
+            }
+
+            return View(entry);
         }
 
         #region Login
@@ -95,7 +121,26 @@ namespace App.Website.Areas.Admin.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-    #endregion
+        #endregion
+
+        #region Private Methods
+        private UserEntry DetailToEntry(UserDetail detail)
+        {
+            return new UserEntry {
+                Id = detail.Id,
+                Firstname = detail.Firstname,
+                Lastname = detail.Lastname,
+                Email = detail.Email,
+                EmailConfirmed = detail.EmailConfirmed,
+                PhoneNumber = detail.PhoneNumber,
+                PhoneNumberConfirmed = detail.PhoneNumberConfirmed,
+                Address = detail.Address,
+                LockoutEnabled = detail.LockoutEnabled,
+                LockoutEndDateUtc = detail.LockoutEndDateUtc,
+                Roles = detail.Roles.Select(x=>x.RoleId).ToList()
+            };
+        }
+        #endregion
 
         #region Dispose
 
@@ -109,6 +154,7 @@ namespace App.Website.Areas.Admin.Controllers
                 if (isDisposing)
                 {
                     UserService = null;
+                    RoleService = null;
                 }
                 _disposed = true;
             }

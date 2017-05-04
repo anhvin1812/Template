@@ -12,6 +12,7 @@ using App.Entities.ProductManagement;
 using App.Repositories.IdentityManagement;
 using App.Services.Common;
 using App.Services.Dtos.IdentityManagement;
+using App.Services.Dtos.UI;
 
 namespace App.Services.IdentityManagement
 {
@@ -47,6 +48,25 @@ namespace App.Services.IdentityManagement
                 });
             
             return roles;
+        }
+
+        public SelectListOptions GetOptionsForDropdownList()
+        {
+            var userId = CurrentClaimsIdentity.GetUserId();
+
+            int? recordCount = null;
+            var items = RoleRepository.GetAll(null, null, ref recordCount).Select(x=> new OptionItem {
+                Value = x.Id,
+                Text = x.Name
+            });
+            var selectedValues = RoleRepository.GetByUserId(userId).Select(x=>x.Id);
+
+
+            return new SelectListOptions {
+                Items = items,
+                SelectedValues = selectedValues
+            };
+            
         }
 
         public RoleEntry GetBlankRoleEntry()
@@ -243,24 +263,21 @@ namespace App.Services.IdentityManagement
 
         private void ValidateEntryData(RoleEntry entry)
         {
+            var violations = new List<ErrorExtraInfo>();
 
             if (entry == null)
             {
-                var violations = new List<ErrorExtraInfo>
-                {
-                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidData}
-                };
+                violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.InvalidData });
                 throw new ValidationError(violations);
             }
 
             if ( string.IsNullOrWhiteSpace(entry.RoleName) )
             {
-                var violations = new List<ErrorExtraInfo>
-                {
-                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidRoleName, Property = "RoleName"}
-                };
-                throw new ValidationError(violations);
+                violations.Add(new ErrorExtraInfo {Code = ErrorCodeType.InvalidRoleName, Property = "RoleName"});
             }
+
+            if(violations.Any())
+                throw new ValidationError(violations);
         }
 
         private void ValidateEntityData(Role entity)

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using App.Services.Dtos.Common;
+using App.Services.Dtos.Validations;
 
 namespace App.Services.Dtos.IdentityManagement
 {
@@ -9,30 +10,36 @@ namespace App.Services.Dtos.IdentityManagement
     {
         public UserEntry()
         {
-            Roles = new List<RoleSelection>();    
-            SelectedRoles = new int[0];
+            Roles = new List<int>();    
         }
 
+        public int Id { get; set; }
 
         [Required]
-        [Display(Name = "First name")]
         public string Firstname { get; set; }
 
         [Required]
-        [Display(Name = "Last name")]
         public string Lastname { get; set; }
 
         [Required]
+        [Email(ErrorMessage = "Please enter a valid email")]
         public string Email { get; set; }
 
+        public bool EmailConfirmed { get; set; }
+
         [Required]
-        [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
+
+        public bool PhoneNumberConfirmed { get; set; }
+
         public string Address { get; set; }
 
+        public DateTime? LockoutEndDateUtc { get; set; }
+
+        public bool LockoutEnabled { get; set; }
+
         [Display(Name = "Roles")]
-        public int[] SelectedRoles { get; set; }
-        public List<RoleSelection> Roles { get; set; }
+        public List<int> Roles { get; set; }
     }
     public class UserSummary : DtoBase
     {
@@ -48,16 +55,41 @@ namespace App.Services.Dtos.IdentityManagement
 
         public string PhoneNumber { get; set; }
 
+        public bool LockoutEnabled { get; set; }
+
         public IEnumerable<RoleDetails> Roles { get; set; }
     }
 
-    public class UserDetails : DtoBase
+    public class UserDetail : DtoBase
     {
-        public string UserName { get; set; }
+        public UserDetail()
+        {
+            Roles = new List<RoleSummary>();
+        }
+
+        public int Id { get; set; }
+
+        public string Username { get; set; }
+
+        public string Firstname { get; set; }
+
+        public string Lastname { get; set; }
 
         public string Email { get; set; }
 
+        public bool EmailConfirmed { get; set; }
+
         public string PhoneNumber { get; set; }
 
+        public bool PhoneNumberConfirmed { get; set; }
+
+        public string Address { get; set; }
+
+        public DateTime? LockoutEndDateUtc { get; set; }
+
+        public bool LockoutEnabled { get; set; }
+
+        public List<RoleSummary> Roles { get; set; }
     }
+
 }

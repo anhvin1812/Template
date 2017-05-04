@@ -127,6 +127,7 @@
     <Compile Include="SocialMediaTag\ArticleSocialMediaTag.cs" />
     <Compile Include="SocialMediaTag\ProductSocialMediaTag.cs" />
     <Compile Include="UI\SelectListOptions.cs" />
+    <Compile Include="Validations\EmailAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

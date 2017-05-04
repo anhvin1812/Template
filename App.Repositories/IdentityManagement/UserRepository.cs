@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using App.Core.Repositories;
-using App.Data.EntityFramework;
 using App.Entities.ProductManagement;
 using App.Infrastructure.IdentityManagement;
 using App.Repositories.Common;
 using Microsoft.AspNet.Identity;
-using User = App.Entities.ProductManagement.User;
 
 namespace App.Repositories.IdentityManagement
 {
@@ -36,8 +30,6 @@ namespace App.Repositories.IdentityManagement
 
         public IEnumerable<User> GetAllUser(int? page, int? pageSize, ref int? recordCount)
         {
-            var db = new MinhKhangDbContext();
-
             var result = DatabaseContext.Get<User>();
 
             if (recordCount != null)
@@ -71,6 +63,12 @@ namespace App.Repositories.IdentityManagement
         public IEnumerable<Role> GetRoleByUser(int useId)
         {
             return DatabaseContext.Get<Role>().Where(r => r.Users.Any(u => u.UserId == useId));
+        }
+
+        public bool IsExistedEmail(string email)
+        {
+            return DatabaseContext.Get<User>().Any(t=>t.Email == email);
+
         }
 
 

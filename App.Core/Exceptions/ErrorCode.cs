@@ -21,6 +21,11 @@ namespace App.Core.Exceptions
                 {ErrorCodeType.InvalidRoleName, "Role name is not valid."},
                 {ErrorCodeType.RoleNameIsUsed, "Role name is used."},
                 {ErrorCodeType.RoleIsNotExsted, "Role is not existed."},
+                // User
+                {ErrorCodeType.InvalidFirstName, "First name is not valid."},
+                {ErrorCodeType.InvalidLastName, "Last name is not valid."},
+                {ErrorCodeType.InvalidEmail, "Email is not valid."},
+                {ErrorCodeType.EmailIsUsed, "Email is used."},
                 // Product
             };
         }

@@ -77,10 +77,8 @@ namespace App.Services.ProductManagement
 
             return new SelectListOptions
             {
-                Items = results,
-                DisabledValues = disabledValues,
-                DataValueField = "Id",
-                DataTextField = "Name"
+                Items = results.Select(x=> new OptionItem {Value = x.Id, Text = x.Name}),
+                DisabledValues = disabledValues
             };
         }
 

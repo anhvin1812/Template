@@ -18,5 +18,7 @@ namespace App.Repositories.IdentityManagement
         void Delete(User user);
 
         IEnumerable<Role> GetRoleByUser(int useId);
+
+        bool IsExistedEmail(string email);
     }
 }

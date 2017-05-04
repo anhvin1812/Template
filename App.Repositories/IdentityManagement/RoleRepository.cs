@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using App.Core.Repositories;
-using App.Data.EntityFramework;
 using App.Entities.ProductManagement;
 using App.Infrastructure.IdentityManagement;
 using App.Repositories.Common;
 using Microsoft.AspNet.Identity;
-using User = App.Entities.ProductManagement.User;
 
 namespace App.Repositories.IdentityManagement
 {
@@ -58,6 +53,11 @@ namespace App.Repositories.IdentityManagement
             }
 
             return result;
+        }
+
+        public IEnumerable<Role> GetByUserId(int userId)
+        {
+            return PlatformContext.Get<Role>().Where(t => t.RoleUsers.Any(u => u.Id == userId));
         }
 
         public void Insert(Role entity)

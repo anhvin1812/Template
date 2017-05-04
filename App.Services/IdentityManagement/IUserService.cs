@@ -10,6 +10,14 @@ namespace App.Services.IdentityManagement
     public interface IUserService: IService
     {
         IEnumerable<UserSummary> GetAllUser(int? page, int? pageSize, ref int? recordCount);
+        UserDetail GetById(int id);
+
+        void Insert(UserEntry entry);
+
+        void Update(int id, UserEntry entry);
+
+        void EnableLockout(int id);
+
 
     }
 }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using App.Core.Repositories;
 using App.Entities.ProductManagement;
 
@@ -13,6 +9,7 @@ namespace App.Repositories.IdentityManagement
     {
         #region Role
         IEnumerable<Role> GetAll(int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<Role> GetByUserId(int userId);
         Role GetByName(string roleName);
         Role GetById(int id);
         void Insert(Role role);
