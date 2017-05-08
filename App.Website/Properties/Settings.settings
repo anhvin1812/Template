@@ -1,6 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="App.Website.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AutoEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webmasternavn@gmail.com</Value>
+    </Setting>
+    <Setting Name="AutoEmailPassword" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">anhvin1812</Value>
+    </Setting>
+    <Setting Name="AutoEmailSMTP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">smtp.gmail.com</Value>
+    </Setting>
+    <Setting Name="AutoEmailPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

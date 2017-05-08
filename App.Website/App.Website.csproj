@@ -17,7 +17,7 @@
     <AssemblyName>App.Website</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -323,6 +323,8 @@
     <Content Include="Areas\Admin\Content\Images\user8-128x128.jpg" />
     <Content Include="Areas\Admin\Scripts\App\common.js" />
     <Content Include="Areas\Admin\Scripts\App\product.js" />
+    <Content Include="Areas\Admin\Scripts\fastselect\fastselect.min.css" />
+    <Content Include="Areas\Admin\Scripts\fastselect\fastselect.standalone.min.js" />
     <Content Include="Areas\Admin\Scripts\jQuery-validate\jquery.validate.js" />
     <Content Include="Areas\Admin\Scripts\jQuery-validate\jquery.validate.unobtrusive.js" />
     <Content Include="Areas\Admin\Views\Shared\index.html" />
@@ -1723,11 +1725,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>21843</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:21843</IISUrl>
+          <IISUrl>http://localhost/App.Website</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://localhost:8080</CustomServerUrl>

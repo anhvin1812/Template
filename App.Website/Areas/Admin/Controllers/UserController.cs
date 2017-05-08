@@ -18,7 +18,7 @@ namespace App.Website.Areas.Admin.Controllers
         private IRoleService RoleService { get; set; }
 
         public UserController(IUserService userService, IRoleService roleService)
-            : base(new IService[] { userService })
+            : base(new IService[] { userService, roleService })
         {
             UserService = userService;
             RoleService = roleService;
@@ -35,6 +35,9 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
+            var options = RoleService.GetOptionsForDropdownList();
+            ViewBag.Roles = new SelectList(options.Items, options.DataValueField, options.DataTextField, options.SelectedValues);
+
             return View();
         }
 
@@ -65,6 +68,8 @@ namespace App.Website.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ErrorHandler(View = "Edit")]
         public ActionResult Edit(int id, UserEntry entry)
         {
             var options = RoleService.GetOptionsForDropdownList();

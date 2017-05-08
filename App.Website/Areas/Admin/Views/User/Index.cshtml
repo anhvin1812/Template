@@ -9,7 +9,7 @@
 }
 
 <div class="box">
-    <div class="box-header">
+    @*<div class="box-header">
         <h3 class="box-title">Data Table With Full Features</h3>
         @using (Html.BeginForm("Index", "User", FormMethod.Get))
         {
@@ -20,6 +20,11 @@
                 </span>
             </div>
         }
+    </div>*@
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            <a class="btn btn-block btn-primary" href="@Url.Action("Create", "User")">Tạo tài khoản</a>
+        </h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -49,7 +54,7 @@
                     }
                 </td>
                 <td>
-                    <a class="btn btn-default btn-sm" href="">
+                    <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "User", new {id = m.Id})">
                         <i class="fa fa-fw fa-pencil"></i> Edit
                     </a>
                 </td>

@@ -75,7 +75,7 @@ namespace App.Website.Areas.Admin.App_Start
 
             bundles.Add(new StyleBundle("~/Admin/Content/css").Include(
                       getPath("Scripts/bootstrap/css/bootstrap.min.css"),
-                      getPath("Scripts/bootstrap/css/bootstrap.min.css"),
+                      getPath("Scripts/select2/select2.min.css"),
                       getPath("Content/css/AdminLTE.min.css"),
                       getPath("Content/css/skins/_all-skins.min.css"),
                       getPath("Content/css/site.css")));

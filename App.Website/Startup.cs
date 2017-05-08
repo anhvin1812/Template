@@ -1,11 +1,6 @@
-﻿using System;
-using System.Configuration;
-using System.Data.Entity;
-using App.Infrastructure.IdentityManagement;
+﻿using App.Infrastructure.IdentityManagement;
 using App.Website;
-using App.Website.Models;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.OAuth;
 using Owin;
 
 [assembly: OwinStartup(typeof(Startup))]

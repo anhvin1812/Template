@@ -22,5 +22,41 @@ namespace App.Website.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("webmasternavn@gmail.com")]
+        public string AutoEmail {
+            get {
+                return ((string)(this["AutoEmail"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("anhvin1812")]
+        public string AutoEmailPassword {
+            get {
+                return ((string)(this["AutoEmailPassword"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("smtp.gmail.com")]
+        public string AutoEmailSMTP {
+            get {
+                return ((string)(this["AutoEmailSMTP"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("587")]
+        public string AutoEmailPort {
+            get {
+                return ((string)(this["AutoEmailPort"]));
+            }
+        }
     }
 }
