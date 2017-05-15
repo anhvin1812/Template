@@ -1,12 +1,116 @@
 ﻿body
 {
+    background: url("../images/background.png")
 }
 .container-fluid {
     background: rgba(0, 0, 0, 0.2);
     max-width: 1240px;
 }
-
+#logo {
+    padding: 10px;
+}
 #logo img{
     width: 276px;
     height: 90px;
+}
+
+#call-us{
+    display: block;
+    padding: 45px 10px 30px 0;
+    text-align: right;
+}
+#call-us a{
+    color: #fff;
+    font-size: 30px;
+    padding-right: 5px;
+    text-transform: uppercase;
+}
+
+#main-nav{
+    margin: 4px 0 15px;
+}
+#main-nav ul{
+    margin: 0;
+    padding: 0;
+    background: #111;
+}
+#main-nav ul li{
+    display: block;
+    float: left;
+}
+#main-nav li a{
+    display: block;
+    border-right: 1px solid #333;
+    color: #fff;
+    padding: 15px 30px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+#main-nav > ul > li.active > a,
+#main-nav > ul > li > a:hover{
+    background: #b12a2a;
+}
+
+/* Carousel */
+#home-slider .item img{
+    width: 100%;
+}
+.carousel-control.left{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0px, rgba(0, 0, 0, 0) 100%);
+    background-repeat: repeat-x;
+}
+.carousel-control.right{
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.5) 100%);
+    background-repeat: repeat-x;
+    left: auto;
+    right: 0;
+}
+.carousel-control.left i{
+    position: absolute;
+    left: 22px;
+    top: 45%;
+}
+.carousel-control.right i{
+    right: 20px;
+    position: absolute;
+    top: 45%;
+}
+ol.carousel-indicators li {
+    background: #888;
+    border: 0 solid #888;
+    padding: 8px;
+}
+.carousel-caption h2 {
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 26px;
+    padding: 20px 0;
+    transition: all 0.3s ease 0s;
+}
+.carousel-caption h2 .price-style {
+    color: orange;
+    font-weight: 700;
+}
+#home-slider .carousel-inner .item.active:hover .carousel-caption h2 {
+    cursor: pointer;
+    opacity: 0;
+}
+
+.side-widget{
+    background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.widget-title{
+    background: #b12a2a;
+    color: #fff;
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 2.2em;
+    margin-bottom: 0;
+    margin: 0 0 10px 0;
+    padding: 4px 10px;
+    text-align: center;
+    text-transform: uppercase;
 }
