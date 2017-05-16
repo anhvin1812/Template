@@ -1,6 +1,7 @@
 ﻿body
 {
-    background: url("../images/background.png")
+    background: url("../images/background.png");
+    color: #fff;
 }
 .container-fluid {
     background: rgba(0, 0, 0, 0.2);
@@ -27,7 +28,7 @@
 }
 
 #main-nav{
-    margin: 4px 0 15px;
+    margin: 4px 10px 15px;
 }
 #main-nav ul{
     margin: 0;
@@ -53,6 +54,9 @@
 }
 
 /* Carousel */
+#home-slider{
+    margin-bottom: 20px; 
+}
 #home-slider .item img{
     width: 100%;
 }
@@ -113,4 +117,74 @@ ol.carousel-indicators li {
     padding: 4px 10px;
     text-align: center;
     text-transform: uppercase;
+}
+
+.product-item{
+    background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+.product-item .images{
+    display: block;
+    overflow: hidden;
+    padding-top: 56.25%;
+    position: relative;
+    width: 100%;
+}
+.product-item .images > a{
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.product-item .images > a > img{
+    max-width: 100%;
+    width: 100%;
+}
+.summary{
+    padding: 8px 15px 15px;
+    font-weight: 700;
+}
+.summary .name{
+    padding: 10px 0 5px;
+    font-size: 15px;
+}
+.summary .name > a{
+    color: #fff;
+    text-decoration: none;
+}
+.summary .price{
+    font-size: 18px;
+    color: orange;
+    padding-bottom: 5px;
+}
+.summary .origin{
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+
+
+.btn.btn-detail{
+    background: #333;
+    border-radius: 0;
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    width: 100%;
+    transition: all 0.5s ease 0s;
+}
+.btn.btn-detail:hover{
+    background: #dcdcdc;
+    color: #000;
+}
+
+/* Facebook */
+iframe #facebook .uiScaledImageContainer _2zfr, ._2p3a{
+    width: 100% !important;
+}
+.fb-comments, .fb-comments span, .fb-comments.fb_iframe_widget span iframe {
+    width: 100% !important;
 }

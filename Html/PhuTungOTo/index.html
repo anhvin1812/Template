@@ -7,6 +7,7 @@
     <title>Trang chủ</title>
 
     <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="fonts/fonts.css" rel="stylesheet" />
     <link href="css/normalize.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="js/simple-selectbox/styles.css" rel="stylesheet" />
@@ -14,21 +15,35 @@
 
 </head>
 <body>
+
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.9&appId=860970487280989";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
     <div class="container-fluid">
         <header>
-            <div class="row">
-                <div id="logo" class="col-sm-6">
-                    <a href="#">
-                        <img src="images/logo.png" alt="logo">
-                    </a>
-                </div>
-                <div id="call-us" class="col-sm-6">
-                    <a href="tel:0944419503">
-                        +84 9444 19503 
-                        <i class="fa fa-phone-square"></i>
-                    </a>
+            <div class="container">
+                <div class="row">
+                    <div id="logo" class="col-sm-6">
+                        <a href="#">
+                            <img src="images/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <div id="call-us" class="col-sm-6">
+                        <a href="tel:0944419503">
+                            +84 9444 19503 
+                            <i class="fa fa-phone-square"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
+           
             <nav id="main-nav"> 
                 <ul class="clearfix">
                     <li><a href="#">Trang chu</a></li>
@@ -38,114 +53,208 @@
                 </ul>
             </nav>
         </header>
-        <div class="row">
-            <div id="content" class="col-md-9 col-md-push-3">
-                <div id="home-slider" class="carousel slide  hideOnSearch home" data-interval="18000" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#home-slider" data-slide-to="0" class=""></li>
-                        <li data-target="#home-slider" data-slide-to="1" class=""></li>
-                        <li data-target="#home-slider" data-slide-to="2" class=""></li>
-                        <li data-target="#home-slider" data-slide-to="3" class=""></li>
-                        <li data-target="#home-slider" data-slide-to="4" class="active"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="item"> <a href="http://gorillathemes.com/demo/automotive/inventory/acura-mdx/">
-                                    <img src="https://i0.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/2012-mdx-24.jpg?resize=980%2C476" class="img-responsive" alt="" srcset="https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/2012-mdx-24.jpg?resize=980%2C476 980w, https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/2012-mdx-24.jpg?zoom=2&amp;resize=980%2C476 1960w, https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/2012-mdx-24.jpg?zoom=3&amp;resize=980%2C476 2940w" sizes="(max-width: 980px) 100vw, 980px"> </a>
-                            <div class="carousel-caption">
-                                <h2> 2014 Acura MDX <span class="price-style">&nbsp;&nbsp;$56,700 </span></h2>
-                            </div>
-                        </div>
-                        <div class="item"> <a href="http://gorillathemes.com/demo/automotive/inventory/audi-a5-cabriolet/"><img src="https://i1.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/a1.png?resize=980%2C476" class="img-responsive" alt="" srcset="https://i2.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/a1.png?resize=980%2C476 980w, https://i2.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/a1.png?zoom=2&amp;resize=980%2C476 1960w" sizes="(max-width: 980px) 100vw, 980px"> </a>
-                            <div class="carousel-caption">
-                                <h2> 2013 Audi A5 <span class="price-style">&nbsp;&nbsp;$42,300 </span></h2>
-                            </div>
-                        </div>
-                        <div class="item"> <a href="http://gorillathemes.com/demo/automotive/inventory/mercedes-benz-sl550/"><img src="https://i1.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/mb1.jpg?resize=980%2C476" class="img-responsive" alt="" srcset="https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/mb1.jpg?resize=980%2C476 980w, https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/mb1.jpg?zoom=2&amp;resize=980%2C476 1960w" sizes="(max-width: 980px) 100vw, 980px"> </a>
-                            <div class="carousel-caption">
-                                <h2> 2014 Mercedez Benz SL-550 <span class="price-style">&nbsp;&nbsp;$81,197 </span></h2>
-                            </div>
-                        </div>
-                        <div class="item"> <a href="http://gorillathemes.com/demo/automotive/inventory/porsche-boxster/"><img src="https://i2.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/normal-6.jpg?resize=980%2C476" class="img-responsive" alt=""> </a>
-                            <div class="carousel-caption">
-                                <h2> 2011 Porsche Boxster <span class="price-style">&nbsp;&nbsp;$64,540 </span></h2>
-                            </div>
-                        </div>
-                        <div class="item active"> <a href="http://gorillathemes.com/demo/automotive/inventory/range-rover/"><img src="https://i1.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/rr7.jpeg?resize=850%2C425" class="img-responsive" alt="" srcset="https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/rr7.jpeg?w=850 850w, https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/rr7.jpeg?resize=768%2C384 768w" sizes="(max-width: 850px) 100vw, 850px"> </a>
-                            <div class="carousel-caption">
-                                <h2> 2012 Land Rover Range Rover <span class="price-style">&nbsp;&nbsp;$80,275 </span></h2>
-                            </div>
+        <div id="content" class="col-md-9 col-md-push-3">
+            <div id="home-slider" class="carousel slide  hideOnSearch home" data-interval="18000" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#home-slider" data-slide-to="0" class=""></li>
+                    <li data-target="#home-slider" data-slide-to="1" class=""></li>
+                    <li data-target="#home-slider" data-slide-to="2" class=""></li>
+                    <li data-target="#home-slider" data-slide-to="3" class=""></li>
+                    <li data-target="#home-slider" data-slide-to="4" class="active"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item"> <a href="http://gorillathemes.com/demo/automotive/inventory/acura-mdx/">
+                                <img src="https://i0.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/2012-mdx-24.jpg?resize=980%2C476" class="img-responsive" alt="" srcset="https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/2012-mdx-24.jpg?resize=980%2C476 980w, https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/2012-mdx-24.jpg?zoom=2&amp;resize=980%2C476 1960w, https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/2012-mdx-24.jpg?zoom=3&amp;resize=980%2C476 2940w" sizes="(max-width: 980px) 100vw, 980px"> </a>
+                        <div class="carousel-caption">
+                            <h2> 2014 Acura MDX <span class="price-style">&nbsp;&nbsp;$56,700 </span></h2>
                         </div>
                     </div>
-                    <a class="left carousel-control" href="#home-slider" data-slide="prev"> <i class="fa fa-angle-left fa-2x"></i></a>
-                    <a class="right carousel-control" href="#home-slider" data-slide="next"> <i class="fa fa-angle-right fa-2x"></i></a>
-                </div><!-- /#home-slider-->
-                <div class="row produc-list">
-                    <div class="col-md-4">
-                        <div class="product-item">
-                            <div class="images">
+                    <div class="item"> <a href="http://gorillathemes.com/demo/automotive/inventory/audi-a5-cabriolet/"><img src="https://i1.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/a1.png?resize=980%2C476" class="img-responsive" alt="" srcset="https://i2.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/a1.png?resize=980%2C476 980w, https://i2.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/a1.png?zoom=2&amp;resize=980%2C476 1960w" sizes="(max-width: 980px) 100vw, 980px"> </a>
+                        <div class="carousel-caption">
+                            <h2> 2013 Audi A5 <span class="price-style">&nbsp;&nbsp;$42,300 </span></h2>
+                        </div>
+                    </div>
+                    <div class="item"> <a href="http://gorillathemes.com/demo/automotive/inventory/mercedes-benz-sl550/"><img src="https://i1.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/mb1.jpg?resize=980%2C476" class="img-responsive" alt="" srcset="https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/mb1.jpg?resize=980%2C476 980w, https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/mb1.jpg?zoom=2&amp;resize=980%2C476 1960w" sizes="(max-width: 980px) 100vw, 980px"> </a>
+                        <div class="carousel-caption">
+                            <h2> 2014 Mercedez Benz SL-550 <span class="price-style">&nbsp;&nbsp;$81,197 </span></h2>
+                        </div>
+                    </div>
+                    <div class="item"> <a href="http://gorillathemes.com/demo/automotive/inventory/porsche-boxster/"><img src="https://i2.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/normal-6.jpg?resize=980%2C476" class="img-responsive" alt=""> </a>
+                        <div class="carousel-caption">
+                            <h2> 2011 Porsche Boxster <span class="price-style">&nbsp;&nbsp;$64,540 </span></h2>
+                        </div>
+                    </div>
+                    <div class="item active"> <a href="http://gorillathemes.com/demo/automotive/inventory/range-rover/"><img src="https://i1.wp.com/cdn-gorillathemes.netdna-ssl.com/demo/automotive/wp-content/uploads/2013/11/rr7.jpeg?resize=850%2C425" class="img-responsive" alt="" srcset="https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/rr7.jpeg?w=850 850w, https://i1.wp.com/gorillathemes.com/demo/automotive/wp-content/uploads/2013/11/rr7.jpeg?resize=768%2C384 768w" sizes="(max-width: 850px) 100vw, 850px"> </a>
+                        <div class="carousel-caption">
+                            <h2> 2012 Land Rover Range Rover <span class="price-style">&nbsp;&nbsp;$80,275 </span></h2>
+                        </div>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#home-slider" data-slide="prev"> <i class="fa fa-angle-left fa-2x"></i></a>
+                <a class="right carousel-control" href="#home-slider" data-slide="next"> <i class="fa fa-angle-right fa-2x"></i></a>
+            </div><!-- /#home-slider-->
+            <div class="row produc-list">
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <div class="images">
+                            <a href="#">
+                                <img src="images/product.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="summary">
+                            <div class="name">
                                 <a href="#">
-                                        <img src="images/product.png" alt="">
-                                    </a>
+                                2014 Mercedez Benz SL-550
+                                </a>
                             </div>
-                            <div class="summary">
-                                <div class="name">2014 Mercedez Benz SL-550</div>
-                                <div class="price">15.000.000đ</div>
-                                <div class="origin">Thái Lan</div>
-                            </div>
+                            <div class="price">15.000.000đ</div>
+                            <div class="origin">Thái Lan</div>
                             <a class="btn btn-detail" href="#">Chi tiết</a>
                         </div>
                     </div>
-                </div><!-- /.produc-list-->
-
-            </div><!-- /#content-->
-            <div id="sidebar" class="col-md-3 col-md-pull-9">
-                <div class="side-widget">
-                    <h3 class="widget-title hidden-xs">Search</h3>
-                    <div class="widget-content">
-                        <form action="/" >
-                            <select>
-                                <option>Chủng loại</option>
-                                <option value="0">Zero</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                            </select>
-
-                            <select>
-                                <option>Chủng loại</option>
-                                <option value="0">Zero</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                            </select>
-
-                            <select>
-                                <option>Chủng loại</option>
-                                <option value="0">Zero</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                            </select>
-
-                            <select>
-                                <option>Chủng loại</option>
-                                <option value="0">Zero</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                            </select>
-                            
-                            <select>
-                                <option>Chủng loại</option>
-                                <option value="0">Zero</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                            </select>
-                            <button class="btn btn-default btn-large" type="submit">
-                                <i class="fa fa-search"></i> Tìm kiếm
-                            </button>
-                        </form>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <div class="images">
+                            <a href="#">
+                                <img src="images/product.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="summary">
+                            <div class="name">2014 Mercedez Benz SL-550</div>
+                            <div class="price">15.000.000đ</div>
+                            <div class="origin">Thái Lan</div>
+                            <a class="btn btn-detail" href="#">Chi tiết</a>
+                        </div>
                     </div>
-                </div><!-- /.side-widget-->
-            </div><!-- /#sidebar-->
-        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <div class="images">
+                            <a href="#">
+                                <img src="images/product.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="summary">
+                            <div class="name">2014 Mercedez Benz SL-550</div>
+                            <div class="price">15.000.000đ</div>
+                            <div class="origin">Thái Lan</div>
+                            <a class="btn btn-detail" href="#">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.produc-list-->
+
+        </div><!-- /#content-->
+        <div id="sidebar" class="col-md-3 col-md-pull-9">
+            <div class="side-widget">
+                <h3 class="widget-title hidden-xs">Search</h3>
+                <div class="widget-content">
+                    <form action="/" >
+                        <select>
+                            <option>Chủng loại</option>
+                            <option value="0">Zero</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+
+                        <select>
+                            <option>Chủng loại</option>
+                            <option value="0">Zero</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+
+                        <select>
+                            <option>Chủng loại</option>
+                            <option value="0">Zero</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+
+                        <select>
+                            <option>Chủng loại</option>
+                            <option value="0">Zero</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+                        
+                        <select>
+                            <option>Chủng loại</option>
+                            <option value="0">Zero</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                        </select>
+                        <button class="btn btn-default btn-large" type="submit">
+                            <i class="fa fa-search"></i> Tìm kiếm
+                        </button>
+                    </form>
+                </div>
+            </div><!-- /.side-widget-->
+
+            <div class="side-widget">
+                <h3 class="widget-title hidden-xs">Xem nhiều</h3>
+                <div class="widget-content">
+                    <div class="product-item">
+                        <div class="images">
+                            <a href="#">
+                                <img src="images/product.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="summary">
+                            <div class="name">
+                                <a href="#">
+                                2014 Mercedez Benz SL-550
+                                </a>
+                            </div>
+                            <div class="price">15.000.000đ</div>
+                            <div class="origin">Thái Lan</div>
+                            <a class="btn btn-detail" href="#">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.side-widget-->
+
+            <div class="side-widget">
+                <h3 class="widget-title hidden-xs">Theo dõi</h3>
+                <div class="widget-content" style"width:100%">
+                    <div class="fb-page" data-href="https://www.facebook.com/mphealthandbeauty/" data-tabs="timeline" data-height="500" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/mphealthandbeauty/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/mphealthandbeauty/">MP Health &amp; Beauty</a></blockquote></div>
+                </div>
+            </div><!-- /.side-widget-->
+        </div><!-- /#sidebar-->
     </div>
+
+    <div class="container-fluid">
+        <div class="col-sm-4">
+            <h3 class="widget-title">TIN TỨC</h3>
+            <ul>
+                <li>
+                    <a href="#">Thinking about selling your current vehicle?</a>
+                </li>
+                <li>
+                    <a href="#">Bring your car for an appraisal, and get a free written offer good for 7 days.</a>
+                </li>
+                <li>
+                    <a href="#">Submit your vehicle information now.</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <h3 class="widget-title">TIN TỨC</h3>
+            <div>
+                <p>Submit your vehicle information now.</p>
+                <p>Tel: 0944419503</p>
+                <p>Email: leanhvin@gmail.com</p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <h3 class="widget-title">Chỉ đường</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.8200285970477!2d106.64091720029346!3d10.789832517783095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752eb286fca98b%3A0x63029e90b8defed4!2zQ8O0bmcgVHkgQ3AgQ8O0bmcgTmdo4buHIEdvbGQgU3Rhcg!5e0!3m2!1svi!2s!4v1494954923387" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+
+    </div>
+
+
 
     <script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
