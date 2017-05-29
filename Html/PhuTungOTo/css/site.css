@@ -23,12 +23,14 @@
 #call-us a{
     color: #fff;
     font-size: 30px;
+    font-family: "Roboto Condensed",sans-serif;
     padding-right: 5px;
     text-transform: uppercase;
 }
 
 #main-nav{
     margin: 4px 10px 15px;
+    font-family: "Roboto Condensed",sans-serif;
 }
 #main-nav ul{
     margin: 0;
@@ -43,7 +45,7 @@
     display: block;
     border-right: 1px solid #333;
     color: #fff;
-    padding: 15px 30px;
+    padding: 15px 50px;
     text-decoration: none;
     text-transform: uppercase;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
@@ -57,7 +59,7 @@
 #home-slider{
     margin-bottom: 20px; 
 }
-#home-slider .item img{
+.carousel .item img{
     width: 100%;
 }
 .carousel-control.left{
@@ -109,6 +111,7 @@ ol.carousel-indicators li {
     background: #b12a2a;
     color: #fff;
     display: block;
+    font-family: "Roboto Condensed",sans-serif;
     font-size: 15px;
     font-weight: 700;
     line-height: 2.2em;
@@ -165,6 +168,162 @@ ol.carousel-indicators li {
     margin-bottom: 10px;
 }
 
+.detail-page-content{
+    color: #d1d1d1;
+    font-size: 16px;
+    line-height: 160%;
+}
+.page-title{
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-family: "Roboto Condensed",sans-serif;
+}
+
+/* Product detail */
+.carousel-thumbnails{
+    padding: 2px 0;
+}
+.carousel-thumbnails ul{
+    padding: 0;
+}
+.carousel-thumbnails li{
+    padding: 2px;
+    transition: all 0.3s ease 0s;
+}
+.carousel-thumbnails li:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.carousel-thumbnails a img{
+    height: 60px;
+    width: 80px;
+}
+
+.product-info{
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+.product-info .price{
+    background: #000;
+    color:  red;
+    font-family: "Roboto Condensed",sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 12px 0;
+    text-align: center;
+}
+ul.quick-list{
+    padding: 0;
+    list-style: none;
+}
+ul.quick-list li{
+    border-bottom: 1px solid #555;
+    color: #f1f1f1;
+    font-size: 14px;
+    padding: 10px 0;
+}
+.social-box{
+    text-align: center;
+    margin: 0 0 20px;
+}
+.social-box .col-xs-4{
+    padding: 2px;
+}
+.social-item,
+a.social-item:hover{
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 5px 0;
+    text-decoration: none;
+    width: 100%;
+}
+.my-facebook{
+    background: #3b5997;
+}
+.my-facebook:hover{
+    background: #2d4372;
+}
+.my-twitter{
+    background: #00aced;
+}
+.my-twitter:hover{
+    background: #0084b4;
+}
+.my-googleplus{
+    background: #d64937;
+}
+.my-googleplus:hover{
+    background: #b53525;
+}
+
+/* News */
+.post{
+    background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+}
+.post > .page-title{
+    padding: 30px 15px 0;
+    margin: 0;
+}
+.post > .page-title a{
+    color: #f1f1f1;
+    text-decoration: none;
+}
+.post > .page-title a:hover{
+    color: red;
+}
+.post-image{
+    margin: 20px 0;
+}
+.post p {
+    color: #f1f1f1;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 160%;
+    padding: 0 15px;
+}
+.link-details{
+    color: #b12a2a;
+}
+.link-details:hover{
+    color: red;
+    text-decoration: underline;
+}
+
+/* Contact */
+.contact-item{
+    background: #111;
+    padding: 15px 10px;
+    margin: 15px 0;
+}
+.contact-item h3{
+    text-transform: uppercase;
+    font-family: "Roboto Condensed",sans-serif;
+}
+#footer p{
+    margin: 8px;
+    line-height: 160%;
+}
+#footer p a{
+    color: #f1f1f1;
+    text-decoration: none;
+}
+
+#bottom-bar{
+    color: #888;
+    font-size: 11px;
+    border-top: 1px solid #444; 
+    margin: 20px 0 0;
+}
+#bottom-bar a{
+    color: #ccc;
+    line-height: 42px;
+    text-anchor: none;
+}
 
 
 .btn.btn-detail{
@@ -175,10 +334,83 @@ ol.carousel-indicators li {
     text-transform: uppercase;
     width: 100%;
     transition: all 0.5s ease 0s;
+    font-family: "Roboto Condensed",sans-serif;
 }
 .btn.btn-detail:hover{
     background: #dcdcdc;
     color: #000;
+}
+.btn.btn-search{
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    font-weight: bold;
+    padding: 10px;
+    text-transform: uppercase;
+    margin-top: 5px;
+    font-family: "Roboto Condensed",sans-serif;
+}
+.w100p{
+    width: 100%;
+}
+.pb0{
+    padding-bottom: 0;
+}
+.no-background{
+    background: none;
+}
+/* Select box */
+.selectBox-dropdown{
+    background: #333;
+    border: medium none;
+    box-shadow: none;
+    border-radius: 0;
+    cursor: pointer;
+    line-height: 160%;
+    padding: 10px 10px 0;
+    text-align: left;
+    margin: 5px 0;
+    font-family: "Roboto Condensed",sans-serif;
+}
+.selectBox-dropdown .selectBox-label{
+    text-transform: uppercase;
+    color: #f1f1f1;
+}
+.selectBox-dropdown .selectBox-arrow{
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAOAQMAAADHWqTrAAAABlBMVEXt7u0AAAC8TFHIAAAAAXRSTlMAQObYZgAAABpJREFUCB1jQAP/GxjqGRjsGBhkGBg4GJABADkdAmFf+WokAAAAAElFTkSuQmCC') no-repeat scroll 50% center;
+    border: none;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 36px;
+}
+.selectBox-dropdown-menu{
+    background: #444;
+    border: none;
+    box-shadow: none;
+    color: #000;
+}
+
+.selectBox-options li.selectBox-hover a,
+.selectBox-options li.selectBox-selected a {
+    color: #333;
+    background: #eee;
+}
+.selectBox-options li a{
+    border-bottom: 1px solid #111;
+    color: #f1f1f1;
+    padding: 0.4em 1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Overide Bootstrap*/
+.form-control:focus{
+    box-shadow: none;
 }
 
 /* Facebook */
