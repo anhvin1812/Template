@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "Content/css/site.css",
+    "inputFile": "Content/css/site.sass"
+  },
+  {
+    "outputFile": "Content/css/site.css",
+    "inputFile": "Content/css/site.scss"
+  }
+]
