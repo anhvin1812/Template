@@ -1,0 +1,26 @@
+@media screen and ( max-width:1300px) {
+	.container {
+	    width: 100%;
+	}
+}
+
+@media screen and ( max-width:767px) {
+	.module-highlight .carousel-inner > .item,
+    .module-highlight .carousel-inner > .item:first-child {
+        padding: 0;
+	    width: 100%;
+	    float: none;
+	}
+    .module-highlight .carousel-inner > .item {
+        display: none;
+    }
+    .module-highlight .carousel-inner > .active, 
+    .module-highlight .carousel-inner > .next, 
+    .module-highlight .carousel-inner > .prev {
+        display: block;
+    }
+    .carousel-caption h3 {
+        font-size: 18px;
+    }
+    
+}

@@ -97,26 +97,26 @@ ul.multi-level {
     padding: 28px 15px; }
 
 /* Highlight */
-.module-highlight {
-  background: #e7e8e1; }
-  .module-highlight .carousel-inner > .item {
-    display: block;
-    width: 25%;
-    float: left;
-    position: relative; }
-    .module-highlight .carousel-inner > .item .img-holder:after {
-      background: transparent linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 50%, black 100%, black 101%) repeat scroll 0 0;
-      bottom: 0;
-      content: " ";
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-      z-index: 6; }
-  .module-highlight .carousel-inner > .item:first-child {
-    width: 50%; }
-    .module-highlight .carousel-inner > .item:first-child .carousel-caption h3 {
-      font-size: 18px; }
+.module-highlight .carousel-inner > .item {
+  display: block;
+  width: 25%;
+  float: left;
+  padding: 0 0 3px 3px; }
+  .module-highlight .carousel-inner > .item .img-holder:after {
+    background: transparent linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 50%, black 100%, black 101%) repeat scroll 0 0;
+    bottom: 0;
+    content: " ";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 6; }
+
+.module-highlight .carousel-inner > .item:first-child {
+  width: 50%;
+  padding: 0; }
+  .module-highlight .carousel-inner > .item:first-child .carousel-caption h3 {
+    font-size: 18px; }
 
 .carousel-caption {
   left: 0;
