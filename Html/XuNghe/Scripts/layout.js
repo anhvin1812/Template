@@ -48,6 +48,78 @@ var layout = (function () {
         });
     };
 
+    my.Navigation = function () {
+        function openCloseMenu(close) {
+            if (close) {
+                $("#btn-open-menu").removeClass("open");
+                $("#main-nav").removeClass("open");
+                $(".wrap").removeClass("push");
+            } else {
+                // open menu
+                $("#btn-open-menu").addClass("open");
+                $("#main-nav").addClass("open");
+                $(".wrap").addClass("push");
+            }
+        }
+
+        function openCloseSearchBar(close) {
+            if (close) {
+                $("#btn-open-search").removeClass("open");
+                $("#search-form").removeClass("open");
+            } else {
+                // open menu
+                $("#btn-open-search").addClass("open");
+                $("#search-form").addClass("open");
+                $("#txt-search").focus();
+            }
+        }
+
+        //open mobile menu
+        $("#btn-open-menu").click(function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var close = $(this).hasClass("open");
+            openCloseMenu(close);
+        });
+
+        // open search bar
+        $("#btn-open-search").click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var close = $(this).hasClass("open");
+            openCloseSearchBar(close);
+        });
+
+        // typing event
+        $(".txt-search").on("keyup", function() {
+            var term = $(this).val();
+            if (term.length > 0) {
+                $(".btn-search-clear").removeClass("hide");
+            } else {
+                $(".btn-search-clear").addClass("hide");
+            }
+        });
+
+        // clear search box
+        $(".btn-search-clear").click(function () {
+            $(".txt-search").val("");
+            $(this).addClass("hide");
+        });
+
+        // click outside close navigation
+        $(document).click(function(event) {
+            if (!$(event.target).is("#main-nav, #main-nav *")) {
+                openCloseMenu(true); // close menu
+            }
+
+            if (!$(event.target).is("#search-form, #search-form *")) {
+                openCloseSearchBar(true); // close search form
+            }
+        });
+    }
+
     return my;
 }());
 
@@ -57,4 +129,6 @@ $(document).ready(function () {
 
     // Responsive 
     layout.Responsive();
+
+    layout.Navigation();
 });

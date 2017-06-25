@@ -5,7 +5,80 @@
 }
 
 @media screen and ( max-width:767px) {
-	.module-highlight .carousel-inner > .item,
+    .container {
+        padding: 0 10px;
+    }
+    .wrap.push {
+        right: 280px;
+        -webkit-transition: right 400ms ease 0s;
+        -moz-transition: right 400ms ease 0s;
+        -ms-transition: right 400ms ease 0s;
+        -o-transition: right 400ms ease 0s;
+        transition: right 400ms ease 0s;
+    }
+
+    .header .logo .inner-logo img {
+        height: 26px;
+        max-width: 200px;
+    }
+    .menu-btn {
+        padding: 21px 15px;
+    }
+    #main-nav {
+        background: #333;
+        bottom: 0;
+        height: 100%;
+        position: fixed;
+        padding: 10px 0;
+        right: -280px;
+        top: 0;
+        -webkit-transition: right 400ms ease 0s;
+        -moz-transition: right 400ms ease 0s;
+        -ms-transition: right 400ms ease 0s;
+        -o-transition: right 400ms ease 0s;
+        transition: right 400ms ease 0s;
+        width: 280px;
+        overflow: scroll;
+    }
+    #main-nav.open {
+        right: 0;
+    }
+    ul.multi-level > li {
+        float: none;
+    }
+    ul.multi-level li a {
+        color: #fff;
+        font-size: 14px;
+    }
+    ul.multi-level > li a {
+        padding: 10px 15px;
+    }
+    ul.multi-level li ul {
+        width: 100%;
+        opacity: 1;
+        display: block;
+        background: none;
+        box-shadow: none;
+        position: static;
+        visibility: visible;
+        overflow: scroll;
+    }
+    ul.multi-level li li {
+        border: none;
+    }
+    ul.multi-level li li a {
+        border: none;
+        padding-left: 40px;
+        color: #fff;
+    }
+    ul.multi-level li li.active a,
+    ul.multi-level li li a:hover {
+        color: #dc4a29;
+    }
+
+
+
+    .module-highlight .carousel-inner > .item,
     .module-highlight .carousel-inner > .item:first-child {
         padding: 0;
 	    width: 100%;
@@ -19,8 +92,31 @@
     .module-highlight .carousel-inner > .prev {
         display: block;
     }
+    .module-highlight .carousel-inner > .item:first-child .carousel-caption h3,
     .carousel-caption h3 {
-        font-size: 18px;
+        font-size: 16px;
     }
-    
+    .carousel-caption.photo {
+        padding: 10px;
+    }
+    .carousel-caption.photo .post-title {
+        font-size: 14px;
+    }
+
+    .post-info {
+        padding: 15px;
+    }
+    .social-share {
+        text-align: left;
+    }
+
+    .pagination > li a {
+        padding: 4px 10px;
+    }
+    .pagination > li:first-child {
+        margin: 0 10px 0 0;
+    }
+    .pagination > li:last-child {
+        margin: 0 0 0 10px;
+    }
 }

@@ -17,7 +17,7 @@
     <link href="Content/css/responsive.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="header-wrap">
+    <div class="wrap">
         <div class="top-bar">
             <div class="container">
 
@@ -32,7 +32,7 @@
                         </a>
                     </div>
                     <div class="nav-wrap">
-                        <nav id="main-nav">
+                        <nav id="main-nav" class="">
                             <ul class="multi-level">
                                 <li>
                                     <a href="#">Trang chủ</a>
@@ -67,22 +67,31 @@
                                 </li>
                             </ul>
                         </nav>
-                        <div class="nav-search">
-                            <a class="search-btn" href="">
+                        <div class="pull-left">
+                            <a id="btn-open-search" class="menu-btn">
                                 <i class="fa fa-search"></i>
+                            </a>
+                        </div>
+                        <div class="pull-left hidden-sm hidden-md hidden-lg">
+                            <a id="btn-open-menu" class="menu-btn">
+                                <i class="fa fa-reorder"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div id="search-form" class="hidden">
-                    <form action="">
-                        <input class="txt-search" type="text">
-                        <button class="btn-search-clear">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        <button class="btn-search-clear">
-                            <i class="fa fa-close"></i>
-                        </button>
+                <div id="search-form" class="">
+                    <form action="/">
+                        <div class="input-group search-box">
+                            <span class="input-group-addon">
+                                <button type="submit">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                            <input id="txt-search" name="term" type="text" class="form-control txt-search" placeholder="Nhập từ khóa & Enter">
+                            <button class="btn-search-clear hide" type="button">
+                                <span class="fa fa-close"></span>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -763,7 +772,7 @@
                                             </a>
                                         </div>
                                         <div class="carousel-caption photo">
-                                            <h4>
+                                            <h4 class="post-title">
                                                 <a href="#">
                                                     Throughout life people will make you mad, disrespect you and treat you bad. Let God deal with the things they do.
                                                 </a>
@@ -783,7 +792,7 @@
                                             </a>
                                         </div>
                                         <div class="carousel-caption photo">
-                                            <h4>
+                                            <h4 class="post-title">
                                                 <a href="#">
                                                     Throughout life people will make you mad, disrespect you and treat you bad. Let God deal with the things they do.
                                                 </a>
@@ -803,7 +812,7 @@
                                             </a>
                                         </div>
                                         <div class="carousel-caption photo">
-                                            <h4>
+                                            <h4 class="post-title">
                                                 <a href="#">
                                                     Throughout life people will make you mad, disrespect you and treat you bad. Let God deal with the things they do.
                                                 </a>

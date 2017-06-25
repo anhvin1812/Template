@@ -27,13 +27,20 @@ ul.reset {
   margin: 0;
   padding: 0; }
 
-.header .logo {
-  float: left;
-  padding: 20px 0; }
-  .header .logo .inner-logo {
-    height: 36px; }
-    .header .logo .inner-logo img {
-      height: 100%; }
+.wrap {
+  position: relative;
+  right: 0; }
+
+.header {
+  background: #2c2d30; }
+  .header .logo {
+    float: left;
+    padding: 20px 0; }
+    .header .logo .inner-logo {
+      display: block; }
+      .header .logo .inner-logo img {
+        height: 36px;
+        max-width: 215px; }
 
 .nav-wrap {
   float: right; }
@@ -71,11 +78,12 @@ ul.multi-level {
     ul.multi-level li a {
       display: block;
       text-decoration: none;
-      color: #333; }
+      color: #fff; }
     ul.multi-level li li {
       border-bottom: 1px solid #e1e1e1; }
       ul.multi-level li li a {
         border-left: 4px solid #dc4a29;
+        color: #333;
         padding: 10px 15px; }
         ul.multi-level li li a:hover {
           border-left-width: 15px; }
@@ -88,35 +96,70 @@ ul.multi-level {
   ul.multi-level li:hover li:hover > ul {
     top: 0; }
 
-.nav-search {
-  float: left; }
-  .nav-search .search-btn {
-    color: #333;
-    display: block;
-    font-size: 16px;
-    padding: 28px 15px; }
-
-/* Highlight */
-.module-highlight .carousel-inner > .item {
+.menu-btn {
+  color: #fff;
   display: block;
-  width: 25%;
-  float: left;
-  padding: 0 0 3px 3px; }
-  .module-highlight .carousel-inner > .item .img-holder:after {
-    background: transparent linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 50%, black 100%, black 101%) repeat scroll 0 0;
-    bottom: 0;
-    content: " ";
-    left: 0;
+  font-size: 16px;
+  padding: 28px 15px;
+  cursor: pointer; }
+  .menu-btn.open, .menu-btn:hover, .menu-btn:focus {
+    color: #129793; }
+
+#search-form {
+  display: none; }
+  #search-form.open {
+    display: block; }
+
+.search-box {
+  position: relative;
+  padding-bottom: 5px; }
+  .search-box .input-group-addon {
+    color: #999;
+    background: #fff;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    border-radius: 0; }
+    .search-box .input-group-addon button {
+      background: none;
+      border: none;
+      padding: 0; }
+  .search-box .txt-search {
+    padding: 6px  40px 6px 0;
+    border-left: none; }
+    .search-box .txt-search:focus {
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+      border-color: #ccc; }
+  .search-box .btn-search-clear {
+    background: none;
+    border: medium none;
+    bottom: 5px;
+    font-size: 18px;
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 6; }
+    z-index: 9; }
 
-.module-highlight .carousel-inner > .item:first-child {
-  width: 50%;
-  padding: 0; }
-  .module-highlight .carousel-inner > .item:first-child .carousel-caption h3 {
-    font-size: 18px; }
+/* Highlight */
+.module-highlight {
+  margin-top: 15px; }
+  .module-highlight .carousel-inner > .item {
+    display: block;
+    width: 25%;
+    float: left;
+    padding: 0 0 3px 3px; }
+    .module-highlight .carousel-inner > .item .img-holder:after {
+      background: transparent linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 50%, black 100%, black 101%) repeat scroll 0 0;
+      bottom: 0;
+      content: " ";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 6; }
+  .module-highlight .carousel-inner > .item:first-child {
+    width: 50%;
+    padding: 0; }
+    .module-highlight .carousel-inner > .item:first-child .carousel-caption h3 {
+      font-size: 18px; }
 
 .carousel-caption {
   left: 0;
@@ -150,12 +193,12 @@ ul.multi-level {
 
 .carousel-thumbnail .carousel-indicators {
   position: static;
-  margin: 10px 0 0;
+  margin: 10px -5px 0;
   width: auto; }
   .carousel-thumbnail .carousel-indicators li {
     width: 20%;
     float: left;
-    padding-right: 10px;
+    padding: 0 5px;
     background-color: transparent;
     border: none;
     border-radius: 0;
@@ -163,8 +206,6 @@ ul.multi-level {
     height: auto;
     margin: auto;
     text-indent: 0; }
-    .carousel-thumbnail .carousel-indicators li:last-child {
-      padding-right: 0; }
 
 .carousel-thumbnail .carousel-outer {
   position: relative; }
