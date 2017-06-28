@@ -1407,19 +1407,32 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\normalize.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\site.css" />
+    <Content Include="Content\css\site.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\fonts.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\robotocondensed-bold-webfont.svg" />
+    <Content Include="Content\fonts\robotocondensed-light-webfont.svg" />
+    <Content Include="Content\fonts\robotocondensed-regular-webfont.svg" />
     <Content Include="Content\images\1.jpg" />
     <Content Include="Content\images\1_zoom.jpg" />
     <Content Include="Content\images\2.jpg" />
     <Content Include="Content\images\3.jpg" />
+    <Content Include="Content\images\bg-stripe.png" />
     <Content Include="Content\images\default-image.png" />
     <Content Include="Content\images\default-thumbnail.png" />
     <Content Include="Content\images\facebook-footer.png" />
     <Content Include="Content\images\facebook.png" />
     <Content Include="Content\images\google.png" />
+    <Content Include="Content\images\img-02.jpg" />
+    <Content Include="Content\images\img-03.jpg" />
+    <Content Include="Content\images\img-04.jpg" />
+    <Content Include="Content\images\img-05.jpg" />
+    <Content Include="Content\images\img-06.jpg" />
     <Content Include="Content\images\instagram-footer.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\pinterest-footer.png" />
@@ -1570,6 +1583,21 @@
     <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\News\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Content\css\site.scss" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\robotocondensed-bold-webfont.eot" />
+    <Content Include="Content\fonts\robotocondensed-bold-webfont.ttf" />
+    <Content Include="Content\fonts\robotocondensed-bold-webfont.woff" />
+    <Content Include="Content\fonts\robotocondensed-light-webfont.eot" />
+    <Content Include="Content\fonts\robotocondensed-light-webfont.ttf" />
+    <Content Include="Content\fonts\robotocondensed-light-webfont.woff" />
+    <Content Include="Content\fonts\robotocondensed-regular-webfont.eot" />
+    <Content Include="Content\fonts\robotocondensed-regular-webfont.ttf" />
+    <Content Include="Content\fonts\robotocondensed-regular-webfont.woff" />
     <None Include="Properties\DefaultSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>DefaultSettings.Designer.cs</LastGenOutput>
@@ -1580,6 +1608,9 @@
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\App\app.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\layout.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\product-scripts.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\EasyZoom\css\easyzoom.css" />
@@ -1661,6 +1692,7 @@
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Shared\_ProductSocialMediaTag.cshtml" />
     <Content Include="Views\Shared\_ArticleSocialMediaTag.cshtml" />
+    <Content Include="Views\Shared\NoPermission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1671,6 +1703,8 @@
     <Folder Include="Content\FileUpload\Galleries\Thumbnails\" />
     <Folder Include="Content\FileUpload\Products\Images\" />
     <Folder Include="Content\FileUpload\Products\Thumbnails\" />
+    <Folder Include="Scripts\bootstrap-datetimepicker\" />
+    <Folder Include="Scripts\owl-carousel\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
@@ -1726,7 +1760,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>21843</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

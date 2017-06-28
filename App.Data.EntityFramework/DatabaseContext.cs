@@ -25,7 +25,7 @@ namespace App.Data.EntityFramework
         {
             _instanceId = Guid.NewGuid();
 
-            _dbContext = _dbContext = new MinhKhangDbContext(connectionString);
+            _dbContext = new MinhKhangDbContext(connectionString);
             Disposables.Add(_dbContext);
         }
 

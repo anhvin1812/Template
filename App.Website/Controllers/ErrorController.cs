@@ -15,5 +15,10 @@ namespace App.Website.Controllers
         {
             return View("NotFound");
         }
+
+        public ActionResult NoPermission()
+        {
+            return View("NoPermission");
+        }
     }
 }

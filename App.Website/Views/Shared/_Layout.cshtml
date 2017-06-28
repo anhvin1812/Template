@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>@ViewBag.Title</title>
-    @RenderSection("SocialMediaTag", required: false)
-
-    @RenderSection("AddStyles", required: false)
-
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,300italic,300,400italic,500,500italic,700,700italic" rel="stylesheet">
     @Styles.Render("~/Content/css")
-
+    @RenderSection("Style", required: false)
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,90 +18,206 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    @RenderSection("SocialMediaTag", required: false)
 </head>
 <body>
-@RenderSection("AfterBody", required: false)
+    @RenderSection("AfterBody", required: false)
 
-<header>
-    <div id="top-line"></div>
-    <nav id="top-nav">
-        <div id="logo-container">
-            <a href="#">
-                <img src="@Url.Content("~/Content/images/logo.png")"/>
-            </a>
-            <button class="navbar-toggle collapsed" data-target="#collapse-menu" data-toggle="collapse" type="button">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div id="collapse-menu">
-            <div id="nav-right" class="navigation">
-                <a href="@Url.Action("Index", "Search")" class="gray-border-right">
-                    <span class="glyphicon glyphicon-search"></span>
-                    TÌM KIẾM
-                </a>
-                <a href="@Url.Action("Login", "Account")" class="gray-border-right">
-                    <span class="glyphicon glyphicon-user"></span>
-                    Đăng nhập
-                </a>
-                <a href="@Url.Action("Index", "Cart")" class="gray-border-right">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                    GIỎ HÀNG
-                    <span id="item-amount">4</span>
-                </a>
-            </div>
-            <div id="nav-left" class="navigation">
-                <a href="/">TRANG CHỦ</a>
-                <a href="@Url.Action("Index", "Product")">SẢN PHẨM</a>
-                <a href="@Url.Action("Index", "Service")">DỊCH VỤ</a>
-                <a href="@Url.Action("Index", "About")">GIỚI THIỆU</a>
+    <div class="wrap">
+        <div class="top-bar">
+            <div class="container">
+
             </div>
         </div>
-    </nav>
-</header>
+        <header id="header" class="header">
+            <div class="container">
+                <div class="nav-holder clearfix">
+                    <div class="logo">
+                        <a class="inner-logo" href="/">
+                            <img class="img-responsive" src="@Url.Content("~/Content/images/logo.png")" alt="">
+                        </a>
+                    </div>
+                    <div class="nav-wrap">
+                        <nav id="main-nav" class="">
+                            <ul class="multi-level">
+                                <li>
+                                    <a href="#">Trang chủ</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tin tức</a>
+                                    <ul>
+                                        <li><a href="#">Thời sự</a></li>
+                                        <li><a href="#">Thể thao</a></li>
+                                        <li>
+                                            <a href="#">Thể thao</a>
+                                            <ul>
+                                                <li><a href="#">Bóng đá</a></li>
+                                                <li><a href="#">Tennis</a></li>
+                                                <li><a href="#">Cầu lông</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Du lịch</a>
+                                </li>
+                                <li>
+                                    <a href="#">Góc học tập</a>
+                                    <ul>
+                                        <li><a href="#">Tiếng Anh</a></li>
+                                        <li><a href="#">Nấu Ăn</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Hài</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="pull-left">
+                            <a id="btn-open-search" class="menu-btn">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </div>
+                        <div class="pull-left hidden-sm hidden-md hidden-lg">
+                            <a id="btn-open-menu" class="menu-btn">
+                                <i class="fa fa-reorder"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="search-form" class="">
+                    <form action="/">
+                        <div class="input-group search-box">
+                            <span class="input-group-addon">
+                                <button type="submit">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                            <input id="txt-search" name="term" type="text" class="form-control txt-search" placeholder="Nhập từ khóa & Enter">
+                            <button class="btn-search-clear hide" type="button">
+                                <span class="fa fa-close"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                @RenderBody()
+                
+            </div>
+        </main>
 
-@RenderSection("HomeSlider", false)
+        <footer class="footer">
+            <div class="container">
+                <div class="row ptb60">
+                    <div class="col-sm-4">
+                        <div class="footer-widget">
+                            <div class="contact-list">
+                                <a class="logo" href="#">
+                                    <img class="img-responsive" src="Content/images/logo.png" alt="Alternate Text" />
+                                </a>
+                                <ul class="reset">
+                                    <li>
+                                        <i class="fa fa-map-marker"></i>
+                                        18 ngõ 11 Hồ Sỹ Dương, Tp.Vinh
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-headphones"></i>
+                                        (+84) 944 419 503
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-envelope-o"></i>
+                                        leanhvin@gmail.com
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-skype"></i>
+                                        anhvin1812
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-globe"></i>
+                                        http://xunghe.vn
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="footer-widget mb30">
+                            <h3 class="mb15">Newsletter</h3>
+                            <div class="newsletter-form">
+                                <p>Nhận tin qua email</p>
+                                <form>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                                        <input class="form-control" placeholder="Your Email" type="text">
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-icon">
+                                                <i class="fa fa-paper-plane"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div><!-- /.footer-widget-->
 
-<div id="content-container" class="@ViewBag.ContentContainerCssClass">
+                        <div class="footer-widget">
+                            <h3>Tags</h3>
+                            <div class="populer-tags">
+                                <ul class="reset">
+                                    <li>
+                                        <a href="#">Xứ nghệ</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Nghệ An</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Bến thủy</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Vinh</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div><!-- /.footer-widget-->
 
-    @RenderSection("PageTitle", false)
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="footer-widget">
+                            <h3>Follow</h3>
+                            <div class="newsletter-form">
+                                <h3>Facebook from</h3>
+                            </div>
+                        </div><!-- /.footer-widget-->
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bar">
+                <div class="container">
+                    <div class="copyright">
+                        Xứ nghệ @($"@{DateTime.Now.Year}"), All Rights Reservered
+                    </div>
+                </div>
+            </div>
+        </footer>
 
-    <div id="@ViewBag.ContentCssId" class="content @ViewBag.ContentCssClass">
-        @RenderBody()
 
     </div>
-</div>
 
-<footer>
-    <div class="footer-social navigation pull-right">
-        <a href="#">
-            <img src="@Url.Content("~/Content/images/facebook-footer.png")" alt="Alternate Text"/>
-        </a>
-        <a href="#">
-            <img src="@Url.Content("~/Content/images/twitter-footer.png")" alt="Alternate Text"/>
-        </a>
-        <a href="#">
-            <img src="@Url.Content("~/Content/images/pinterest-footer.png")" alt="Alternate Text"/>
-        </a>
-        <a href="#">
-            <img src="@Url.Content("~/Content/images/instagram-footer.png")" alt="Alternate Text"/>
-        </a>
-    </div>
-    <div class="navigation pull-left gray-border-right">
-        <a href="#">Developed by Tuan Le</a>
-    </div>
-</footer>
+    <script src="Scripts/jquery-3.2.1.min.js"></script>
+    <script src="Scripts/moment.min.js"></script>
+    <script src="Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="Scripts/owl-carousel/js/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="Scripts/layout.js" type="text/javascript"></script>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+   
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-@Scripts.Render("~/Scripts/common")
+    @Scripts.Render("~/Scripts/coreJS")
 
-@RenderSection("AddScript", required: false)
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

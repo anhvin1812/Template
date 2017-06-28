@@ -13,10 +13,8 @@ namespace App.Data.EntityFramework
 {
     public class MinhKhangDatabaseContext : DatabaseContext, IMinhKhangDatabaseContext
     {
-        public MinhKhangDatabaseContext(string connectionString) : base()
+        public MinhKhangDatabaseContext(string connectionString) : base(connectionString)
         {
-            _dbContext = new MinhKhangDbContext(connectionString);
-            Disposables.Add(_dbContext);
         }
 
         public DbContext MinhKhangDbContext

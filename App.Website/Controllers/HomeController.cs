@@ -5,7 +5,6 @@ namespace App.Website.Controllers
 {
     public class HomeController : Controller
     {
-        [CustomAuthorize(AllowAnonymous = false)]
         public ActionResult Index()
         {
             return View();

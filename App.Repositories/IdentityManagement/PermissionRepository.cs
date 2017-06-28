@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,11 +26,15 @@ namespace App.Repositories.IdentityManagement
 
         public bool HasRoleClaim(int userId, string permissionCapability, ApplicationPermissions permission)
         {
-            return DatabaseContext.Get<User>().Where(u => u.Id == userId)
-                                        .Select(u=>u.UserRoles.Where(x=>
-                                            x.RoleClaims.Any(c => c.ClaimType == permissionCapability 
-                                                        && (c.ClaimValue == permission.ToString() || c.ClaimValue == ApplicationPermissions.Super.ToString())
-                ))).Any();
+            //return DatabaseContext.Get<User>().Where(u => u.Id == userId)
+            //                            .Select(u=>u.UserRoles.Where(x=> x.RoleClaims.Any(c => c.ClaimType == permissionCapability 
+            //                                            && (c.ClaimValue == permission.ToString() || c.ClaimValue == ApplicationPermissions.Super.ToString())
+            //    ))).Any();
+            DatabaseContext.MinhKhangDbContext.Database.Log = s => Debug.WriteLine(s);
+            return DatabaseContext.Get<Role>().Any(t => t.Users.Any(x => x.UserId == userId) 
+                                && t.RoleClaims.Any(c => c.ClaimType == permissionCapability 
+                                            && (c.ClaimValue == permission.ToString() || c.ClaimValue == ApplicationPermissions.Super.ToString()))
+                                );
         }
 
         #region Dispose

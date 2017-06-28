@@ -6,16 +6,11 @@ namespace App.Services.Dtos.UI
 {
     public class SelectListOptions : DtoBase
     {
-        public SelectListOptions()
-        {
-            DataValueField = "Value";
-            DataTextField = "Text";
-        }
         public IEnumerable<OptionItem> Items { get; set; } 
         public IEnumerable DisabledValues { get; set; }
         public IEnumerable<int> SelectedValues { get; set; }
-        public string DataTextField { get; set; }
-        public string DataValueField { get; set; }
+        public string DataTextField => "Text";
+        public string DataValueField => "Value";
     }
 
     public class OptionItem

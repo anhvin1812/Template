@@ -80,7 +80,7 @@ namespace App.Services.IdentityManagement
         public RoleEntry GetRoleForEditing(int id)
         {
             var userId = CurrentClaimsIdentity.GetUserId();
-            if (SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Modify))
+            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Modify))
                 throw new PermissionException();
 
             var roleEntity = RoleRepository.GetById(id);
@@ -117,8 +117,8 @@ namespace App.Services.IdentityManagement
             ValidateEntryData(entry);
 
             // Check existed name
-            var roleForValidation = RoleRepository.GetByName(entry.RoleName);
-            if (roleForValidation != null)
+            var isExisted = RoleRepository.RoleExists(entry.RoleName);
+            if (isExisted)
             {
                 var violations = new List<ErrorExtraInfo>
                 {

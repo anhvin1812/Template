@@ -71,6 +71,12 @@ namespace App.Website
                 }
             }
 
+            if (ex is PermissionException)
+                action = "NoPermission";
+
+            if(ex is DataNotFoundException)
+                action = "NotFound";
+
             httpContext.ClearError();
             httpContext.Response.Clear();
             httpContext.Response.StatusCode = ex is HttpException ? ((HttpException)ex).GetHttpCode() : 500;

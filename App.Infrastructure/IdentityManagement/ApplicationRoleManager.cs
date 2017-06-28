@@ -15,8 +15,9 @@ namespace App.Infrastructure.IdentityManagement
         public ApplicationRoleManager(IRoleStore<Role, int> roleStore)
             : base(roleStore)
         {
-            _roleManager = new RoleManager<Role, int>(roleStore);
+            //_roleManager = new RoleManager<Role, int>(roleStore);
         }
+
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
             var appRoleManager = new ApplicationRoleManager(new RoleStore<Role, int, UserRole>(context.Get<MinhKhangDbContext>()));

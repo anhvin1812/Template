@@ -10,37 +10,33 @@ namespace App.Repositories.IdentityManagement
 {
     public class RoleRepository : RepositoryBase, IRoleRepository
     {
-        private ApplicationRoleManager _applicationRoleManager;
         private IMinhKhangDatabaseContext DatabaseContext => PlatformContext as IMinhKhangDatabaseContext;
 
 
-        public RoleRepository(IMinhKhangDatabaseContext databaseContext, ApplicationRoleManager applicationRoleManager)
+        public RoleRepository(IMinhKhangDatabaseContext databaseContext)
             : base(databaseContext)
         {
-            _applicationRoleManager = applicationRoleManager;
         }
 
 
         public Role GetById(int id)
         {
-            return _applicationRoleManager.FindById(id);
+            return DatabaseContext.FindById<Role>(id);
         }
 
         public Role GetByName(string roleName)
         {
-            return _applicationRoleManager.FindByName(roleName);
+            return DatabaseContext.Get<Role>().FirstOrDefault(t => t.Name == roleName);
         }
-
-
 
         public bool RoleExists(string roleName)
         {
-            return _applicationRoleManager.RoleExists(roleName);
+            return DatabaseContext.Get<Role>().Any(t => t.Name == roleName);
         }
 
         public IEnumerable<Role> GetAll(int? page, int? pageSize, ref int? recordCount)
         {
-            var result = PlatformContext.Get<Role>();
+            var result = DatabaseContext.Get<Role>();
 
             if (recordCount != null)
             {
@@ -57,22 +53,22 @@ namespace App.Repositories.IdentityManagement
 
         public IEnumerable<Role> GetByUserId(int userId)
         {
-            return PlatformContext.Get<Role>().Where(t => t.RoleUsers.Any(u => u.Id == userId));
+            return DatabaseContext.Get<Role>().Where(t => t.Users.Any(u => u.UserId == userId));
         }
 
         public void Insert(Role entity)
         {
-            _applicationRoleManager.Create(entity);
+            DatabaseContext.Insert(entity);
         }
 
         public void Update(Role entity)
         {
-            _applicationRoleManager.Update(entity);
+            DatabaseContext.Update(entity);
         }
 
-        public void Delete(Role entity)
+        public void Delete(int id)
         {
-            _applicationRoleManager.Delete(entity);
+            DatabaseContext.Delete<Role>(id);
         }
 
         #region Role Claim

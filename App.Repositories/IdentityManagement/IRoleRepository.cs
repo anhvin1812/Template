@@ -14,7 +14,7 @@ namespace App.Repositories.IdentityManagement
         Role GetById(int id);
         void Insert(Role role);
         void Update(Role role);
-        void Delete(Role role);
+        void Delete(int id);
 
         bool RoleExists(string roleName);
         #endregion

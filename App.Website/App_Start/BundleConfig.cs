@@ -8,8 +8,13 @@ namespace App.Website
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/coreJS").Include(
+                        "~/Scripts/jquery-3.2.1.min.js",
+                        "~/Scripts/moment.min.js", 
+                        "~/Scripts/bootstrap.min.js",
+                        "~/Scripts/owl-carousel/js/owl.carousel.min.js",
+                        "~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js",
+                        "~/Scripts/layout.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -24,8 +29,11 @@ namespace App.Website
                       "~/Scripts/common.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/fonts/fonts.css",
+                      "~/Content/css/font-awesome.min.css",
                       "~/Content/css/bootstrap.min.css",
+                      "~/Scripts/owl-carousel/css/owl.carousel.min.css",
+                      "~/Scripts/owl-carousel/css/owl.theme.default.min.css",
+                      "~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css",
                       "~/Content/css/site.css",
                       "~/Content/css/responsive.css"));
         }
