@@ -29,5 +29,12 @@ namespace App.Core.Exceptions
         InvalidLastName = 101,
         InvalidEmail = 102,
         EmailIsUsed = 103,
+
+        // News
+        InvalidTitle = 200,
+        NewsCategoryIsEmpty = 201,
+
+        // Tag
+        TagNameIsExisted = 300
     }
 }

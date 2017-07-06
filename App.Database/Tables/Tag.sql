@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Tag]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] NVARCHAR(255) NOT NULL, 
+    [IsDisabled] BIT NULL
+)

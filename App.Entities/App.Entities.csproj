@@ -83,6 +83,7 @@
     <Compile Include="IdentityManagement\UserLogin.cs" />
     <Compile Include="IdentityManagement\UserRole.cs" />
     <Compile Include="IObjectState.cs" />
+    <Compile Include="NewsManagement\Tag.cs" />
     <Compile Include="NewsManagement\News.cs" />
     <Compile Include="ObjecState.cs" />
     <Compile Include="NewsManagement\Category.cs" />

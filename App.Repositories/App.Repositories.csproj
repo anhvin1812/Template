@@ -86,8 +86,10 @@
   <ItemGroup>
     <Compile Include="Common\EntityExtensions.cs" />
     <Compile Include="Common\QueryableExtensions.cs" />
+    <Compile Include="NewsManagement\ITagRepository.cs" />
     <Compile Include="NewsManagement\INewsCategoryRepository.cs" />
     <Compile Include="NewsManagement\INewsRepository.cs" />
+    <Compile Include="NewsManagement\TagRepository.cs" />
     <Compile Include="NewsManagement\NewsCategoryRepository.cs" />
     <Compile Include="NewsManagement\NewsRepository.cs" />
     <Compile Include="ProductManagement\IProductCategoryRepository.cs" />

@@ -18,6 +18,6 @@ namespace App.Entities.ProductManagement
         public virtual ProductCategory Category { get; set; }
         public virtual ProductStatus Status { get; set; }
         public virtual Gallery Image { get; set; }
-        public virtual ICollection<Gallery> Gallery { get; set; }
+        public virtual ICollection<Gallery> Galleries { get; set; }
     }
 }

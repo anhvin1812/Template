@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
@@ -11,12 +12,17 @@ namespace App.Services.Dtos.NewsManagement
         [Required(ErrorMessage = "Please enter title.")]
         public string Title { get; set; }
         public string Description { get; set; }
-
         [AllowHtml]
         public string Content { get; set; }
+        public bool IsHot { get; set; }
+        public bool IsFeatured { get; set; }
+        public bool IsDisabled { get; set; }
+
+
 
         [Required(ErrorMessage = "Please select a category.")]
-        public int CategoryId { get; set; }
+        public List<int> CategoryIds { get; set; }
+        public List<int> TagIds { get; set; }
 
         public HttpPostedFileBase Image { get; set; }
     }
@@ -28,12 +34,15 @@ namespace App.Services.Dtos.NewsManagement
         public string Title { get; set; }
         public string Description { get; set; }
         public string Thumbnail { get; set; }
-
         [AllowHtml]
         public string Content { get; set; }
+        public bool IsHot { get; set; }
+        public bool IsFeatured { get; set; }
+        public bool IsDisabled { get; set; }
 
-        [Required]
-        public int CategoryId { get; set; }
+        [Required(ErrorMessage = "Please select a category.")]
+        public List<int> CategoryIds { get; set; }
+        public List<int> TagIds { get; set; }
 
         public HttpPostedFileBase Image { get; set; }
     }
@@ -45,9 +54,9 @@ namespace App.Services.Dtos.NewsManagement
         public string Title { get; set; }
         public string Description { get; set; }
 
-        public string Image { get; set; }
+        public string Thumbnail { get; set; }
 
-        public string Category { get; set; }
+        public int Views { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
@@ -63,9 +72,13 @@ namespace App.Services.Dtos.NewsManagement
         public string Content { get; set; }
         public string Thumbnail { get; set; }
         public string Image { get; set; }
-        public int CategoryId { get; set; }
-        public string Category { get; set; }
-
+        public bool IsHot { get; set; }
+        public bool IsFeatured { get; set; }
+        public bool IsDisabled { get; set; }
+        public int Views { get; set; }
+        public List<NewsCategorySummary> Categories { get; set; }
+        public List<TagSummary> Tag { get; set; }
+        
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }

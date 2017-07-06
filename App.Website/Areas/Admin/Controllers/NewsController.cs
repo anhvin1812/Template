@@ -22,12 +22,14 @@ namespace App.Website.Areas.Admin.Controllers
         #region Contractor
         private INewsService NewsService { get; set; }
         private INewsCategoryService NewsCategoryService { get; set; }
+        private ITagService TagService { get; set; }
 
-        public NewsController(INewsService newsService, INewsCategoryService newsCategoryService)
-            : base(new IService[] { newsService, newsCategoryService })
+        public NewsController(INewsService newsService, INewsCategoryService newsCategoryService, ITagService tagService)
+            : base(new IService[] { newsService, newsCategoryService, tagService })
         {
             NewsService = newsService;
             NewsCategoryService = newsCategoryService;
+            TagService = tagService;
         }
 
         #endregion
@@ -43,9 +45,11 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var options = NewsCategoryService.GetOptionsForDropdownList(null, null);
+            var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
+            var tagOptions = TagService.GetOptionsForDropdownList(false);
 
-            ViewBag.Categories = new SelectList(options.Items, options.DataValueField, options.DataTextField);
+            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField);
+            ViewBag.Tags = new SelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField);
 
             return View();
         }
@@ -55,9 +59,11 @@ namespace App.Website.Areas.Admin.Controllers
         [ErrorHandler(View = "Create")]
         public ActionResult Create(NewsEntry entry)
         {
-            var options = NewsCategoryService.GetOptionsForDropdownList(null, null);
+            var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
+            var tagOptions = TagService.GetOptionsForDropdownList(false);
 
-            ViewBag.Categories = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.CategoryId);
+            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, entry.CategoryIds);
+            ViewBag.Tags = new SelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, entry.TagIds);
 
             if (ModelState.IsValid)
             {
@@ -70,10 +76,12 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var model = NewsService.GetProductForEditing(id);
-            var options = NewsCategoryService.GetOptionsForDropdownList(null);
+            var model = NewsService.GetEntryForEditing(id);
+            var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
+            var tagOptions = TagService.GetOptionsForDropdownList(false);
 
-            ViewBag.Categories = new SelectList(options.Items, options.DataValueField, options.DataTextField, model.CategoryId);
+            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, model.CategoryIds);
+            ViewBag.Tags = new SelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, model.TagIds);
 
             return View(model);
         }
@@ -83,8 +91,11 @@ namespace App.Website.Areas.Admin.Controllers
         [ErrorHandler(View = "Edit")]
         public ActionResult Edit(int id, NewsUpdateEntry entry)
         {
-            var options = NewsCategoryService.GetOptionsForDropdownList(null);
-            ViewBag.Categories = new SelectList(options.Items, options.DataValueField, options.DataTextField, entry.CategoryId);
+            var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
+            var tagOptions = TagService.GetOptionsForDropdownList(false);
+
+            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, entry.CategoryIds);
+            ViewBag.Tags = new SelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, entry.TagIds);
 
             if (ModelState.IsValid)
             {
@@ -92,7 +103,7 @@ namespace App.Website.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View("Index");
+            return View(entry);
         }
 
         public ActionResult Delete(int id)
@@ -112,6 +123,7 @@ namespace App.Website.Areas.Admin.Controllers
                 {
                     NewsService = null;
                     NewsCategoryService = null;
+                    TagService = null;
                 }
                 _disposed = true;
             }

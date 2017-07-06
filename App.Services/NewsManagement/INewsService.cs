@@ -10,7 +10,7 @@ namespace App.Services.NewsManagement
         IEnumerable<NewsSummary> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount);
         IEnumerable<NewsSummary> GetRelatedNews(int newsId, int categoryId, int? maxRecords = null);
         NewsDetail GetById(int id);
-        NewsUpdateEntry GetProductForEditing(int id);
+        NewsUpdateEntry GetEntryForEditing(int id);
         void Insert(NewsEntry entry);
         void Update(int id, NewsUpdateEntry entry);
         void Delete(int id);

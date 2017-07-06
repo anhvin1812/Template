@@ -55,8 +55,8 @@
                         @Html.TextAreaFor(m => m.Description, new {@class = "form-control", placeholder = "Enter description"})
                     </div>
                     <div class="form-group">
-                        @Html.LabelFor(m => m.CategoryId, "Category")
-                        @Html.DropDownListFor(m => m.CategoryId, (SelectList)ViewBag.Categories, string.Empty, new { @class = "form-control" })
+                        @Html.Label("Categories")
+                        @Html.DropDownListFor(m => m.CategoryIds, (SelectList)ViewBag.Categories, string.Empty, new { @class = "form-control" })
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->

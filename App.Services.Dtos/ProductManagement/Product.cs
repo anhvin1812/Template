@@ -80,7 +80,7 @@ namespace App.Services.Dtos.ProductManagement
 
         public string Image { get; set; }
         public string Thumbnail { get; set; }
-        public List<GallerySummary> Gallery { get; set; }
+        public List<GallerySummary> Galleries { get; set; }
 
         public string Status { get; set; }
         public int CategoryId { get; set; }

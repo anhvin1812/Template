@@ -38,7 +38,7 @@ namespace App.Data.EntityFramework.Mapping
                 HasOptional(t => t.Image).WithMany().HasForeignKey(t => t.GalleryId);
                 HasOptional(t => t.Category).WithMany().HasForeignKey(t => t.CategoryId);
                 HasRequired(t => t.Status).WithMany().HasForeignKey(t => t.StatusId);
-                HasMany(t => t.Gallery).WithMany().Map(x =>
+                HasMany(t => t.Galleries).WithMany().Map(x =>
                 {
                     x.ToTable("Products_Galleries");
                     x.MapLeftKey("ProductId");

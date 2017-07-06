@@ -91,7 +91,7 @@ namespace App.Services.ProductManagement
                 OldPrice = product.OldPrice,
                 Image = product.Image.Image,
                 Thumbnail = product.Image.Thumbnail,
-                Gallery = product.Gallery.Select(g=> new GallerySummary{
+                Galleries = product.Galleries.Select(g=> new GallerySummary{
                     Id = g.Id,
                     Image = g.Image,
                     Thumbnail = g.Thumbnail
@@ -138,7 +138,7 @@ namespace App.Services.ProductManagement
                     OldPrice = entry.OldPrice,
                     CategoryId = entry.CategoryId,
                     StatusId = entry.StatusId,
-                    Gallery = new List<App.Entities.ProductManagement.Gallery>()
+                    Galleries = new List<App.Entities.ProductManagement.Gallery>()
                 };
 
                 // upload image
@@ -161,7 +161,7 @@ namespace App.Services.ProductManagement
                     {
                         var fileName = GalleryHelper.UploadGallery(gallery);
 
-                        entity.Gallery.Add(new Entities.ProductManagement.Gallery
+                        entity.Galleries.Add(new Entities.ProductManagement.Gallery
                         {
                             Image = fileName,
                             Thumbnail = fileName,
@@ -234,7 +234,7 @@ namespace App.Services.ProductManagement
 
                         var fileName = GalleryHelper.UploadGallery(gallery);
 
-                        entity.Gallery.Add(new Entities.ProductManagement.Gallery
+                        entity.Galleries.Add(new Entities.ProductManagement.Gallery
                         {
                             Image = fileName,
                             Thumbnail = fileName,
@@ -273,7 +273,7 @@ namespace App.Services.ProductManagement
             if(entity==null)
                 throw new DataNotFoundException();
 
-            return entity.Gallery.Select(x => new GallerySummary
+            return entity.Galleries.Select(x => new GallerySummary
             {
                 Id = x.Id,
                 Image = x.Image,
@@ -287,10 +287,10 @@ namespace App.Services.ProductManagement
             if (entity == null)
                 throw new DataNotFoundException();
 
-            var gallery = entity.Gallery.FirstOrDefault(x => x.Id == galleryId);
+            var gallery = entity.Galleries.FirstOrDefault(x => x.Id == galleryId);
             if (gallery != null)
             {
-                entity.Gallery.Remove(gallery);
+                entity.Galleries.Remove(gallery);
                 GalleryService.Delete(galleryId);
 
                 Save();

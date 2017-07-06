@@ -79,6 +79,9 @@
     <Build Include="Tables\Products_Galleries.sql" />
     <Build Include="Tables\NewsCategory.sql" />
     <Build Include="Tables\News.sql" />
+    <Build Include="Tables\News_NewsCategory.sql" />
+    <Build Include="Tables\Tag.sql" />
+    <Build Include="Tables\News_Tag.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="App.Database.refactorlog" />

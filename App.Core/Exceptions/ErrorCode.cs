@@ -27,6 +27,14 @@ namespace App.Core.Exceptions
                 {ErrorCodeType.InvalidEmail, "Email is not valid."},
                 {ErrorCodeType.EmailIsUsed, "Email is used."},
                 // Product
+
+                // News
+                {ErrorCodeType.InvalidTitle, "Title is not valid."},
+                {ErrorCodeType.NewsCategoryIsEmpty, "Category cannot be empty."},
+
+                // Tag
+                {ErrorCodeType.TagNameIsExisted, "Tag name is existed."},
+
             };
         }
     }

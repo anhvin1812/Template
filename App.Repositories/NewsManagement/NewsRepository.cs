@@ -26,11 +26,10 @@ namespace App.Repositories.NewsManagement
                 result = result.Where(t => t.Title.Contains(keyword) || t.Description.Contains(keyword));
             }
 
+            //get by category
             if (categoryId.HasValue)
             {
-                var lstHereditaryIds = DatabaseContext.Get<NewsCategory>().GetHereditaryIds(categoryId.Value);
-
-                result = result.Where(t => lstHereditaryIds.Contains(t.CategoryId));
+                result = result.Where(t => t.Categories.Any(c=>c.Id == categoryId));
             }
 
             if (recordCount != null)
@@ -50,8 +49,7 @@ namespace App.Repositories.NewsManagement
         {
             var result = DatabaseContext.Get<News>().Where(t => t.Id != newsId);
 
-            var lstHereditaryIds = DatabaseContext.Get<NewsCategory>().GetHereditaryIds(categoryId);
-            result = result.Where(t => lstHereditaryIds.Contains(t.CategoryId));
+            result = result.Where(t => t.Categories.Any(c => c.Id == categoryId));
 
             if (maxRecords.HasValue)
             {
@@ -63,7 +61,7 @@ namespace App.Repositories.NewsManagement
 
         public News GetById(int id)
         {
-            return DatabaseContext.Get<News>().FirstOrDefault(t=>t.Id == id);
+            return DatabaseContext.FindById<News>(id);
         }
 
         public void Insert(News entity)

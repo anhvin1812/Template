@@ -6,19 +6,19 @@ using App.Repositories.Common;
 
 namespace App.Repositories.NewsManagement
 {
-    public class NewsCategoryRepository : RepositoryBase, INewsCategoryRepository
+    public class TagRepository : RepositoryBase, ITagRepository
     {
         private IMinhKhangDatabaseContext DatabaseContext => PlatformContext as IMinhKhangDatabaseContext;
 
 
-        public NewsCategoryRepository(IMinhKhangDatabaseContext databaseContext)
+        public TagRepository(IMinhKhangDatabaseContext databaseContext)
             : base(databaseContext)
         {
         }
 
-        public IEnumerable<NewsCategory> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<Tag> GetAll(int? page, int? pageSize, ref int? recordCount)
         {
-            var result = DatabaseContext.Get<NewsCategory>();
+            var result = DatabaseContext.Get<Tag>();
 
             if (recordCount != null)
             {
@@ -27,7 +27,7 @@ namespace App.Repositories.NewsManagement
 
             if (page != null && pageSize != null)
             {
-                result = result.OrderBy(t=>t.Id).ApplyPaging(page.Value, pageSize.Value);
+                result = result.OrderBy(t=>t.Name).ApplyPaging(page.Value, pageSize.Value);
             }
 
             return result;
@@ -40,29 +40,34 @@ namespace App.Repositories.NewsManagement
             return result;
         }
 
-        public IEnumerable<NewsCategory> GetByIds(IEnumerable<int> ids)
+        public IEnumerable<Tag> GetByIds(IEnumerable<int> ids)
         {
-            return DatabaseContext.Get<NewsCategory>().Where(t => ids.Contains(t.Id));
+            return DatabaseContext.Get<Tag>().Where(t => ids.Contains(t.Id));
         }
 
-        public NewsCategory GetById(int id)
+        public Tag GetById(int id)
         {
-            return DatabaseContext.Get<NewsCategory>().FirstOrDefault(t=>t.Id == id);
+            return DatabaseContext.Get<Tag>().FirstOrDefault(t=>t.Id == id);
         }
 
-        public void Insert(NewsCategory entity)
+        public Tag GetByName(string name)
+        {
+            return DatabaseContext.Get<Tag>().FirstOrDefault(t => t.Name == name);
+        }
+
+        public void Insert(Tag entity)
         {
             DatabaseContext.Insert(entity);
         }
 
-        public void Update(NewsCategory entity)
+        public void Update(Tag entity)
         {
             DatabaseContext.Update(entity);
         }
 
         public void Delete(int id)
         {
-            DatabaseContext.Delete<NewsCategory>(id);
+            DatabaseContext.Delete<Tag>(id);
         }
     }
 }

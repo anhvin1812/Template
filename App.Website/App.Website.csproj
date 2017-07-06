@@ -218,6 +218,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\App_Start\AdminBundleConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
@@ -1598,6 +1599,7 @@
     <Content Include="Content\fonts\robotocondensed-regular-webfont.eot" />
     <Content Include="Content\fonts\robotocondensed-regular-webfont.ttf" />
     <Content Include="Content\fonts\robotocondensed-regular-webfont.woff" />
+    <Content Include="Areas\Admin\Views\Tag\Index.cshtml" />
     <None Include="Properties\DefaultSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>DefaultSettings.Designer.cs</LastGenOutput>
