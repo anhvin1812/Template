@@ -12,6 +12,7 @@ namespace App.Data.EntityFramework.Mapping
             modelBuilder.Configurations.Add(new NewsMap());
             modelBuilder.Configurations.Add(new NewsCategoryMap());
             modelBuilder.Configurations.Add(new TagMap());
+            modelBuilder.Configurations.Add(new NewsStatusMap());
         }
 
         private class NewsMap : EntityTypeConfiguration<News>
@@ -30,7 +31,7 @@ namespace App.Data.EntityFramework.Mapping
                 Property(t => t.Content).IsOptional();
                 Property(t => t.IsHot).IsOptional();
                 Property(t => t.IsFeatured).IsOptional();
-                Property(t => t.IsDisabled).IsOptional();
+                Property(t => t.StatusId).IsRequired();
                 Property(t => t.Views).IsRequired();
                 Property(t => t.CreatedDate).IsRequired();
                 Property(t => t.UpdatedDate).IsOptional();
@@ -40,11 +41,19 @@ namespace App.Data.EntityFramework.Mapping
                 // Relationships
                 HasOptional(t => t.Image).WithMany().HasForeignKey(t => t.GalleryId);
                 HasRequired(t => t.Editor).WithMany().HasForeignKey(t => t.UpdatedById);
+                HasRequired(t => t.Status).WithMany().HasForeignKey(t => t.StatusId);
                 HasMany(t => t.Categories).WithMany().Map(x =>
                 {
                     x.ToTable("News_NewsCategory");
                     x.MapLeftKey("NewsId");
-                    x.MapRightKey("NewsCategory");
+                    x.MapRightKey("NewsCategoryId");
+
+                });
+                HasMany(t => t.Tags).WithMany().Map(x =>
+                {
+                    x.ToTable("News_Tag");
+                    x.MapLeftKey("NewsId");
+                    x.MapRightKey("TagId");
 
                 });
             }
@@ -82,6 +91,20 @@ namespace App.Data.EntityFramework.Mapping
                 // Properties
                 Property(t => t.Name).IsRequired();
                 Property(t => t.IsDisabled).IsOptional();
+            }
+        }
+
+        private class NewsStatusMap : EntityTypeConfiguration<NewsStatus>
+        {
+            public NewsStatusMap()
+            {
+                ToTable("NewsStatus");
+                // Primary Key
+                HasKey(t => t.Id);
+                Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+                // Properties
+                Property(t => t.Status).IsRequired();
             }
         }
     }

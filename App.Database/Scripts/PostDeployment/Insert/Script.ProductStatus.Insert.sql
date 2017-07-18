@@ -18,3 +18,24 @@ IF NOT EXISTS(SELECT 1 FROM dbo.ProductStatus WHERE Status = N'Hết hàng')
 BEGIN
 	Insert into ProductStatus values(N'Hết hàng')
 END
+
+/* NewsStatus */
+IF NOT EXISTS(SELECT 1 FROM dbo.NewsStatus WHERE Status = N'Private')
+BEGIN
+	Insert into NewsStatus values(N'Private')
+END
+
+IF NOT EXISTS(SELECT 1 FROM dbo.NewsStatus WHERE Status = N'Public')
+BEGIN
+	Insert into NewsStatus values(N'Public')
+END
+
+IF NOT EXISTS(SELECT 1 FROM dbo.NewsStatus WHERE Status = N'Draft')
+BEGIN
+	Insert into NewsStatus values(N'Draft')
+END
+
+IF NOT EXISTS(SELECT 1 FROM dbo.NewsStatus WHERE Status = N'Pending Validation')
+BEGIN
+	Insert into NewsStatus values(N'Pending Validation')
+END

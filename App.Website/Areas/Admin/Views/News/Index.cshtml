@@ -1,10 +1,11 @@
-﻿@using System.Globalization
-@using System.Web.Optimization
-@using App.Core.Configuration
-@using Microsoft.Ajax.Utilities
-@model IEnumerable<App.Services.Dtos.NewsManagement.NewsSummary>
+﻿@using System.Web.Optimization
+@using App.Services.Dtos.NewsManagement
+@using PagedList.Mvc
+@model PagedList.StaticPagedList<NewsSummary>
 @{
     ViewBag.Title = "News";
+
+    var filters = (NewsFilter)ViewBag.Filters;
 }
 
 @section AddStyles{
@@ -27,9 +28,51 @@
 
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">
-            <a class="btn btn-block btn-primary" href="@Url.Action("Create", "News")">Add a news</a>
-        </h3>
+        @using (Html.BeginForm("Index", "News", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            
+           <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                <div class="form-group">
+                    <h3 class="box-title">
+                        <a class="btn btn-block btn-primary btn-sm" href="@Url.Action("Create", "News")">Add a news</a>
+                        <br/>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-9  text-right">
+                <div class="form-group">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control" type="text" name="keyword" placeholder="Title, description" value="@filters.Keyword">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    @Html.DropDownList("categoryId", (SelectList)ViewBag.Categories, "All categories", new {@class= "form-control input-sm" })
+                </div>
+                <div class="form-group">
+                    @Html.DropDownList("statusId", (SelectList)ViewBag.Status, "All status", new { @class = "form-control input-sm" })
+                </div>
+                <div class="form-group">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-danger btn-sm @(filters.IsHot.GetValueOrDefault() ? "active" : string.Empty)">
+                            <input type="checkbox" name="hot" value="true" @(filters.IsHot.GetValueOrDefault() ? "checked" : string.Empty)/> Hot
+                        </label>
+                        <label class="btn btn-warning btn-sm @(filters.IsFeatured.GetValueOrDefault() ? "active" : string.Empty)">
+                            <input type="checkbox" name="featured" value="true" @(filters.IsFeatured.GetValueOrDefault() ? "checked" : string.Empty)/> Featured
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-filter"></i> Filter</button>
+            </div>
+        </div>
+        }
     </div>
     <!-- /.box-header -->
     <div class="box-body">
@@ -37,31 +80,54 @@
         {
             <table class="table table-hover table-striped">
                 <tr>
-                    <th>#</th>
                     <th>Title</th>
-                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Views</th>
+                    <th>Categories</th>
+                    <th>Tags</th>
                     <th>Created date</th>
                     <th>Updated date</th>
                     <th>Updated by</th>
                     <th></th>
                 </tr>
-                @{ int i = 1; }
                 @foreach (var m in Model)
                 {
                     <tr>
-                        <td class="vertical-middle">@i</td>
                         <td class="vertical-middle">@m.Title</td>
-                        <td class="vertical-middle">@m.Category</td>
-                        <td class="vertical-middle">@m.CreatedDate</td>
-                        <td class="vertical-middle">@m.UpdatedDate</td>
+                        <td>
+                            <span class="label label-info">@m.Status</span>
+                            @if (m.IsHot)
+                            {
+                                <span class="label label-danger">Hot</span>
+                            }
+                            @if (m.IsFeatured)
+                            {
+                                <span class="label label-warning">Featured</span>
+                            }
+                        </td>
+                        <td>@m.Views</td>
+                        <td class="vertical-middle">
+                            @foreach (var c in m.Categories)
+                            {
+                                <span class="label label-info">@c</span>
+                            }
+                        </td>
+                        <td class="vertical-middle">
+                            @foreach (var t in m.Tags)
+                            {
+                                <span class="label label-default">@t</span>
+                            }
+                        </td>
+
+                        <td class="vertical-middle">@m.CreatedDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="vertical-middle">@(m.UpdatedDate.HasValue ? m.UpdatedDate.Value.ToString("yyyy-MM-dd HH:mm") : "")</td>
                         <td class="vertical-middle">@m.UpdatedBy</td>
                         <td class="vertical-middle">
-                            <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "News", new {id = m.Id})">
+                            <a class="btn btn-default btn-xs" href="@Url.Action("Edit", "News", new {id = m.Id})">
                                 <i class="fa fa-fw fa-pencil"></i> Edit
                             </a>
                         </td>
                     </tr>
-                    i++;
                 }
 
             </table>
@@ -69,15 +135,17 @@
         
     </div>
     <!-- /.box-body -->
-    @*<div class="box-footer clearfix">
-        <ul class="pagination no-margin pull-right">
+    <div class="box-footer clearfix">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new {keyword = filters.Keyword, categotyId = filters.CategoryId, statusId=filters.StatusId, hot=filters.IsHot, featured = filters.IsFeatured, page = page }), new PagedListRenderOptions { ContainerDivClasses = new [] { "no-margin","pull-right" }  })
+
+        @*<ul class="pagination no-margin pull-right">
             <li><a href="#">&laquo;</a></li>
             <li><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">&raquo;</a></li>
-        </ul>
-    </div>*@
+        </ul>*@
+    </div>
 </div>
 <!-- /.box -->
 

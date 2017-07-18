@@ -1,1 +1,88 @@
-﻿
+﻿@using System.Web.Optimization
+@model IEnumerable<App.Services.Dtos.NewsManagement.TagSummary>
+@{
+    ViewBag.Title = "Tags";
+}
+
+@section AddStyles{
+    @Styles.Render("~/Admin/Css/DataTable")
+    <!-- Bootstrap-toggle -->
+    @Styles.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.css")
+}
+
+@section ContentHeader
+{
+    <section class="content-header">
+        <h1>
+            Tags Management
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li>News Management</li>
+            <li class="active">Tags</li>
+        </ol>
+    </section>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            <a class="btn btn-block btn-primary" href="@Url.Action("Create", "Tag")">Add new tag</a>
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @if (Model.Any())
+        {
+            var toggleAttributes = new {@class = "toggle-disable", disabled = "disabled", data_toggle = "toggle", data_onstyle = "success", data_on = "Yes", data_off = "No", data_size = "small" };
+
+            <table class="table table-hover table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Disabled</th>
+                    <th></th>
+                </tr>
+                @{ int i = 1; }
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@m.Name</td>
+                        <td>
+                            @Html.CheckBox("Disable", m.IsDisabled, toggleAttributes)
+                        </td>
+                        <td>
+                            <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "Tag", new {id = m.Id})">
+                                <i class="fa fa-fw fa-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+
+            </table>
+        }
+
+    </div>
+    <!-- /.box-body -->
+    @*<div class="box-footer clearfix">
+            <ul class="pagination no-margin pull-right">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>*@
+</div>
+<!-- /.box -->
+
+
+@section AddScripts{
+    <!-- DataTables -->
+    @Scripts.Render("~/Admin/Js/dataTable")
+    <!-- Bootstrap-toggle -->
+    @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
+}
+

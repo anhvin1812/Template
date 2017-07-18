@@ -82,7 +82,7 @@ namespace App.Services.NewsManagement
             return new TagEntry
             {
                 Name = entity.Name,
-                IsDisabled = entity.IsDisabled
+                IsDisabled = entity.IsDisabled ?? false
             };
         }
 

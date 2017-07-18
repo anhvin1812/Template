@@ -22,6 +22,8 @@ namespace App.Repositories
             // News
             builder.RegisterType<NewsRepository>().As<INewsRepository>().InstancePerDependency();
             builder.RegisterType<NewsCategoryRepository>().As<INewsCategoryRepository>().InstancePerDependency();
+            builder.RegisterType<TagRepository>().As<ITagRepository>().InstancePerDependency();
+
 
             //builder.RegisterType<SherpaRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.SherpaRoster).InstancePerDependency();
             //builder.RegisterType<GCrewRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.GCrewRoster).InstancePerDependency();

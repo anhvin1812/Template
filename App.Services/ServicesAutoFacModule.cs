@@ -34,6 +34,7 @@ namespace App.Services
             // News
             builder.RegisterType<NewsService>().As<INewsService>().InstancePerDependency();
             builder.RegisterType<NewsCategoryService>().As<INewsCategoryService>().InstancePerDependency();
+            builder.RegisterType<TagService>().As<ITagService>().InstancePerDependency();
             //builder.RegisterType<RedCatMemberFactory>().As<IThirdPartyProviderMemberFactory<RedCatMember>>().InstancePerLifetimeScope();
             //builder.RegisterType<Talent2MemberFactory>().As<IThirdPartyProviderMemberFactory<Talent2Member>>().InstancePerLifetimeScope();
             //builder.RegisterType<KeyPayMemberFactory>().As<IThirdPartyProviderMemberFactory<KeyPayMember>>().InstancePerLifetimeScope();

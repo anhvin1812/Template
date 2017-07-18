@@ -13,6 +13,7 @@ using App.Services.IdentityManagement;
 using App.Services.NewsManagement;
 using App.Services.ProductManagement;
 using App.Website.Fillters;
+using PagedList;
 
 namespace App.Website.Areas.Admin.Controllers
 {
@@ -35,21 +36,40 @@ namespace App.Website.Areas.Admin.Controllers
         #endregion
 
 
-        public ActionResult Index(string keyword, int? categoryId = null, int? page = null, int? pageSize = null)
+        public ActionResult Index(string keyword, int? categoryId = null, int? statusId = null, bool? hot = null, bool? featured = null, int? page = null, int? pageSize = null)
         {
+            pageSize = 15;
             int? recordCount = 0;
-            var result = NewsService.GetAll(keyword, categoryId, page, pageSize, ref recordCount);
+            var result = NewsService.GetAll(keyword, categoryId, statusId, hot, featured, page, pageSize, ref recordCount);
 
-            return View(result);
+            var pagedNews = new StaticPagedList<NewsSummary>(result, page ?? 1, (int) pageSize, (int)recordCount);
+
+            var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
+            var statusOptions = NewsService.GetStatusOptionsForDropdownList();
+
+            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, categoryId);
+            ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField, statusId);
+            ViewBag.Filters = new NewsFilter
+            {
+                Keyword = keyword,
+                CategoryId = categoryId,
+                StatusId = statusId,
+                IsHot = hot,
+                IsFeatured = featured
+            };
+
+            return View(pagedNews);
         }
 
         public ActionResult Create()
         {
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var tagOptions = TagService.GetOptionsForDropdownList(false);
+            var statusOptions = NewsService.GetStatusOptionsForDropdownList();
 
-            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField);
-            ViewBag.Tags = new SelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField);
+            ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField);
+            ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField);
+            ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField);
 
             return View();
         }
@@ -61,9 +81,11 @@ namespace App.Website.Areas.Admin.Controllers
         {
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var tagOptions = TagService.GetOptionsForDropdownList(false);
+            var statusOptions = NewsService.GetStatusOptionsForDropdownList();
 
-            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, entry.CategoryIds);
-            ViewBag.Tags = new SelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, entry.TagIds);
+            ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, entry.CategoryIds);
+            ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, entry.TagIds);
+            ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField, entry.StatusId);
 
             if (ModelState.IsValid)
             {
@@ -79,9 +101,11 @@ namespace App.Website.Areas.Admin.Controllers
             var model = NewsService.GetEntryForEditing(id);
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var tagOptions = TagService.GetOptionsForDropdownList(false);
+            var statusOptions = NewsService.GetStatusOptionsForDropdownList();
 
-            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, model.CategoryIds);
-            ViewBag.Tags = new SelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, model.TagIds);
+            ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, model.CategoryIds);
+            ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, model.TagIds);
+            ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField, model.StatusId);
 
             return View(model);
         }
@@ -93,9 +117,11 @@ namespace App.Website.Areas.Admin.Controllers
         {
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var tagOptions = TagService.GetOptionsForDropdownList(false);
+            var statusOptions = NewsService.GetStatusOptionsForDropdownList();
 
-            ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, entry.CategoryIds);
-            ViewBag.Tags = new SelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, entry.TagIds);
+            ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, entry.CategoryIds);
+            ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, entry.TagIds);
+            ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField, entry.StatusId);
 
             if (ModelState.IsValid)
             {

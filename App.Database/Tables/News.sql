@@ -4,10 +4,10 @@
     [Title] NVARCHAR(255) NOT NULL, 
     [GalleryId] INT NOT NULL, 
 	[Description] NVARCHAR(255) NULL, 
-    [Content] TEXT NULL, 
+    [Content] NTEXT NULL, 
 	[IsHot] BIT NULL, 
     [IsFeatured] BIT NULL,
-	[IsDisabled] BIT NULL,  
+	[StatusId] INT NOT NULL,  
 	[Views] INT NOT NULL DEFAULT 0, 
     [CreatedDate] DATETIME NOT NULL, 
     [UpdatedDate] DATETIME NULL, 
@@ -15,5 +15,6 @@
     [UpdatedById] INT NOT NULL, 	  
     
     CONSTRAINT [FK_News_Gallery] FOREIGN KEY ([GalleryId]) REFERENCES [Gallery]([Id]), 
-    CONSTRAINT [FK_News_User] FOREIGN KEY ([UpdatedById]) REFERENCES [User]([Id])
+    CONSTRAINT [FK_News_User] FOREIGN KEY ([UpdatedById]) REFERENCES [User]([Id]),
+    CONSTRAINT [FK_News_Status] FOREIGN KEY ([StatusId]) REFERENCES [NewsStatus]([Id])
 )

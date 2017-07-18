@@ -34,17 +34,14 @@
         {
             <table class="table table-hover table-striped">
                 <tr>
-                    <th>#</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Disabled</th>
                     <th></th>
                 </tr>
-                @{ int i = 1; }
                 @foreach (var m in Model)
                 {
                     <tr>
-                        <td>@i</td>
                         <td>@m.Name</td>
                         <td>@m.Description</td>
                         <td>@m.IsDisabled</td>
@@ -54,7 +51,6 @@
                             </a>
                         </td>
                     </tr>
-                    i++;
                 }
 
             </table>

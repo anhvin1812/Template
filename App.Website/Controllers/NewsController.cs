@@ -27,36 +27,10 @@ namespace App.Website.Controllers
         // GET: News
         public ActionResult Index(int? page = null, int? pageSize = null)
         {
-            int? recordCount = 0;
-            var result = NewsService.GetAll(null, null, page, pageSize, ref recordCount);
 
-            ViewBag.Categories = NewsCategoryService.GetAll(null, null, ref recordCount);
-
-            return View(result);
+            return View();
         }
 
-        // GET: News/NewProducts/5
-        public ActionResult NewProducts(int? maxRecords = null)
-        {
-            int? recordCount = 0;
-            var result = NewsService.GetAll(null, null, 1, maxRecords, ref recordCount);
-
-            return View("_NewsList", result);
-        }
-
-        // GET: News/Category/5
-        public ActionResult Category(int id)
-        {
-            int? recordCount = 0;
-            var result = NewsService.GetAll(null, id, null, null, ref recordCount);
-
-            var categories = NewsCategoryService.GetAll(null, null, ref recordCount);
-            ViewBag.Categories = NewsCategoryService.GetAll(null, null, ref recordCount);
-            ViewBag.CategoryId = id;
-            ViewBag.CategoryName = categories.FirstOrDefault(x => x.Id == id)?.Name;
-
-            return View("Index", result);
-        }
 
         // GET: News/Details/5
         public ActionResult Details(int id)

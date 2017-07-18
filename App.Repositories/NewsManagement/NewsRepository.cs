@@ -17,7 +17,7 @@ namespace App.Repositories.NewsManagement
         {
         }
 
-        public IEnumerable<News> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<News> GetAll(string keyword, int? categoryId, int? statusId, bool? hot, bool? featured, int? page, int? pageSize, ref int? recordCount)
         {
             var result = DatabaseContext.Get<News>();
 
@@ -30,6 +30,24 @@ namespace App.Repositories.NewsManagement
             if (categoryId.HasValue)
             {
                 result = result.Where(t => t.Categories.Any(c=>c.Id == categoryId));
+            }
+            
+            //get by status
+            if (statusId.HasValue)
+            {
+                result = result.Where(t => t.StatusId == statusId);
+            }
+
+            //get hot news
+            if (hot.HasValue)
+            {
+                result = result.Where(t => t.IsHot == hot.Value);
+            }
+
+            //get featured news
+            if (featured.HasValue)
+            {
+                result = result.Where(t => t.IsFeatured == featured.Value);
             }
 
             if (recordCount != null)
@@ -78,5 +96,19 @@ namespace App.Repositories.NewsManagement
         {
             DatabaseContext.Delete<News>(id);
         }
+
+        #region Status
+
+        public IEnumerable<NewsStatus> GetAllStatus()
+        {
+            return DatabaseContext.Get<NewsStatus>();
+        }
+
+        public NewsStatus GetStatusById(int id)
+        {
+            return DatabaseContext.FindById<NewsStatus>(id);
+        }
+
+        #endregion
     }
 }

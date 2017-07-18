@@ -14,6 +14,7 @@ using App.Services.Common;
 using App.Services.Dtos.Gallery;
 using App.Services.Dtos.NewsManagement;
 using App.Services.Dtos.ProductManagement;
+using App.Services.Dtos.UI;
 using App.Services.Gallery;
 
 namespace App.Services.NewsManagement
@@ -42,9 +43,9 @@ namespace App.Services.NewsManagement
 
         #region Public Methods
 
-        public IEnumerable<NewsSummary> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<NewsSummary> GetAll(string keyword, int? categoryId, int? statusId, bool? hot, bool? featured, int? page, int? pageSize, ref int? recordCount)
         {
-            var news = NewsRepository.GetAll(keyword, categoryId, page, pageSize, ref recordCount);
+            var news = NewsRepository.GetAll(keyword, categoryId, statusId, hot, featured, page, pageSize, ref recordCount);
             
             return EntitiesToDtos(news);
         }
@@ -82,9 +83,9 @@ namespace App.Services.NewsManagement
                 Thumbnail = news.Image.Thumbnail,
                 IsHot = news.IsHot ?? false,
                 IsFeatured = news.IsFeatured ?? false,
-                IsDisabled = news.IsDisabled ?? false,
-                CategoryIds = news.Categories.Where(x=>x.IsDisabled != false).Select(x=>x.Id).ToList(),
-                TagIds = news.Tags.Where(x=>x.IsDisabled != false).Select(x=>x.Id).ToList()
+                StatusId = news.StatusId,
+                CategoryIds = news.Categories.Where(x=>x.IsDisabled != true).Select(x=>x.Id).ToList(),
+                TagIds = news.Tags.Where(x=>x.IsDisabled != true).Select(x=>x.Id).ToList()
             };
         }
 
@@ -97,6 +98,17 @@ namespace App.Services.NewsManagement
 
             var userId = CurrentClaimsIdentity.GetUserId();
 
+            // status
+            var status = NewsRepository.GetStatusById(entry.StatusId);
+            if (status == null)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Status"}
+                };
+                throw new ValidationError(violations);
+            }
+
             using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
             {
                 var entity = new News
@@ -106,7 +118,7 @@ namespace App.Services.NewsManagement
                     Content = entry.Content,
                     IsHot = entry.IsHot,
                     IsFeatured = entry.IsFeatured,
-                    IsDisabled = entry.IsFeatured,
+                    StatusId = entry.StatusId,
                     CreatedDate = DateTime.Now,
                     UpdatedById = userId,
                     
@@ -115,14 +127,14 @@ namespace App.Services.NewsManagement
                 };
 
                 // categories
-                if(entry.CategoryIds != null && entity.Categories.Any())
+                if(entry.CategoryIds != null && entry.CategoryIds.Any())
                 {
                     var categories = NewsCategoryRepository.GetByIds(entry.CategoryIds).ToList();
                     entity.Categories = categories;
                 }
 
                 // tags
-                if (entry.TagIds != null && entity.Tags.Any())
+                if (entry.TagIds != null && entry.TagIds.Any())
                 {
                     var tags = TagRepository.GetByIds(entry.TagIds).ToList();
                     entity.Tags = tags;
@@ -162,20 +174,31 @@ namespace App.Services.NewsManagement
             if(entity == null)
                 throw new DataNotFoundException();
 
+            // status
+            var status = NewsRepository.GetStatusById(entry.StatusId);
+            if(status == null)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Status"}
+                };
+                throw new ValidationError(violations);
+            }
+
             using (var transactionScope = new TransactionScope(TransactionScopeOption.Required))
             {
                 entity.Title = entry.Title;
                 entity.Description = entry.Description;
                 entity.Content = entry.Content;
                 entity.IsHot = entry.IsHot;
-                entry.IsFeatured = entry.IsFeatured;
-                entry.IsDisabled = entry.IsDisabled;
+                entity.IsFeatured = entry.IsFeatured;
+                entity.StatusId = entry.StatusId;
 
                 entity.UpdatedDate = DateTime.Now;
                 entity.UpdatedById = userId;
 
                 // categories
-                if (entry.CategoryIds != null && entity.Categories.Any())
+                if (entry.CategoryIds != null && entry.CategoryIds.Any())
                 {
                     var categories = NewsCategoryRepository.GetByIds(entry.CategoryIds).ToList();
 
@@ -184,7 +207,7 @@ namespace App.Services.NewsManagement
                 }
 
                 // tags
-                if (entry.TagIds != null && entity.Tags.Any())
+                if (entry.TagIds != null && entry.TagIds.Any())
                 {
                     var tags = TagRepository.GetByIds(entry.TagIds).ToList();
 
@@ -243,6 +266,20 @@ namespace App.Services.NewsManagement
             Save();
         }
 
+        #region Status
+
+        public SelectListOptions GetStatusOptionsForDropdownList()
+        {
+            var allStatuses = NewsRepository.GetAllStatus();
+
+            return new SelectListOptions
+            {
+                Items = allStatuses.Select(x => new OptionItem { Value = x.Id, Text = x.Status }),
+            };
+        }
+
+        #endregion
+
         #endregion
 
 
@@ -263,6 +300,11 @@ namespace App.Services.NewsManagement
                 violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.InvalidTitle, Property = "Title" });
             }
 
+            if (entry.Image == null )
+            {
+                violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.EmptyImage, Property = "Image" });
+            }
+
             if (entry.CategoryIds == null || !entry.CategoryIds.Any())
             {
                 violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.NewsCategoryIsEmpty, Property = "CategoryIds" });
@@ -276,23 +318,27 @@ namespace App.Services.NewsManagement
 
         private void ValidateUpdateEntryData(NewsUpdateEntry entry)
         {
+            var violations = new List<ErrorExtraInfo>();
+
             if (entry == null)
             {
-                var violations = new List<ErrorExtraInfo>
-                {
-                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidData}
-                };
+                violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.InvalidData });
                 throw new ValidationError(violations);
             }
 
             if (string.IsNullOrWhiteSpace(entry.Title))
             {
-                var violations = new List<ErrorExtraInfo>
-                {
-                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Title"}
-                };
-                throw new ValidationError(violations);
+                violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.InvalidTitle, Property = "Title" });
             }
+
+            if (entry.CategoryIds == null || !entry.CategoryIds.Any())
+            {
+                violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.NewsCategoryIsEmpty, Property = "CategoryIds" });
+            }
+
+
+            if (violations.Any())
+                throw new ValidationError(violations);
 
         }
 
@@ -305,12 +351,15 @@ namespace App.Services.NewsManagement
             {
                 Id = x.Id,
                 Title = x.Title,
-                Description = x.Description,
-                Thumbnail = x.Image.Thumbnail,
                 Views = x.Views,
+                Status = x.Status.Status,
+                IsHot = x.IsHot ?? false,
+                IsFeatured = x.IsFeatured ?? false,
                 CreatedDate = x.CreatedDate,
                 UpdatedDate = x.UpdatedDate,
-                UpdatedBy = x.Editor.Firstname
+                UpdatedBy = $"{x.Editor.Firstname} {x.Editor.Lastname}",
+                Categories = x.Categories?.Select(c=>c.Name).ToList(),
+                Tags = x.Tags?.Select(t=>t.Name).ToList()
             });
         }
 
@@ -326,7 +375,7 @@ namespace App.Services.NewsManagement
                 Content = entity.Content,
                 IsHot = entity.IsHot ?? false,
                 IsFeatured = entity.IsFeatured ?? false,
-                IsDisabled = entity.IsDisabled ?? false,
+                StatusId = entity.StatusId,
                 Views = entity.Views,
                 CreatedDate = entity.CreatedDate,
                 UpdatedDate = entity.UpdatedDate,

@@ -11,3 +11,7 @@
 .underline {
     text-decoration: line-through;
 }
+
+.table td .label {
+    display: inline-block;
+}

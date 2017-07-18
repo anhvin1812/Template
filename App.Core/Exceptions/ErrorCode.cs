@@ -31,6 +31,8 @@ namespace App.Core.Exceptions
                 // News
                 {ErrorCodeType.InvalidTitle, "Title is not valid."},
                 {ErrorCodeType.NewsCategoryIsEmpty, "Category cannot be empty."},
+                {ErrorCodeType.EmptyImage, "Featured image cannot be empty."},
+                {ErrorCodeType.NewsStatusIsNotExisted, "Status not found."},
 
                 // Tag
                 {ErrorCodeType.TagNameIsExisted, "Tag name is existed."},

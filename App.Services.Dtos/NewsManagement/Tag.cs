@@ -6,9 +6,9 @@ namespace App.Services.Dtos.NewsManagement
 {
     public class TagEntry : DtoBase
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter tag name.")]
         public string Name { get; set; }
-        public bool? IsDisabled { get; set; }
+        public bool IsDisabled { get; set; }
     }
 
     public class TagDetail : DtoBase

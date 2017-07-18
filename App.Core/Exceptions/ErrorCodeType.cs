@@ -33,6 +33,8 @@ namespace App.Core.Exceptions
         // News
         InvalidTitle = 200,
         NewsCategoryIsEmpty = 201,
+        EmptyImage = 202,
+        NewsStatusIsNotExisted = 203,
 
         // Tag
         TagNameIsExisted = 300

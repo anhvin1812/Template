@@ -1,16 +1,14 @@
 ﻿@using System.Web.Optimization
-@using App.Core.Configuration
+@using App.Core.Permission
 @using App.Infrastructure.File
-@using App.Services.Dtos.Gallery
-@using Microsoft.Ajax.Utilities
 @model App.Services.Dtos.NewsManagement.NewsUpdateEntry
 @{
-    ViewBag.Title = "News";
+    ViewBag.Title = "Edit News";
 }
 
 @section AddStyles{
-    <!-- iCheck for checkboxes and radio inputs -->
-    @*@Styles.Render("~/Admin/Content/iCheck")*@
+    <!-- Bootstrap-toggle -->
+    @Styles.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.css")
 }
 
 @section ContentHeader
@@ -32,6 +30,7 @@
 @using (Html.BeginForm("Edit", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    var toggleAttributes = new { data_toggle = "toggle", data_onstyle = "success", data_on = "Yes", data_off = "No" };
 
     <div class="row">
         <div class="col-xs-12">
@@ -52,11 +51,11 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.Description)
-                        @Html.TextAreaFor(m => m.Description, new {@class = "form-control", placeholder = "Enter description"})
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "Enter description" })
                     </div>
                     <div class="form-group">
-                        @Html.Label("Categories")
-                        @Html.DropDownListFor(m => m.CategoryIds, (SelectList)ViewBag.Categories, string.Empty, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.CategoryIds, "Categories")
+                        @Html.ListBoxFor(m => m.CategoryIds, (MultiSelectList)ViewBag.Categories, new { @class = "form-control select2", data_placeholder = "Select categories", style = "width: 100%;" })
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -90,33 +89,70 @@
                             <input type="text" readonly="readonly" class="form-control input-sm input-file">
                         </div><!-- /input-group -->
                     </div>
-                    <div id="previewFeaturedImage" class="">
-                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(Model.Thumbnail))" class="img-responsive" style="max-width: 200px">
+                    <div id="previewFeaturedImage">
+                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(Model.Thumbnail))" class="img-responsive" style="max-width:200px">
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Options</h3>
+                </div>
+                <div class="box-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                @Html.Label("Featured", new { @class = "control-label" }) &nbsp;&nbsp;&nbsp;
+                                @Html.CheckBoxFor(m => m.IsFeatured, toggleAttributes)
+                            </div>
+                            <div class="col-xs-6">
+                                @Html.Label("Hot", new { @class = "control-label" }) &nbsp;&nbsp;&nbsp;
+                                @Html.CheckBoxFor(m => m.IsHot, toggleAttributes)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Status")
+                        @Html.DropDownListFor(m => m.StatusId, (SelectList)ViewBag.Status, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Tags")
+                        @Html.ListBoxFor(m => m.TagIds, (MultiSelectList)ViewBag.Tags, new { @class = "form-control select2", data_placeholder = "Select tags", style = "width: 100%;" })
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>
     </div>
 
+
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "News")">Back to news</a>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        <a class="btn btn-default pull-right" href="@Url.Action("Index", "News")">Back to news</a>
     </div>
 
-
 }
+
+
 
 @section AddScripts{
     <!-- jQuery-validate -->
     @Scripts.Render("~/Admin/Js/jqueryval")
     <!-- CKEditor. -->
     @Scripts.Render("~/ckeditor/ckeditor.js")
-
+    <!-- Select2 -->
+    @Scripts.Render("~/Areas/Admin/Scripts/select2/select2.full.min.js")
+    <!-- Bootstrap-toggle -->
+    @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
     <!-- Product -->
     @Scripts.Render("~/Admin/App/product")
 
     <script type="text/javascript">
-        jQuery(function($) {
+        jQuery(function ($) {
+            // Select2
+            $(".select2").select2();
+
             // CKeditor
             CKEDITOR.replace('txtContent');
         });
