@@ -1,0 +1,78 @@
+﻿@using App.Core.Extensions
+@using App.Infrastructure.File
+@using Microsoft.Security.Application
+@model App.Services.Dtos.NewsManagement.PublicNewsDetail
+
+@{
+    ViewBag.Title = Model.Title;
+    var category = Model.Categories.FirstOrDefault();
+}
+
+@section FullContent{
+    <div class="row">
+        <div class="col-xs-12 cat-title-holder mt60">
+            <h2>@(category?.Name)</h2>
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li><a href="@Url.Action("Category","Article", new {id=category?.Id})">@(category?.Name)</a></li>
+            </ul>
+        </div>
+    </div>
+}
+
+
+<div class="post-widget bg-white light-shadow mb30">
+    <article class="post">
+        <div class="img-holder-wrap">
+            <a class="img-holder" href="#">
+                <img src="@Url.Content(GalleryHelper.GetImagePath(Model.Image))" alt="@Model.Title">
+            </a>
+            <span class="post-badge">@(category?.Name)</span>
+        </div>
+        <div class="post-info p30">
+            <h3>@Model.Title</h3>
+            <div class="row mb10">
+                <div class="col-sm-6">
+                    <ul class="post-meta m0 p0">
+                        <li><i class="fa fa-clock-o"></i> @Model.PublishedDate.RelativeTime()</li>
+                        <li><i class="fa fa-eye"></i> @Model.Views</li>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="social-share reset text-right">
+                        <li>
+                            <a class="btn-facebook" href="">
+                                <span class="fa fa-facebook"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn-twitter" href="">
+                                <span class="fa fa-twitter"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn-linkedin" href="">
+                                <span class="fa fa-linkedin"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="post-content">
+                @Html.Raw(Sanitizer.GetSafeHtmlFragment(Model.Content))
+            </div>
+            <div class="post-tags-holder">
+                <ul class="post-tags reset">
+                    @foreach (var t in Model.Tags)
+                    {
+                        <li><a href="#">@t.Name</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </article>
+</div><!-- /.post-widget-->
+
+@section SideBar{
+    @Html.Partial("_SideBar")
+}

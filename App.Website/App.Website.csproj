@@ -231,6 +231,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -1699,6 +1700,12 @@
     <Content Include="Views\Shared\_ProductSocialMediaTag.cshtml" />
     <Content Include="Views\Shared\_ArticleSocialMediaTag.cshtml" />
     <Content Include="Views\Shared\NoPermission.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Article\_Featured.cshtml" />
+    <Content Include="Views\Article\_Hot.cshtml" />
+    <Content Include="Views\Article\Category.cshtml" />
+    <Content Include="Views\Shared\_SideBar.cshtml" />
+    <Content Include="Views\Article\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

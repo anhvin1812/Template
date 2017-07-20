@@ -100,9 +100,11 @@
     <Compile Include="EntityMapping\IdentityManagementMapping.cs" />
     <Compile Include="Gallery\IGalleryService.cs" />
     <Compile Include="Gallery\GalleryService.cs" />
+    <Compile Include="NewsManagement\IPublicNewsService.cs" />
     <Compile Include="NewsManagement\ITagService.cs" />
     <Compile Include="NewsManagement\INewsCategoryService.cs" />
     <Compile Include="NewsManagement\INewsService.cs" />
+    <Compile Include="NewsManagement\PublicNewsService.cs" />
     <Compile Include="NewsManagement\TagService.cs" />
     <Compile Include="NewsManagement\NewsCategoryService.cs" />
     <Compile Include="NewsManagement\NewsService.cs" />

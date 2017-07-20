@@ -1,10 +1,9 @@
 ﻿@using System.Web.Optimization
+@using App.Core.News
 @using App.Services.Dtos.NewsManagement
 @using PagedList.Mvc
 @model PagedList.StaticPagedList<NewsSummary>
 @{
-    ViewBag.Title = "News";
-
     var filters = (NewsFilter)ViewBag.Filters;
 }
 
@@ -60,6 +59,9 @@
                     @Html.DropDownList("statusId", (SelectList)ViewBag.Status, "All status", new { @class = "form-control input-sm" })
                 </div>
                 <div class="form-group">
+                    @Html.DropDownList("mediaTypeId", (SelectList)ViewBag.MediaTypes, "All media types", new { @class = "form-control input-sm" })
+                </div>
+                <div class="form-group">
                     <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-danger btn-sm @(filters.IsHot.GetValueOrDefault() ? "active" : string.Empty)">
                             <input type="checkbox" name="hot" value="true" @(filters.IsHot.GetValueOrDefault() ? "checked" : string.Empty)/> Hot
@@ -82,6 +84,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Status</th>
+                    <th>Media</th>
                     <th>Views</th>
                     <th>Categories</th>
                     <th>Tags</th>
@@ -103,6 +106,20 @@
                             @if (m.IsFeatured)
                             {
                                 <span class="label label-warning">Featured</span>
+                            }
+                        </td>
+                        <td>
+                            @if (m.MediaTypeId == (int)MediaType.Photo)
+                            {
+                                <span class="label bg-olive"><i class="fa fa-camera"></i></span>
+                            }
+                            else if (m.MediaTypeId == (int) MediaType.Video)
+                            {
+                                <span class="label bg-olive"><i class="fa fa-video-camera"></i></span>
+                            }
+                            else
+                            {
+                                <span class="label bg-olive"><i class="fa fa-newspaper-o"></i></span>
                             }
                         </td>
                         <td>@m.Views</td>

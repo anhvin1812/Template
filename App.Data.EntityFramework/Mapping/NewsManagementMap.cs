@@ -32,6 +32,7 @@ namespace App.Data.EntityFramework.Mapping
                 Property(t => t.IsHot).IsOptional();
                 Property(t => t.IsFeatured).IsOptional();
                 Property(t => t.StatusId).IsRequired();
+                Property(t => t.MediaTypeId).IsRequired();
                 Property(t => t.Views).IsRequired();
                 Property(t => t.CreatedDate).IsRequired();
                 Property(t => t.UpdatedDate).IsOptional();

@@ -1,0 +1,44 @@
+﻿@using App.Infrastructure.File
+@model IEnumerable<App.Services.Dtos.NewsManagement.PublicNewsSummary>
+
+<section id="carousel-highlight" class="module-highlight carousel slide">
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        @{
+            var i = 0;
+
+            foreach (var m in Model)
+            {
+                var url = Url.Action("Detail", "Article", new { id = m.Id });
+                <div class="item @(i==0 ? "active" : "")">
+                    <div class="img-holder-wrap">
+                        <a class="img-holder" href="@url">
+                            <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Thumbnail))" alt="@m.Title">
+                        </a>
+                    </div>
+                    <div class="carousel-caption">
+                        <span class="post-badge">@m.Category.Name</span>
+                        <h3>
+                            <a href="@url">
+                                @m.Title
+                            </a>
+                        </h3>
+                    </div>
+                </div>
+                i++;
+            }
+        }
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control hidden-lg hidden-md hidden-sm" href="#carousel-highlight" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control hidden-lg hidden-md hidden-sm" href="#carousel-highlight" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</section><!-- /#carousel-highlight-->

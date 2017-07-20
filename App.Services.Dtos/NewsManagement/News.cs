@@ -18,6 +18,8 @@ namespace App.Services.Dtos.NewsManagement
         public bool IsFeatured { get; set; }
         [Required(ErrorMessage = "Please select status.")]
         public int StatusId { get; set; }
+        [Required(ErrorMessage = "Please select media type.")]
+        public int MediaTypeId { get; set; }
 
         [Required(ErrorMessage = "Please select categories.")]
         public List<int> CategoryIds { get; set; }
@@ -40,6 +42,8 @@ namespace App.Services.Dtos.NewsManagement
         public bool IsFeatured { get; set; }
         [Required(ErrorMessage = "Please select status.")]
         public int StatusId { get; set; }
+        [Required(ErrorMessage = "Please select media type.")]
+        public int MediaTypeId { get; set; }
 
         [Required(ErrorMessage = "Please select categories.")]
         public List<int> CategoryIds { get; set; }
@@ -56,6 +60,7 @@ namespace App.Services.Dtos.NewsManagement
         public string Status { get; set; }
         public bool IsHot { get; set; }
         public bool IsFeatured { get; set; }
+        public int MediaTypeId { get; set; }
 
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
@@ -78,6 +83,7 @@ namespace App.Services.Dtos.NewsManagement
         public bool IsFeatured { get; set; }
         public int Views { get; set; }
         public int StatusId { get; set; }
+        public int MediaTypeId { get; set; }
         public List<NewsCategorySummary> Categories { get; set; }
         public List<TagSummary> Tags { get; set; }
         
@@ -98,6 +104,7 @@ namespace App.Services.Dtos.NewsManagement
         public string Keyword { get; set; }
         public int? CategoryId { get; set; }
         public int? StatusId { get; set; }
+        public int? MediaTypeId { get; set; }
         public bool? IsHot { get; set; }
         public bool? IsFeatured { get; set; }
     }

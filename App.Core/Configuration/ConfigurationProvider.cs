@@ -15,52 +15,20 @@ namespace App.Core.Configuration
             return (setting == null) ? string.Empty : setting.ConnectionString;
         }
         
-        public string DirectoryProductImage
-        {
-            get
-            {
-                return GetAppSetting("DirectoryProductImage").Trim();
-            }
-        }
+        public string DirectoryProductImage => GetAppSetting("DirectoryProductImage").Trim();
 
-        public string DirectoryProductThumbnail
-        {
-            get
-            {
-                return GetAppSetting("DirectoryProductThumbnail").Trim();
-            }
-        }
+        public string DirectoryProductThumbnail => GetAppSetting("DirectoryProductThumbnail").Trim();
 
-        public string DirectoryGalleryImage
-        {
-            get
-            {
-                return GetAppSetting("DirectoryGalleryImage").Trim();
-            }
-        }
+        public string DirectoryGalleryImage => GetAppSetting("DirectoryGalleryImage").Trim();
 
-        public string DirectoryGalleryThumbnail
-        {
-            get
-            {
-                return GetAppSetting("DirectoryGalleryThumbnail").Trim();
-            }
-        }
+        public string DirectoryGalleryThumbnail => GetAppSetting("DirectoryGalleryThumbnail").Trim();
 
-        public string DefaultGalleryImage
-        {
-            get
-            {
-                return GetAppSetting("DefaultGalleryImage").Trim();
-            }
-        }
+        public string DefaultGalleryImage => GetAppSetting("DefaultGalleryImage").Trim();
 
-        public string DefaultGalleryThumbnail
-        {
-            get
-            {
-                return GetAppSetting("DefaultGalleryThumbnail").Trim();
-            }
-        }
+        public string DefaultGalleryThumbnail => GetAppSetting("DefaultGalleryThumbnail").Trim();
+
+        public int ThumbnailWidth => 420;
+
+        public int ThumbnailPhotoWidth => 600;
     }
 }

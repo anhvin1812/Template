@@ -15,6 +15,7 @@ namespace App.Entities.NewsManagement
         public bool? IsHot { get; set; }
         public bool? IsFeatured { get; set; }
         public int StatusId { get; set; }
+        public int MediaTypeId { get; set; }
         public int Views { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
@@ -29,4 +30,5 @@ namespace App.Entities.NewsManagement
         public virtual ICollection<Tag> Tags { get; set; }
 
     }
+
 }

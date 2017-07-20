@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using App.Core.Configuration;
 using App.Core.Exceptions;
+using App.Core.News;
 using App.Core.Repositories;
 using App.Entities;
 using App.Entities.NewsManagement;
@@ -16,6 +18,7 @@ using App.Services.Dtos.NewsManagement;
 using App.Services.Dtos.ProductManagement;
 using App.Services.Dtos.UI;
 using App.Services.Gallery;
+using NewsStatus = App.Core.News.NewsStatus;
 
 namespace App.Services.NewsManagement
 {
@@ -43,9 +46,9 @@ namespace App.Services.NewsManagement
 
         #region Public Methods
 
-        public IEnumerable<NewsSummary> GetAll(string keyword, int? categoryId, int? statusId, bool? hot, bool? featured, int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<NewsSummary> GetAll(string keyword, int? categoryId, int? statusId, int? mediaTypeId, bool? hot, bool? featured, int? page, int? pageSize, ref int? recordCount)
         {
-            var news = NewsRepository.GetAll(keyword, categoryId, statusId, hot, featured, page, pageSize, ref recordCount);
+            var news = NewsRepository.GetAll(keyword, categoryId, statusId, mediaTypeId, hot, featured, page, pageSize, ref recordCount);
             
             return EntitiesToDtos(news);
         }
@@ -119,6 +122,7 @@ namespace App.Services.NewsManagement
                     IsHot = entry.IsHot,
                     IsFeatured = entry.IsFeatured,
                     StatusId = entry.StatusId,
+                    MediaTypeId = entry.MediaTypeId,
                     CreatedDate = DateTime.Now,
                     UpdatedById = userId,
                     
@@ -143,7 +147,11 @@ namespace App.Services.NewsManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var imageName = GalleryHelper.UploadGallery(entry.Image);
+                    var thumbnailWidth = entry.MediaTypeId == (int) MediaType.Photo
+                        ? Settings.ConfigurationProvider.ThumbnailWidth
+                        : Settings.ConfigurationProvider.ThumbnailPhotoWidth;
+
+                    var imageName = GalleryHelper.UploadGallery(entry.Image, thumbnailWidth);
 
                     entity.Image = new Entities.ProductManagement.Gallery
                     {
@@ -193,6 +201,7 @@ namespace App.Services.NewsManagement
                 entity.IsHot = entry.IsHot;
                 entity.IsFeatured = entry.IsFeatured;
                 entity.StatusId = entry.StatusId;
+                entity.MediaTypeId = entry.MediaTypeId;
 
                 entity.UpdatedDate = DateTime.Now;
                 entity.UpdatedById = userId;
@@ -218,7 +227,11 @@ namespace App.Services.NewsManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var imageName = GalleryHelper.UploadGallery(entry.Image);
+                    var thumbnailWidth = entry.MediaTypeId == (int)MediaType.Photo
+                        ? Settings.ConfigurationProvider.ThumbnailWidth
+                        : Settings.ConfigurationProvider.ThumbnailPhotoWidth;
+
+                    var imageName = GalleryHelper.UploadGallery(entry.Image, thumbnailWidth);
 
                     if (entity.Image != null)
                     {
@@ -278,6 +291,18 @@ namespace App.Services.NewsManagement
             };
         }
 
+        #endregion
+
+        #region Media type
+        public SelectListOptions GetMediaTypeOptionsForDropdownList()
+        {
+            var status = Enum.GetValues(typeof (MediaType)).OfType<MediaType>();
+            
+            return new SelectListOptions
+            {
+                Items = status.Select(x => new OptionItem { Value = (int)x, Text = x.ToString() }),
+            };
+        }
         #endregion
 
         #endregion
@@ -353,6 +378,7 @@ namespace App.Services.NewsManagement
                 Title = x.Title,
                 Views = x.Views,
                 Status = x.Status.Status,
+                MediaTypeId = x.MediaTypeId,
                 IsHot = x.IsHot ?? false,
                 IsFeatured = x.IsFeatured ?? false,
                 CreatedDate = x.CreatedDate,
@@ -376,6 +402,7 @@ namespace App.Services.NewsManagement
                 IsHot = entity.IsHot ?? false,
                 IsFeatured = entity.IsFeatured ?? false,
                 StatusId = entity.StatusId,
+                MediaTypeId = entity.MediaTypeId,
                 Views = entity.Views,
                 CreatedDate = entity.CreatedDate,
                 UpdatedDate = entity.UpdatedDate,

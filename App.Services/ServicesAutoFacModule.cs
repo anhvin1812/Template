@@ -33,6 +33,7 @@ namespace App.Services
             builder.RegisterType<GalleryService>().As<IGalleryService>().InstancePerDependency();
             // News
             builder.RegisterType<NewsService>().As<INewsService>().InstancePerDependency();
+            builder.RegisterType<PublicNewsService>().As<IPublicNewsService>().InstancePerDependency();
             builder.RegisterType<NewsCategoryService>().As<INewsCategoryService>().InstancePerDependency();
             builder.RegisterType<TagService>().As<ITagService>().InstancePerDependency();
             //builder.RegisterType<RedCatMemberFactory>().As<IThirdPartyProviderMemberFactory<RedCatMember>>().InstancePerLifetimeScope();

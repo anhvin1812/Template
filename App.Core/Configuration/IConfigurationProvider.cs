@@ -8,6 +8,10 @@
         string DirectoryGalleryThumbnail { get; }
         string DefaultGalleryThumbnail { get; }
         string DefaultGalleryImage { get; }
+
+        int ThumbnailWidth { get; }
+        int ThumbnailPhotoWidth { get; }
+
        
     }
 }

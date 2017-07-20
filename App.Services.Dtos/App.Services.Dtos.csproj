@@ -113,6 +113,7 @@
     <Compile Include="Common\Error.cs" />
     <Compile Include="Common\DtoBase.cs" />
     <Compile Include="Gallery\Gallery.cs" />
+    <Compile Include="NewsManagement\PublicNews.cs" />
     <Compile Include="NewsManagement\News.cs" />
     <Compile Include="NewsManagement\Tag.cs" />
     <Compile Include="NewsManagement\NewsCategory.cs" />

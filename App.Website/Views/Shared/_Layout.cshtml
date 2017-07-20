@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title | Xứ Nghệ</title>
     
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,300italic,300,400italic,500,500italic,700,700italic" rel="stylesheet">
@@ -105,8 +105,15 @@
         </header>
         <main>
             <div class="container">
-                @RenderBody()
-                
+                @RenderSection("FullContent", required: false)
+                <div class="row mt60">
+                    <div class="col-sm-8 col-md-9">
+                        @RenderBody()
+                    </div>
+                    <div class="col-sm-4 col-md-3">
+                        @RenderSection("SideBar", required: false)
+                    </div>
+                </div>
             </div>
         </main>
 

@@ -36,24 +36,27 @@ namespace App.Website.Areas.Admin.Controllers
         #endregion
 
 
-        public ActionResult Index(string keyword, int? categoryId = null, int? statusId = null, bool? hot = null, bool? featured = null, int? page = null, int? pageSize = null)
+        public ActionResult Index(string keyword, int? categoryId = null, int? statusId = null, int? mediaTypeId = null, bool? hot = null, bool? featured = null, int? page = null, int? pageSize = null)
         {
             pageSize = 15;
             int? recordCount = 0;
-            var result = NewsService.GetAll(keyword, categoryId, statusId, hot, featured, page, pageSize, ref recordCount);
+            var result = NewsService.GetAll(keyword, categoryId, statusId, mediaTypeId, hot, featured, page, pageSize, ref recordCount);
 
             var pagedNews = new StaticPagedList<NewsSummary>(result, page ?? 1, (int) pageSize, (int)recordCount);
 
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
+            var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 
             ViewBag.Categories = new SelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, categoryId);
             ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField, statusId);
+            ViewBag.MediaTypes = new SelectList(mediaTypeOptions.Items, mediaTypeOptions.DataValueField, mediaTypeOptions.DataTextField, mediaTypeId);
             ViewBag.Filters = new NewsFilter
             {
                 Keyword = keyword,
                 CategoryId = categoryId,
                 StatusId = statusId,
+                MediaTypeId = mediaTypeId,
                 IsHot = hot,
                 IsFeatured = featured
             };
@@ -66,10 +69,12 @@ namespace App.Website.Areas.Admin.Controllers
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var tagOptions = TagService.GetOptionsForDropdownList(false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
+            var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 
             ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField);
             ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField);
             ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField);
+            ViewBag.MediaTypes = new SelectList(mediaTypeOptions.Items, mediaTypeOptions.DataValueField, mediaTypeOptions.DataTextField);
 
             return View();
         }
@@ -82,10 +87,12 @@ namespace App.Website.Areas.Admin.Controllers
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var tagOptions = TagService.GetOptionsForDropdownList(false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
+            var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 
             ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, entry.CategoryIds);
             ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, entry.TagIds);
             ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField, entry.StatusId);
+            ViewBag.MediaTypes = new SelectList(mediaTypeOptions.Items, mediaTypeOptions.DataValueField, mediaTypeOptions.DataTextField, entry.MediaTypeId);
 
             if (ModelState.IsValid)
             {
@@ -102,10 +109,12 @@ namespace App.Website.Areas.Admin.Controllers
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var tagOptions = TagService.GetOptionsForDropdownList(false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
+            var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 
             ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, model.CategoryIds);
             ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, model.TagIds);
             ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField, model.StatusId);
+            ViewBag.MediaTypes = new SelectList(mediaTypeOptions.Items, mediaTypeOptions.DataValueField, mediaTypeOptions.DataTextField, model.MediaTypeId);
 
             return View(model);
         }
@@ -118,10 +127,12 @@ namespace App.Website.Areas.Admin.Controllers
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
             var tagOptions = TagService.GetOptionsForDropdownList(false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
+            var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 
             ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField, entry.CategoryIds);
             ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField, entry.TagIds);
             ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField, entry.StatusId);
+            ViewBag.MediaTypes = new SelectList(mediaTypeOptions.Items, mediaTypeOptions.DataValueField, mediaTypeOptions.DataTextField, entry.MediaTypeId);
 
             if (ModelState.IsValid)
             {

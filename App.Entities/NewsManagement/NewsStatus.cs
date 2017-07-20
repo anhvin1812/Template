@@ -1,4 +1,5 @@
-﻿using App.Core.DataModels;
+﻿using System.ComponentModel.DataAnnotations;
+using App.Core.DataModels;
 
 namespace App.Entities.NewsManagement
 {
@@ -8,4 +9,5 @@ namespace App.Entities.NewsManagement
 
         public string Status { get; set; }
     }
+
 }

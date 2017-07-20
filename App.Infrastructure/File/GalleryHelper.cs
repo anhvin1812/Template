@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Web;
 using App.Core.Configuration;
@@ -30,16 +31,20 @@ namespace App.Infrastructure.File
         }
 
 
-        public static string UploadGallery(HttpPostedFileBase image)
+        public static string UploadGallery(HttpPostedFileBase image, int thumbWidth)
         {
             if(image ==null)
                 throw new ArgumentNullException(nameof(image), "File can not be null.");
 
             var imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{ Path.GetExtension(image.FileName)}";
             Image img = Image.FromStream(image.InputStream);
+            Image thumb = img;
 
-            var thumbHeight = 300*img.Height/img.Width;
-            Image thumb = img.GetThumbnailImage(300, thumbHeight, () => false, IntPtr.Zero);
+            if (img.Width > thumbWidth)
+            {
+                var thumbHeight = thumbWidth * img.Height/img.Width;
+                thumb = ResizeImage(img, thumbWidth, thumbHeight);
+            }
 
             var fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
 
@@ -73,6 +78,21 @@ namespace App.Infrastructure.File
             {
                 File.Delete(fullThumbnailPath);
             }
+        }
+
+
+        private static Bitmap ResizeImage(Image originalImage, int newWidth, int newHeight)
+        {
+            Bitmap newImage = new Bitmap(newWidth, newHeight);
+            using (Graphics gr = Graphics.FromImage(newImage))
+            {
+                gr.SmoothingMode = SmoothingMode.HighQuality;
+                gr.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                gr.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                gr.DrawImage(originalImage, new Rectangle(0, 0, newWidth, newHeight));
+            }
+
+            return newImage;
         }
     }
 }
