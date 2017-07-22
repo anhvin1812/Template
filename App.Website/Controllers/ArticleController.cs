@@ -93,6 +93,13 @@ namespace App.Website.Controllers
             return PartialView("_Hot", model);
         }
 
+        public ActionResult Related(int newsId, int categoryId)
+        {
+            var model = PublicNewsService.GetRelatedNews(newsId, categoryId);
+
+            return PartialView("_Related", model);
+        }
+
         #region Dispose
         private bool _disposed;
 

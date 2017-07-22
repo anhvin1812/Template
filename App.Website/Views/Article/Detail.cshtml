@@ -39,19 +39,22 @@
                     </ul>
                 </div>
                 <div class="col-sm-6">
+                @{
+                    var shareUrl = Url.Encode(Request?.Url.OriginalString);
+                }
                     <ul class="social-share reset text-right">
                         <li>
-                            <a class="btn-facebook" href="">
+                            <a class="btn-facebook" onclick="return ShareSocial(this);"  href="https://www.facebook.com/sharer/sharer.php?u=@shareUrl">
                                 <span class="fa fa-facebook"></span>
                             </a>
                         </li>
                         <li>
-                            <a class="btn-twitter" href="">
+                            <a class="btn-twitter" onclick="return ShareSocial(this);"  href="https://twitter.com/share?url=@shareUrl">
                                 <span class="fa fa-twitter"></span>
                             </a>
                         </li>
                         <li>
-                            <a class="btn-linkedin" href="">
+                            <a class="btn-linkedin" onclick="return ShareSocial(this);"  href="https://www.linkedin.com/cws/share?url=@shareUrl">
                                 <span class="fa fa-linkedin"></span>
                             </a>
                         </li>
@@ -73,6 +76,36 @@
     </article>
 </div><!-- /.post-widget-->
 
+@Html.Action("Related", "Article", new {newsId = Model.Id, categoryId = category?.Id})
+
 @section SideBar{
     @Html.Partial("_SideBar")
+}
+
+
+@section Scripts{
+<script type="text/javascript">
+    jQuery(function ($) {
+        // active hot news slider
+        $(".related-news-slider .owl-carousel").owlCarousel({
+            loop: false,
+            margin: 30,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                768: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+    });
+</script>
 }

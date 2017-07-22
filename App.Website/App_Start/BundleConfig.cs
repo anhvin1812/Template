@@ -14,6 +14,7 @@ namespace App.Website
                         "~/Scripts/bootstrap.min.js",
                         "~/Scripts/owl-carousel/js/owl.carousel.min.js",
                         "~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js",
+                        "~/Scripts/app/common.js",
                         "~/Scripts/layout.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(

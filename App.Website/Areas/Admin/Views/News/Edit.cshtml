@@ -83,14 +83,14 @@
                             <span class="input-group-btn">
                                 <span class="btn btn-success btn-sm btn-file">
                                     <i class="fa fa-folder-open-o"></i> Browse...
-                                    @Html.TextBoxFor(x => x.Image, new { type = "file", id = "fileFeaturedImage" })
+                                    @Html.TextBoxFor(x => x.Image, new { type = "file", @class = "input-file-single", data_preview = "previewFeaturedImage" })
                                 </span>
                             </span>
                             <input type="text" readonly="readonly" class="form-control input-sm input-file">
                         </div><!-- /input-group -->
                     </div>
                     <div id="previewFeaturedImage">
-                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(Model.Thumbnail))" class="img-responsive" style="max-width:200px">
+                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(Model.Thumbnail))" class="img-responsive" style="max-height:200px; max-width:90%">
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->

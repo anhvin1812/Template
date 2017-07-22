@@ -1,0 +1,37 @@
+﻿@using App.Core.Extensions
+@using App.Infrastructure.File
+@model IEnumerable<App.Services.Dtos.NewsManagement.PublicNewsSummary>
+
+<section class="mt30 mb30">
+    <div class="primary-heading">
+        <a>Tin khác</a>
+    </div>
+    <div class="related-news-slider slider-post bg-white p30 light-shadow">
+        <div class="owl-carousel">
+        @{
+            foreach (var m in Model)
+            {
+                var url = Url.Action("Detail", "Article", new { id = m.Id });
+                <div class="post-item post-item-vertical">
+                    <div class="img-holder-wrap mb15">
+                        <a class="img-holder" href="@url">
+                            <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Thumbnail))" alt="@m.Title">
+                        </a>
+                        <span class="post-badge">@m.Category.Name</span>
+                    </div>
+                   
+                    <div class="post-summary">
+                        <h6 class="post-title">
+                            <a href="@url">@m.Title</a>
+                        </h6>
+                        <ul class="post-meta m0 p0">
+                            <li><i class="fa fa-clock-o"></i> @m.PublishedDate.RelativeTime()</li>
+                            <li><i class="fa fa-eye"></i> @m.Views</li>
+                        </ul>
+                    </div>
+                </div><!-- /.post-item-->
+            }
+        }
+        </div>
+    </div>
+</section>

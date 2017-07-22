@@ -57,9 +57,21 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="@Url.Action("Index", "News")"><i class="fa fa-newspaper-o"></i> News</a></li>
-                    <li><a href="@Url.Action("Index", "NewsCategory")"><i class="fa fa-list-alt"></i> Categories</a></li>
-                    <li><a href="@Url.Action("Index", "Tag")"><i class="fa fa-tags"></i> Tags</a></li>
+                    <li><a href="@Url.Action("Index", "News")">News</a></li>
+                    <li><a href="@Url.Action("Index", "NewsCategory")">Categories</a></li>
+                    <li><a href="@Url.Action("Index", "Tag")">Tags</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>Settings</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Homepage", "Setting")">Home page</a></li>
+                    <li><a href="@Url.Action("Menu", "Setting")">Menu</a></li>
+                    <li><a href="@Url.Action("ThemeOptions", "Setting")">Theme options</a></li>
                 </ul>
             </li>
         </ul>
