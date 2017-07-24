@@ -1,23 +1,23 @@
 ﻿@using App.Core.Extensions
 @using App.Infrastructure.File
 @using App.Services.Dtos.NewsManagement
+@using PagedList
 @using PagedList.Mvc
 
-@model PagedList.StaticPagedList<App.Services.Dtos.NewsManagement.PublicNewsSummary>
+@model dynamic
 
 @{
-    var filters = (NewsFilter)ViewBag.Filters;
+    ViewBag.Title = Model.Category?.Name;
 }
 
 
 @section FullContent{
-
 <div class="row">
     <div class="col-xs-12 cat-title-holder mt60">
-        <h2>Fashion</h2>
+        <h2>@(Model.Category?.Name)</h2>
         <ul class="breadcrumb">
-            <li><a href="#">Home</a></li>
-            <li>Fashion</li>
+            <li><a href="/">Home</a></li>
+            <li><a href="@Url.Action("Category","Article", new {id = Model.Category?.Id})">@(Model.Category?.Name)</a></li>
         </ul>
     </div>
 </div>
@@ -25,7 +25,7 @@
 
 <div class="post-widget bg-white light-shadow mb30">
     <ul class="list-posts reset">
-        @foreach (var m in Model)
+        @foreach (PublicNewsSummary m in Model.PagedNews)
         {
             var url = Url.Action("Detail", "Article", new { id = m.Id });
 
@@ -58,25 +58,7 @@
     </ul>
 </div><!-- /.post-widget-->
 
-@Html.PagedListPager(Model, page => Url.Action("Category", "Article", new { id = filters.CategoryId, page = page }), new PagedListRenderOptions { ContainerDivClasses = new[] { "mb30" } })
-
-@*<ul class="pagination mb30">
-    <li>
-        <a href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-        </a>
-    </li>
-    <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-        <a href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-        </a>
-    </li>
-</ul>*@
+@Html.PagedListPager((StaticPagedList <PublicNewsSummary>)Model.PagedNews, page => Url.Action("Category", "Article", new { id = Model.Category.Id, page = page }), new PagedListRenderOptions { ContainerDivClasses = new[] { "mb30" } })
 
 @section SideBar{
     @Html.Partial("_SideBar")

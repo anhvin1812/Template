@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,15 +37,14 @@ namespace App.Website.Controllers
 
             var result = PublicNewsService.GetAll(keyword, null, page, pageSize, ref recordCount);
 
-            var pagedNews = new StaticPagedList<PublicNewsSummary>(result, page ?? 1, pageSize, (int)recordCount);
-
-            ViewBag.Title = keyword;
-            ViewBag.Filters = new NewsFilter
+            dynamic model = new ExpandoObject();
+            model.PagedNews = new StaticPagedList<PublicNewsSummary>(result, page ?? 1, pageSize, (int)recordCount);
+            model.NewsFilter = new NewsFilter
             {
                 Keyword = keyword
             };
 
-            return View(pagedNews);
+            return View(model);
         }
 
         [LayoutActionFilter]
@@ -58,15 +58,15 @@ namespace App.Website.Controllers
 
                 var result = PublicNewsService.GetAll(null, id, page, pageSize, ref recordCount);
 
-                var pagedNews = new StaticPagedList<PublicNewsSummary>(result, page ?? 1, pageSize, (int)recordCount);
-
-                ViewBag.Title = category.Name;
-                ViewBag.Filters = new NewsFilter
+                dynamic model = new ExpandoObject();
+                model.PagedNews = new StaticPagedList<PublicNewsSummary>(result, page ?? 1, pageSize, (int)recordCount);
+                model.Category = new PublicCategorySummary
                 {
-                    CategoryId = id
+                    Id = category.Id,
+                    Name = category.Name
                 };
 
-                return View(pagedNews);
+                return View(model);
             }
 
             return HttpNotFound();

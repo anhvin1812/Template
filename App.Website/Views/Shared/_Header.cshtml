@@ -14,18 +14,18 @@
                 <nav id="main-nav" class="hidden">
                     @Html.Raw(Model.Menu)
                     @*<ul class="multi-level">
-                        <li>
-                            <a href="#">Trang chủ</a>
-                        </li>
-                        <li>
-                            <a href="#">Tin tức</a>
-                            <ul>
-                                <li><a href="#">Thời sự</a></li>
-                                <li><a href="#">Thể thao</a></li>
-                            </ul>
-                        </li>
-                        
-                    </ul>*@
+                            <li>
+                                <a href="#">Trang chủ</a>
+                            </li>
+                            <li>
+                                <a href="#">Tin tức</a>
+                                <ul>
+                                    <li><a href="#">Thời sự</a></li>
+                                    <li><a href="#">Thể thao</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>*@
                 </nav>
                 <div class="pull-left">
                     <a id="btn-open-search" class="menu-btn">
@@ -40,19 +40,20 @@
             </div>
         </div>
         <div id="search-form" class="">
-            <form action="/">
-                <div class="input-group search-box">
-                    <span class="input-group-addon">
-                        <button type="submit">
-                            <span class="fa fa-search"></span>
-                        </button>
-                    </span>
-                    <input id="txt-search" name="term" type="text" class="form-control txt-search" placeholder="Nhập từ khóa & Enter">
-                    <button class="btn-search-clear hide" type="button">
-                        <span class="fa fa-close"></span>
+        @using (Html.BeginForm("Index", "Article", FormMethod.Get))
+        {
+            <div class="input-group search-box">
+                <span class="input-group-addon">
+                    <button type="submit">
+                        <span class="fa fa-search"></span>
                     </button>
-                </div>
-            </form>
+                </span>
+                <input id="txt-search" name="keyword" type="text" class="form-control txt-search" placeholder="Nhập từ khóa & Enter">
+                <button class="btn-search-clear hide" type="button">
+                    <span class="fa fa-close"></span>
+                </button>
+            </div>
+        }
         </div>
     </div>
 </header>

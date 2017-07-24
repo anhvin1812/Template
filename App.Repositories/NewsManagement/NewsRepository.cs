@@ -63,9 +63,11 @@ namespace App.Repositories.NewsManagement
                 recordCount = result.Count();
             }
 
+            result = result.OrderByDescending(t => t.Id);
+
             if (page != null && pageSize != null)
             {
-                result = result.OrderByDescending(t => t.Id).ApplyPaging(page.Value, pageSize.Value);
+                result = result.ApplyPaging(page.Value, pageSize.Value);
             }
 
             return result;
@@ -185,7 +187,7 @@ namespace App.Repositories.NewsManagement
 
         public IEnumerable<News> GetAllPublicNews(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount)
         {
-            var result = GetPublicNews().Where(t => t.Categories.Any(c => c.Id == categoryId));
+            var result = GetPublicNews();
 
             if (!string.IsNullOrWhiteSpace(keyword))
             {
