@@ -1,9 +1,10 @@
 ﻿
 var menu = (function () {
     var my = {
-        URLs: {
-            DeleteGallery: $("#DeleteGalleryUrl").val()
+        Urls: {
+            UpdateMenu: $("#update-menu-url").val()
         },
+        HiddenMenu: $("#hd-menu"),
         WrapMenu: $("#menu-wrap"),
         RootItem: $("#menu-wrap > .dd-list"),
         BtnAddItem: $("#btn-add-menu-item"),
@@ -65,21 +66,18 @@ var menu = (function () {
 
     my.SaveMenu = function () {
         function buildMenu() {
-            var menu = my.WrapMenu.html();
-            menu = menu.find(".form-edit-item").remove();
-
-            return menu;
+            var menuHtml = my.WrapMenu;
+            menuHtml.find(".form-edit-item").remove(); // remove edit from
+            menuHtml.find("li.dd-item > button").remove(); // remove Expand/Collapse buttons
+            
+            return menuHtml.html();
         }
 
-        $("#btn-save-menu").click(function () {
-            var url = "";
+        $("#form-setting-menu").submit(function (event) {
             var menu = buildMenu();
-            $.post(url, menu, function (result) {
-
-            });
+            my.HiddenMenu.val(menu);
         });
     }
-
 
     return my;
 }());
@@ -90,5 +88,6 @@ $(document).ready(function () {
     menu.AddItem();
     menu.EditItem();
     menu.DeleteItem();
-   
+
+    menu.SaveMenu();
 });

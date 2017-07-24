@@ -12,11 +12,12 @@ namespace App.Infrastructure.File
 
     public static class GalleryHelper
     {
+        #region Gallery
         public static string GetImagePath(string fileName)
         {
-            var imgPath = string.IsNullOrWhiteSpace(fileName) 
-                ? Settings.ConfigurationProvider.DefaultGalleryImage 
-                : $"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{fileName}";
+            var imgPath = string.IsNullOrWhiteSpace(fileName)
+                ? AppSettings.ConfigurationProvider.DefaultGalleryImage
+                : $"{AppSettings.ConfigurationProvider.DirectoryGalleryImage}/{fileName}";
 
             return imgPath;
         }
@@ -24,8 +25,8 @@ namespace App.Infrastructure.File
         public static string GetThumbnailPath(string fileName)
         {
             var imgPath = string.IsNullOrWhiteSpace(fileName)
-                ? Settings.ConfigurationProvider.DefaultGalleryThumbnail
-                : $"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{fileName}";
+                ? AppSettings.ConfigurationProvider.DefaultGalleryThumbnail
+                : $"{AppSettings.ConfigurationProvider.DirectoryGalleryThumbnail}/{fileName}";
 
             return imgPath;
         }
@@ -33,7 +34,7 @@ namespace App.Infrastructure.File
 
         public static string UploadGallery(HttpPostedFileBase image, int thumbWidth)
         {
-            if(image ==null)
+            if (image == null)
                 throw new ArgumentNullException(nameof(image), "File can not be null.");
 
             var imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}{ Path.GetExtension(image.FileName)}";
@@ -42,30 +43,30 @@ namespace App.Infrastructure.File
 
             if (img.Width > thumbWidth)
             {
-                var thumbHeight = thumbWidth * img.Height/img.Width;
+                var thumbHeight = thumbWidth * img.Height / img.Width;
                 thumb = ResizeImage(img, thumbWidth, thumbHeight);
             }
 
-            var fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
+            var fullPath = HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
 
             var index = 1;
             while (File.Exists(fullPath))
             {
                 imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}_{index}{ Path.GetExtension(image.FileName)}";
-                fullPath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
+                fullPath = HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
                 index++;
             }
 
-            img.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}"));
-            thumb.Save(HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{imageName}"));
-            
+            img.Save(HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}"));
+            thumb.Save(HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryThumbnail}/{imageName}"));
+
             return imageName;
         }
 
         public static void DeleteGallery(string imageFileName, string thumbnailFileName)
         {
             // Delete image
-            var fullImagePath = HttpContext.Current.Server.MapPath($"{Settings.ConfigurationProvider.DirectoryGalleryImage}/{imageFileName}");
+            var fullImagePath = HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryImage}/{imageFileName}");
 
             if (File.Exists(fullImagePath))
             {
@@ -73,14 +74,40 @@ namespace App.Infrastructure.File
             }
 
             // Delete thumbnail
-            var fullThumbnailPath = HttpContext.Current.Server.MapPath( $"{Settings.ConfigurationProvider.DirectoryGalleryThumbnail}/{thumbnailFileName}");
+            var fullThumbnailPath = HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryThumbnail}/{thumbnailFileName}");
             if (File.Exists(fullThumbnailPath))
             {
                 File.Delete(fullThumbnailPath);
             }
         }
 
+        #endregion
 
+        #region Logo
+        public static string GetLogoPath(string fileName)
+        {
+            var imgPath = $"{AppSettings.ConfigurationProvider.DirectoryLogo}/{fileName}";
+            return imgPath;
+        }
+
+        public static string UploadLogo(HttpPostedFileBase image)
+        {
+            if (image == null)
+                throw new ArgumentNullException(nameof(image), "File can not be null.");
+
+            var imageName = $"Logo{ Path.GetExtension(image.FileName)}";
+            Image img = Image.FromStream(image.InputStream);
+            
+            var fullPath = HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryLogo}/{imageName}");
+
+            img.Save(fullPath);
+
+            return imageName;
+        }
+        #endregion
+
+
+        #region Private Methods
         private static Bitmap ResizeImage(Image originalImage, int newWidth, int newHeight)
         {
             Bitmap newImage = new Bitmap(newWidth, newHeight);
@@ -94,5 +121,6 @@ namespace App.Infrastructure.File
 
             return newImage;
         }
+        #endregion
     }
 }

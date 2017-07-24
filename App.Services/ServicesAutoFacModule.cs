@@ -8,6 +8,7 @@ using App.Services.Gallery;
 using App.Services.IdentityManagement;
 using App.Services.NewsManagement;
 using App.Services.ProductManagement;
+using App.Services.Settings;
 using Autofac;
 
 namespace App.Services
@@ -36,6 +37,10 @@ namespace App.Services
             builder.RegisterType<PublicNewsService>().As<IPublicNewsService>().InstancePerDependency();
             builder.RegisterType<NewsCategoryService>().As<INewsCategoryService>().InstancePerDependency();
             builder.RegisterType<TagService>().As<ITagService>().InstancePerDependency();
+
+            // Settings
+            builder.RegisterType<SettingService>().As<ISettingService>().InstancePerDependency();
+
             //builder.RegisterType<RedCatMemberFactory>().As<IThirdPartyProviderMemberFactory<RedCatMember>>().InstancePerLifetimeScope();
             //builder.RegisterType<Talent2MemberFactory>().As<IThirdPartyProviderMemberFactory<Talent2Member>>().InstancePerLifetimeScope();
             //builder.RegisterType<KeyPayMemberFactory>().As<IThirdPartyProviderMemberFactory<KeyPayMember>>().InstancePerLifetimeScope();

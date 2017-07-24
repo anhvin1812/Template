@@ -105,4 +105,46 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="NewsId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="e296696c-7a09-4013-85bb-e1c80b001713" ChangeDateTime="07/23/2017 10:13:55">
+    <Property Name="ElementName" Value="[dbo].[Tag].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tag]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Menu" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="aa8ef13c-d845-4664-83a3-acea8c7915d2" ChangeDateTime="07/23/2017 10:14:15">
+    <Property Name="ElementName" Value="[dbo].[Tag].[IsDisabled]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Tag]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Address" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0fd1eda7-7131-421f-b016-a2b876f2cce8" ChangeDateTime="07/23/2017 10:32:27">
+    <Property Name="ElementName" Value="[dbo].[HomepageLayout].[Menu]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HomepageLayout]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CategoryId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6d61a925-8917-49b0-bafb-bce2f502e086" ChangeDateTime="07/23/2017 10:33:07">
+    <Property Name="ElementName" Value="[dbo].[HomepageLayout].[Address]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HomepageLayout]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PostTypeId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e08efe89-c0ac-4c5e-9e80-f75c8767e408" ChangeDateTime="07/23/2017 10:33:25">
+    <Property Name="ElementName" Value="[dbo].[HomepageLayout].[PhoneNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HomepageLayout]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LayoutId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e51c47be-9cc8-4522-93e3-b8d28f8d6e7c" ChangeDateTime="07/23/2017 10:33:33">
+    <Property Name="ElementName" Value="[dbo].[HomepageLayout].[LayoutId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[HomepageLayout]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LayoutTypeId" />
+  </Operation>
 </Operations>

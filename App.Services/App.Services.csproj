@@ -124,6 +124,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesAutoFacModule.cs" />
     <Compile Include="ServiceBase.cs" />
+    <Compile Include="Settings\ISettingService.cs" />
+    <Compile Include="Settings\SettingService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

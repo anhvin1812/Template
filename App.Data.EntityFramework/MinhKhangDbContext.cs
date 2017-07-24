@@ -54,7 +54,7 @@ namespace App.Data.EntityFramework
             IdentityManagementMap.Configure(modelBuilder);
             ProductManagementMap.Configure(modelBuilder);
             NewsManagementMap.Configure(modelBuilder);
-
+            SettingsMap.Configure(modelBuilder);
         }
 
         private bool disposed = false;

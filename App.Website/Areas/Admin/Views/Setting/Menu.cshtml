@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@model string
 @{
     ViewBag.Title = "Menu";
 }
@@ -21,6 +22,24 @@
     </section>
 }
 
+@using (Html.BeginForm("Menu", "Setting", FormMethod.Post, new { id="form-setting-menu"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "validation-messages" })
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Success!</h4>
+                    @TempData["Message"]
+                </div>
+            }
+        </div>
+    </div>
+
 <div class="row">
     <div class="col-md-8">
         <div class="box box-primary">
@@ -28,84 +47,94 @@
                 <h3 class="box-title text-right">
 
                 </h3>
-                <button id="btn-add-menu-item" class="btn btn-xs btn-primary pull-right"><i class="fa fa-plus"></i> New item</button>
+                <button id="btn-add-menu-item" class="btn btn-xs btn-primary pull-right" type="button"><i class="fa fa-plus"></i> New item</button>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div id="menu-wrap" class="nestable-list dd">
-                    <ul class="dd-list">
-                        <li class="dd-item dd3-item" data-id="13">
-                            <div class="dd-handle dd3-handle"></div>
-                            <a class="dd3-content" href="#">
-                                <span class="item-label">Item 13</span>
-                                <div class="item-tools pull-right">
-                                    <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
-                                    <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="dd-item dd3-item" data-id="14">
-                            <div class="dd-handle dd3-handle"></div>
-                            <a class="dd3-content" href="#">
-                                <span class="item-label">Item 2</span>
-                                <div class="item-tools pull-right">
-                                    <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
-                                    <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="dd-item dd3-item" data-id="15">
-                            <div class="dd-handle dd3-handle"></div>
-                            <a class="dd3-content" href="#">
-                                <span class="item-label">Item 3</span>
-                                <div class="item-tools pull-right">
-                                    <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
-                                    <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
-                                </div>
-                            </a>
-                            <ul class="dd-list">
-                                <li class="dd-item dd3-item" data-id="14">
-                                    <div class="dd-handle dd3-handle"></div>
-                                    <a class="dd3-content" href="#">
-                                        <span class="item-label">Item 4</span>
-                                        <div class="item-tools pull-right">
-                                            <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
-                                            <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="dd-item dd3-item" data-id="14">
-                                    <div class="dd-handle dd3-handle"></div>
-                                    <a class="dd3-content" href="#">
-                                        <span class="item-label">Item 5</span>
-                                        <div class="item-tools pull-right">
-                                            <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
-                                            <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="dd-item dd3-item" data-id="14">
-                                    <div class="dd-handle dd3-handle"></div>
-                                    <a class="dd3-content" href="#">
-                                        <span class="item-label">Item 6</span>
-                                        <div class="item-tools pull-right">
-                                            <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
-                                            <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    @if (string.IsNullOrWhiteSpace(Model))
+                    {
+                        <ul class="dd-list">
+                            @*<li class="dd-item dd3-item" data-id="13">
+                                <div class="dd-handle dd3-handle"></div>
+                                <a class="dd3-content" href="#">
+                                    <span class="item-label">Item 13</span>
+                                    <div class="item-tools pull-right">
+                                        <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
+                                        <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dd-item dd3-item" data-id="14">
+                                <div class="dd-handle dd3-handle"></div>
+                                <a class="dd3-content" href="#">
+                                    <span class="item-label">Item 2</span>
+                                    <div class="item-tools pull-right">
+                                        <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
+                                        <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dd-item dd3-item" data-id="15">
+                                <div class="dd-handle dd3-handle"></div>
+                                <a class="dd3-content" href="#">
+                                    <span class="item-label">Item 3</span>
+                                    <div class="item-tools pull-right">
+                                        <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
+                                        <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dd-list">
+                                    <li class="dd-item dd3-item" data-id="14">
+                                        <div class="dd-handle dd3-handle"></div>
+                                        <a class="dd3-content" href="#">
+                                            <span class="item-label">Item 4</span>
+                                            <div class="item-tools pull-right">
+                                                <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
+                                                <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="dd-item dd3-item" data-id="14">
+                                        <div class="dd-handle dd3-handle"></div>
+                                        <a class="dd3-content" href="#">
+                                            <span class="item-label">Item 5</span>
+                                            <div class="item-tools pull-right">
+                                                <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
+                                                <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="dd-item dd3-item" data-id="14">
+                                        <div class="dd-handle dd3-handle"></div>
+                                        <a class="dd3-content" href="#">
+                                            <span class="item-label">Item 6</span>
+                                            <div class="item-tools pull-right">
+                                                <span class="btn btn-xs btn-info btn-edit-menu-item"><i class="fa fa-edit"></i></span>
+                                                <span class="btn btn-xs btn-danger btn-delete-menu-item"><i class="fa fa-close"></i></span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>*@
+                        </ul>
+                    }
+                    else
+                    {
+                        @Html.Raw(Model);
+                    }
+                    
                 </div>
             </div>
             <div class="box-footer">
-                <button id="btn-save-menu" type="button" class="btn btn-primary">Save</button>
+                @Html.Hidden("menu", Model ?? string.Empty, new { id = "hd-menu" })
+                <button id="btn-save-menu" type="submit" class="btn btn-primary">Save</button>
             </div>
         </div><!-- /.box -->
     </div>
 </div>
 
 
+}
 
 
 @section AddScripts{
@@ -117,7 +146,7 @@
     <script type="text/javascript">
         jQuery(function ($) {
             // Nestable
-            $("#menu-wrap").nestable({ /* config options */ });
+            $("#menu-wrap").nestable({ listNodeName: "ul" });
         });
     </script>
 }

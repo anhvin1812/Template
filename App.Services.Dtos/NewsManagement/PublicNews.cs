@@ -56,4 +56,10 @@ namespace App.Services.Dtos.NewsManagement
         public string Name { get; set; }
     }
 
+    public class LatestNews : DtoBase
+    {
+        public PublicCategorySummary Id { get; set; }
+        public string Name { get; set; }
+    }
+
 }

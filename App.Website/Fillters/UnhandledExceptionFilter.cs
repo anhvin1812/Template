@@ -55,7 +55,7 @@ namespace App.Website.Fillters
             }
             else
             {
-                if (!String.IsNullOrEmpty(context.Exception.Message))
+                if (!string.IsNullOrEmpty(context.Exception.Message))
                 {
                     context.ActionContext.ModelState.AddModelError(ErrorCodeType.Error.ToString(), context.Exception.Message);
                 //    error.ExtraInfos.Add(new ErrorExtraInfo { Code = ErrorCodeType.Error, Message = context.Exception.Message });

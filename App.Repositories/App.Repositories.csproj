@@ -114,6 +114,8 @@
     <Compile Include="IdentityManagement\IUserRepository.cs" />
     <Compile Include="IdentityManagement\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\ISettingRepository.cs" />
+    <Compile Include="Settings\SettingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Core\App.Core.csproj">

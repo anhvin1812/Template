@@ -30,5 +30,7 @@ namespace App.Core.Configuration
         public int ThumbnailWidth => 420;
 
         public int ThumbnailPhotoWidth => 600;
+
+        public string DirectoryLogo => GetAppSetting("DirectoryLogo").Trim();
     }
 }

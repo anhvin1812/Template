@@ -2,6 +2,7 @@
 using App.Repositories.IdentityManagement;
 using App.Repositories.NewsManagement;
 using App.Repositories.ProductManagement;
+using App.Repositories.Settings;
 using Autofac;
 
 namespace App.Repositories
@@ -23,6 +24,8 @@ namespace App.Repositories
             builder.RegisterType<NewsRepository>().As<INewsRepository>().InstancePerDependency();
             builder.RegisterType<NewsCategoryRepository>().As<INewsCategoryRepository>().InstancePerDependency();
             builder.RegisterType<TagRepository>().As<ITagRepository>().InstancePerDependency();
+            // Settings
+            builder.RegisterType<SettingRepository>().As<ISettingRepository>().InstancePerDependency();
 
 
             //builder.RegisterType<SherpaRosterRepository>().Keyed<IRosterExtendedRepository>(DatabaseInstance.SherpaRoster).InstancePerDependency();

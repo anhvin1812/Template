@@ -148,8 +148,8 @@ namespace App.Services.NewsManagement
                 if (entry.Image != null)
                 {
                     var thumbnailWidth = entry.MediaTypeId == (int) MediaType.Photo
-                        ? Settings.ConfigurationProvider.ThumbnailWidth
-                        : Settings.ConfigurationProvider.ThumbnailPhotoWidth;
+                        ? AppSettings.ConfigurationProvider.ThumbnailWidth
+                        : AppSettings.ConfigurationProvider.ThumbnailPhotoWidth;
 
                     var imageName = GalleryHelper.UploadGallery(entry.Image, thumbnailWidth);
 
@@ -228,8 +228,8 @@ namespace App.Services.NewsManagement
                 if (entry.Image != null)
                 {
                     var thumbnailWidth = entry.MediaTypeId == (int)MediaType.Photo
-                        ? Settings.ConfigurationProvider.ThumbnailWidth
-                        : Settings.ConfigurationProvider.ThumbnailPhotoWidth;
+                        ? AppSettings.ConfigurationProvider.ThumbnailWidth
+                        : AppSettings.ConfigurationProvider.ThumbnailPhotoWidth;
 
                     var imageName = GalleryHelper.UploadGallery(entry.Image, thumbnailWidth);
 

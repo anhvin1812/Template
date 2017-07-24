@@ -144,7 +144,7 @@ namespace App.Services.ProductManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var imageName = GalleryHelper.UploadGallery(entry.Image, Settings.ConfigurationProvider.ThumbnailWidth);
+                    var imageName = GalleryHelper.UploadGallery(entry.Image, AppSettings.ConfigurationProvider.ThumbnailWidth);
 
                     entity.Image = new Entities.ProductManagement.Gallery
                     {
@@ -159,7 +159,7 @@ namespace App.Services.ProductManagement
                 {
                     foreach (var gallery in entry.Gallery)
                     {
-                        var fileName = GalleryHelper.UploadGallery(gallery, Settings.ConfigurationProvider.ThumbnailWidth);
+                        var fileName = GalleryHelper.UploadGallery(gallery, AppSettings.ConfigurationProvider.ThumbnailWidth);
 
                         entity.Galleries.Add(new Entities.ProductManagement.Gallery
                         {
@@ -203,7 +203,7 @@ namespace App.Services.ProductManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var imageName = GalleryHelper.UploadGallery(entry.Image, Settings.ConfigurationProvider.ThumbnailWidth);
+                    var imageName = GalleryHelper.UploadGallery(entry.Image, AppSettings.ConfigurationProvider.ThumbnailWidth);
 
                     if (entity.Image != null)
                     {
@@ -232,7 +232,7 @@ namespace App.Services.ProductManagement
                     {
                         if (gallery == null) continue;
 
-                        var fileName = GalleryHelper.UploadGallery(gallery, Settings.ConfigurationProvider.ThumbnailWidth);
+                        var fileName = GalleryHelper.UploadGallery(gallery, AppSettings.ConfigurationProvider.ThumbnailWidth);
 
                         entity.Galleries.Add(new Entities.ProductManagement.Gallery
                         {

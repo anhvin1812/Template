@@ -89,7 +89,7 @@
     <Compile Include="Common\DisposableObject.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
-    <Compile Include="Configuration\Settings.cs" />
+    <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Common\StringExtensions.cs" />
     <Compile Include="Exceptions\AppException.cs" />
     <Compile Include="Exceptions\PermissionException.cs" />

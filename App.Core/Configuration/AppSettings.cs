@@ -4,11 +4,11 @@ namespace App.Core.Configuration
     /// <summary>
     /// Sherpa configuration settings
     /// </summary>
-    public static class Settings
+    public static class AppSettings
     {
         public static ConfigurationProvider ConfigurationProvider;
 
-        static Settings()
+        static AppSettings()
         {
             ConfigurationProvider = new ConfigurationProvider();
         }

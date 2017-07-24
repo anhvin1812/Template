@@ -1,6 +1,6 @@
 ﻿@using System.Web.Optimization
 @using App.Infrastructure.File
-@model App.Services.Dtos.Settings.Option
+@model App.Services.Dtos.Settings.OptionEntry
 @{
     ViewBag.Title = "Options";
 }
@@ -23,14 +23,21 @@
     </section>
 }
 
-@using (Html.BeginForm("Options", "Setting", FormMethod.Post))
+@using (Html.BeginForm("Options", "Setting", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-
 
     <div class="row">
         <div class="col-xs-12">
             @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "validation-messages" })
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Success!</h4>
+                    @TempData["Message"]
+                </div>
+            }
         </div>
     </div>
 
@@ -58,6 +65,10 @@
                         @Html.TextBoxFor(m => m.Skype, new {@class = "form-control", placeholder = "Enter skype"})
                     </div>
                     <div class="form-group">
+                        @Html.LabelFor(m => m.Website)
+                        @Html.TextBoxFor(m => m.Website, new { @class = "form-control", placeholder = "Enter url" })
+                    </div>
+                    <div class="form-group">
                         @Html.LabelFor(m => m.Facebook)
                         @Html.TextAreaFor(m => m.Facebook, new { @class = "form-control", placeholder = "Enter embeded code of facebook" })
                     </div>
@@ -72,7 +83,7 @@
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <div id="wrapperUploadFeaturedImage" class="input-group">
+                        <div id="wrapperUploadLogo" class="input-group">
                             <span class="input-group-btn">
                                 <span class="btn btn-success btn-sm btn-file">
                                     <i class="fa fa-folder-open-o"></i> Browse...
@@ -83,7 +94,7 @@
                         </div><!-- /input-group -->
                     </div>
                     <div id="previewLogo" class="">
-                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(string.Empty))" class="img-responsive" style="max-width: 200px">
+                        <img src="@Url.Content(GalleryHelper.GetLogoPath(Model.LogoFileName))" class="img-responsive" style="max-width: 200px; max-width:90%">
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -99,15 +110,11 @@
     @section AddScripts{
 
     <!-- Nestable -->
-    @Scripts.Render("~/Areas/Admin/Scripts/nestable/jquery.nestable.js")
-    @Scripts.Render("~/Areas/Admin/Scripts/app/menu.js")
+    @*@Scripts.Render("~/Areas/Admin/Scripts/app/menu.js")*@
 
     <script type="text/javascript">
         $(function () {
-            $("#sortable1, #sortable2").sortable({
-                connectWith: ".connectedSortable",
-                placeholder: "dd-placeholder"
-            }).disableSelection();
+           
         });
     </script>
 }

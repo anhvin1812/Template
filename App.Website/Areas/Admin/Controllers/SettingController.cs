@@ -5,8 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using App.Core.Permission;
 using App.Services;
+using App.Services.Dtos.Common;
 using App.Services.Dtos.IdentityManagement;
+using App.Services.Dtos.Settings;
 using App.Services.IdentityManagement;
+using App.Services.Settings;
 using App.Website.Fillters;
 
 namespace App.Website.Areas.Admin.Controllers
@@ -15,80 +18,67 @@ namespace App.Website.Areas.Admin.Controllers
     {
 
         #region Contractor
-        private IRoleService RoleService { get; set; }
+        private ISettingService SettingService { get; set; }
 
-        public SettingController(IRoleService roleService)
-            : base(new IService[] { roleService })
+        public SettingController(ISettingService settingService)
+            : base(new IService[] { settingService })
         {
-            RoleService = roleService;
+            SettingService = settingService;
         }
 
         #endregion
 
-
-        public ActionResult Index(int? page = null, int? pageSize = null)
-        {
-            int? recordCount = 0;
-            var result = RoleService.GetAll(page, pageSize, ref recordCount);
-
-            return View(result);
-        }
-
         public ActionResult Homepage()
         {
-            var model = RoleService.GetBlankRoleEntry();
+            var model = SettingService.GetAllHomepageLayout();
 
             return View(model);
         }
 
         public ActionResult Menu()
         {
-            var model = RoleService.GetBlankRoleEntry();
+            var model = SettingService.GetMenu();
 
-            return View(model);
+            return View(model: model);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ErrorHandler(View = "Menu")]
+        [ValidateInput(false)]
         public ActionResult Menu(string menu)
         {
-            var model = RoleService.GetBlankRoleEntry();
+            SettingService.UpdateMenu(menu);
 
-            return View(model);
+            TempData["Message"] = "Saved successfully.";
+            return RedirectToAction("Menu");
         }
 
         public ActionResult Options()
         {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [ErrorHandler(View = "Create")]
-        public ActionResult Create(RoleEntry entry)
-        {
-            if (ModelState.IsValid)
+            var options = SettingService.GetOptions();
+            var model = new OptionEntry
             {
-                RoleService.Insert(entry);
-                return RedirectToAction("Index");
-            }
-
-            return View(entry);
-        }
-
-        public ActionResult Edit(int id)
-        {
-            var result = RoleService.GetRoleForEditing(id);
-            return View(result);
+                Address = options.Address,
+                Email = options.Email,
+                Facebook = options.Facebook,
+                PhoneNumber = options.PhoneNumber,
+                Skype = options.Skype,
+                Website = options.Website,
+                LogoFileName = options.Logo
+            };
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ErrorHandler(View = "Edit")]
-        public ActionResult Edit(int id, RoleEntry entry)
+        [ErrorHandler(View = "Options")]
+        public ActionResult Options(OptionEntry entry)
         {
-            RoleService.Update(id, entry);
+            SettingService.UpdateOptions(entry);
 
-            return RedirectToAction("Index");
+            TempData["Message"] = "Saved successfully.";
+            return RedirectToAction("Options");
         }
 
         public ActionResult Delete(int id)
@@ -106,7 +96,7 @@ namespace App.Website.Areas.Admin.Controllers
             {
                 if (isDisposing)
                 {
-                    RoleService = null;
+                    SettingService = null;
                 }
                 _disposed = true;
             }

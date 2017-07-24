@@ -1,13 +1,31 @@
 ﻿using System.Web.Mvc;
+using App.Services;
+using App.Services.Dtos.Settings;
+using App.Services.Settings;
 using App.Website.Fillters;
+
 
 namespace App.Website.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        #region Contractor
+        private ISettingService SettingService { get; set; }
+
+        public HomeController(ISettingService settingService)
+            : base(new IService[] { settingService })
+        {
+            SettingService = settingService;
+        }
+
+        #endregion
+        [LayoutActionFilter]
         public ActionResult Index()
         {
-            return View();
+            var model = new HomepageViewModel();
+            model.Layouts = SettingService.GetAllHomepageLayout();
+
+            return View(model);
         }
 
         public ActionResult About()
@@ -23,5 +41,23 @@ namespace App.Website.Controllers
 
             return View();
         }
+
+        #region Dispose
+        private bool _disposed;
+
+        [NonAction]
+        protected override void Dispose(bool isDisposing)
+        {
+            if (!_disposed)
+            {
+                if (isDisposing)
+                {
+                    SettingService = null;
+                }
+                _disposed = true;
+            }
+            base.Dispose(isDisposing);
+        }
+        #endregion
     }
 }

@@ -37,6 +37,9 @@ namespace App.Core.Exceptions
         NewsStatusIsNotExisted = 203,
 
         // Tag
-        TagNameIsExisted = 300
+        TagNameIsExisted = 300,
+
+        // Settings
+        
     }
 }

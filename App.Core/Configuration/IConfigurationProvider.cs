@@ -12,6 +12,8 @@
         int ThumbnailWidth { get; }
         int ThumbnailPhotoWidth { get; }
 
+        string DirectoryLogo { get; }
+
        
     }
 }

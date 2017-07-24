@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var layoutViewModel = (App.Services.Dtos.Settings.LayoutViewModel)ViewBag.LayoutViewModel;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -30,79 +33,7 @@
 
             </div>
         </div>
-        <header id="header" class="header">
-            <div class="container">
-                <div class="nav-holder clearfix">
-                    <div class="logo">
-                        <a class="inner-logo" href="/">
-                            <img class="img-responsive" src="@Url.Content("~/Content/images/logo.png")" alt="">
-                        </a>
-                    </div>
-                    <div class="nav-wrap">
-                        <nav id="main-nav" class="">
-                            <ul class="multi-level">
-                                <li>
-                                    <a href="#">Trang chủ</a>
-                                </li>
-                                <li>
-                                    <a href="#">Tin tức</a>
-                                    <ul>
-                                        <li><a href="#">Thời sự</a></li>
-                                        <li><a href="#">Thể thao</a></li>
-                                        <li>
-                                            <a href="#">Thể thao</a>
-                                            <ul>
-                                                <li><a href="#">Bóng đá</a></li>
-                                                <li><a href="#">Tennis</a></li>
-                                                <li><a href="#">Cầu lông</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Du lịch</a>
-                                </li>
-                                <li>
-                                    <a href="#">Góc học tập</a>
-                                    <ul>
-                                        <li><a href="#">Tiếng Anh</a></li>
-                                        <li><a href="#">Nấu Ăn</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Hài</a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="pull-left">
-                            <a id="btn-open-search" class="menu-btn">
-                                <i class="fa fa-search"></i>
-                            </a>
-                        </div>
-                        <div class="pull-left hidden-sm hidden-md hidden-lg">
-                            <a id="btn-open-menu" class="menu-btn">
-                                <i class="fa fa-reorder"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div id="search-form" class="">
-                    <form action="/">
-                        <div class="input-group search-box">
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="fa fa-search"></span>
-                                </button>
-                            </span>
-                            <input id="txt-search" name="term" type="text" class="form-control txt-search" placeholder="Nhập từ khóa & Enter">
-                            <button class="btn-search-clear hide" type="button">
-                                <span class="fa fa-close"></span>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </header>
+        @Html.Partial("_Header", layoutViewModel.Setting)
         <main>
             <div class="container">
                 @RenderSection("FullContent", required: false)
@@ -117,110 +48,9 @@
             </div>
         </main>
 
-        <footer class="footer">
-            <div class="container">
-                <div class="row ptb60">
-                    <div class="col-sm-4">
-                        <div class="footer-widget">
-                            <div class="contact-list">
-                                <a class="logo" href="#">
-                                    <img class="img-responsive" src="Content/images/logo.png" alt="Alternate Text" />
-                                </a>
-                                <ul class="reset">
-                                    <li>
-                                        <i class="fa fa-map-marker"></i>
-                                        18 ngõ 11 Hồ Sỹ Dương, Tp.Vinh
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-headphones"></i>
-                                        (+84) 944 419 503
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-envelope-o"></i>
-                                        leanhvin@gmail.com
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-skype"></i>
-                                        anhvin1812
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-globe"></i>
-                                        http://xunghe.vn
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="footer-widget mb30">
-                            <h3 class="mb15">Newsletter</h3>
-                            <div class="newsletter-form">
-                                <p>Nhận tin qua email</p>
-                                <form>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
-                                        <input class="form-control" placeholder="Your Email" type="text">
-                                        <span class="input-group-btn">
-                                            <button type="submit" class="btn btn-icon">
-                                                <i class="fa fa-paper-plane"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                </form>
-                            </div>
-                        </div><!-- /.footer-widget-->
-
-                        <div class="footer-widget">
-                            <h3>Tags</h3>
-                            <div class="populer-tags">
-                                <ul class="reset">
-                                    <li>
-                                        <a href="#">Xứ nghệ</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Nghệ An</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bến thủy</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Vinh</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div><!-- /.footer-widget-->
-
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="footer-widget">
-                            <h3>Follow</h3>
-                            <div class="newsletter-form">
-                                <h3>Facebook from</h3>
-                            </div>
-                        </div><!-- /.footer-widget-->
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bar">
-                <div class="container">
-                    <div class="copyright">
-                        Xứ nghệ @($"@{DateTime.Now.Year}"), All Rights Reservered
-                    </div>
-                </div>
-            </div>
-        </footer>
-
+        @Html.Partial("_Footer", layoutViewModel.Setting)
 
     </div>
-
-    @*<script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/moment.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/owl-carousel/js/owl.carousel.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/layout.js")"></script>*@
-
-   
 
     @Scripts.Render("~/bundles/coreJS")
 

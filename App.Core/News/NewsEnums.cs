@@ -23,4 +23,12 @@ namespace App.Core.News
         Photo = 2,
         Video = 3
     }
+
+    public enum LayoutType
+    {
+        OneCategory = 1,
+        TwoCategory = 2,
+        HorizontalSlider = 3,
+        PhotoSlider = 4,
+    }
 }

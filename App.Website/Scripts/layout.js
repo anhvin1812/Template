@@ -120,6 +120,18 @@ var layout = (function () {
         });
     }
 
+    my.BuildMainMenu = function () {
+        $("#main-nav > ul.dd-list").addClass("multi-level");
+        $("#main-nav .dd-handle").remove();
+        $("#main-nav .dd-list").removeClass("dd-list");
+        $("#main-nav li").removeClass("dd-item").removeClass("dd3-item");
+        $("#main-nav .item-tools").remove(); 
+        $("#main-nav .dd3-content").removeClass("dd3-content");
+
+        $("#main-nav").removeClass("hidden");
+    }
+
+
     return my;
 }());
 
@@ -131,4 +143,7 @@ $(document).ready(function () {
     layout.Responsive();
 
     layout.Navigation();
+
+    // Build main menu
+    layout.BuildMainMenu();
 });

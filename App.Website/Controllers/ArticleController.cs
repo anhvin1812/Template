@@ -7,6 +7,7 @@ using App.Services;
 using App.Services.Dtos.NewsManagement;
 using App.Services.NewsManagement;
 using App.Services.ProductManagement;
+using App.Website.Fillters;
 using PagedList;
 
 namespace App.Website.Controllers
@@ -27,6 +28,7 @@ namespace App.Website.Controllers
 
 
         // GET: News
+        [LayoutActionFilter]
         public ActionResult Index(string keyword, int? page = 1)
         {
             int? recordCount = 0;
@@ -45,6 +47,7 @@ namespace App.Website.Controllers
             return View(pagedNews);
         }
 
+        [LayoutActionFilter]
         public ActionResult Category(int id, int? page = 1)
         {
             var category = NewsCategoryService.GetById(id);
@@ -69,6 +72,7 @@ namespace App.Website.Controllers
             return HttpNotFound();
         }
 
+        [LayoutActionFilter]
         public ActionResult Detail(int id)
         {
             var model = PublicNewsService.GetPublicNewsById(id);
@@ -98,6 +102,13 @@ namespace App.Website.Controllers
             var model = PublicNewsService.GetRelatedNews(newsId, categoryId);
 
             return PartialView("_Related", model);
+        }
+
+        public ActionResult Latest(int categoryId)
+        {
+            var model = PublicNewsService.GetLatestNews(categoryId);
+
+            return PartialView("_Latest", model);
         }
 
         #region Dispose

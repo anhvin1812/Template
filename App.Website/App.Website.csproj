@@ -237,6 +237,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Fillters\LayoutActionFilter.cs" />
     <Compile Include="Fillters\ErrorHandlerAttribute.cs" />
     <Compile Include="Fillters\UnhandledExceptionFilter.cs" />
     <Compile Include="Fillters\CustomAuthorizeAttribute.cs" />
@@ -1714,6 +1715,9 @@
     <Content Include="Views\Shared\_SideBar.cshtml" />
     <Content Include="Views\Article\Detail.cshtml" />
     <Content Include="Views\Article\_Related.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Article\_Latest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1722,6 +1726,7 @@
     <Folder Include="Content\FileUpload\CKEditor\" />
     <Folder Include="Content\FileUpload\Galleries\Images\" />
     <Folder Include="Content\FileUpload\Galleries\Thumbnails\" />
+    <Folder Include="Content\FileUpload\Logo\" />
     <Folder Include="Content\FileUpload\Products\Images\" />
     <Folder Include="Content\FileUpload\Products\Thumbnails\" />
     <Folder Include="Scripts\bootstrap-datetimepicker\" />

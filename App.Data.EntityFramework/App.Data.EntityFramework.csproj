@@ -92,6 +92,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapping\SettingsMap.cs" />
     <Compile Include="Mapping\NewsManagementMap.cs" />
     <Compile Include="Mapping\ProductManagementMap.cs" />
     <Compile Include="TestDb.cs" />
