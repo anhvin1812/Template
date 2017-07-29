@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using App.Core.Repositories;
 using App.Entities.NewsManagement;
@@ -45,7 +46,7 @@ namespace App.Repositories.Settings
 
         public IEnumerable<HomepageLayout> GetAllHomepageLayout()
         {
-            return DatabaseContext.Get<HomepageLayout>();
+            return DatabaseContext.Get<HomepageLayout>().AsNoTracking().OrderBy(t=>t.SortOrder);
         }
 
         public HomepageLayout GetHomepageLayoutById(int id)

@@ -16,9 +16,14 @@ namespace App.Repositories.NewsManagement
         {
         }
 
-        public IEnumerable<NewsCategory> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<NewsCategory> GetAll(bool? isDisabled, int? page, int? pageSize, ref int? recordCount)
         {
             var result = DatabaseContext.Get<NewsCategory>();
+
+            if(isDisabled != null)
+            {
+                result = (isDisabled == false) ? result.Where(t => t.IsDisabled != true) : result.Where(t => t.IsDisabled == true);
+            }
 
             if (recordCount != null)
             {

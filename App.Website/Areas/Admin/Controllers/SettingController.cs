@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,6 +10,7 @@ using App.Services.Dtos.Common;
 using App.Services.Dtos.IdentityManagement;
 using App.Services.Dtos.Settings;
 using App.Services.IdentityManagement;
+using App.Services.NewsManagement;
 using App.Services.Settings;
 using App.Website.Fillters;
 
@@ -19,20 +21,40 @@ namespace App.Website.Areas.Admin.Controllers
 
         #region Contractor
         private ISettingService SettingService { get; set; }
+        private INewsCategoryService NewsCategoryService { get; set; }
+        private IPublicNewsService PublicNewsService { get; set; }
 
-        public SettingController(ISettingService settingService)
-            : base(new IService[] { settingService })
+        public SettingController(ISettingService settingService, INewsCategoryService newsCategoryService)
+            : base(new IService[] { settingService, newsCategoryService })
         {
             SettingService = settingService;
+            NewsCategoryService = newsCategoryService;
         }
 
         #endregion
 
         public ActionResult Homepage()
         {
-            var model = SettingService.GetAllHomepageLayout();
+            int? recordCount = null;
+
+            var model = new SettingHomepageViewModel();
+            model.HomepageLayOuts = SettingService.GetAllHomepageLayout();
+
+            var addedCategoryIds = model.HomepageLayOuts.Where(x=>x.CategoryId != null).Select(x => x.CategoryId);
+            model.Categories = NewsCategoryService.GetAll(false, null, null, ref recordCount).Where(x=> !addedCategoryIds.Contains(x.Id));
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ErrorHandler]
+        public ActionResult Homepage(List<HomepageLayoutEntry> entries)
+        {
+            SettingService.UpdateHomepageLayout(entries);
+
+            var layouts = SettingService.GetAllHomepageLayout();
+
+            return Json(new SuccessResult(layouts, "Save successfully."), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Menu()
@@ -97,6 +119,7 @@ namespace App.Website.Areas.Admin.Controllers
                 if (isDisposing)
                 {
                     SettingService = null;
+                    NewsCategoryService = null;
                 }
                 _disposed = true;
             }

@@ -151,6 +151,7 @@ namespace App.Services.Settings
             {
                 Id = x.Id,
                 CategoryId = x.CategoryId,
+                Title = x.Category?.Name,
                 MediaType = (MediaType?) x.MediaTypeId,
                 LayoutType = (LayoutType?) x.MediaTypeId,
                 SortOrder = x.SortOrder
@@ -175,20 +176,45 @@ namespace App.Services.Settings
             Save();
         }
 
-        public void UpdateHomepageLayout(int id, HomepageLayoutEntry entry)
+        public void UpdateHomepageLayout(List<HomepageLayoutEntry> entries)
         {
-            ValidateHomepageLayoutEntry(entry);
+            var allLayouts = SettingRepository.GetAllHomepageLayout();
 
-            var entity = SettingRepository.GetHomepageLayoutById(id);
+            foreach (var entry in entries)
+            {
+                var entity = allLayouts.FirstOrDefault( x => x.Id == entry.Id);
 
-            if(entity == null)
-                throw new DataNotFoundException();
+                if (entity != null)
+                {
+                    entity.CategoryId = entry.CategoryId;
+                    entity.MediaTypeId = (int?)entry.MediaType;
+                    entity.LayoutTypeId = (int?)entry.LayoutType;
+                    entity.SortOrder = entry.SortOrder;
 
-            entity.CategoryId = entity.CategoryId;
-            entity.CategoryId = entity.MediaTypeId;
-            entity.CategoryId = entity.LayoutTypeId;
-            
-            SettingRepository.UpdateHomepageLayout(entity);
+                    SettingRepository.UpdateHomepageLayout(entity);
+                }
+                else
+                {
+                    entity = new HomepageLayout
+                    {
+                        CategoryId = entry.CategoryId,
+                        MediaTypeId = (int?)entry.MediaType,
+                        LayoutTypeId = (int?)entry.LayoutType,
+                        SortOrder = entry.SortOrder,
+                    };
+
+                    SettingRepository.InsertHomepageLayout(entity);
+                }
+            }
+
+            // Delete unused layouts
+            var usingLayoutIds = entries.Where(x => x.Id != null).Select(x => x.Id);
+            var deleteLayouts = allLayouts.Where(x => !usingLayoutIds.Contains(x.Id));
+            foreach (var layout in deleteLayouts)
+            {
+                SettingRepository.DeleteHomepageLayout(layout.Id);
+            }
+
             Save();
         }
 

@@ -21,7 +21,7 @@ namespace App.Services.Settings
 
         IEnumerable<HomepageLayOutDetail> GetAllHomepageLayout();
         void InsertHomepageLayout(HomepageLayoutEntry entry);
-        void UpdateHomepageLayout(int id, HomepageLayoutEntry entry);
+        void UpdateHomepageLayout(List<HomepageLayoutEntry> entries);
         void DeleteHomepageLayout(int id);
 
         #endregion

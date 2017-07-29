@@ -4,6 +4,7 @@ using App.Services.Dtos.Common;
 using App.Core.News;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using App.Services.Dtos.NewsManagement;
 
 namespace App.Services.Dtos.Settings
 {
@@ -50,13 +51,21 @@ namespace App.Services.Dtos.Settings
     {
         public int Id { get; set; }
         public int? CategoryId{ get; set; }
+        public string Title { get; set; }
         public MediaType? MediaType { get; set; }
         public LayoutType? LayoutType { get; set; }
         public int? SortOrder { get; set; }
     }
 
+    public class SettingHomepageViewModel : DtoBase
+    {
+        public IEnumerable<NewsCategorySummary> Categories { get; set; }
+        public IEnumerable<HomepageLayOutDetail> HomepageLayOuts { get; set; }
+    }
+
     public class HomepageLayoutEntry : DtoBase
     {
+        public int? Id { get; set; }
         public int? CategoryId { get; set; }
         public MediaType? MediaType { get; set; }
         public LayoutType? LayoutType { get; set; }
@@ -67,8 +76,10 @@ namespace App.Services.Dtos.Settings
     {
         public IEnumerable<HomepageLayOutDetail> Layouts { get; set; }
     }
+
     public class LayoutViewModel : DtoBase
     {
         public SettingDetail Setting { get; set; }
+        public NewsDetail SocialMetaTags { get; set; }
     }
 }

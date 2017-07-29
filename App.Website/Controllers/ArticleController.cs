@@ -79,6 +79,8 @@ namespace App.Website.Controllers
             if (model == null)
                 return HttpNotFound();
 
+            ViewBag.SocialMetaTags = model;
+
             return View(model);
         }
 

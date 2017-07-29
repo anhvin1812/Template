@@ -6,7 +6,7 @@ namespace App.Repositories.NewsManagement
 {
     public interface INewsCategoryRepository : IRepository
     {
-        IEnumerable<NewsCategory> GetAll(int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<NewsCategory> GetAll(bool? isDisabled, int? page, int? pageSize, ref int? recordCount);
         IEnumerable<NewsCategory> GetByParentId(int? parentId);
         IEnumerable<NewsCategory> GetByIds(IEnumerable<int> ids);
         NewsCategory GetById(int id);

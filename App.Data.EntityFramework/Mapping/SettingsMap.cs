@@ -49,6 +49,9 @@ namespace App.Data.EntityFramework.Mapping
                 Property(t => t.MediaTypeId).IsOptional();
                 Property(t => t.LayoutTypeId).IsOptional();
                 Property(t => t.SortOrder).IsOptional();
+
+                // Relationships
+                HasOptional(t => t.Category).WithMany().HasForeignKey(t => t.CategoryId);
             }
         }
     }

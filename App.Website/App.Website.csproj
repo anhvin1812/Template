@@ -326,6 +326,7 @@
     <Content Include="Areas\Admin\Content\Images\user7-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user8-128x128.jpg" />
     <Content Include="Areas\Admin\Scripts\App\common.js" />
+    <Content Include="Areas\Admin\Scripts\App\homepageLayout.js" />
     <Content Include="Areas\Admin\Scripts\App\menu.js" />
     <Content Include="Areas\Admin\Scripts\App\product.js" />
     <Content Include="Areas\Admin\Scripts\bootstrap-toggle\bootstrap-toggle.min.css" />
@@ -1706,7 +1707,7 @@
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Shared\_ProductSocialMediaTag.cshtml" />
-    <Content Include="Views\Shared\_ArticleSocialMediaTag.cshtml" />
+    <Content Include="Views\Shared\_ArticleSocialMetaTag.cshtml" />
     <Content Include="Views\Shared\NoPermission.cshtml" />
     <Content Include="Views\Article\Index.cshtml" />
     <Content Include="Views\Article\_Featured.cshtml" />

@@ -1,6 +1,9 @@
 ﻿@using System.Web.Optimization
+@using App.Core.News
+@model App.Services.Dtos.Settings.SettingHomepageViewModel
+
 @{
-    ViewBag.Title = "Home page";
+    ViewBag.Title = "Home page - Setting";
 }
 
 @section AddStyles{
@@ -11,7 +14,7 @@
 {
     <section class="content-header">
         <h1>
-            Home page
+            Homepage
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -20,6 +23,12 @@
         </ol>
     </section>
 }
+
+<div class="row">
+    <div class="col-xs-12">
+        <div id="validation-messages"></div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-6">
@@ -32,12 +41,11 @@
                                 <h3 class="box-title">Categories</h3>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <ul id="sortable1" class="connectedSortable">
-                                    <li class="ui-state-default dd-handle dd-handle">Item 1</li>
-                                    <li class="ui-state-default dd-handle">Item 2</li>
-                                    <li class="ui-state-default dd-handle">Item 3</li>
-                                    <li class="ui-state-default dd-handle">Item 4</li>
-                                    <li class="ui-state-default dd-handle">Item 5</li>
+                                <ul id="categories" class="connectedSortable">
+                                    @foreach (var c in Model.Categories)
+                                    {
+                                        <li class="ui-state-default dd-handle" data-category-id="@c.Id" data-media-type="@MediaType.Standard" data-layout-type="@LayoutType.OneCategory">@c.Name</li>
+                                    }
                                 </ul>
                             </div>
                             <!-- /.box-body -->
@@ -50,12 +58,11 @@
                                 <h3 class="box-title">Display on home page</h3>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <ul id="sortable2" class="connectedSortable">
-                                    <li class="ui-state-highlight dd-handle">Item 1</li>
-                                    <li class="ui-state-highlight dd-handle">Item 2</li>
-                                    <li class="ui-state-highlight dd-handle">Item 3</li>
-                                    <li class="ui-state-highlight dd-handle">Item 4</li>
-                                    <li class="ui-state-highlight dd-handle">Item 5</li>
+                                <ul id="homepage-layout" class="connectedSortable">
+                                    @foreach (var l in Model.HomepageLayOuts)
+                                    {
+                                        <li class="ui-state-highlight dd-handle" data-id="@l.Id" data-category-id="@l.CategoryId" data-media-type="@l.MediaType" data-layout-type="@l.LayoutType" >@l.Title</li>
+                                    }
                                 </ul>
                             </div>
                             <!-- /.box-body -->
@@ -63,28 +70,18 @@
                     </div>
                 </div>
                 <div class="box-footer">
-                    <button id="btn-save-menu" type="button" class="btn btn-primary">Save</button>
+
+                    <button id="btn-save-homepage-layout" type="button" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
                 </div>
             </div><!-- /.box -->
         </div>
     </div>
 </div>
-
+@Html.Hidden("UpdateHomepageLayoutUrl", Url.Action("Homepage", "Setting"), new { id= "update-homepage-layout-url" })
 
 
 
 @section AddScripts{
-
     <!-- Nestable -->
-    @Scripts.Render("~/Areas/Admin/Scripts/nestable/jquery.nestable.js")
-    @Scripts.Render("~/Areas/Admin/Scripts/app/menu.js")
-
-    <script type="text/javascript">
-        $(function () {
-            $("#sortable1, #sortable2").sortable({
-                connectWith: ".connectedSortable",
-                placeholder: "dd-placeholder"
-            }).disableSelection();
-        });
-    </script>
+    @Scripts.Render("~/Areas/Admin/Scripts/app/homepageLayout.js")
 }

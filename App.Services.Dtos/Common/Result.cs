@@ -37,6 +37,7 @@ namespace App.Services.Dtos.Common
 
     public sealed class SuccessResult : Result
     {
+        public string Message { get; set; }
         public dynamic Data { get; set; }
 
         public SuccessResult()
@@ -44,10 +45,23 @@ namespace App.Services.Dtos.Common
             Status = ResultStatusType.Success;
         }
 
+        public SuccessResult(string message)
+        {
+            Status = ResultStatusType.Success;
+            Message = message;
+        }
+
         public SuccessResult(dynamic data)
         {
             Status = ResultStatusType.Success;
             Data = data;
+        }
+
+        public SuccessResult(dynamic data, string message)
+        {
+            Status = ResultStatusType.Success;
+            Data = data;
+            Message = message;
         }
     }
 

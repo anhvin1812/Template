@@ -38,7 +38,7 @@ namespace App.Website.Controllers
             var model = NewsService.GetById(id);
 
             int? recordCount = 0;
-            ViewBag.Categories = NewsCategoryService.GetAll(null, null, ref recordCount);
+            ViewBag.Categories = NewsCategoryService.GetAll(null, null, null, ref recordCount);
 
             return View(model);
         }

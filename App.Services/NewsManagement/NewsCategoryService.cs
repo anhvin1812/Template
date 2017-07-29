@@ -28,9 +28,9 @@ namespace App.Services.NewsManagement
 
         #region Public Methods
 
-        public IEnumerable<NewsCategorySummary> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<NewsCategorySummary> GetAll(bool? isDisabled, int? page, int? pageSize, ref int? recordCount)
         {
-            var categories = NewsCategoryRepository.GetAll(page, pageSize, ref recordCount)
+            var categories = NewsCategoryRepository.GetAll(isDisabled, page, pageSize, ref recordCount)
                 .Select(x => new NewsCategorySummary
                 {
                     Id = x.Id,
@@ -53,11 +53,7 @@ namespace App.Services.NewsManagement
         public SelectListOptions GetOptionsForDropdownList(int? parentId, int? currentId = null, bool? isDisabled = null)
         {
             int? recordCount = 0;
-            var allCategories = NewsCategoryRepository.GetAll(null, null, ref recordCount);
-
-            allCategories = isDisabled.HasValue ?
-                isDisabled.Value ? allCategories.Where(x => x.IsDisabled == true) : allCategories.Where(x => x.IsDisabled != true)
-                : allCategories;
+            var allCategories = NewsCategoryRepository.GetAll(isDisabled, null, null, ref recordCount);
 
             var results = GetCategoryForDropdown(allCategories, parentId, string.Empty);
             var disabledValues = new List<int>();
