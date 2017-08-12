@@ -4,31 +4,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>@ViewBag.Title | Xứ Nghệ</title>
-    
+
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,300italic,300,400italic,500,500italic,700,700italic" rel="stylesheet">
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/style")
     @RenderSection("Style", required: false)
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    @if(layoutViewModel.SocialMetaTags != null)
+    <meta name="description" content="Tin tức Xứ Nghệ mới nhất được cập nhật hàng giờ. Tin tức Xứ Nghệ về xã hội, kinh doanh, pháp luật, khoa học, công nghệ, sức khoẻ, đời sống, văn hóa, rao vặt, tâm sự...">
+    <meta name="keywords" content="Xứ Nghệ,Nghệ Tĩnh 24h,Nghệ An,Hà Tĩnh,Vinh,Sông Lam Nghệ An,Tin nhanh,cập nhật,báo điện tử,việt báo,tin việt,VietNews,mua bán,rao vặt,tư vấn,việc làm,Hà Nội,Sài Gòn,tin tức,Huế,Đà Nẵng,VDC,Netnam,Saigonnet,Sggp,VET,Nhân dân,Lao động,Kinh tế,Kinh doanh,Tin nhanh,cap nhat,bao dien tu,Vietbao,TinViet,Mua Ban,Rao Vat,Tu Van,Viec Lam,Hanoi,Ha Noi,Saigon,Sai gon,Tin tuc,Tintuc,Hue,Da Nang,Danang,Nhandan,Nhan dan,Laodong,Lao dong,Kinhte,Kinh te,Kinhdoanh,Kinh doanh">
+    @if (layoutViewModel?.SocialMetaTags != null)
     {
         @Html.Partial("_ArticleSocialMetaTag", layoutViewModel.SocialMetaTags)
     }
-    
+
 </head>
 <body>
     @RenderSection("AfterBody", required: false)
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=105735046784078";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
 
     <div class="wrap">
         <div class="top-bar">
@@ -40,11 +54,11 @@
         <main>
             <div class="container">
                 @RenderSection("FullContent", required: false)
-                <div class="row mt60">
-                    <div class="col-sm-8 col-md-9">
+                <div class="row mt45">
+                    <div class="main-content col-sm-8 col-md-9">
                         @RenderBody()
                     </div>
-                    <div class="col-sm-4 col-md-3">
+                    <div class="sidebar col-sm-4 col-md-3">
                         @RenderSection("SideBar", required: false)
                     </div>
                 </div>

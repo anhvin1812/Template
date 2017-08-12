@@ -33,6 +33,7 @@ namespace App.Services.Dtos.NewsManagement
         public string Title { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }
+        public string Thumbnail { get; set; }
         public string Image { get; set; }
         public int Views { get; set; }
         public int MediaTypeId { get; set; }
@@ -58,8 +59,15 @@ namespace App.Services.Dtos.NewsManagement
 
     public class LatestNews : DtoBase
     {
-        public PublicCategorySummary Id { get; set; }
-        public string Name { get; set; }
+        public PublicCategorySummary Category { get; set; }
+        public IEnumerable<PublicNewsSummary> News { get; set; }
+    }
+
+    public class TopViewSidebar : DtoBase
+    {
+        public IEnumerable<PublicNewsSummary> Weekly { get; set; }
+        public IEnumerable<PublicNewsSummary> Monthly { get; set; }
+        public IEnumerable<PublicNewsSummary> All { get; set; }
     }
 
 }

@@ -1,0 +1,38 @@
+﻿@using App.Core.Extensions
+@using App.Infrastructure.File
+@model IEnumerable<App.Services.Dtos.NewsManagement.PublicNewsSummary>
+
+<div class="post-widget bg-white light-shadow mb30">
+    <ul class="list-posts reset">
+        @foreach (var m in Model)
+        {
+            var url = Url.Action("Detail", "Article", new { id = m.Id });
+
+            <li class="post-item">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="img-holder-wrap">
+                            <a class="img-holder" href="@url">
+                                <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Thumbnail))" alt="@m.Title">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="post-summary">
+                            <h5 class="post-title">
+                                <a href="@url">@m.Title</a>
+                            </h5>
+                            <ul class="post-meta m0 p0">
+                                <li><i class="fa fa-clock-o"></i> @m.PublishedDate.RelativeTime()</li>
+                                <li><i class="fa fa-eye"></i> @m.Views</li>
+                            </ul>
+                            <p class="p0">
+                                @m.Description
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+</div><!-- /.post-widget-->

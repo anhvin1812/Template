@@ -1,4 +1,5 @@
-﻿@model App.Services.Dtos.Settings.HomepageViewModel
+﻿@using App.Services.Dtos.Layout
+@model App.Services.Dtos.Settings.HomepageViewModel
 @{
     ViewBag.Title = "Nghệ Tĩnh 24h";
 }
@@ -573,5 +574,5 @@
 
 
 @section SideBar{
-    @Html.Partial("_SideBar")
+    @Html.Partial("_SideBar", new SideBar ())
 }

@@ -30,9 +30,9 @@ namespace App.Services.NewsManagement
         #endregion
 
         #region Public Methods
-        public IEnumerable<PublicNewsSummary> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<PublicNewsSummary> GetAll(string keyword, DateTime? startDate, DateTime? endDate, int? categoryId, int? page, int? pageSize, ref int? recordCount)
         {
-            var results = NewsRepository.GetAllPublicNews(keyword, categoryId, page, pageSize, ref recordCount);
+            var results = NewsRepository.GetAllPublicNews(keyword, startDate, endDate, categoryId, page, pageSize, ref recordCount);
 
             return EntitiesToDtos(results);
         }
@@ -173,6 +173,7 @@ namespace App.Services.NewsManagement
                 Id = entity.Id,
                 Title = entity.Title,
                 Description = entity.Description,
+                Thumbnail = entity.Image.Thumbnail,
                 Image = entity.Image.Image,
                 Content = entity.Content,
                 PublishedDate = entity.CreatedDate,

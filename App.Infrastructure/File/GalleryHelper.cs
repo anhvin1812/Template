@@ -100,6 +100,10 @@ namespace App.Infrastructure.File
             
             var fullPath = HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryLogo}/{imageName}");
 
+            // Delete image
+            if (File.Exists(fullPath))
+                File.Delete(fullPath);
+
             img.Save(fullPath);
 
             return imageName;

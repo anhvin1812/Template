@@ -9,7 +9,7 @@ namespace App.Services.NewsManagement
 {
     public interface IPublicNewsService : IService
     {
-        IEnumerable<PublicNewsSummary> GetAll(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<PublicNewsSummary> GetAll(string keyword, DateTime? startDate, DateTime? endDate, int? categoryId, int? page, int? pageSize, ref int? recordCount);
 
         PublicNewsDetail GetPublicNewsById(int id);
 

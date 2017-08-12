@@ -77,6 +77,7 @@ namespace App.Data.EntityFramework.Mapping
 
                 // Relationships
                 HasOptional(t => t.Parent).WithMany().HasForeignKey(t => t.ParentId);
+                HasMany(t => t.Newses).WithMany();
             }
         }
 

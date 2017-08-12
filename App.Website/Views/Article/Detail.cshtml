@@ -1,23 +1,16 @@
-﻿@using App.Core.Extensions
+﻿@using App.Services.Dtos.Layout
+@using App.Core.Extensions
 @using App.Infrastructure.File
 @using Microsoft.Security.Application
 @model App.Services.Dtos.NewsManagement.PublicNewsDetail
 
 @{
     ViewBag.Title = Model.Title;
-    var category = Model.Categories.FirstOrDefault();
+    var category = Model.Categories.LastOrDefault();
 }
 
 @section FullContent{
-    <div class="row">
-        <div class="col-xs-12 cat-title-holder mt60">
-            <h2>@(category?.Name)</h2>
-            <ul class="breadcrumb">
-                <li><a href="/">Home</a></li>
-                <li><a href="@Url.Action("Category","Article", new {id=category?.Id})">@(category?.Name)</a></li>
-            </ul>
-        </div>
-    </div>
+   @Html.Action("BreadCrumb", "Article", new { categoryId = category?.Id})
 }
 
 
@@ -62,7 +55,7 @@
                 </div>
             </div>
             <div class="post-content">
-                @Html.Raw(Sanitizer.GetSafeHtmlFragment(Model.Content))
+                @Html.Raw(Model.Content) 
             </div>
             <div class="post-tags-holder">
                 <ul class="post-tags reset">
@@ -78,9 +71,10 @@
 
 @Html.Action("Related", "Article", new {newsId = Model.Id, categoryId = category?.Id})
 
+@Html.Partial("_FacebookComment", shareUrl)
+
 @section SideBar{
-    @Html.Partial("_SideBar")
-}
+    @Html.Partial("_SideBar", new SideBar { CategoryId = category?.Id })
 
 
 @section Scripts{

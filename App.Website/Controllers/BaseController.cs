@@ -18,13 +18,6 @@ namespace App.Website.Controllers
         }
 
 
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-           
-
-            base.OnActionExecuted(filterContext);
-        }
-
         protected LayoutViewModel LayoutViewModel { get; private set; }
 
         protected IEnumerable<IService> Services { get; private set; }

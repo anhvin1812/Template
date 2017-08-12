@@ -1,0 +1,87 @@
+﻿@model App.Services.Dtos.NewsManagement.TopViewSidebar
+
+@{
+    var order = 0;
+}
+
+<div class="side-widget bg-white light-shadow">
+    <div class="primary-heading">
+        <a>Xem Nhiều</a>
+    </div>
+    <div class="horizontal-tabs-widget">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#TopViewsWeek" aria-controls="TopViewsWeek" role="tab" data-toggle="tab">Tuần</a></li>
+            <li role="presentation"><a href="#TopViewsMonth" aria-controls="TopViewsMonth" role="tab" data-toggle="tab">Tháng</a></li>
+            <li role="presentation"><a href="#TopViewsAll" aria-controls="TopViewsAll" role="tab" data-toggle="tab">Tất cả</a></li>
+        </ul><!-- Nav tabs -->
+
+        <div class="tab-content pb15 pt15">
+            <div role="tabpanel" class="tab-pane active" id="TopViewsWeek">
+                <ul class="top-views reset">
+                @foreach (var m in Model.Weekly)
+                {
+                    var url = Url.Action("Detail", "Article", new { id = m.Id });
+                    <li>
+                        <div class="post-item">
+                            <span class="number">@order</span>
+                            <div class="post-summary">
+                                <h6 class="post-title">
+                                    <a href="@url">@m.Title</a>
+                                </h6>
+                            </div>
+                        </div>
+                    </li>
+
+                    order++;
+                }
+                </ul><!-- /.top-views-->
+            </div>
+            <div role="tabpanel" class="tab-pane" id="TopViewsMonth">
+                <ul class="top-views reset">
+                    @{
+                        order = 1;
+                        foreach (var m in Model.Monthly)
+                        {
+                            var url = Url.Action("Detail", "Article", new { id = m.Id });
+                            <li>
+                                <div class="post-item">
+                                    <span class="number">@order</span>
+                                    <div class="post-summary">
+                                        <h6 class="post-title">
+                                            <a href="@url">@m.Title</a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </li>
+
+                            order++;
+                        }
+                    }
+                </ul><!-- /.top-views-->
+            </div>
+            <div role="tabpanel" class="tab-pane" id="TopViewsAll">
+                <ul class="top-views reset">
+                    @{
+                        order = 1;
+                        foreach (var m in Model.All)
+                        {
+                            var url = Url.Action("Detail", "Article", new {id = m.Id});
+                            <li>
+                                <div class="post-item">
+                                    <span class="number">@order</span>
+                                    <div class="post-summary">
+                                        <h6 class="post-title">
+                                            <a href="@url">@m.Title</a>
+                                        </h6>
+                                    </div>
+                                </div>
+                            </li>
+
+                            order++;
+                        }
+                    }
+                </ul><!-- /.top-views-->
+            </div>
+        </div><!-- Tab panes -->
+    </div>
+</div><!-- /.side-widget-->

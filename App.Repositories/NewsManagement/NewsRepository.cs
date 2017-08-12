@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using App.Core.Repositories;
 using App.Entities.NewsManagement;
@@ -168,14 +169,10 @@ namespace App.Repositories.NewsManagement
             var result = GetPublicNews();
 
             if (startDate.HasValue)
-            {
-                result = result.Where(t=>t.CreatedDate >= startDate.Value.Date);
-            }
+                result = result.Where(t=>t.CreatedDate >= startDate.Value);
 
             if (endDate.HasValue)
-            {
-                result = result.Where(t => t.CreatedDate >= endDate.Value.Date);
-            }
+                result = result.Where(t => DbFunctions.TruncateTime(t.CreatedDate) <= endDate.Value);
 
             if (maxRecords.HasValue)
             {
@@ -185,15 +182,24 @@ namespace App.Repositories.NewsManagement
             return result;
         }
 
-        public IEnumerable<News> GetAllPublicNews(string keyword, int? categoryId, int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<News> GetAllPublicNews(string keyword, DateTime? startDate, DateTime? endDate, int? categoryId, int? page, int? pageSize, ref int? recordCount)
         {
             var result = GetPublicNews();
 
+            //get by keyword
             if (!string.IsNullOrWhiteSpace(keyword))
             {
                 result = result.Where(t => t.Title.Contains(keyword) || t.Description.Contains(keyword));
             }
 
+            //get by date
+            if (startDate.HasValue)
+                result = result.Where(t => t.CreatedDate >= startDate.Value);
+
+            if (endDate.HasValue)
+                result = result.Where(t => DbFunctions.TruncateTime(t.CreatedDate) <= endDate.Value);
+
+            //get by categoryId
             if (categoryId.HasValue)
             {
                 result = result.Where(t => t.Categories.Any(c => c.Id == categoryId.Value));

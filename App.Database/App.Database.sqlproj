@@ -91,5 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Database.dev.publish.xml" />
+    <None Include="NgheTinh24h.publish.xml" />
   </ItemGroup>
 </Project>

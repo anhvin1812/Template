@@ -1,12 +1,10 @@
 ﻿ @using App.Infrastructure.File 
-@model App.Services.Dtos.NewsManagement.NewsDetail
+@model App.Services.Dtos.NewsManagement.PublicNewsDetail
 
 @{
     var url = Request?.Url.OriginalString;
     var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetImagePath(Model.Thumbnail))).OriginalString;
-    var largeImage = new Uri(Request?.Url, Url.Content(GalleryHelper.GetImagePath(Model.Image))).OriginalString;
-
-    Model.UpdatedDate = Model.UpdatedDate ?? DateTime.Now;
+    var tags = string.Join(",", Model.Tags.Select(x => x.Name));
 }
 
 <!-- Place this data between the <head> tags of your website -->
@@ -18,13 +16,13 @@
 <meta itemprop="image" content="@image">
 
 <!-- Twitter Card data -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="Xứ Nghệ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="Nghệ Tĩnh 24h">
 <meta name="twitter:title" content="@Model.Title">
 <meta name="twitter:description" content="@Model.Description">
-<meta name="twitter:creator" content="@Model.UpdatedBy">
+<meta name="twitter:creator" content="@Model.CreatedBy">
 <!-- Twitter summary card with large image must be at least 280x150px -->
-<meta name="twitter:image:src" content="@largeImage">
+<meta name="twitter:image:src" content="@image">
 
 <!-- Open Graph data -->
 <meta property="og:title" content="@Model.Title" />
@@ -32,9 +30,9 @@
 <meta property="og:url" content="@url" />
 <meta property="og:image" content="@image" />
 <meta property="og:description" content="@Model.Description" />
-<meta property="og:site_name" content="Minh Khang Store" />
-<meta property="article:published_time" content="@Model.CreatedDate.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
-<meta property="article:modified_time" content="@Model.UpdatedDate.Value.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
+<meta property="og:site_name" content="Xứ Nghệ 24h" />
+<meta property="article:published_time" content="@Model.PublishedDate.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
+<meta property="article:modified_time" content="@Model.PublishedDate.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
 <meta property="article:section" content="Xứ Nghệ" />
-<meta property="article:tag" content="Xứ Nghệ" />
+<meta property="article:tag" content="@tags" />
 <meta property="fb:admins" content="105735046784078" /> 

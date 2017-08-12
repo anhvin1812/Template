@@ -1,19 +1,19 @@
 ﻿@using App.Core.Extensions
 @using App.Infrastructure.File
 @using App.Services.Dtos.NewsManagement
-@model IEnumerable<PublicNewsSummary>
+@model LatestNews
 
-@if (Model != null && Model.Any())
+@if (Model != null && Model.News.Any())
 {
-    var firstNews = Model.FirstOrDefault();
-    var category = firstNews?.Category ?? new PublicCategorySummary();
+    var firstNews = Model.News.FirstOrDefault();
+    var category = Model.Category ?? new PublicCategorySummary();
 
     var url = Url.Action("Detail", "Article", new { id = firstNews?.Id });
 
     <div class="post-widget">
 
         <div class="primary-heading">
-            <a>@category.Name</a>
+            <a href="@Url.Action("Category", "Article", new {id = category.Id})">@category.Name</a>
         </div>
         <div class="post-item post-item-vertical bg-white light-shadow p20">
             <div class="row">
@@ -23,7 +23,7 @@
                         <a class="img-holder" href="@url">
                             <img src="@Url.Content(GalleryHelper.GetThumbnailPath(firstNews.Thumbnail))" alt="@firstNews.Title">
                         </a>
-                        <span class="post-badge">@category.Name</span>
+                        <span class="post-badge">@firstNews.Category.Name</span>
                     </div>
                     <h4 class="post-title">
                         <a href="@url">@firstNews.Title</a>
@@ -39,7 +39,7 @@
                 
                 <div class="col-sm-6">
                     <ul class="post-wrap-list">
-                        @foreach (var m in Model.Skip(1))
+                        @foreach (var m in Model.News.Skip(1))
                         {
                             url = Url.Action("Detail", "Article", new { id = m.Id });
 

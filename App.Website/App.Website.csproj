@@ -1520,7 +1520,10 @@
     <Content Include="Html\js\jquery.incrementer\jquery-incrementer-1.0.js" />
     <Content Include="Html\js\jquery.incrementer\jquery-tools-1.0.js" />
     <Content Include="Html\product.html" />
+    <Content Include="nghetinh24h_favicon.png" />
     <Content Include="Scripts\App\common.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Html\fonts\glyphicons-halflings-regular.eot" />
@@ -1614,10 +1617,15 @@
     <Content Include="Areas\Admin\Views\Setting\Menu.cshtml" />
     <Content Include="Areas\Admin\Views\Setting\Homepage.cshtml" />
     <Content Include="Areas\Admin\Views\Setting\Options.cshtml" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Properties\DefaultSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>DefaultSettings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Properties\PublishProfiles\NgheTinh24h.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1719,6 +1727,11 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Article\_Latest.cshtml" />
+    <Content Include="Views\Article\_Breadcrumb.cshtml" />
+    <Content Include="Views\Article\_FacebookComment.cshtml" />
+    <Content Include="Views\Article\_TopViewSideBar.cshtml" />
+    <Content Include="Views\Article\_ListHorizontal.cshtml" />
+    <Content Include="Views\Article\_CategoriesSideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1730,7 +1743,6 @@
     <Folder Include="Content\FileUpload\Logo\" />
     <Folder Include="Content\FileUpload\Products\Images\" />
     <Folder Include="Content\FileUpload\Products\Thumbnails\" />
-    <Folder Include="Scripts\bootstrap-datetimepicker\" />
     <Folder Include="Scripts\owl-carousel\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>

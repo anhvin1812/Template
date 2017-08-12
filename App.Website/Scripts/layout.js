@@ -24,15 +24,19 @@ var layout = (function () {
             }
         });
 
-        // active datetimepickers inline
-        $(".datepicker-inline").datetimepicker({
+        // active achive datetimepickers 
+        $(".datepicker-archive").datetimepicker({
             inline: true,
-            format: "DD/MM/YYYY",
+            format: "MM-dd-YYYY",
             icons: {
                 previous: "fa fa-angle-left",
                 next: "fa fa-angle-right"
             }
-        });
+        }).on("dp.change", function (e) {
+            var url = $(this).data("url");
+            var date = (e.date.month() + 1) + "-" + e.date.date() + "-" + e.date.year();
+            window.location.href = url + "?startDate=" + date + "&endDate=" + date;
+        });;
     };
 	
     my.Responsive = function () {

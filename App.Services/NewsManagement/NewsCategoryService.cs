@@ -30,17 +30,44 @@ namespace App.Services.NewsManagement
 
         public IEnumerable<NewsCategorySummary> GetAll(bool? isDisabled, int? page, int? pageSize, ref int? recordCount)
         {
-            var categories = NewsCategoryRepository.GetAll(isDisabled, page, pageSize, ref recordCount)
-                .Select(x => new NewsCategorySummary
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    ParentId = x.ParentId,
-                    Description = x.Description,
-                    IsDisabled = x.IsDisabled ?? false
-                });
+            var results = NewsCategoryRepository.GetAll(isDisabled, page, pageSize, ref recordCount);
+            return EntitiesToDtos(results);
+        }
 
-            return categories;
+        public IEnumerable<NewsCategorySummary> GetByParentId(int? categoryId = null, bool? isDisabled = false, bool hasCounter = false)
+        {
+            var results = NewsCategoryRepository.GetByParentId(categoryId);
+            return EntitiesToDtos(results, hasCounter);
+        }
+
+        public IEnumerable<NewsCategorySummary> GetCategoryWithParents(int categoryId, bool? isDisabled = false)
+        {
+            int? recordCount = 0;
+            var allCategories = NewsCategoryRepository.GetAll(isDisabled, null, null, ref recordCount);
+
+            var entities = new List<NewsCategory>();
+
+            var currentCategory = allCategories.FirstOrDefault(x => x.Id == categoryId);
+
+            if(currentCategory != null)
+            {
+                entities.Insert(0, currentCategory);
+
+                while (true)
+                {
+                    currentCategory = allCategories.FirstOrDefault(x => x.ParentId == currentCategory.ParentId && currentCategory.ParentId != null);
+                    if (currentCategory != null)
+                    {
+                        entities.Insert(0, currentCategory);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return EntitiesToDtos(entities);
         }
 
         /// <summary>
@@ -73,25 +100,12 @@ namespace App.Services.NewsManagement
 
         public NewsCategoryDetail GetById(int id)
         {
-            var category = NewsCategoryRepository.GetById(id);
+            var entity = NewsCategoryRepository.GetById(id);
 
-            if (category == null)
+            if (entity == null)
                 throw new DataNotFoundException();
 
-            return new NewsCategoryDetail
-            {
-                Id = category.Id,
-                Name = category.Name,
-                Description = category.Description,
-                IsDisabled = category.IsDisabled,
-                Parent = category.Parent == null ? null : new NewsCategoryDetail
-                {
-                    Id = category.Parent.Id,
-                    Name = category.Parent.Name,
-                    Description = category.Parent.Description,
-                    IsDisabled = category.IsDisabled
-                }
-            };
+            return EntityToDto(entity);
         }
 
         public NewsCategoryEntry GetCategoryForEditing(int id)
@@ -214,6 +228,41 @@ namespace App.Services.NewsManagement
 
             return categories;
         }
+
+        #endregion
+
+        #region EntityMap
+        private IEnumerable<NewsCategorySummary> EntitiesToDtos(IEnumerable<NewsCategory> entities, bool hasCounter = false)
+        {
+            return entities.Select(x => new NewsCategorySummary
+            {
+                Id = x.Id,
+                Name = x.Name,
+                ParentId = x.ParentId,
+                Description = x.Description,
+                IsDisabled = x.IsDisabled ?? false,
+                NewsCount = hasCounter ? x.Newses.Count() : 0
+            });
+        }
+
+        private NewsCategoryDetail EntityToDto(NewsCategory entity)
+        {
+            return new NewsCategoryDetail
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Description = entity.Description,
+                IsDisabled = entity.IsDisabled,
+                Parent = entity.Parent == null ? null : new NewsCategoryDetail
+                {
+                    Id = entity.Parent.Id,
+                    Name = entity.Parent.Name,
+                    Description = entity.Parent.Description,
+                    IsDisabled = entity.IsDisabled
+                }
+            };
+        }
+
 
         #endregion
 

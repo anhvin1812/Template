@@ -15,7 +15,7 @@ namespace App.Website.Fillters
             var layoutViewModel = new LayoutViewModel { Setting = settings };
 
             // get social meta tags data
-            var socialMetaTags = (NewsDetail)filterContext.Controller.ViewBag.SocialMetaTags;
+            var socialMetaTags = (PublicNewsDetail)filterContext.Controller.ViewBag.SocialMetaTags;
             layoutViewModel.SocialMetaTags = socialMetaTags;
 
             filterContext.Controller.ViewBag.LayoutViewModel = layoutViewModel;

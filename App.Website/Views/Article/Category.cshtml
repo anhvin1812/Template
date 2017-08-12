@@ -1,65 +1,24 @@
-﻿@using App.Core.Extensions
-@using App.Infrastructure.File
+﻿@using App.Services.Dtos.Layout
 @using App.Services.Dtos.NewsManagement
-@using PagedList
 @using PagedList.Mvc
 
-@model dynamic
+@model ArticleCategory
 
 @{
-    ViewBag.Title = Model.Category?.Name;
+    var currentCategory = Model.Categories.LastOrDefault();
+    ViewBag.Title = currentCategory?.Name;
 }
 
 
 @section FullContent{
-<div class="row">
-    <div class="col-xs-12 cat-title-holder mt60">
-        <h2>@(Model.Category?.Name)</h2>
-        <ul class="breadcrumb">
-            <li><a href="/">Home</a></li>
-            <li><a href="@Url.Action("Category","Article", new {id = Model.Category?.Id})">@(Model.Category?.Name)</a></li>
-        </ul>
-    </div>
-</div>
+    @Html.Action("BreadCrumb", "Article", new { categoryId = currentCategory?.Id })
 }
 
-<div class="post-widget bg-white light-shadow mb30">
-    <ul class="list-posts reset">
-        @foreach (PublicNewsSummary m in Model.PagedNews)
-        {
-            var url = Url.Action("Detail", "Article", new { id = m.Id });
+<!-- List posts -->
+@Html.Partial("_ListHorizontal", Model.PagedNews)
 
-            <li class="post-item">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="img-holder-wrap">
-                            <a class="img-holder" href="@url">
-                                <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Thumbnail))" alt="@m.Title">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="post-summary">
-                            <h5 class="post-title">
-                                <a href="@url">@m.Title</a>
-                            </h5>
-                            <ul class="post-meta m0 p0">
-                                <li><i class="fa fa-clock-o"></i> @m.PublishedDate.RelativeTime()</li>
-                                <li><i class="fa fa-eye"></i> @m.Views</li>
-                            </ul>
-                            <p class="p0">
-                                @m.Description
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        }
-    </ul>
-</div><!-- /.post-widget-->
-
-@Html.PagedListPager((StaticPagedList <PublicNewsSummary>)Model.PagedNews, page => Url.Action("Category", "Article", new { id = Model.Category.Id, page = page }), new PagedListRenderOptions { ContainerDivClasses = new[] { "mb30" } })
+@Html.PagedListPager(Model.PagedNews, page => Url.Action("Category", "Article", new { id = currentCategory?.Id, page = page }), new PagedListRenderOptions { ContainerDivClasses = new[] { "mb30" } })
 
 @section SideBar{
-    @Html.Partial("_SideBar")
+    @Html.Partial("_SideBar", new SideBar {CategoryId = currentCategory?.Id})
 }

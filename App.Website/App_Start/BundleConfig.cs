@@ -29,7 +29,7 @@ namespace App.Website
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/common.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/style").Include(
                       "~/Content/css/font-awesome.min.css",
                       "~/Content/css/bootstrap.min.css",
                       "~/Scripts/owl-carousel/css/owl.carousel.min.css",
@@ -37,6 +37,12 @@ namespace App.Website
                       "~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css",
                       "~/Content/css/site.css",
                       "~/Content/css/responsive.css"));
+
+#if DEBUG
+            BundleTable.EnableOptimizations = true;
+#else
+            BundleTable.EnableOptimizations = true;
+#endif
         }
     }
 }

@@ -28,48 +28,24 @@ namespace App.Website.Controllers
         #endregion
 
 
-        // GET: News
         [LayoutActionFilter]
-        public ActionResult Index(string keyword, int? page = 1)
+        public ActionResult Index(string keyword, DateTime? startDate = null, DateTime? endDate = null, int? page = 1)
         {
             int? recordCount = 0;
             var pageSize = 10;
 
-            var result = PublicNewsService.GetAll(keyword, null, page, pageSize, ref recordCount);
+            var result = PublicNewsService.GetAll(keyword, startDate, endDate, null, page, pageSize, ref recordCount);
 
-            dynamic model = new ExpandoObject();
+            var model = new ArticleSearch();
             model.PagedNews = new StaticPagedList<PublicNewsSummary>(result, page ?? 1, pageSize, (int)recordCount);
             model.NewsFilter = new NewsFilter
             {
-                Keyword = keyword
+                Keyword = keyword,
+                StartDate = startDate,
+                EndDate = endDate
             };
 
             return View(model);
-        }
-
-        [LayoutActionFilter]
-        public ActionResult Category(int id, int? page = 1)
-        {
-            var category = NewsCategoryService.GetById(id);
-            if(category != null)
-            {
-                int? recordCount = 0;
-                var pageSize = 10;
-
-                var result = PublicNewsService.GetAll(null, id, page, pageSize, ref recordCount);
-
-                dynamic model = new ExpandoObject();
-                model.PagedNews = new StaticPagedList<PublicNewsSummary>(result, page ?? 1, pageSize, (int)recordCount);
-                model.Category = new PublicCategorySummary
-                {
-                    Id = category.Id,
-                    Name = category.Name
-                };
-
-                return View(model);
-            }
-
-            return HttpNotFound();
         }
 
         [LayoutActionFilter]
@@ -108,10 +84,98 @@ namespace App.Website.Controllers
 
         public ActionResult Latest(int categoryId)
         {
-            var model = PublicNewsService.GetLatestNews(categoryId);
+            var category = NewsCategoryService.GetById(categoryId);
+            if(category!=null)
+            {
+                var news = PublicNewsService.GetLatestNews(categoryId);
+                var model = new LatestNews {
+                    Category = new PublicCategorySummary{
+                        Id = category.Id,
+                        Name = category.Name
+                    },
+                    News = news
+                };
 
-            return PartialView("_Latest", model);
+                return PartialView("_Latest", model);
+            }
+
+            return Content("");
         }
+
+        public ActionResult TopViewSideBar()
+        {
+            var now = DateTime.Now.Date;
+            int days = DateTime.Now.DayOfWeek - DayOfWeek.Monday;
+
+            var startDateOfWeek = now.AddDays(-days);
+            var endDateOfWeek = startDateOfWeek.AddDays(6);
+
+            var startDateOfMonth = new DateTime(now.Year, now.Month, 1);
+            var endDateOfMonth = startDateOfMonth.AddMonths(1).AddDays(-1);
+
+            var model = new TopViewSidebar
+            {
+                Weekly = PublicNewsService.GetMostViews(startDateOfWeek, endDateOfWeek),
+                Monthly = PublicNewsService.GetMostViews(startDateOfMonth, endDateOfMonth),
+                All = PublicNewsService.GetMostViews(),
+            }; 
+
+            return PartialView("_TopViewSideBar", model);
+        }
+
+        public ActionResult BreadCrumb(int categoryId)
+        {
+            var categories = NewsCategoryService.GetCategoryWithParents(categoryId);
+
+            if (categories != null && categories.Any())
+            {
+                var model = new Breadcrumb
+                {
+                    Title = categories.LastOrDefault()?.Name,
+                    Categories = categories
+                };
+                  
+                return PartialView("_Breadcrumb", model);
+            }
+
+            return Content("");
+        }
+
+        #region Category
+        [LayoutActionFilter]
+        public ActionResult Category(int id, int? page = 1)
+        {
+            var categories = NewsCategoryService.GetCategoryWithParents(id);
+
+            if (categories != null && categories.Any())
+            {
+                int? recordCount = 0;
+                var pageSize = 10;
+
+                var results = PublicNewsService.GetAll(null,null, null, id, page, pageSize, ref recordCount);
+
+                var model = new ArticleCategory();
+                model.PagedNews = new StaticPagedList<PublicNewsSummary>(results, page ?? 1, pageSize, (int)recordCount);
+                model.Categories = categories;
+
+                return View(model);
+            }
+
+            return HttpNotFound();
+        }
+
+        public ActionResult CategoriesSideBar(int? categoryId)
+        {
+            var categories = NewsCategoryService.GetByParentId(categoryId);
+
+            if (categories != null && categories.Any())
+            {
+                return PartialView("_CategoriesSideBar", categories);
+            }
+
+            return Content("");
+        }
+        #endregion
 
         #region Dispose
         private bool _disposed;

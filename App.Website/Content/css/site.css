@@ -3,11 +3,11 @@
 
 body {
   background: #f3f3f3;
-  color: #999;
+  color: #555;
   font-family: "Roboto",sans-serif; }
 
 a {
-  color: #333; }
+  color: #555; }
 
 h1, h2, h3, h4, h5, h6 {
   color: #2c2d30;
@@ -35,11 +35,11 @@ ul.reset {
   background: #2c2d30; }
   .header .logo {
     float: left;
-    padding: 20px 0; }
+    padding: 10px 0; }
     .header .logo .inner-logo {
       display: block; }
       .header .logo .inner-logo img {
-        height: 36px;
+        height: 56px;
         max-width: 215px; }
 
 .nav-wrap {
@@ -114,7 +114,7 @@ ul.multi-level {
   position: relative;
   padding-bottom: 5px; }
   .search-box .input-group-addon {
-    color: #999;
+    color: #555;
     background: #fff;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     border-radius: 0; }
@@ -331,7 +331,14 @@ ul.multi-level {
     .post-item .post-title a:hover {
       color: #129793; }
 
+.post-content {
+  font-size: 16px;
+  color: #555; }
+  .post-content * {
+    max-width: 100%; }
+
 .post-meta li {
+  color: #999;
   display: inline-block;
   font-size: 12px;
   margin-right: 10px; }
@@ -420,11 +427,9 @@ ul.categories-widget > li {
   ul.categories-widget > li a {
     border-left: 3px solid transparent;
     display: block;
-    padding-left: 15px;
-    color: #999; }
+    padding-left: 15px; }
     ul.categories-widget > li a:hover {
       background: #f0f0f0;
-      color: #999;
       padding-left: 30px; }
     ul.categories-widget > li a em {
       display: inline-block;
@@ -440,10 +445,9 @@ ul.categories-widget > li {
       text-align: center; }
 
 .cat-title-holder {
-  margin-bottom: 45px;
   text-align: center; }
   .cat-title-holder h2 {
-    font-size: 48px;
+    font-size: 38px;
     line-height: 40px;
     margin: 0;
     text-transform: uppercase; }
@@ -550,6 +554,8 @@ ul.post-tags li {
   .footer .logo {
     display: block;
     margin: 0 0 30px 0; }
+    .footer .logo img {
+      max-height: 100px; }
 
 .footer-widget > h3 {
   color: #fff;
@@ -632,11 +638,14 @@ ul.post-tags li {
   color: #dc4a29; }
 
 /* Quick css */
-.mt60 {
-  margin-top: 60px; }
-
 .m0 {
   margin: 0; }
+
+.mt45 {
+  margin-top: 45px; }
+
+.mt60 {
+  margin-top: 60px; }
 
 .mb10 {
   margin-bottom: 10px; }
@@ -679,6 +688,9 @@ ul.post-tags li {
 
 .ptb60 {
   padding: 60px 0; }
+
+.ptb30 {
+  padding: 30px 0; }
 
 .light-shadow {
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.18); }

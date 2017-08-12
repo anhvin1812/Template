@@ -1,0 +1,20 @@
+﻿@model IEnumerable<App.Services.Dtos.NewsManagement.NewsCategorySummary>
+
+<div class="side-widget bg-white light-shadow">
+    <div class="primary-heading">
+        <a>Chuyên Mục</a>
+    </div>
+    <ul class="categories-widget reset">
+        @foreach (var m in Model)
+        {
+            var url = Url.Action("Category", "Article", new { id = m.Id });
+
+            <li>
+                <a href="@url">
+                    <em>@m.Name</em>
+                    <span class="bg-gray">@m.NewsCount</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div><!-- /.side-widget-->

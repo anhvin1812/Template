@@ -38,5 +38,7 @@ namespace App.Services.Dtos.NewsManagement
 
         public bool IsDisabled { get; set; }
 
+        public int NewsCount { get; set; }
+
     }
 }

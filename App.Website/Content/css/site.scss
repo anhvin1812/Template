@@ -1,4 +1,5 @@
-$textColor: #999;
+$colorLight: #999;
+$textColor: #555;
 $colorGreen: #129793;
 $colorRed: #dc4a29;
 $colorDark: #333;
@@ -13,7 +14,7 @@ body{
     font-family: "Roboto",sans-serif;
 }
 a{
-	color:$colorDark;
+	color:$textColor;
 }
 h1, h2, h3, h4, h5, h6{
 	color: #2c2d30;
@@ -41,11 +42,11 @@ ul.reset {
 	background: #2c2d30 ;
 	.logo{
 		float: left;
-		padding: 20px 0;
+		padding: 10px 0;
 		.inner-logo{
 			display: block;
 			img{
-				height: 36px; 
+				height: 56px; 
 				max-width: 215px;
 			}
 		}
@@ -266,7 +267,6 @@ ul.multi-level {
 	
 }
 
-
 /* Owl carousel */
 .owl-dots {
 	position: absolute;
@@ -416,8 +416,16 @@ ul.multi-level {
 .post-summary{
 	
 }
+.post-content{
+    font-size: 16px;
+    color: $textColor;
+    *{
+        max-width: 100%;
+    }
+}
 .post-meta{
 	li{
+        color: $colorLight;
 		display: inline-block;
 		font-size: 12px;
 		margin-right: 10px;
@@ -527,10 +535,8 @@ ul.categories-widget {
             border-left: 3px solid transparent;
             display: block;
             padding-left: 15px;
-			color: $textColor;
 			&:hover{
 				background: #f0f0f0;
-				color: $textColor;
 				padding-left: 30px;
 			}
             em {
@@ -552,10 +558,9 @@ ul.categories-widget {
 }
 
 .cat-title-holder{
-	margin-bottom:45px;
     text-align: center;
 	h2{
-		 font-size: 48px;
+		 font-size: 38px;
     line-height: 40px;
     margin: 0;
 	text-transform: uppercase;
@@ -563,10 +568,10 @@ ul.categories-widget {
 }
 .breadcrumb{
 	background: transparent;
-	color: $textColor;
+	color: $colorLight;
 	margin:0;
 	a{
-		color: $textColor;
+		color: $colorLight;
 		text-decoration: none;
 		&:hover{
 			color: $colorGreen
@@ -641,7 +646,7 @@ ul.post-tags {
         }
 
         a {
-            color: #999;
+            color: $colorLight;
             display: block;
             background: #f2f2f2;
             font-size: 12px;
@@ -679,7 +684,7 @@ ul.post-tags {
         }
 
         a {
-            color: #999;
+            color: $colorLight;
             padding: 8px 15px;
         }
 
@@ -706,6 +711,9 @@ ul.post-tags {
 	.logo{
 		display: block;
 		margin: 0 0 30px 0;
+        img{
+            max-height: 100px;
+        }
 	}
 	
 }
@@ -810,11 +818,15 @@ ul.post-tags {
 }
 
 /* Quick css */
-.mt60{
-	margin-top: 60px;
-}
+
 .m0{
 	margin: 0;
+}
+.mt45{
+	margin-top: 45px;
+}
+.mt60{
+	margin-top: 60px;
 }
 .mb10{
 	margin-bottom: 10px;
@@ -857,6 +869,9 @@ ul.post-tags {
 }
 .ptb60{
 	padding: 60px 0;
+}
+.ptb30{
+	padding: 30px 0;
 }
 
 .light-shadow{

@@ -42,10 +42,13 @@ namespace App.Core.Extensions
             {
                 return ts.Days + " ngày trước";
             }
-            else
+
+            if (delta < 12 * MONTH && dateTime.Year == DateTime.Now.Year)
             {
-                return dateTime.ToString("dd/MM/yyyy HH:mm");
+                return dateTime.ToString("dd/MM");
             }
+
+            return dateTime.ToString("dd/MM/yyyy HH:mm");
         }
     }
 }

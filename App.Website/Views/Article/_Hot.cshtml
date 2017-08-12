@@ -9,8 +9,6 @@
     <div class="hot-news-slider slider-post bg-white p30 light-shadow">
         <div class="owl-carousel">
         @{
-            var i = 0;
-
             foreach (var m in Model)
             {
                 var url = Url.Action("Detail", "Article", new { id = m.Id });

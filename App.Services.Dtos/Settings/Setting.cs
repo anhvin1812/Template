@@ -79,7 +79,13 @@ namespace App.Services.Dtos.Settings
 
     public class LayoutViewModel : DtoBase
     {
+        public LayoutViewModel()
+        {
+            Setting = new SettingDetail();
+            SocialMetaTags = new PublicNewsDetail();
+        }
+
         public SettingDetail Setting { get; set; }
-        public NewsDetail SocialMetaTags { get; set; }
+        public PublicNewsDetail SocialMetaTags { get; set; }
     }
 }

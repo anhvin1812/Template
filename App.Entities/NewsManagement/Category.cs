@@ -1,4 +1,5 @@
-﻿using App.Core.DataModels;
+﻿using System.Collections.Generic;
+using App.Core.DataModels;
 
 namespace App.Entities.NewsManagement
 {
@@ -15,5 +16,7 @@ namespace App.Entities.NewsManagement
         public bool? IsDisabled { get; set; }
 
         public virtual NewsCategory Parent { get; set; }
+
+        public virtual ICollection<News> Newses { get; set; }
     }
 }
