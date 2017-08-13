@@ -3,7 +3,7 @@
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
     [Title] NVARCHAR(255) NOT NULL, 
     [GalleryId] INT NOT NULL, 
-	[Description] NVARCHAR(255) NULL, 
+	[Description] NVARCHAR(500) NULL, 
     [Content] NTEXT NULL, 
 	[IsHot] BIT NULL, 
     [IsFeatured] BIT NULL,

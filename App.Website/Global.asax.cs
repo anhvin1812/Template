@@ -88,13 +88,13 @@ namespace App.Website
             //controller.ViewData.Model = new HandleErrorInfo(ex, currentController, currentAction);
             //((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
 
-            //var httpContext = ((MvcApplication)sender).Context;
-            //var exp = Server.GetLastError();
+            var httpContext = ((MvcApplication)sender).Context;
+            var exp = Server.GetLastError();
 
-            //if (exp is DataNotFoundException)
-            //{
-            //    httpContext.Response.Redirect("~/Error/NotFound");
-            //}
+            if (exp is DataNotFoundException)
+            {
+                httpContext.Response.Redirect("~/Error/NotFound");
+            }
             //else
             //{
             //    Response.Redirect(string.Format("~/Error/?error={0}", exp.Message));

@@ -43,7 +43,7 @@ namespace App.Data.EntityFramework.Mapping
                 HasOptional(t => t.Image).WithMany().HasForeignKey(t => t.GalleryId);
                 HasRequired(t => t.Editor).WithMany().HasForeignKey(t => t.UpdatedById);
                 HasRequired(t => t.Status).WithMany().HasForeignKey(t => t.StatusId);
-                HasMany(t => t.Categories).WithMany().Map(x =>
+                HasMany(t => t.Categories).WithMany( t=>t.Newses).Map(x =>
                 {
                     x.ToTable("News_NewsCategory");
                     x.MapLeftKey("NewsId");

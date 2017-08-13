@@ -5,9 +5,6 @@
 }
 
 @media screen and ( max-width:767px) {
-    .container {
-        padding: 0 10px;
-    }
     .wrap.push {
         right: 280px;
         -webkit-transition: right 400ms ease 0s;
@@ -18,7 +15,7 @@
     }
 
     .header .logo .inner-logo img {
-        height: 26px;
+        height: 45px;
         max-width: 200px;
     }
     .menu-btn {
@@ -125,5 +122,22 @@
     .cat-title-holder h2 {
         font-size: 35px;
         line-height: 30px;
+    }
+    .post-item-vertical {
+        padding: 5px;
+    }
+    .post-item-vertical .col-sm-6 {
+        padding-right: 15px;
+    }
+    .slider-post {
+        padding: 10px;
+    }
+
+    .owl-dots {
+        right: -14px;
+        top: -43px;
+    }
+    .facebook-comments {
+        padding: 10px;
     }
 }

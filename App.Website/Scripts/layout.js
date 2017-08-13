@@ -10,7 +10,8 @@ var layout = (function () {
             nav: false,
             responsive: {
                 0: {
-                    items: 1
+                    items: 1,
+                    margin: 30
                 },
                 600: {
                     items: 2
@@ -110,6 +111,11 @@ var layout = (function () {
         $(".btn-search-clear").click(function () {
             $(".txt-search").val("");
             $(this).addClass("hide");
+        });
+
+        // close menu
+        $(".close-menu").click(function () {
+            openCloseMenu(true); // close menu
         });
 
         // click outside close navigation

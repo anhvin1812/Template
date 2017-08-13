@@ -11,6 +11,7 @@ namespace App.Services.Dtos.NewsManagement
     {
         [Required(ErrorMessage = "Please enter title.")]
         public string Title { get; set; }
+        [MinLength(500, ErrorMessage = "The length of description cannot be over than 500 characters.")]
         public string Description { get; set; }
         [AllowHtml]
         public string Content { get; set; }
@@ -34,6 +35,7 @@ namespace App.Services.Dtos.NewsManagement
         public int Id { get; set; }
         [Required(ErrorMessage = "Please enter title.")]
         public string Title { get; set; }
+        [MinLength(500, ErrorMessage = "The length of description cannot be over than 500 characters.")]
         public string Description { get; set; }
         public string Thumbnail { get; set; }
         [AllowHtml]

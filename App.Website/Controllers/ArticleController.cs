@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using App.Core.Extensions;
 using App.Services;
 using App.Services.Dtos.NewsManagement;
 using App.Services.NewsManagement;
@@ -105,9 +106,9 @@ namespace App.Website.Controllers
         public ActionResult TopViewSideBar()
         {
             var now = DateTime.Now.Date;
-            int days = DateTime.Now.DayOfWeek - DayOfWeek.Monday;
 
-            var startDateOfWeek = now.AddDays(-days);
+            var startDateOfWeek = DateTimeExtension.GetMonday(now);
+            return Content(startDateOfWeek.ToString());
             var endDateOfWeek = startDateOfWeek.AddDays(6);
 
             var startDateOfMonth = new DateTime(now.Year, now.Month, 1);
@@ -166,7 +167,7 @@ namespace App.Website.Controllers
 
         public ActionResult CategoriesSideBar(int? categoryId)
         {
-            var categories = NewsCategoryService.GetByParentId(categoryId);
+            var categories = NewsCategoryService.GetByParentId(categoryId, false, true);
 
             if (categories != null && categories.Any())
             {

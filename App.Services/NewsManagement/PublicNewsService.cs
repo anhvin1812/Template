@@ -41,12 +41,12 @@ namespace App.Services.NewsManagement
         {
             var result = NewsRepository.GetPublicNewsById(id);
 
-            if(result != null)
-            {
-                result.Views++;
-                NewsRepository.Update(result);
-                Save();
-            }
+            if (result == null)
+                throw new DataNotFoundException();
+
+            result.Views++;
+            NewsRepository.Update(result);
+            Save();
 
             return EntityToDto(result);
         }

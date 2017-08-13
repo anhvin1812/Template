@@ -50,5 +50,15 @@ namespace App.Core.Extensions
 
             return dateTime.ToString("dd/MM/yyyy HH:mm");
         }
+
+        public static DateTime GetMonday(DateTime time)
+        {
+            int diff = time.DayOfWeek - DayOfWeek.Monday;
+            if (diff < 0)
+            {
+                diff += 7;
+            }
+            return time.AddDays(-1 * diff);
+        }
     }
 }
