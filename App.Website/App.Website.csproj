@@ -1520,7 +1520,6 @@
     <Content Include="Html\js\jquery.incrementer\jquery-incrementer-1.0.js" />
     <Content Include="Html\js\jquery.incrementer\jquery-tools-1.0.js" />
     <Content Include="Html\product.html" />
-    <Content Include="nghetinh24h_favicon.png" />
     <Content Include="Scripts\App\common.js" />
     <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.css" />
     <Content Include="Scripts\bootstrap-datetimepicker\bootstrap-datetimepicker.min.js" />
@@ -1626,6 +1625,7 @@
       <LastGenOutput>DefaultSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Properties\PublishProfiles\NgheTinh24h.pubxml" />
+    <None Include="Properties\PublishProfiles\NgheTinh24hLocal.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

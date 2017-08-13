@@ -17,12 +17,7 @@ namespace App.Website.Controllers
             Services = services;
         }
 
-
-        protected LayoutViewModel LayoutViewModel { get; private set; }
-
         protected IEnumerable<IService> Services { get; private set; }
-
-        public  ISettingService SettingService { get;  set; }
 
         protected internal ClaimsPrincipal CurrentClaimsIdentity { get; private set; }
 
