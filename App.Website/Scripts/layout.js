@@ -131,7 +131,7 @@ var layout = (function () {
     }
 
     my.BuildMainMenu = function () {
-        $("#main-nav > ul.dd-list").addClass("multi-level");
+        $("#main-nav > .main-nav-scroll > ul.dd-list").addClass("multi-level");
         $("#main-nav .dd-handle").remove();
         $("#main-nav .dd-list").removeClass("dd-list");
         $("#main-nav li").removeClass("dd-item").removeClass("dd3-item");

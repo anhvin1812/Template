@@ -148,13 +148,13 @@ namespace App.Repositories.NewsManagement
 
         public IEnumerable<News> GetRelatedNews(int newsId, int categoryId, int? maxRecords = 5)
         {
-            var result = GetPublicNews().Where(t => t.Id != newsId);
+            var result = GetPublicNews().Where(t => t.Id < newsId);
 
             result = result.Where(t => t.Categories.Any(c => c.Id == categoryId));
 
             if (maxRecords.HasValue)
             {
-                result = result.Take(maxRecords.Value);
+                result = result.OrderByDescending(t=>t.CreatedDate).Take(maxRecords.Value);
             }
 
             return result;

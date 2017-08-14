@@ -108,7 +108,6 @@ namespace App.Website.Controllers
             var now = DateTime.Now.Date;
 
             var startDateOfWeek = DateTimeExtension.GetMonday(now);
-            return Content(startDateOfWeek.ToString());
             var endDateOfWeek = startDateOfWeek.AddDays(6);
 
             var startDateOfMonth = new DateTime(now.Year, now.Month, 1);

@@ -71,7 +71,7 @@
 
 @Html.Action("Related", "Article", new {newsId = Model.Id, categoryId = category?.Id})
 
-@Html.Partial("_FacebookComment", shareUrl)
+@Html.Partial("_FacebookComment", Request?.Url.OriginalString)
 
 @section SideBar{
     @Html.Partial("_SideBar", new SideBar { CategoryId = category?.Id })

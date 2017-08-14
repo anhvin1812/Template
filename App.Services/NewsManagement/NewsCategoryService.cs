@@ -55,7 +55,7 @@ namespace App.Services.NewsManagement
 
                 while (true)
                 {
-                    currentCategory = allCategories.FirstOrDefault(x => x.ParentId == currentCategory.ParentId && currentCategory.ParentId != null);
+                    currentCategory = allCategories.FirstOrDefault(x => x.Id == currentCategory.ParentId && currentCategory.ParentId != null);
                     if (currentCategory != null)
                     {
                         entities.Insert(0, currentCategory);

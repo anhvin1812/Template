@@ -58,15 +58,15 @@ ul.reset {
 #main-nav{
 	float: left;
     position:relative;
-    padding-bottom:50px;
 }
+
 .menu-footer{
     position: absolute;
     bottom: 0;
     left:0;
     right:0;
     height: 40px;
-    
+    background: #202020;
     padding: 0 15px;
     a{
         cursor:pointer;
@@ -437,8 +437,12 @@ ul.multi-level {
     font-size: 16px;
     color: $textColor;
     *{
-        max-width: 100%;
+        max-width: 100% !important;
     }
+    table{
+        table-layout: fixed;
+    }
+
 }
 .post-meta{
 	li{

@@ -17,7 +17,7 @@ namespace App.Core.Extensions
             const int DAY = 24 * HOUR;
             const int MONTH = 30 * DAY;
 
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - dateTime.Ticks);
+            var ts = new TimeSpan(DateTime.Now.Ticks - dateTime.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 1 * MINUTE)

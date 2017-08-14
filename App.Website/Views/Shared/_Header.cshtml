@@ -12,21 +12,23 @@
             </div>
             <div class="nav-wrap">
                 <nav id="main-nav" class="hidden">
-                    @Html.Raw(Model.Menu)
-                    @*<ul class="multi-level">
-                            <li>
-                                <a href="#">Trang chủ</a>
-                            </li>
-                            <li>
-                                <a href="#">Tin tức</a>
-                                <ul>
-                                    <li><a href="#">Thời sự</a></li>
-                                    <li><a href="#">Thể thao</a></li>
-                                </ul>
-                            </li>
+                    <div class="main-nav-scroll">
+                        @Html.Raw(Model.Menu)
+                        @*<ul class="multi-level">
+                                <li>
+                                    <a href="#">Trang chủ</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tin tức</a>
+                                    <ul>
+                                        <li><a href="#">Thời sự</a></li>
+                                        <li><a href="#">Thể thao</a></li>
+                                    </ul>
+                                </li>
 
-                        </ul>*@
-                    <div class="menu-footer">
+                            </ul>*@
+                    </div>
+                    <div class="menu-footer hidden-lg hidden-md hidden-sm">
                         <a class="close-menu"><i class="fa fa-arrow-circle-left"></i></a>
                     </div>
                 </nav>

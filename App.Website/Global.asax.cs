@@ -25,7 +25,7 @@ namespace App.Website
 
             ModelBinders.Binders.DefaultBinder = new AppModelBinder();
 
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("vi-VN");
+            //System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
 
             //ExceptionHandlingConfig.RegisterExceptionHandler(GlobalConfiguration.Configuration);
 
