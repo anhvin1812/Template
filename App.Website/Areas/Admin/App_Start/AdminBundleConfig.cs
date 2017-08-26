@@ -53,7 +53,9 @@ namespace App.Website.Areas.Admin.App_Start
 
             bundles.Add(new ScriptBundle("~/Admin/Js/app").Include(
                       getPath("Scripts/js/app.min.js"),
-                      getPath("Scripts/App/common.js")));
+                      getPath("Scripts/App/common.js"),
+                      getPath("Scripts/App/modal.js")
+                      ));
 
             bundles.Add(new ScriptBundle("~/Admin/Js/dataTable").Include(
                       getPath("Scripts/datatables/jquery.dataTables.min.js"),
@@ -74,6 +76,7 @@ namespace App.Website.Areas.Admin.App_Start
                        getPath("Scripts/bootstrap/js/bootstrap.min.js")));
 
             bundles.Add(new StyleBundle("~/Admin/Content/css").Include(
+                      getPath("Scripts/jQueryUI/jquery-ui.min.css"),
                       getPath("Scripts/bootstrap/css/bootstrap.min.css"),
                       getPath("Scripts/select2/select2.min.css"),
                       getPath("Content/css/AdminLTE.min.css"),

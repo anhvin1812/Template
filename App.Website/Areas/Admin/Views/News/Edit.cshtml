@@ -35,6 +35,14 @@
     <div class="row">
         <div class="col-xs-12">
             @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "error-messages" })
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Success!</h4>
+                    @TempData["Message"]
+                </div>
+            }
         </div>
     </div>
 
@@ -133,7 +141,10 @@
 
     <div class="box-footer">
         <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
-        <a class="btn btn-default pull-right" href="@Url.Action("Index", "News")">Back to news</a>
+        <button id="btn-preview-news" type="button" class="btn btn-success" title="Preview" data-url="@Url.Action("Preview", "Article", new {area = ""})">
+            <i class="fa fa-eye"></i> Preview
+        </button>
+        <a class="btn btn-default pull-right" onclick="goBack()">Back to news</a>
     </div>
 
 }
@@ -143,14 +154,16 @@
 @section AddScripts{
     <!-- jQuery-validate -->
     @Scripts.Render("~/Admin/Js/jqueryval")
+    <!-- jQuery-ui -->
+    @Scripts.Render("~/Admin/Js/jqueryval")
     <!-- CKEditor. -->
     @Scripts.Render("~/ckeditor/ckeditor.js")
     <!-- Select2 -->
     @Scripts.Render("~/Areas/Admin/Scripts/select2/select2.full.min.js")
     <!-- Bootstrap-toggle -->
     @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
-    <!-- Product -->
-    @Scripts.Render("~/Admin/App/product")
+    <!-- News -->
+    @Scripts.Render("~/Areas/Admin/Scripts/App/news.js")
 
     <script type="text/javascript">
         jQuery(function ($) {

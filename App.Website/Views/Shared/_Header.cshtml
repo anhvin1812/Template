@@ -1,5 +1,6 @@
 ﻿
 @using App.Infrastructure.File
+@using Microsoft.Security.Application
 @model App.Services.Dtos.Settings.SettingDetail
 
 <header id="header" class="header">
@@ -7,7 +8,7 @@
         <div class="nav-holder clearfix">
             <div class="logo">
                 <a class="inner-logo" href="@Model.Website">
-                    <img class="img-responsive" src="@Url.Content(GalleryHelper.GetLogoPath(Model.Logo))" alt="Xứ nghệ">
+                    <img class="img-responsive" src="@Url.Content("~/Content/images/logo-top.png")" alt="Xứ nghệ">
                 </a>
             </div>
             <div class="nav-wrap">
@@ -28,8 +29,9 @@
 
                             </ul>*@
                     </div>
-                    <div class="menu-footer hidden-lg hidden-md hidden-sm">
-                        <a class="close-menu"><i class="fa fa-arrow-circle-left"></i></a>
+                    <div class="menu-title text-center hidden-lg hidden-md">
+                        <span>MENU</span>
+                        <a class="close-menu pull-right"> x </a>
                     </div>
                 </nav>
                 <div class="pull-left">
@@ -37,7 +39,7 @@
                         <i class="fa fa-search"></i>
                     </a>
                 </div>
-                <div class="pull-left hidden-sm hidden-md hidden-lg">
+                <div class="pull-left hidden-md hidden-lg">
                     <a id="btn-open-menu" class="menu-btn">
                         <i class="fa fa-reorder"></i>
                     </a>

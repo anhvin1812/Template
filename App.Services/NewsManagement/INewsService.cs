@@ -16,6 +16,8 @@ namespace App.Services.NewsManagement
         void Update(int id, NewsUpdateEntry entry);
         void Delete(int id);
 
+        PublicNewsDetail Preview(NewsUpdateEntry entry);
+
         #region Media type
         SelectListOptions GetMediaTypeOptionsForDropdownList();
         #endregion

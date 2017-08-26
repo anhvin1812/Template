@@ -110,6 +110,21 @@ namespace App.Infrastructure.File
         }
         #endregion
 
+        #region Utilities
+        public static string ToBase64String(this HttpPostedFileBase image)
+        {
+            if (image == null)
+                throw new ArgumentNullException(nameof(image), "File can not be null.");
+
+            using (var theReader = new BinaryReader(image.InputStream))
+            {
+                var bytes = theReader.ReadBytes(image.ContentLength);
+                var imageBase64 = Convert.ToBase64String(bytes);
+
+                return imageBase64;
+            }
+        }   
+        #endregion
 
         #region Private Methods
         private static Bitmap ResizeImage(Image originalImage, int newWidth, int newHeight)

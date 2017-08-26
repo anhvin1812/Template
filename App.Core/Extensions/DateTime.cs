@@ -36,7 +36,7 @@ namespace App.Core.Extensions
                 return ts.Hours + " giờ trước";
 
             if (delta < 48 * HOUR)
-                return "hôm qua";
+                return "Hôm qua";
 
             if (delta < 10 * DAY)
             {

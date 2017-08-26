@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using App.Services;
 using App.Services.Dtos.NewsManagement;
 using App.Services.NewsManagement;
@@ -24,7 +25,7 @@ namespace App.Website.Areas.Admin.Controllers
         public ActionResult Index(int? page = null, int? pageSize = null)
         {
             int? recordCount = 0;
-            var result = NewsCategoryService.GetAll(null, page, pageSize, ref recordCount);
+            var result = NewsCategoryService.GetAll(null, page, pageSize, ref recordCount).ToList();
 
             return View(result);
         }

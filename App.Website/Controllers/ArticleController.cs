@@ -18,12 +18,14 @@ namespace App.Website.Controllers
     {
         #region Contractor
         private IPublicNewsService PublicNewsService { get; set; }
+        private INewsService NewsService { get; set; }
         private INewsCategoryService NewsCategoryService { get; set; }
 
-        public ArticleController(IPublicNewsService publicNewsService, INewsCategoryService newsCategoryService)
+        public ArticleController(IPublicNewsService publicNewsService, INewsService newsService, INewsCategoryService newsCategoryService)
             :base(new IService[]{ publicNewsService })
         {
             PublicNewsService = publicNewsService;
+            NewsService = newsService;
             NewsCategoryService = newsCategoryService;
         }
         #endregion
@@ -59,6 +61,18 @@ namespace App.Website.Controllers
             ViewBag.SocialMetaTags = model;
 
             return View(model);
+        }
+
+        [LayoutActionFilter]
+        public ActionResult Preview(NewsUpdateEntry entry)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = NewsService.Preview(entry);
+                return View(model);
+            }
+
+            return Content("");
         }
 
 
@@ -188,6 +202,7 @@ namespace App.Website.Controllers
                 if (isDisposing)
                 {
                     PublicNewsService = null;
+                    NewsService = null;
                     NewsCategoryService = null;
                 }
                 _disposed = true;

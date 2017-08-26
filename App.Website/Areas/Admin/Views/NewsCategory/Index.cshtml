@@ -1,5 +1,6 @@
 ﻿@using System.Web.Optimization
-@model IEnumerable<App.Services.Dtos.NewsManagement.NewsCategorySummary>
+@using App.Services.Dtos.NewsManagement
+@model List<App.Services.Dtos.NewsManagement.NewsCategorySummary>
 @{
     ViewBag.Title = "News Categories";
 }
@@ -39,20 +40,58 @@
                     <th>Disabled</th>
                     <th></th>
                 </tr>
-                @foreach (var m in Model)
-                {
-                    <tr>
-                        <td>@m.Name</td>
-                        <td>@m.Description</td>
-                        <td>@m.IsDisabled</td>
-                        <td>
-                            <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "NewsCategory", new {id = m.Id})">
-                                <i class="fa fa-fw fa-pencil"></i> Edit
-                            </a>
-                        </td>
-                    </tr>
-                }
 
+                @{
+                    var shownCategoryIds = new List<int>();
+                    var rootCategories = Model.Where(x => x.ParentId == null).ToList();
+
+                    for (var i = 0; i < rootCategories.Count(); i++)
+                    {
+                        var m = rootCategories[i];
+
+                        <tr>
+                            <td><a target="_blank" href="@Url.Action("Category","Article", new {id = m.Id, area = ""})">@m.Name</a></td>
+                            <td>@m.Description</td>
+                            <td>@m.IsDisabled</td>
+                            <td>
+                                <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "NewsCategory", new {id = m.Id})">
+                                    <i class="fa fa-fw fa-pencil"></i> Edit
+                                </a>
+                            </td>
+                        </tr>
+
+                        var strSubCate = "";
+                        var currentParent = m;
+                        while (currentParent != null)
+                        {
+                            var firstChild = Model.FirstOrDefault(x => x.ParentId == currentParent.Id && !shownCategoryIds.Contains(x.Id));
+                            if (firstChild != null)
+                            {
+
+                                strSubCate = strSubCate + "——";
+                                <tr>
+                                    <td><a target="_blank" href="@Url.Action("Category","Article", new {id = m.Id, area = ""})">@Html.Raw($"{strSubCate} {firstChild.Name}")</a></td>
+                                    <td>@firstChild.Description</td>
+                                    <td>@firstChild.IsDisabled</td>
+                                    <td>
+                                        <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "NewsCategory", new {id = firstChild.Id})">
+                                            <i class="fa fa-fw fa-pencil"></i> Edit
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                currentParent = firstChild;
+                                shownCategoryIds.Add(firstChild.Id);
+
+                            }
+                            else
+                            {
+                                strSubCate = strSubCate.Replace("——", "");
+                                currentParent = Model.FirstOrDefault(x => x.Id == currentParent.ParentId);
+                            }
+                        }
+                    }
+                }
             </table>
         }
         

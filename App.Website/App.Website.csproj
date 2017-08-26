@@ -325,9 +325,11 @@
     <Content Include="Areas\Admin\Content\Images\user6-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user7-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user8-128x128.jpg" />
+    <Content Include="Areas\Admin\Scripts\App\modal.js" />
     <Content Include="Areas\Admin\Scripts\App\common.js" />
     <Content Include="Areas\Admin\Scripts\App\homepageLayout.js" />
     <Content Include="Areas\Admin\Scripts\App\menu.js" />
+    <Content Include="Areas\Admin\Scripts\App\news.js" />
     <Content Include="Areas\Admin\Scripts\App\product.js" />
     <Content Include="Areas\Admin\Scripts\bootstrap-toggle\bootstrap-toggle.min.css" />
     <Content Include="Areas\Admin\Scripts\bootstrap-toggle\bootstrap-toggle.min.js" />
@@ -335,6 +337,7 @@
     <Content Include="Areas\Admin\Scripts\fastselect\fastselect.standalone.min.js" />
     <Content Include="Areas\Admin\Scripts\jQuery-validate\jquery.validate.js" />
     <Content Include="Areas\Admin\Scripts\jQuery-validate\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\Admin\Scripts\jQueryUI\jquery-ui.min.css" />
     <Content Include="Areas\Admin\Scripts\nestable\jquery.nestable.js" />
     <Content Include="Areas\Admin\Views\Shared\index.html" />
     <Content Include="Areas\Admin\product.html" />
@@ -1421,8 +1424,16 @@
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\css\site.min.css" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300.svg" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300italic.svg" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500.svg" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500italic.svg" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700.svg" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700italic.svg" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-italic.svg" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-regular.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\fonts\fonts.css" />
+    <Content Include="Content\css\fonts.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\robotocondensed-bold-webfont.svg" />
     <Content Include="Content\fonts\robotocondensed-light-webfont.svg" />
@@ -1444,6 +1455,7 @@
     <Content Include="Content\images\img-06.jpg" />
     <Content Include="Content\images\instagram-footer.png" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logo-top.png" />
     <Content Include="Content\images\pinterest-footer.png" />
     <Content Include="Content\images\product-10-270x270.png" />
     <Content Include="Content\images\product-31-270x270.png" />
@@ -1620,6 +1632,38 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="Content\fonts\fira-sans-v7-latin-300.eot" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300.ttf" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300.woff" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300.woff2" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300italic.eot" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300italic.ttf" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300italic.woff" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-300italic.woff2" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500.eot" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500.ttf" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500.woff" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500.woff2" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500italic.eot" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500italic.ttf" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500italic.woff" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-500italic.woff2" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700.eot" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700.ttf" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700.woff" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700.woff2" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700italic.eot" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700italic.ttf" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700italic.woff" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-700italic.woff2" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-italic.eot" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-italic.ttf" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-italic.woff" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-italic.woff2" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-regular.eot" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-regular.ttf" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-regular.woff" />
+    <Content Include="Content\fonts\fira-sans-v7-latin-regular.woff2" />
     <None Include="Properties\DefaultSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>DefaultSettings.Designer.cs</LastGenOutput>
@@ -1732,6 +1776,9 @@
     <Content Include="Views\Article\_TopViewSideBar.cshtml" />
     <Content Include="Views\Article\_ListHorizontal.cshtml" />
     <Content Include="Views\Article\_CategoriesSideBar.cshtml" />
+    <Content Include="Views\Shared\_AfterBodySection.cshtml" />
+    <Content Include="Views\Article\Preview.cshtml" />
+    <Content Include="Views\Shared\_LayoutPreview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

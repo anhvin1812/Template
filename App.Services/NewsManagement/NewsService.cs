@@ -279,6 +279,45 @@ namespace App.Services.NewsManagement
             Save();
         }
 
+        public PublicNewsDetail Preview(NewsUpdateEntry entry)
+        {
+            var detail = new PublicNewsDetail
+            {
+                Id = entry.Id,
+                Title = entry.Title,
+                Description = entry.Description,
+                Content = entry.Content,
+                MediaTypeId = entry.MediaTypeId,
+                PublishedDate = DateTime.Now,
+                Views = 0,
+                
+            };
+            if (entry.Image != null)
+                detail.Image = entry.Image.ToBase64String();
+
+            if (entry.CategoryIds != null && entry.CategoryIds.Any())
+            {
+                var categories = NewsCategoryRepository.GetByIds(entry.CategoryIds).ToList();
+                detail.Categories = categories.Select(x => new PublicCategorySummary
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToList();
+            }
+
+            if (entry.TagIds != null && entry.TagIds.Any())
+            {
+                var tags = TagRepository.GetByIds(entry.TagIds).ToList();
+                detail.Tags = tags.Select(x => new PublicTagSummary
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToList();
+            }
+
+            return detail;
+        }
+
         #region Status
 
         public SelectListOptions GetStatusOptionsForDropdownList()

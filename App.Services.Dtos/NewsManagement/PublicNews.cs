@@ -29,6 +29,12 @@ namespace App.Services.Dtos.NewsManagement
 
     public class PublicNewsDetail : DtoBase
     {
+        public PublicNewsDetail()
+        {
+            Categories = new List<PublicCategorySummary>();
+            Tags = new List<PublicTagSummary>();
+        }
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }

@@ -97,7 +97,7 @@
                 @foreach (var m in Model)
                 {
                     <tr>
-                        <td class="vertical-middle">@m.Title</td>
+                        <td class="vertical-middle"><a target="_blank" href="@Url.Action("Detail", "Article", new {id = m.Id, area = ""})">@m.Title</a></td>
                         <td>
                             <span class="label label-info">@m.Status</span>
                             @if (m.IsHot)

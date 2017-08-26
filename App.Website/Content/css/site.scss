@@ -1,9 +1,12 @@
 $colorLight: #999;
 $textColor: #555;
 $colorGreen: #129793;
+$colorOlive: #3d9970;
 $colorRed: #dc4a29;
 $colorDark: #333;
 $fontFiraSans : "Fira Sans", sans-serif;
+$fontRoboto : "Roboto", sans-serif;
+
 
 *,*:after, *:before{
 	transition: all 0.2s ease-in-out 0s;
@@ -11,14 +14,14 @@ $fontFiraSans : "Fira Sans", sans-serif;
 body{
 	background: #f3f3f3;
     color: $textColor;
-    font-family: "Roboto",sans-serif;
+    font-family: $fontRoboto;
 }
 a{
 	color:$textColor;
 }
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
 	color: #2c2d30;
-    font-family: "Fira Sans",sans-serif;
+    font-family: $fontFiraSans;
     line-height: 1.2;
     margin: 0 0 15px;
     text-transform: initial;
@@ -39,19 +42,25 @@ ul.reset {
 	right: 0;
 }
 .header{
-	background: #2c2d30 ;
+	background: #2c2d30;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:50;
 	.logo{
 		float: left;
-		padding: 10px 0;
+		padding: 4px 0;
 		.inner-logo{
 			display: block;
 			img{
-				height: 56px; 
-				max-width: 215px;
+				height: 40px; 
+				max-width: 120px;
 			}
 		}
 	}	
 }
+
 .nav-wrap{
 	float: right;
 }
@@ -60,19 +69,22 @@ ul.reset {
     position:relative;
 }
 
-.menu-footer{
+.menu-title{
     position: absolute;
-    bottom: 0;
+    top: 0;
     left:0;
     right:0;
     height: 40px;
-    background: #202020;
+    line-height:40px;
+    color: #fff;
     padding: 0 15px;
-    a{
+    a.close-menu{
         cursor:pointer;
-        color: #fff;
+        color: $colorRed;
         font-size: 21px;
-        line-height: 40px;
+    }
+    a:hover{
+        text-decoration: none;
     }
 }
 ul.multi-level {
@@ -81,13 +93,18 @@ ul.multi-level {
     > li {
         float: left;
         a {
-            padding: 28px 15px;
-			font-size: 16px;
+            padding: 15px 11px;
+			font-size: 14px;
         }
-
         &.active > a,
         & > a:hover {
             color: #dc4a29;
+        }
+        > a{
+            border-right: 1px solid #666;
+            >i{
+                font-size: 16px;
+            }
         }
     }
 	li{
@@ -147,7 +164,7 @@ ul.multi-level {
     color: #fff;
     display: block;
     font-size: 16px;
-    padding: 28px 15px;
+    padding: 12px 15px;
 	cursor: pointer;
 	&.open,
 	&:hover,
@@ -195,6 +212,11 @@ ul.multi-level {
 		z-index: 9
 	}
 }
+
+main{
+    margin:65px 0 0;
+}
+
 
 /* Highlight */
 .module-highlight{
@@ -318,7 +340,6 @@ ul.multi-level {
 		text-align: left;
 		text-transform: capitalize;
 		text-decoration: none;
-		z-index: 100;
 		&:before{
 			background: $colorRed;
 			content: "";
@@ -439,6 +460,9 @@ ul.multi-level {
     *{
         max-width: 100% !important;
     }
+    img{
+        height: auto !important;
+    }
     table{
         table-layout: fixed;
     }
@@ -468,9 +492,11 @@ ul.multi-level {
 			overflow: hidden;
 		}
 	}
-	> li:last-child{
-		margin-bottom: 0;
+    > li:last-child{
 	}
+    > li.see-more{
+        text-align: right;
+    }
 }
 .cat-listing{
 
@@ -616,6 +642,9 @@ ul.list-posts{
 	p{
 		margin-bottom: 20px;
 	}
+}
+.modal .post-info{
+    padding: 15px;
 }
 ul.social-share{
 	li{
@@ -838,8 +867,19 @@ ul.post-tags {
 	color:$colorRed
 }
 
-/* Quick css */
+/* custom controls */
+.btn-see-more{
+    background: $colorOlive;
+    border-radius: 0;
+    color: #fff;
+}
+.btn-see-more:hover{
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.2) inset;
+    color: #fff;
+}
 
+
+/* Quick css */
 .m0{
 	margin: 0;
 }

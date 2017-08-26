@@ -34,7 +34,7 @@ var menu = (function () {
                 editForm.remove();
             } else {
                 var html = $(my.EditForm);
-                var label = item.find("> .dd3-content > .item-label:first").text();
+                var label = item.find("> .dd3-content > .item-label:first").html();
                 var url = item.find("> .dd3-content:first").attr("href");
 
                 html.insertAfter(item.find("> .dd3-content:first"));
@@ -49,7 +49,7 @@ var menu = (function () {
         // Update label
         my.WrapMenu.on("keyup", ".txt-item-label", function () {
             var value = $(this).val();
-            $(this).closest("li.dd-item").find("> .dd3-content > .item-label:first").text(value);
+            $(this).closest("li.dd-item").find("> .dd3-content > .item-label:first").html(value);
         });
 
         // Update label

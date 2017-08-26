@@ -36,9 +36,8 @@ namespace App.Website.Areas.Admin.Controllers
         #endregion
 
 
-        public ActionResult Index(string keyword, int? categoryId = null, int? statusId = null, int? mediaTypeId = null, bool? hot = null, bool? featured = null, int? page = null, int? pageSize = null)
+        public ActionResult Index(string keyword, int? categoryId = null, int? statusId = null, int? mediaTypeId = null, bool? hot = null, bool? featured = null, int? page = 1, int? pageSize = 15)
         {
-            pageSize = 15;
             int? recordCount = 0;
             var result = NewsService.GetAll(keyword, categoryId, statusId, mediaTypeId, hot, featured, page, pageSize, ref recordCount);
 
@@ -137,10 +136,22 @@ namespace App.Website.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 NewsService.Update(id, entry);
-                return RedirectToAction("Index");
+                TempData["Message"] = "Saved successfully.";
+                return RedirectToAction("Edit", new {id = id});
             }
 
             return View(entry);
+        }
+
+        public ActionResult Preview(NewsUpdateEntry entry)
+        {
+            if (ModelState.IsValid)
+            {
+                var model = NewsService.Preview(entry);
+                return View("~/Views/Article/Detail.cshtml", model: model, masterName: "~/Views/Shared/_Layout.cshtml");
+            }
+
+            return Content("");
         }
 
         public ActionResult Delete(int id)
