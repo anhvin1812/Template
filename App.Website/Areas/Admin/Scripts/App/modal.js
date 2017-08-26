@@ -38,6 +38,12 @@ var modal = (function () {
         }
 
         if (options.resizable) {
+            var instance = modalContent.resizable("instance");
+
+            if (instance !== "undefined" && instance != null) {
+                modalContent.resizable("destroy");
+            }
+
             modalContent.resizable({
                 //alsoResize: ".modal-dialog",
                 minHeight: 480,
@@ -45,10 +51,10 @@ var modal = (function () {
                 maxWidth: 920
             });
 
-            //destroy resizable
-            $(options.modalTarget).on("hidden.bs.modal", function (e) {
-                modalContent.resizable("destroy");
-            });
+            ////destroy resizable
+            //$(options.modalTarget).on("hidden.bs.modal", function (e) {
+            //    modalContent.resizable("destroy");
+            //});
         }
 
         if (options.draggable) {
@@ -80,7 +86,7 @@ var modal = (function () {
             url: options.url,
             method: options.method,
             data: options.data,
-            dataType: "html",
+            async: false,
             beforeSend: function(xhr) {}
         }).fail(function(jqXHR, textStatus, errorThrown) {
             addContent(options, errorThrown);

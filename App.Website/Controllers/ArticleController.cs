@@ -63,7 +63,6 @@ namespace App.Website.Controllers
             return View(model);
         }
 
-        [LayoutActionFilter]
         public ActionResult Preview(NewsUpdateEntry entry)
         {
             if (ModelState.IsValid)

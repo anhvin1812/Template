@@ -287,6 +287,7 @@ namespace App.Services.NewsManagement
                 Title = entry.Title,
                 Description = entry.Description,
                 Content = entry.Content,
+                Image = entry.Thumbnail,
                 MediaTypeId = entry.MediaTypeId,
                 PublishedDate = DateTime.Now,
                 Views = 0,

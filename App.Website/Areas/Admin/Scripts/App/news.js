@@ -15,7 +15,8 @@ var news = (function () {
             form.submit(function (event) {
                 event.preventDefault();
                 if ($(this).valid()) {
-                    entry = form.serialize();
+                    entry = $(this).serialize();
+                    //entry = new FormData(this);
                 }
             });
 
@@ -24,7 +25,7 @@ var news = (function () {
             if (entry == null) {
                 return;
             }
-            
+           
             var options = {
                 modalTarget: "#modal-preview",
                 url: $(this).data("url"),
@@ -38,6 +39,10 @@ var news = (function () {
 
             // remove submit event
             form.unbind("submit");
+
+            //show news image
+            var imagePath = $("#previewFeaturedImage > img").attr("src");
+            $("#modal-preview .img-holder > img").attr("src", imagePath);
         });
 
         
