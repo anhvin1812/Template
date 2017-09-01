@@ -33,7 +33,7 @@ namespace App.Repositories.NewsManagement
 
         IEnumerable<News> GetMostViews(DateTime? startDate = null, DateTime? endDate = null, int? maxRecords = 5);
 
-        IEnumerable<News> GetAllPublicNews(string keyword, DateTime? startDate, DateTime? endDate, int? categoryId, int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<News> GetAllPublicNews(string keyword, DateTime? startDate, DateTime? endDate, int? categoryId, int? tagId, int? page, int? pageSize, ref int? recordCount);
 
         #endregion
     }

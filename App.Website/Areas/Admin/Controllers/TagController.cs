@@ -1,8 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using App.Services;
+using App.Services.Dtos.Common;
 using App.Services.Dtos.NewsManagement;
 using App.Services.NewsManagement;
 using App.Website.Fillters;
+using Microsoft.Ajax.Utilities;
+using PagedList;
 
 namespace App.Website.Areas.Admin.Controllers
 {
@@ -21,12 +25,14 @@ namespace App.Website.Areas.Admin.Controllers
         #endregion
 
 
-        public ActionResult Index(int? page = null, int? pageSize = null)
+        public ActionResult Index(string keyword, bool? isDisabled = null, int? page = 1, int? pageSize = 15)
         {
             int? recordCount = 0;
-            var result = TagService.GetAll(page, pageSize, ref recordCount);
+            var result = TagService.GetAll(keyword, isDisabled, page, pageSize, ref recordCount);
+            var pagedTags = new StaticPagedList<TagSummary>(result, (int)page, (int)pageSize, (int)recordCount);
 
-            return View(result);
+            ViewBag.Keyword = keyword;
+            return View(pagedTags);
         }
 
         public ActionResult Create()
@@ -73,6 +79,31 @@ namespace App.Website.Areas.Admin.Controllers
         {
             return View();
         }
+
+        #region Json result
+        public ActionResult TagsIn(string query,  string ids)
+        {
+            if (!ids.IsNullOrWhiteSpace())
+            {
+                var results = TagService.GetByStringIds(ids, false).Select(x => new
+                {
+                    id = x.Id,
+                    text = x.Name
+                });
+
+                return Json(new SuccessResult(results), JsonRequestBehavior.AllowGet);
+            }
+
+            int? recordCount = 0;
+            var result = TagService.GetAll(query, false, 1, 10, ref recordCount).Select( x=> new
+                {
+                    id= x.Id,
+                    text = x.Name
+                });
+
+            return Json(new SuccessResult(result), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
 
         #region Dispose
         private bool _disposed;

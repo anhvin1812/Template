@@ -1,0 +1,41 @@
+﻿ @using App.Infrastructure.File 
+@model App.Services.Dtos.NewsManagement.PublicNewsDetail
+
+@{
+    var url = Request?.Url.OriginalString;
+    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetImagePath(Model.Thumbnail))).OriginalString;
+    var tags = string.Join(",", Model.Tags.Select(x => x.Name));
+}
+
+<meta name="description" content="Tin tức Xứ Nghệ mới nhất được cập nhật hàng giờ. Tin tức Xứ Nghệ về xã hội, kinh doanh, pháp luật, khoa học, công nghệ, sức khoẻ, đời sống, văn hóa, rao vặt, tâm sự...">
+<meta name="keywords" content="Xứ Nghệ,Nghệ Tĩnh 24h,Nghệ An,Hà Tĩnh,Vinh,Sông Lam Nghệ An,Tin nhanh,cập nhật,báo điện tử,việt báo,tin việt,VietNews,mua bán,rao vặt,tư vấn,việc làm,Hà Nội,Sài Gòn,tin tức,Huế,Đà Nẵng,VDC,Netnam,Saigonnet,Sggp,VET,Nhân dân,Lao động,Kinh tế,Kinh doanh,Tin nhanh,cap nhat,bao dien tu,Vietbao,TinViet,Mua Ban,Rao Vat,Tu Van,Viec Lam,Hanoi,Ha Noi,Saigon,Sai gon,Tin tuc,Tintuc,Hue,Da Nang,Danang,Nhandan,Nhan dan,Laodong,Lao dong,Kinhte,Kinh te,Kinhdoanh,Kinh doanh">
+
+<!-- Place this data between the <head> tags of your website -->
+<meta name="description" content="@Model.Description" />
+
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="@Model.Title">
+<meta itemprop="description" content="@Model.Description">
+<meta itemprop="image" content="@image">
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="Nghệ Tĩnh 24h">
+<meta name="twitter:title" content="@Model.Title">
+<meta name="twitter:description" content="@Model.Description">
+<meta name="twitter:creator" content="@Model.CreatedBy">
+<!-- Twitter summary card with large image must be at least 280x150px -->
+<meta name="twitter:image:src" content="@image">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="@Model.Title" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="@url" />
+<meta property="og:image" content="@image" />
+<meta property="og:description" content="@Model.Description" />
+<meta property="og:site_name" content="Xứ Nghệ 24h" />
+<meta property="article:published_time" content="@Model.PublishedDate.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
+<meta property="article:modified_time" content="@Model.PublishedDate.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
+<meta property="article:section" content="Xứ Nghệ" />
+<meta property="article:tag" content="@tags" />
+<meta property="fb:admins" content="105735046784078" /> 

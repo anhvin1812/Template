@@ -16,9 +16,19 @@ namespace App.Repositories.NewsManagement
         {
         }
 
-        public IEnumerable<Tag> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<Tag> GetAll(string keyword, bool? isDisabled, int? page, int? pageSize, ref int? recordCount)
         {
             var result = DatabaseContext.Get<Tag>();
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                result = result.Where(t => t.Name.Contains(keyword));
+            }
+
+            if (isDisabled.HasValue)
+            {
+                result = isDisabled == true ? result.Where(t => t.IsDisabled == true) : result.Where(t=>t.IsDisabled != true);
+            }
 
             if (recordCount != null)
             {
@@ -33,9 +43,16 @@ namespace App.Repositories.NewsManagement
             return result;
         }
 
-        public IEnumerable<NewsCategory> GetByParentId(int? parentId)
+        public IEnumerable<Tag> GetMostUsedTags(bool? isDisabled = null, int maxRecords = 10)
         {
-            var result = DatabaseContext.Get<NewsCategory>().Where(t=>t.ParentId == parentId);
+            var result = DatabaseContext.Get<Tag>();
+
+            if (isDisabled.HasValue)
+            {
+                result = isDisabled == true ? result.Where(t => t.IsDisabled == true) : result.Where(t => t.IsDisabled != true);
+            }
+
+            result = result.OrderByDescending(t => t.Newses.Count).Take(maxRecords);
 
             return result;
         }

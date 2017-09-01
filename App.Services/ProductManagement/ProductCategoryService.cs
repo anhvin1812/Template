@@ -198,7 +198,7 @@ namespace App.Services.ProductManagement
             {
                 var violations = new List<ErrorExtraInfo>
                 {
-                    new ErrorExtraInfo {Code = ErrorCodeType.RoleIsNotExsted}
+                    new ErrorExtraInfo {Code = ErrorCodeType.RoleIsNotExisted}
                 };
                 throw new ValidationError(violations);
             }

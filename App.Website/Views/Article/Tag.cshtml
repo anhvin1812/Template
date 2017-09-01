@@ -1,0 +1,24 @@
+﻿@using App.Services.Dtos.Layout
+@using App.Services.Dtos.NewsManagement
+@using PagedList.Mvc
+
+@model ArticleTag
+
+@{
+    var tag = Model.Tag;
+    ViewBag.Title = tag.Name;
+}
+
+
+@section FullContent{
+    @Html.Partial("_Breadcrumb", new Breadcrumb { Title = tag.Name, Tag = tag })
+}
+
+<!-- List posts -->
+@Html.Partial("_ListHorizontal", Model.PagedNews)
+
+@Html.PagedListPager(Model.PagedNews, page => Url.Action("Tag", "Article", new { id = tag.Id, tag = tag.Name, page = page }), new PagedListRenderOptions { ContainerDivClasses = new[] { "mb30" } })
+
+@section SideBar{
+    @Html.Partial("_SideBar", new SideBar())
+}

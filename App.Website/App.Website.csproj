@@ -325,6 +325,7 @@
     <Content Include="Areas\Admin\Content\Images\user6-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user7-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user8-128x128.jpg" />
+    <Content Include="Areas\Admin\Scripts\App\select2.js" />
     <Content Include="Areas\Admin\Scripts\App\modal.js" />
     <Content Include="Areas\Admin\Scripts\App\common.js" />
     <Content Include="Areas\Admin\Scripts\App\homepageLayout.js" />
@@ -1779,6 +1780,7 @@
     <Content Include="Views\Shared\_AfterBodySection.cshtml" />
     <Content Include="Views\Article\Preview.cshtml" />
     <Content Include="Views\Shared\_LayoutPreview.cshtml" />
+    <Content Include="Views\Article\Tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

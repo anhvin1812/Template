@@ -66,12 +66,10 @@ namespace App.Website.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
-            var tagOptions = TagService.GetOptionsForDropdownList(false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
             var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 
             ViewBag.Categories = new MultiSelectList(categoryOptions.Items, categoryOptions.DataValueField, categoryOptions.DataTextField);
-            ViewBag.Tags = new MultiSelectList(tagOptions.Items, tagOptions.DataValueField, tagOptions.DataTextField);
             ViewBag.Status = new SelectList(statusOptions.Items, statusOptions.DataValueField, statusOptions.DataTextField);
             ViewBag.MediaTypes = new SelectList(mediaTypeOptions.Items, mediaTypeOptions.DataValueField, mediaTypeOptions.DataTextField);
 
@@ -84,7 +82,7 @@ namespace App.Website.Areas.Admin.Controllers
         public ActionResult Create(NewsEntry entry)
         {
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
-            var tagOptions = TagService.GetOptionsForDropdownList(false);
+            var tagOptions = TagService.GetOptionsForDropdownList(entry.TagIds, false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
             var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 
@@ -106,7 +104,7 @@ namespace App.Website.Areas.Admin.Controllers
         {
             var model = NewsService.GetEntryForEditing(id);
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
-            var tagOptions = TagService.GetOptionsForDropdownList(false);
+            var tagOptions = TagService.GetOptionsForDropdownList(model.TagIds, false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
             var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 
@@ -124,7 +122,7 @@ namespace App.Website.Areas.Admin.Controllers
         public ActionResult Edit(int id, NewsUpdateEntry entry)
         {
             var categoryOptions = NewsCategoryService.GetOptionsForDropdownList(null, null, false);
-            var tagOptions = TagService.GetOptionsForDropdownList(false);
+            var tagOptions = TagService.GetOptionsForDropdownList(entry.TagIds, false);
             var statusOptions = NewsService.GetStatusOptionsForDropdownList();
             var mediaTypeOptions = NewsService.GetMediaTypeOptionsForDropdownList();
 

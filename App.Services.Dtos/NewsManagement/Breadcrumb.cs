@@ -8,5 +8,6 @@ namespace App.Services.Dtos.NewsManagement
     {
         public string Title { get; set; }
         public IEnumerable<NewsCategorySummary> Categories { get; set; }
+        public TagSummary Tag { get; set; }
     }
 }

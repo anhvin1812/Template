@@ -1,0 +1,169 @@
+﻿@using System.Web.Optimization
+@using App.Core.Permission
+@using App.Infrastructure.File
+@model App.Services.Dtos.NewsManagement.NewsEntry
+@{
+    ViewBag.Title = "Create News";
+}
+
+@section AddStyles{
+    <!-- Bootstrap-toggle -->
+    @Styles.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.css")
+}
+
+@section ContentHeader
+{
+    <section class="content-header">
+        <h1>
+            News Management
+            <small>add</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li>News Management</li>
+            <li class="active">News</li>
+        </ol>
+    </section>
+}
+
+
+@using (Html.BeginForm("Create", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    var toggleAttributes = new { data_toggle = "toggle", data_onstyle = "success", data_on = "Yes", data_off = "No" };
+
+    <div class="row">
+        <div class="col-xs-12">
+            @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "validation-messages" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">General information</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title)
+                        @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Enter title" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Description)
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", placeholder = "Enter description" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CategoryIds, "Categories")
+                        @Html.ListBoxFor(m => m.CategoryIds, (MultiSelectList)ViewBag.Categories, new { @class = "form-control select2", data_placeholder = "Select categories", style = "width: 100%;" })
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Content</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        @Html.TextAreaFor(x => x.Content, new { id = "txtContent" })
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+
+        <div class="col-md-4">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Featured image</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <div id="wrapperUploadFeaturedImage" class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-success btn-sm btn-file">
+                                    <i class="fa fa-folder-open-o"></i> Browse...
+                                    @Html.TextBoxFor(x => x.Image, new { type = "file", @class="input-file-single", data_preview= "previewFeaturedImage" })
+                                </span>
+                            </span>
+                            <input type="text" readonly="readonly" class="form-control input-sm input-file">
+                        </div><!-- /input-group -->
+                    </div>
+                    <div id="previewFeaturedImage">
+                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(string.Empty))" class="img-responsive" style="max-height:200px; max-width:90%">
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Options</h3>
+                </div>
+                <div class="box-body">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                @Html.Label("Featured", new {@class = "control-label"}) &nbsp;&nbsp;&nbsp;
+                                @Html.CheckBoxFor(m => m.IsFeatured, toggleAttributes)
+                            </div>
+                            <div class="col-xs-6">
+                                @Html.Label("Hot", new {@class = "control-label"}) &nbsp;&nbsp;&nbsp;
+                                @Html.CheckBoxFor(m => m.IsHot, toggleAttributes)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Media Type")
+                        @Html.DropDownListFor(m => m.MediaTypeId, (SelectList)ViewBag.MediaTypes, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Status")
+                        @Html.DropDownListFor(m => m.StatusId, (SelectList) ViewBag.Status, new {@class = "form-control"})
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Tags")
+                        @Html.ListBoxFor(m => m.TagIds, (MultiSelectList)ViewBag.Tags, new { @class = "form-control select2", multiple = "multiple", data_placeholder = "Select tags", style = "width: 100%;" })
+                    </div>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </div>
+
+
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+        <button id="btn-preview-news" type="button" class="btn btn-success" title="Preview" data-url="@Url.Action("Preview", "Article", new {area = ""})">
+            <i class="fa fa-eye"></i> Preview
+        </button>
+        <a class="btn btn-default pull-right" onclick="goBack()">Back to news</a>
+    </div>
+
+}
+
+
+
+@section AddScripts{
+    <!-- jQuery-validate -->
+    @Scripts.Render("~/Admin/Js/jqueryval")
+    <!-- CKEditor. -->
+    @Scripts.Render("~/ckeditor/ckeditor.js")
+    <!-- Select2 -->
+    @Scripts.Render("~/Areas/Admin/Scripts/select2/select2.full.min.js")
+    <!-- Bootstrap-toggle -->
+    @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
+    <!-- News -->
+    @Scripts.Render("~/Areas/Admin/Scripts/App/news.js")
+    
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            // CKeditor
+            CKEDITOR.replace('txtContent');
+
+            // Select2
+            $(".select2").select2();
+        });
+    </script>
+}
+

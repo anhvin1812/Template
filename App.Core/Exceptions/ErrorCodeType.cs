@@ -19,7 +19,7 @@ namespace App.Core.Exceptions
         // Role
         InvalidRoleName = 20,
         RoleNameIsUsed = 21,
-        RoleIsNotExsted = 22,
+        RoleIsNotExisted = 22,
 
         // Product
         InvalidProductCategoryName = 30,
@@ -35,6 +35,8 @@ namespace App.Core.Exceptions
         NewsCategoryIsEmpty = 201,
         EmptyImage = 202,
         NewsStatusIsNotExisted = 203,
+        NewsCategoryIsExisted = 204,
+        NewsCategoryNotFound = 205,
 
         // Tag
         TagNameIsExisted = 300,

@@ -1,0 +1,66 @@
+﻿
+@using App.Infrastructure.File
+@using Microsoft.Security.Application
+@model App.Services.Dtos.Settings.SettingDetail
+
+<header id="header" class="header">
+    <div class="container">
+        <div class="nav-holder clearfix">
+            <div class="logo">
+                <a class="inner-logo" href="@Model.Website">
+                    <img class="img-responsive" src="@Url.Content("~/Content/images/logo-top.png")" alt="Xứ nghệ">
+                </a>
+            </div>
+            <div class="nav-wrap">
+                <nav id="main-nav" class="hidden">
+                    <div class="main-nav-scroll">
+                        @Html.Raw(Model.Menu)
+                        @*<ul class="multi-level">
+                                <li>
+                                    <a href="#">Trang chủ</a>
+                                </li>
+                                <li>
+                                    <a href="#">Tin tức</a>
+                                    <ul>
+                                        <li><a href="#">Thời sự</a></li>
+                                        <li><a href="#">Thể thao</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>*@
+                    </div>
+                    <div class="menu-title text-center hidden-lg hidden-md">
+                        <span>MENU</span>
+                        <a class="close-menu pull-right"> x </a>
+                    </div>
+                </nav>
+                <div class="pull-left">
+                    <a id="btn-open-search" class="menu-btn">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </div>
+                <div class="pull-left hidden-md hidden-lg">
+                    <a id="btn-open-menu" class="menu-btn">
+                        <i class="fa fa-reorder"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="search-form" class="">
+        @using (Html.BeginForm("Index", "Article", FormMethod.Get))
+        {
+            <div class="input-group search-box">
+                <span class="input-group-addon">
+                    <button type="submit">
+                        <span class="fa fa-search"></span>
+                    </button>
+                </span>
+                <input id="txt-search" name="keyword" type="text" class="form-control txt-search" placeholder="Nhập từ khóa & Enter">
+                <button class="btn-search-clear hide" type="button">
+                    <span class="fa fa-close"></span>
+                </button>
+            </div>
+        }
+        </div>
+    </div>
+</header>

@@ -1,0 +1,28 @@
+﻿@model App.Services.Dtos.Layout.SideBar
+
+@Html.Action("CategoriesSideBar", "Article", new { categoryId = Model.CategoryId })
+
+
+@Html.Action("TopViewSideBar", "Article")
+
+
+<div class="side-widget bg-white light-shadow">
+    <div class="primary-heading">
+        <a>Xem Theo Ngày</a>
+    </div>
+    <div>
+        <div id="archive-datepicker" class="datepicker-inline datepicker-archive" data-url="@Url.Action("Index", "Article")"></div>
+    </div>
+</div><!-- /.side-widget-->
+
+
+<div class="side-widget bg-white light-shadow">
+    <div class="primary-heading">
+        <a>Advertisement</a>
+    </div>
+    <div>
+        <a>
+            <img class="img-responsive" src="/Content/images/img-02.jpg" />
+        </a>
+    </div>
+</div><!-- /.side-widget-->

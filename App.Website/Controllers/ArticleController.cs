@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Dynamic;
 using System.Linq;
 using System.Web;
@@ -20,13 +21,15 @@ namespace App.Website.Controllers
         private IPublicNewsService PublicNewsService { get; set; }
         private INewsService NewsService { get; set; }
         private INewsCategoryService NewsCategoryService { get; set; }
+        private ITagService TagService { get; set; }
 
-        public ArticleController(IPublicNewsService publicNewsService, INewsService newsService, INewsCategoryService newsCategoryService)
+        public ArticleController(IPublicNewsService publicNewsService, INewsService newsService, INewsCategoryService newsCategoryService, ITagService tagService)
             :base(new IService[]{ publicNewsService })
         {
             PublicNewsService = publicNewsService;
             NewsService = newsService;
             NewsCategoryService = newsCategoryService;
+            TagService = tagService;
         }
         #endregion
 
@@ -37,7 +40,7 @@ namespace App.Website.Controllers
             int? recordCount = 0;
             var pageSize = 10;
 
-            var result = PublicNewsService.GetAll(keyword, startDate, endDate, null, page, pageSize, ref recordCount);
+            var result = PublicNewsService.GetAll(keyword, startDate, endDate, null, null, page, pageSize, ref recordCount);
 
             var model = new ArticleSearch();
             model.PagedNews = new StaticPagedList<PublicNewsSummary>(result, page ?? 1, pageSize, (int)recordCount);
@@ -165,7 +168,7 @@ namespace App.Website.Controllers
                 int? recordCount = 0;
                 var pageSize = 10;
 
-                var results = PublicNewsService.GetAll(null,null, null, id, page, pageSize, ref recordCount);
+                var results = PublicNewsService.GetAll(null,null, null, id, null, page, pageSize, ref recordCount);
 
                 var model = new ArticleCategory();
                 model.PagedNews = new StaticPagedList<PublicNewsSummary>(results, page ?? 1, pageSize, (int)recordCount);
@@ -179,15 +182,44 @@ namespace App.Website.Controllers
 
         public ActionResult CategoriesSideBar(int? categoryId)
         {
-            var categories = NewsCategoryService.GetByParentId(categoryId, false, true);
+            var categories = NewsCategoryService.GetByParentId(categoryId, false, true).Where(x=>x.NewsCount > 0);
 
-            if (categories != null && categories.Any())
+            if (categories.Any())
             {
                 return PartialView("_CategoriesSideBar", categories);
             }
 
             return Content("");
         }
+        #endregion
+
+        #region Tag
+        [LayoutActionFilter]
+        public ActionResult Tag(int id, string tag, int? page = 1, int? pageSize = 10)
+        {
+            var tagDetail = TagService.GetById(id);
+
+            if (tagDetail != null)
+            {
+                int? recordCount = 0;
+
+                var results = PublicNewsService.GetAll(null, null, null, null, id, page, pageSize, ref recordCount);
+
+                var model = new ArticleTag();
+                model.PagedNews = new StaticPagedList<PublicNewsSummary>(results, page ?? 1, (int)pageSize, (int)recordCount);
+                model.Tag = new TagSummary
+                {
+                    Id = tagDetail.Id,
+                    Name = tagDetail.Name,
+                    IsDisabled = tagDetail.IsDisabled
+                };
+
+                return View(model);
+            }
+
+            return HttpNotFound();
+        }
+
         #endregion
 
         #region Dispose
@@ -203,6 +235,7 @@ namespace App.Website.Controllers
                     PublicNewsService = null;
                     NewsService = null;
                     NewsCategoryService = null;
+                    TagService = null;
                 }
                 _disposed = true;
             }

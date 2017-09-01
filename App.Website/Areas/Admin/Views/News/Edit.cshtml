@@ -123,6 +123,7 @@
                     </div>
                     <div class="form-group">
                         @Html.Label("Media Type")
+
                         @Html.DropDownListFor(m => m.MediaTypeId, (SelectList)ViewBag.MediaTypes, new { @class = "form-control" })
                     </div>
                     <div class="form-group">
@@ -131,7 +132,8 @@
                     </div>
                     <div class="form-group">
                         @Html.Label("Tags")
-                        @Html.ListBoxFor(m => m.TagIds, (MultiSelectList)ViewBag.Tags, new { @class = "form-control select2", data_placeholder = "Select tags", style = "width: 100%;" })
+
+                        @Html.ListBoxFor(m => m.TagIds, (MultiSelectList)ViewBag.Tags, new { @class = "form-control select2-ajax", style = "width: 100%;", data_placeholder = "Select tags", data_multiple="true", data_ajax_url = Url.Action("TagsIn", "Tag") })
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -154,8 +156,6 @@
 @section AddScripts{
     <!-- jQuery-validate -->
     @Scripts.Render("~/Admin/Js/jqueryval")
-    <!-- jQuery-ui -->
-    @Scripts.Render("~/Admin/Js/jqueryval")
     <!-- CKEditor. -->
     @Scripts.Render("~/ckeditor/ckeditor.js")
     <!-- Select2 -->
@@ -163,13 +163,10 @@
     <!-- Bootstrap-toggle -->
     @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
     <!-- News -->
-    @Scripts.Render("~/Areas/Admin/Scripts/App/news.js")
+    @Scripts.Render("~/Areas/Admin/Scripts/App/select2.js", "~/Areas/Admin/Scripts/App/news.js")
 
     <script type="text/javascript">
         jQuery(function ($) {
-            // Select2
-            $(".select2").select2();
-
             // CKeditor
             CKEDITOR.replace('txtContent');
         });

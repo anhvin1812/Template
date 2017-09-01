@@ -13,5 +13,7 @@ namespace App.Repositories.NewsManagement
         void Insert(NewsCategory product);
         void Update(NewsCategory product);
         void Delete(int id);
+
+        bool IsExistedName(string name, int? id = null);
     }
 }

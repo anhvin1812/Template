@@ -1,0 +1,74 @@
+﻿@using App.Core.Extensions
+@using App.Infrastructure.File
+@using App.Services.Dtos.NewsManagement
+@model LatestNews
+
+@if (Model != null && Model.News.Any())
+{
+    var firstNews = Model.News.FirstOrDefault();
+    var category = Model.Category ?? new PublicCategorySummary();
+
+    var url = Url.Action("Detail", "Article", new { id = firstNews?.Id });
+    var urlCategory = Url.Action("Category", "Article", new { id = category.Id });
+
+    <div class="post-widget">
+
+        <div class="primary-heading">
+            <a href="@Url">@category.Name</a>
+        </div>
+        <div class="post-item post-item-vertical bg-white light-shadow p20">
+            <div class="row">
+                <div class="col-sm-6 pr20">
+
+                    <div class="img-holder-wrap mb15">
+                        <a class="img-holder" href="@url">
+                            <img src="@Url.Content(GalleryHelper.GetThumbnailPath(firstNews.Thumbnail))" alt="@firstNews.Title">
+                        </a>
+                        <span class="post-badge">@firstNews.Category.Name</span>
+                    </div>
+                    <h4 class="post-title">
+                        <a href="@url">@firstNews.Title</a>
+                    </h4>
+                    <ul class="post-meta m0 p0">
+                        <li><i class="fa fa-clock-o"></i> @firstNews.PublishedDate.RelativeTime()</li>
+                        <li><i class="fa fa-eye"></i> @firstNews.Views</li>
+                    </ul>
+                    <p class="p0">
+                        @firstNews.Description
+                    </p>
+                </div>
+                
+                <div class="col-sm-6">
+                    <ul class="post-wrap-list">
+                        @foreach (var m in Model.News.Skip(1))
+                        {
+                            url = Url.Action("Detail", "Article", new { id = m.Id });
+
+                            <li class="clearfix">
+                                <div class="img-holder-wrap">
+                                    <a class="img-holder" href="@url">
+                                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Thumbnail))" alt="@m.Title">
+                                    </a>
+                                </div>
+                                <div class="post-summary">
+                                    <h6 class="post-title">
+                                        <a href="@url">@m.Title</a>
+                                    </h6>
+                                    <ul class="post-meta m0 p0">
+                                        <li><i class="fa fa-clock-o"></i> @m.PublishedDate.RelativeTime()</li>
+                                        <li><i class="fa fa-eye"></i> @m.Views</li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                        <li class="see-more">
+                            <a href="@urlCategory" class="btn btn-see-more btn-xs">Xem thêm <i class="fa fa-arrow-circle-o-right"></i></a>
+                        </li>
+                    </ul><!-- /.post-wrap-list-->
+                </div>
+            </div>
+        </div><!-- /.post-item-->
+
+    </div><!-- /.post-widget-->
+}
+

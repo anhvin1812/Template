@@ -5,8 +5,8 @@
 }
 
 @section AddStyles{
-    <!-- iCheck for checkboxes and radio inputs -->
-    @Styles.Render("~/Admin/Content/iCheck")
+    <!-- Bootstrap-toggle -->
+    @Styles.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.css")
 }
 
 @section ContentHeader
@@ -26,28 +26,41 @@
 <div class="box box-primary">
     <div class="box-header with-border">
     </div><!-- /.box-header -->
-    @using (Html.BeginForm("Create", "NewsCategory", FormMethod.Post))
+    @using (Html.BeginForm("Create", "NewsCategory", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
+        var toggleAttributes = new { data_toggle = "toggle", data_onstyle = "success", data_on = "Yes", data_off = "No" };
 
         <div class="box-body">
             @Html.ValidationSummary(false, null, new { @class = "alert alert-danger alert-dismissible", id = "error-messages" })
             <div class="form-group">
-                @Html.LabelFor(m => m.Name)
-                @Html.TextBoxFor(m => m.Name, new {@class = "form-control", placeholder = "Enter category name"})
+                @Html.LabelFor(m => m.Name, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter category name" })
+                </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Description)
-                @Html.TextBoxFor(m => m.Description, new {@class = "form-control", placeholder = "Enter description"})
+                @Html.LabelFor(m => m.Description, new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control", placeholder = "Enter description" })
+                </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.ParentId, "Parent")
-                @Html.DropDownListFor(m=>m.ParentId, (SelectList)ViewBag.Parents, string.Empty, new {@class= "form-control" })
+                @Html.Label("Disable", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.CheckBoxFor(m => m.IsDisabled, toggleAttributes)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ParentId, "Parent", new { @class = "control-label col-sm-2" })
+                <div class="col-sm-10">
+                    @Html.DropDownListFor(m => m.ParentId, (SelectList)ViewBag.Parents, string.Empty, new { @class = "form-control" })
+                </div>
             </div>
         </div><!-- /.box-body -->
     <div class="box-footer">
         <button type="submit" class="btn btn-primary">Save</button>
-        <a class="btn btn-default" href="@Url.Action("Index", "NewsCategory")">Back to categories</a>
+        <a class="btn btn-default pull-right" onclick="goBack()">Back to categories</a>
     </div>
 
     }
@@ -58,5 +71,7 @@
 @section AddScripts{
     <!-- jQuery-validate -->
     @Scripts.Render("~/Admin/Js/jqueryval")
+    <!-- Bootstrap-toggle -->
+    @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
 }
 

@@ -1,16 +1,14 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using App.Core.Exceptions;
 using App.Core.Repositories;
 using App.Entities.NewsManagement;
-using App.Entities.ProductManagement;
 using App.Repositories.NewsManagement;
-using App.Repositories.ProductManagement;
 using App.Services.Dtos.NewsManagement;
-using App.Services.Dtos.ProductManagement;
 using App.Services.Dtos.UI;
+using NewsStatus = App.Core.News.NewsStatus;
 
 namespace App.Services.NewsManagement
 {
@@ -29,27 +27,64 @@ namespace App.Services.NewsManagement
 
         #region Public Methods
 
-        public IEnumerable<TagSummary> GetAll(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<TagSummary> GetAll(string keyword, bool? isDisabled, int? page, int? pageSize, ref int? recordCount)
         {
-            var categories = TagRepository.GetAll(page, pageSize, ref recordCount)
-                .Select(x => new TagSummary
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    IsDisabled = x.IsDisabled ?? false
-                });
+            var entities = TagRepository.GetAll(keyword, isDisabled, page, pageSize, ref recordCount);
 
-            return categories;
+            return ToDTOs(entities);
         }
 
-        public SelectListOptions GetOptionsForDropdownList(bool? isDisabled = null)
+        public IEnumerable<TagSummary> GetByStringIds(string ids, bool? isDisabled = null)
         {
-            int? recordCount = 0;
-            var tags = TagRepository.GetAll(null, null, ref recordCount);
+            if(string.IsNullOrWhiteSpace(ids))
+                return new List<TagSummary>();
 
-            tags = isDisabled.HasValue ?
-                isDisabled.Value ? tags.Where(x => x.IsDisabled == true) : tags.Where(x => x.IsDisabled != true)
-                : tags;
+            var lstIds = new List<int>();
+            try
+            {
+                lstIds = ids.Split(',').Select(int.Parse).ToList();
+
+                var entities = TagRepository.GetByIds(lstIds);
+
+                if (isDisabled.HasValue)
+                    entities = isDisabled.Value
+                        ? entities.Where(t => t.IsDisabled == true)
+                        : entities.Where(t => t.IsDisabled != true);
+
+                return ToDTOs(entities);
+            }
+            catch (Exception)
+            {
+
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.InvalidData}
+                };
+                throw new ValidationError(violations);
+            }
+        }
+
+        public IEnumerable<TagSummary> GetMostUsedTags(bool? isDisabled = null, int maxRecord = 10)
+        {
+            var entities = TagRepository.GetMostUsedTags(isDisabled, maxRecord);
+
+            return ToDTOs(entities);
+        }
+
+        public SelectListOptions GetOptionsForDropdownList(List<int> selectedIds, bool? isDisabled = null)
+        {
+            var tags = Enumerable.Empty<Tag>();
+
+            if (selectedIds != null && selectedIds.Any())
+            {
+                tags = TagRepository.GetByIds(selectedIds);
+                tags = isDisabled == true ? tags.Where(x => x.IsDisabled == true) : tags.Where(x => x.IsDisabled != true);
+            }
+            else
+            {
+                int? recordCount = 0;
+                tags = TagRepository.GetAll(null, isDisabled, null, null, ref recordCount);
+            }
 
             return new SelectListOptions
             {
@@ -170,16 +205,15 @@ namespace App.Services.NewsManagement
             }
         }
 
-        private void ValidateEntityData(Role entity)
+        private IEnumerable<TagSummary> ToDTOs(IEnumerable<Tag> entities, bool? hasCounter = false)
         {
-            if (entity == null)
+            return entities.Select(x => new TagSummary
             {
-                var violations = new List<ErrorExtraInfo>
-                {
-                    new ErrorExtraInfo {Code = ErrorCodeType.RoleIsNotExsted}
-                };
-                throw new ValidationError(violations);
-            }
+                Id = x.Id,
+                Name = x.Name,
+                IsDisabled = x.IsDisabled ?? false,
+                NewsCount = hasCounter == true ? x.Newses.Count(n=>n.StatusId == (int)NewsStatus.Public) : 0
+            });
         }
 
         #endregion

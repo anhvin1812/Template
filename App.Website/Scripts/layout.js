@@ -27,6 +27,7 @@ var layout = (function () {
 
         // active achive datetimepickers 
         $(".datepicker-archive").datetimepicker({
+            useCurrent: false,
             inline: true,
             format: "MM-dd-YYYY",
             icons: {

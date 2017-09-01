@@ -7,6 +7,8 @@
 
 @section AddStyles{
     @Styles.Render("~/Admin/Css/DataTable")
+    <!-- Bootstrap-toggle -->
+    @Styles.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.css")
 }
 
 @section ContentHeader
@@ -33,6 +35,8 @@
     <div class="box-body">
         @if (Model.Any())
         {
+            var toggleAttributes = new { @class = "toggle-disable", disabled = "disabled", data_toggle = "toggle", data_onstyle = "success", data_on = "Yes", data_off = "No", data_size = "small" };
+
             <table class="table table-hover table-striped">
                 <tr>
                     <th>Name</th>
@@ -52,7 +56,7 @@
                         <tr>
                             <td><a target="_blank" href="@Url.Action("Category","Article", new {id = m.Id, area = ""})">@m.Name</a></td>
                             <td>@m.Description</td>
-                            <td>@m.IsDisabled</td>
+                            <td>@Html.CheckBox("Disable", m.IsDisabled, toggleAttributes)</td>
                             <td>
                                 <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "NewsCategory", new {id = m.Id})">
                                     <i class="fa fa-fw fa-pencil"></i> Edit
@@ -72,7 +76,7 @@
                                 <tr>
                                     <td><a target="_blank" href="@Url.Action("Category","Article", new {id = m.Id, area = ""})">@Html.Raw($"{strSubCate} {firstChild.Name}")</a></td>
                                     <td>@firstChild.Description</td>
-                                    <td>@firstChild.IsDisabled</td>
+                                    <td>@Html.CheckBox("Disable", firstChild.IsDisabled, toggleAttributes)</td>
                                     <td>
                                         <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "NewsCategory", new {id = firstChild.Id})">
                                             <i class="fa fa-fw fa-pencil"></i> Edit
@@ -111,8 +115,9 @@
 
 
 @section AddScripts{
-
     <!-- DataTables -->
     @Scripts.Render("~/Admin/Js/dataTable")
+    <!-- Bootstrap-toggle -->
+    @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
 }
 

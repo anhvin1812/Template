@@ -1,0 +1,175 @@
+﻿@using System.Web.Optimization
+@using App.Core.News
+@using App.Services.Dtos.NewsManagement
+@using PagedList.Mvc
+@model PagedList.StaticPagedList<NewsSummary>
+@{
+    ViewBag.Title = "News Management";
+    var filters = (NewsFilter)ViewBag.Filters;
+}
+
+@section AddStyles{
+    @Styles.Render("~/Admin/Css/DataTable")
+}
+
+@section ContentHeader
+{
+<section class="content-header">
+    <h1>
+        News Management
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>News Management</li>
+        <li class="active">News</li>
+    </ol>
+</section>
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        @using (Html.BeginForm("Index", "News", FormMethod.Get, new { @class = "form-inline" }))
+        {
+            
+           <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                <div class="form-group">
+                    <h3 class="box-title">
+                        <a class="btn btn-block btn-primary btn-sm" href="@Url.Action("Create", "News")">Add a news</a>
+                        <br/>
+                    </h3>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-9  text-right">
+                <div class="form-group">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control" type="text" name="keyword" placeholder="Title, description" value="@filters.Keyword">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    @Html.DropDownList("categoryId", (SelectList)ViewBag.Categories, "All categories", new {@class= "form-control input-sm" })
+                </div>
+                <div class="form-group">
+                    @Html.DropDownList("statusId", (SelectList)ViewBag.Status, "All status", new { @class = "form-control input-sm" })
+                </div>
+                <div class="form-group">
+                    @Html.DropDownList("mediaTypeId", (SelectList)ViewBag.MediaTypes, "All media types", new { @class = "form-control input-sm" })
+                </div>
+                <div class="form-group">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-danger btn-sm @(filters.IsHot.GetValueOrDefault() ? "active" : string.Empty)">
+                            <input type="checkbox" name="hot" value="true" @(filters.IsHot.GetValueOrDefault() ? "checked" : string.Empty)/> Hot
+                        </label>
+                        <label class="btn btn-warning btn-sm @(filters.IsFeatured.GetValueOrDefault() ? "active" : string.Empty)">
+                            <input type="checkbox" name="featured" value="true" @(filters.IsFeatured.GetValueOrDefault() ? "checked" : string.Empty)/> Featured
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-filter"></i> Filter</button>
+            </div>
+        </div>
+        }
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        @if (Model.Any())
+        {
+            <table class="table table-hover table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Media</th>
+                    <th>Views</th>
+                    <th>Categories</th>
+                    <th>Tags</th>
+                    <th>Created date</th>
+                    <th>Updated date</th>
+                    <th>Updated by</th>
+                    <th></th>
+                </tr>
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td class="vertical-middle"><a target="_blank" href="@Url.Action("Detail", "Article", new {id = m.Id, area = ""})">@m.Title</a></td>
+                        <td>
+                            <span class="label label-info">@m.Status</span>
+                            @if (m.IsHot)
+                            {
+                                <span class="label label-danger">Hot</span>
+                            }
+                            @if (m.IsFeatured)
+                            {
+                                <span class="label label-warning">Featured</span>
+                            }
+                        </td>
+                        <td>
+                            @if (m.MediaTypeId == (int)MediaType.Photo)
+                            {
+                                <span class="label bg-olive"><i class="fa fa-camera"></i></span>
+                            }
+                            else if (m.MediaTypeId == (int) MediaType.Video)
+                            {
+                                <span class="label bg-olive"><i class="fa fa-video-camera"></i></span>
+                            }
+                            else
+                            {
+                                <span class="label bg-olive"><i class="fa fa-newspaper-o"></i></span>
+                            }
+                        </td>
+                        <td>@m.Views</td>
+                        <td class="vertical-middle">
+                            @foreach (var c in m.Categories)
+                            {
+                                <span class="label label-info">@c</span>
+                            }
+                        </td>
+                        <td class="vertical-middle">
+                            @foreach (var t in m.Tags)
+                            {
+                                <span class="label label-default">@t</span>
+                            }
+                        </td>
+
+                        <td class="vertical-middle">@m.CreatedDate.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="vertical-middle">@(m.UpdatedDate.HasValue ? m.UpdatedDate.Value.ToString("yyyy-MM-dd HH:mm") : "")</td>
+                        <td class="vertical-middle">@m.UpdatedBy</td>
+                        <td class="vertical-middle">
+                            <a class="btn btn-default btn-xs" href="@Url.Action("Edit", "News", new {id = m.Id})">
+                                <i class="fa fa-fw fa-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+        
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new {keyword = filters.Keyword, categotyId = filters.CategoryId, statusId=filters.StatusId, hot=filters.IsHot, featured = filters.IsFeatured, page = page }), new PagedListRenderOptions { ContainerDivClasses = new [] { "no-margin","pull-right" }  })
+
+        @*<ul class="pagination no-margin pull-right">
+            <li><a href="#">&laquo;</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>*@
+    </div>
+</div>
+<!-- /.box -->
+
+
+@section AddScripts{
+    <!-- DataTables -->
+    @Scripts.Render("~/Admin/Js/dataTable")
+}
+

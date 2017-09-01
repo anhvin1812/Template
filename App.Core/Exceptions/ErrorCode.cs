@@ -20,7 +20,7 @@ namespace App.Core.Exceptions
                 // Role
                 {ErrorCodeType.InvalidRoleName, "Role name is not valid."},
                 {ErrorCodeType.RoleNameIsUsed, "Role name is used."},
-                {ErrorCodeType.RoleIsNotExsted, "Role is not existed."},
+                {ErrorCodeType.RoleIsNotExisted, "Role is not existed."},
                 // User
                 {ErrorCodeType.InvalidFirstName, "First name is not valid."},
                 {ErrorCodeType.InvalidLastName, "Last name is not valid."},
@@ -33,6 +33,8 @@ namespace App.Core.Exceptions
                 {ErrorCodeType.NewsCategoryIsEmpty, "Category cannot be empty."},
                 {ErrorCodeType.EmptyImage, "Featured image cannot be empty."},
                 {ErrorCodeType.NewsStatusIsNotExisted, "Status not found."},
+                {ErrorCodeType.NewsCategoryIsExisted, "Category is existed."},
+                {ErrorCodeType.NewsCategoryNotFound, "Category is not existed."},
 
                 // Tag
                 {ErrorCodeType.TagNameIsExisted, "Tag name is existed."},

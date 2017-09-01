@@ -17,4 +17,10 @@ namespace App.Services.Dtos.NewsManagement
         public StaticPagedList<PublicNewsSummary> PagedNews { get; set; }
         public IEnumerable<NewsCategorySummary> Categories { get; set; }
     }
+
+    public class ArticleTag : DtoBase
+    {
+        public StaticPagedList<PublicNewsSummary> PagedNews { get; set; }
+        public TagSummary Tag { get; set; }
+    }
 }

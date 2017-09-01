@@ -87,5 +87,6 @@ namespace App.Services.Dtos.Settings
 
         public SettingDetail Setting { get; set; }
         public PublicNewsDetail SocialMetaTags { get; set; }
+        public IEnumerable<TagSummary> MostUsedTags { get; set; }
     }
 }

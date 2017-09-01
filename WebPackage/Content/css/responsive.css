@@ -1,0 +1,160 @@
+@media screen and ( max-width:1300px) {
+	.container {
+	    width: 100%;
+	}
+}
+
+@media screen and ( max-width:1200px) {
+	ul.multi-level > li a {
+	    font-size: 13px;
+	    padding: 15px 9px;
+	}
+}
+
+@media screen and ( max-width:992px) {
+	.wrap.push {
+        right: 280px;
+        -webkit-transition: right 400ms ease 0s;
+        -moz-transition: right 400ms ease 0s;
+        -ms-transition: right 400ms ease 0s;
+        -o-transition: right 400ms ease 0s;
+        transition: right 400ms ease 0s;
+    }
+
+    .header .logo .inner-logo img {
+        height: 45px;
+        max-width: 200px;
+    }
+    .menu-btn {
+        padding: 15px 20px;
+    }
+    #main-nav {
+        background: #333;
+        bottom: 0;
+        height: 100%;
+        position: fixed;
+        padding: 40px 0 10px 0;
+        right: -280px;
+        top: 0;
+        -webkit-transition: right 400ms ease 0s;
+        -moz-transition: right 400ms ease 0s;
+        -ms-transition: right 400ms ease 0s;
+        -o-transition: right 400ms ease 0s;
+        transition: right 400ms ease 0s;
+        width: 280px;
+        overflow: scroll;
+        z-index: 100;
+    }
+    #main-nav.open {
+        right: 0;
+    }
+    .main-nav-scroll{
+        height: 100%;
+        overflow: scroll;
+    }
+    ul.multi-level > li {
+        float: none;
+    }
+    ul.multi-level li a {
+        color: #fff;
+        font-size: 14px;
+    }
+    ul.multi-level > li a {
+        padding: 10px 15px;
+        border-top: 1px solid #444;
+        border-right: none;
+    }
+    ul.multi-level li ul {
+        width: 100%;
+        opacity: 1;
+        display: block;
+        background: none;
+        box-shadow: none;
+        position: static;
+        visibility: visible;
+        overflow: scroll;
+    }
+    ul.multi-level li li {
+        border: none;
+    }
+    ul.multi-level li li a {
+        border-color: #444;
+        border-width: 1px 0 0 0;
+        padding-left: 40px;
+        color: #fff;
+    }
+    ul.multi-level li li.active a,
+    ul.multi-level li li a:hover {
+        color: #dc4a29;
+        border-width: 1px 0 0 0;
+    }
+}
+
+@media screen and ( max-width:767px) {
+
+    .module-highlight .carousel-inner > .item,
+    .module-highlight .carousel-inner > .item:first-child {
+        padding: 0;
+	    width: 100%;
+	    float: none;
+	}
+    .module-highlight .carousel-inner > .item {
+        display: none;
+    }
+    .module-highlight .carousel-inner > .active, 
+    .module-highlight .carousel-inner > .next, 
+    .module-highlight .carousel-inner > .prev {
+        display: block;
+    }
+    .module-highlight .carousel-inner > .item:first-child .carousel-caption h3,
+    .carousel-caption h3 {
+        font-size: 16px;
+    }
+    .carousel-caption.photo {
+        padding: 10px;
+    }
+    .carousel-caption.photo .post-title {
+        font-size: 14px;
+    }
+
+    .post-info {
+        padding: 15px;
+    }
+    .social-share {
+        text-align: left;
+    }
+    .pagination > li,
+    .pagination > li:first-child,
+     .pagination > li:last-child{
+        margin: 0 1px 0 0;
+    }
+    .pagination > li a
+     {
+        padding: 5px 10px;
+    }
+    .cat-title-holder h2 {
+        font-size: 35px;
+        line-height: 30px;
+    }
+    .post-item-vertical,ul.list-posts > li {
+        padding: 5px;
+    }
+    .post-item-vertical .col-sm-6 {
+        padding-right: 15px;
+    }
+    .slider-post {
+        padding: 10px;
+    }
+
+    .owl-dots {
+        right: -14px;
+        top: -43px;
+    }
+    .facebook-comments {
+        padding: 10px;
+    }
+
+    .post-wrap-list > li.see-more {
+        text-align: center;
+    }
+}

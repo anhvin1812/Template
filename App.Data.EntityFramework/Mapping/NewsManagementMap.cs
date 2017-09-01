@@ -50,7 +50,7 @@ namespace App.Data.EntityFramework.Mapping
                     x.MapRightKey("NewsCategoryId");
 
                 });
-                HasMany(t => t.Tags).WithMany().Map(x =>
+                HasMany(t => t.Tags).WithMany(t => t.Newses).Map(x =>
                 {
                     x.ToTable("News_Tag");
                     x.MapLeftKey("NewsId");
@@ -93,6 +93,9 @@ namespace App.Data.EntityFramework.Mapping
                 // Properties
                 Property(t => t.Name).IsRequired();
                 Property(t => t.IsDisabled).IsOptional();
+
+                // Relationships
+                HasMany(t => t.Newses).WithMany();
             }
         }
 

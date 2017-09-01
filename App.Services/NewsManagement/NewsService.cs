@@ -29,9 +29,10 @@ namespace App.Services.NewsManagement
         private INewsCategoryRepository NewsCategoryRepository { get; set; }
         private ITagRepository TagRepository { get; set; }
         private IGalleryService GalleryService { get; set; }
+        private ITagService TagService { get; set; }
 
         public NewsService(IUnitOfWork unitOfWork, INewsRepository newsRepository, INewsCategoryRepository newsCategoryRepository, ITagRepository tagRepository,
-            IGalleryService galleryService)
+            IGalleryService galleryService, ITagService tagService)
             : base(unitOfWork, new IRepository[] { newsRepository, newsCategoryRepository, tagRepository }, 
                   new IService[] { galleryService })
         {
@@ -40,6 +41,7 @@ namespace App.Services.NewsManagement
             TagRepository = tagRepository;
 
             GalleryService = galleryService;
+            TagService = tagService;
         }
 
         #endregion
@@ -77,6 +79,8 @@ namespace App.Services.NewsManagement
             if (news == null)
                 throw new DataNotFoundException();
 
+            var tags = news.Tags.Where(x => x.IsDisabled != true);
+
             return new NewsUpdateEntry
             {
                 Id = news.Id,
@@ -88,7 +92,7 @@ namespace App.Services.NewsManagement
                 IsFeatured = news.IsFeatured ?? false,
                 StatusId = news.StatusId,
                 CategoryIds = news.Categories.Where(x=>x.IsDisabled != true).Select(x=>x.Id).ToList(),
-                TagIds = news.Tags.Where(x=>x.IsDisabled != true).Select(x=>x.Id).ToList()
+                TagIds = tags.Select(x=>x.Id).ToList()
             };
         }
 
@@ -218,6 +222,7 @@ namespace App.Services.NewsManagement
                 // tags
                 if (entry.TagIds != null && entry.TagIds.Any())
                 {
+
                     var tags = TagRepository.GetByIds(entry.TagIds).ToList();
 
                     entity.Tags.Clear();
@@ -308,7 +313,9 @@ namespace App.Services.NewsManagement
 
             if (entry.TagIds != null && entry.TagIds.Any())
             {
+
                 var tags = TagRepository.GetByIds(entry.TagIds).ToList();
+
                 detail.Tags = tags.Select(x => new PublicTagSummary
                 {
                     Id = x.Id,
@@ -466,6 +473,9 @@ namespace App.Services.NewsManagement
                     NewsRepository = null;
                     NewsCategoryRepository = null;
                     TagRepository = null;
+
+                    GalleryService = null;
+                    TagService = null;
                 }
                 _disposed = true;
             }

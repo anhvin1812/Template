@@ -10,6 +10,7 @@ using App.Repositories.ProductManagement;
 using App.Services.Dtos.NewsManagement;
 using App.Services.Dtos.ProductManagement;
 using App.Services.Dtos.UI;
+using NewsStatus = App.Core.News.NewsStatus;
 
 namespace App.Services.NewsManagement
 {
@@ -37,6 +38,9 @@ namespace App.Services.NewsManagement
         public IEnumerable<NewsCategorySummary> GetByParentId(int? categoryId = null, bool? isDisabled = false, bool hasCounter = false)
         {
             var results = NewsCategoryRepository.GetByParentId(categoryId);
+            if (isDisabled.HasValue)
+                results = (isDisabled == false) ? results.Where(t => t.IsDisabled != true) : results.Where(t => t.IsDisabled == true);
+
             return EntitiesToDtos(results, hasCounter);
         }
 
@@ -119,7 +123,7 @@ namespace App.Services.NewsManagement
             {
                 Name = category.Name,
                 Description = category.Description,
-                IsDisabled = category.IsDisabled,
+                IsDisabled = category.IsDisabled ?? false,
                ParentId = category.ParentId
             };
         }
@@ -132,7 +136,30 @@ namespace App.Services.NewsManagement
             // Validate data
             ValidateEntryData(entry);
 
-            //TODO: CHeck parent existed
+            // check duplicating name
+            var isExistedName = NewsCategoryRepository.IsExistedName(entry.Name);
+            if (isExistedName)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.NewsCategoryIsExisted}
+                };
+                throw new ValidationError(violations);
+            }
+
+            // CHeck existing parent
+            if (entry.ParentId.HasValue)
+            {
+                var parent = NewsCategoryRepository.GetById(entry.ParentId.Value);
+                if (parent == null)
+                {
+                    var violations = new List<ErrorExtraInfo>
+                    {
+                        new ErrorExtraInfo {Code = ErrorCodeType.NewsCategoryNotFound}
+                    };
+                    throw new ValidationError(violations);
+                }
+            }
 
 
             var entity = new NewsCategory
@@ -154,12 +181,35 @@ namespace App.Services.NewsManagement
             // Validate data
             ValidateEntryData(entry);
 
-            //TODO: CHeck parent existed
-
             var entity = NewsCategoryRepository.GetById(id);
             if (entity == null)
                 throw new DataNotFoundException();
 
+            // check duplicating name
+            var isExistedName = NewsCategoryRepository.IsExistedName(entry.Name, entity.Id);
+            if (isExistedName)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.NewsCategoryIsExisted}
+                };
+                throw new ValidationError(violations);
+            }
+
+            // CHeck existing parent
+            if (entry.ParentId.HasValue)
+            {
+                var parent = NewsCategoryRepository.GetById(entry.ParentId.Value);
+                if (parent == null)
+                {
+                    var violations = new List<ErrorExtraInfo>
+                    {
+                        new ErrorExtraInfo {Code = ErrorCodeType.NewsCategoryNotFound}
+                    };
+                    throw new ValidationError(violations);
+                }
+            }
+            
             entity.Name = entry.Name;
             entity.Description = entry.Description;
             entity.ParentId = entry.ParentId;
@@ -190,18 +240,6 @@ namespace App.Services.NewsManagement
                 var violations = new List<ErrorExtraInfo>
                 {
                     new ErrorExtraInfo {Code = ErrorCodeType.InvalidName, Property = "Name"}
-                };
-                throw new ValidationError(violations);
-            }
-        }
-
-        private void ValidateEntityData(Role entity)
-        {
-            if (entity == null)
-            {
-                var violations = new List<ErrorExtraInfo>
-                {
-                    new ErrorExtraInfo {Code = ErrorCodeType.RoleIsNotExsted}
                 };
                 throw new ValidationError(violations);
             }
@@ -241,7 +279,7 @@ namespace App.Services.NewsManagement
                 ParentId = x.ParentId,
                 Description = x.Description,
                 IsDisabled = x.IsDisabled ?? false,
-                NewsCount = hasCounter ? x.Newses.Count() : 0
+                NewsCount = hasCounter ? x.Newses.Count(c => c.StatusId == (int) NewsStatus.Public) : 0
             });
         }
 

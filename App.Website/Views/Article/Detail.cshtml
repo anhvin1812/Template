@@ -59,9 +59,9 @@
             </div>
             <div class="post-tags-holder">
                 <ul class="post-tags reset">
-                    @foreach (var t in Model.Tags)
+                    @foreach (var tag in Model.Tags)
                     {
-                        <li><a href="#">@t.Name</a></li>
+                        <li><a href="@Url.Action("Tag", "Article", new {id = tag.Id, tag=tag.Name})">@tag.Name</a></li>
                     }
                 </ul>
             </div>

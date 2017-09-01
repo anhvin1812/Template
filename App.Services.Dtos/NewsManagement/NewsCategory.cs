@@ -10,7 +10,7 @@ namespace App.Services.Dtos.NewsManagement
         public string Name { get; set; }
         public string Description { get; set; }
         public int? ParentId { get; set; }
-        public bool? IsDisabled { get; set; }
+        public bool IsDisabled { get; set; }
     }
 
     public class NewsCategoryDetail : DtoBase

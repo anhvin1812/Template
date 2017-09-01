@@ -69,5 +69,15 @@ namespace App.Repositories.NewsManagement
         {
             DatabaseContext.Delete<NewsCategory>(id);
         }
+
+        public bool IsExistedName(string name, int? id = null)
+        {
+            if (id.HasValue)
+            {
+                return DatabaseContext.Get<NewsCategory>().Any(t => t.Name == name && t.Id != id);
+            }
+
+            return DatabaseContext.Get<NewsCategory>().Any(t => t.Name == name);
+        }
     }
 }

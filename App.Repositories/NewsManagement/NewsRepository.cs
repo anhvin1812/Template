@@ -182,7 +182,7 @@ namespace App.Repositories.NewsManagement
             return result;
         }
 
-        public IEnumerable<News> GetAllPublicNews(string keyword, DateTime? startDate, DateTime? endDate, int? categoryId, int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<News> GetAllPublicNews(string keyword, DateTime? startDate, DateTime? endDate, int? categoryId, int? tagId, int? page, int? pageSize, ref int? recordCount)
         {
             var result = GetPublicNews();
 
@@ -198,6 +198,12 @@ namespace App.Repositories.NewsManagement
 
             if (endDate.HasValue)
                 result = result.Where(t => DbFunctions.TruncateTime(t.CreatedDate) <= endDate.Value);
+
+            //get by tagId
+            if (tagId.HasValue)
+            {
+                result = result.Where(t => t.Tags.Any(c => c.Id == tagId.Value));
+            }
 
             //get by categoryId
             if (categoryId.HasValue)

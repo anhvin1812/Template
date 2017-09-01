@@ -1,0 +1,73 @@
+﻿@using App.Services.Dtos.NewsManagement
+@using App.Services.Dtos.SocialMediaTag
+@{
+    var layoutViewModel = (App.Services.Dtos.Settings.LayoutViewModel)ViewBag.LayoutViewModel;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>@ViewBag.Title | Xứ Nghệ</title>
+
+    <link href="//fonts.googleapis.com/css?family=Roboto:400,700&amp;subset=vietnamese" rel="stylesheet"> 
+    <link href="//fonts.googleapis.com/css?family=Fira+Sans:400,300italic,300,400italic,500,500italic,700,700italic" rel="stylesheet" type="text/css" media="all">
+    @Styles.Render("~/Content/style")
+    @RenderSection("Style", required: false)
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    @Html.Partial("_ArticleSocialMetaTag", layoutViewModel?.SocialMetaTags ?? new PublicNewsDetail())
+
+    <!-- Google AdSense-->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8277167017845821",
+            enable_page_level_ads: true
+        });
+    </script>
+</head>
+<body>
+    @Html.Partial("_AfterBodySection")
+    @RenderSection("AfterBody", required: false)
+    
+    <div class="wrap">
+        <div class="top-bar">
+            <div class="container">
+
+            </div>
+        </div>
+        @Html.Partial("_Header", layoutViewModel.Setting)
+        <main>
+            <div class="container">
+                @RenderSection("FullContent", required: false)
+                <div class="row mt45">
+                    <div class="main-content col-sm-8 col-md-9">
+                        @RenderBody()
+                    </div>
+                    <div class="sidebar col-sm-4 col-md-3">
+                        @RenderSection("SideBar", required: false)
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        @Html.Partial("_Footer", layoutViewModel.Setting)
+
+    </div>
+
+    @Scripts.Render("~/bundles/coreJS")
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
