@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Web;
-using App.Core.Configuration;
 using App.Core.Exceptions;
 using App.Core.Repositories;
-using App.Entities.ProductManagement;
-using App.Entities.ProductManagement;
 using App.Infrastructure.File;
 using App.Repositories.ProductManagement;
-using App.Services.Dtos.ProductManagement;
 
 namespace App.Services.Gallery
 {
@@ -38,7 +30,6 @@ namespace App.Services.Gallery
 
             // delete files from server
             GalleryHelper.DeleteGallery(entity.Image, entity.Thumbnail);
-
             GalleryRepository.Delete(id);
             Save();
         }

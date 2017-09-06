@@ -1,0 +1,25 @@
+﻿@using App.Core.Extensions
+@using App.Infrastructure.File
+@model App.Services.Dtos.NewsManagement.Breadcrumb
+
+<div class="row">
+    <div class="col-xs-12 cat-title-holder mt45">
+        <h2>@(Model.Title?? "Trang Chủ")</h2>
+        <ul class="breadcrumb">
+            <li><a href="/">Trang Chủ</a></li>
+            @if (Model.Categories != null)
+            {
+                foreach (var c in Model.Categories)
+                {
+                    <li><a href="@Url.Action("Category","Article", new {id=c.Id})">@(c.Name)</a></li>
+                }
+            }
+            else if (Model.Tag != null)
+            {
+
+                <li><a href="@Url.Action("Tag","Article", new {id=Model.Tag.Id, tag = Model.Tag.Name})">@Model.Tag.Name</a></li>
+            }
+        </ul>
+
+    </div>
+</div>

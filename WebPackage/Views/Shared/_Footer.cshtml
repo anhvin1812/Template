@@ -1,0 +1,95 @@
+﻿
+@using App.Infrastructure.File
+@model App.Services.Dtos.Settings.LayoutViewModel
+
+@{
+    var setings = Model.Setting;
+    var tags = Model.MostUsedTags;
+}
+<footer class="footer">
+    <div class="container">
+        <div class="row ptb30">
+            <div class="col-sm-4">
+                <div class="footer-widget">
+                    <div class="contact-list">
+                        <a class="logo" href="@setings.Website">
+                            <img class="img-responsive" src="@Url.Content(GalleryHelper.GetLogoPath(setings.Logo))" alt="Xứ nghệ">
+                        </a>
+                        <ul class="reset">
+                            <li>
+                                <i class="fa fa-map-marker"></i>
+                                @setings.Address
+                            </li>
+                            <li>
+                                <i class="fa fa-headphones"></i>
+                                @setings.PhoneNumber
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                @setings.Email
+                            </li>
+                            <li>
+                                <i class="fa fa-skype"></i>
+                                @setings.Skype
+                            </li>
+                            <li>
+                                <i class="fa fa-globe"></i>
+                                @setings.Website
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="footer-widget mb30">
+                    <h3 class="mb15">Newsletter</h3>
+                    <div class="newsletter-form">
+                        <p>Nhận tin qua email</p>
+                        <form>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                                <input class="form-control" placeholder="Your Email" type="text">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-icon">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div><!-- /.footer-widget-->
+
+                <div class="footer-widget">
+                    <h3>Tags</h3>
+                    <div class="populer-tags">
+                        <ul class="reset">
+                            @foreach (var tag in tags)
+                            {
+                                <li>
+                                    <a href="@Url.Action("Tag", "Article", new {id = tag.Id, tag=tag.Name})">@tag.Name</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div><!-- /.footer-widget-->
+
+            </div>
+            <div class="col-sm-4">
+                <div class="footer-widget">
+                    <h3>Follow</h3>
+                    <div class="newsletter-form">
+                        @*<h3>Facebook from</h3>*@
+                        @Html.Raw(setings.Facebook)
+                    </div>
+                </div><!-- /.footer-widget-->
+            </div>
+        </div>
+    </div>
+    <div class="footer-bar">
+        <div class="container">
+            <div class="copyright">
+                Xứ nghệ @($"@{DateTime.Now.Year}"), All Rights Reservered
+            </div>
+        </div>
+    </div>
+</footer>

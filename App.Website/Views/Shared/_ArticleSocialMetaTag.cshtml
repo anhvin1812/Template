@@ -1,9 +1,9 @@
-﻿ @using App.Infrastructure.File 
+﻿ @using App.Core.Files @using App.Infrastructure.File 
 @model App.Services.Dtos.NewsManagement.PublicNewsDetail
 
 @{
     var url = Request?.Url.OriginalString;
-    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetImagePath(Model.Thumbnail))).OriginalString;
+    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetFilePath(Model.Thumbnail, FilePath.NewsThumbnail))).OriginalString;
     var tags = string.Join(",", Model.Tags.Select(x => x.Name));
 }
 

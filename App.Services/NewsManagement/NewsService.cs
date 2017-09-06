@@ -8,20 +8,17 @@ using App.Core.News;
 using App.Core.Repositories;
 using App.Entities;
 using App.Entities.NewsManagement;
-using App.Entities.ProductManagement;
 using App.Infrastructure.File;
 using App.Repositories.NewsManagement;
-using App.Repositories.ProductManagement;
 using App.Services.Common;
-using App.Services.Dtos.Gallery;
 using App.Services.Dtos.NewsManagement;
-using App.Services.Dtos.ProductManagement;
 using App.Services.Dtos.UI;
 using App.Services.Gallery;
-using NewsStatus = App.Core.News.NewsStatus;
 
 namespace App.Services.NewsManagement
 {
+    using App.Entities.FileManagement;
+
     public class NewsService : ServiceBase, INewsService
     {
         #region Contructor
@@ -157,7 +154,7 @@ namespace App.Services.NewsManagement
 
                     var imageName = GalleryHelper.UploadGallery(entry.Image, thumbnailWidth);
 
-                    entity.Image = new Entities.ProductManagement.Gallery
+                    entity.Image = new Gallery
                     {
                         Image = imageName,
                         Thumbnail = imageName,
@@ -248,7 +245,7 @@ namespace App.Services.NewsManagement
                     }
                     else
                     {
-                        entity.Image = new Entities.ProductManagement.Gallery
+                        entity.Image = new Gallery
                         {
                             Image = imageName,
                             Thumbnail = imageName,

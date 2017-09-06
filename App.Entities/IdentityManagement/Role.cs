@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace App.Entities.ProductManagement
+namespace App.Entities.IdentityManagement
 {
     [Serializable]
     public class Role : IdentityRole<int, UserRole>, IObjectState

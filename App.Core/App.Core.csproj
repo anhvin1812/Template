@@ -100,6 +100,7 @@
     <Compile Include="Exceptions\ValidationError.cs" />
     <Compile Include="DataModels\ICategory.cs" />
     <Compile Include="Extensions\DateTime.cs" />
+    <Compile Include="Files\FileEnums.cs" />
     <Compile Include="News\NewsEnums.cs" />
     <Compile Include="Permission\ApplicationPermissionCapabilities.cs" />
     <Compile Include="Permission\ApplicationPermissions.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\RpositoryBase.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
+    <Compile Include="User\UserEnums.cs" />
     <Compile Include="Validation\SpecificationBase.cs" />
     <Compile Include="Validation\ISpecification.cs" />
   </ItemGroup>

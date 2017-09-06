@@ -1,6 +1,6 @@
 ﻿using System;
 using App.Data.EntityFramework;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

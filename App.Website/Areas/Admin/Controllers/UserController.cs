@@ -1,19 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
+using App.Core.User;
+using App.Entities.IdentityManagement;
 using App.Services;
 using App.Services.Dtos.IdentityManagement;
 using App.Services.IdentityManagement;
 using App.Website.Fillters;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using PagedList;
 
 namespace App.Website.Areas.Admin.Controllers
 {
     public class UserController : BaseController
     {
+
         #region Contractor
+        private Infrastructure.IdentityManagement.ApplicationSignInManager _signInManager;
+        private Infrastructure.IdentityManagement.ApplicationUserManager _userManager;
+
+        public Infrastructure.IdentityManagement.ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<Infrastructure.IdentityManagement.ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+
+        public Infrastructure.IdentityManagement.ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<Infrastructure.IdentityManagement.ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         private IUserService UserService { get; set; }
         private IRoleService RoleService { get; set; }
 
@@ -26,17 +60,28 @@ namespace App.Website.Areas.Admin.Controllers
 
         #endregion
 
-        public ActionResult Index(int? page = 1, int? pageSize = 10, int? recordCount = null)
+        public ActionResult Index(string term, int? roleId, bool? lockoutEnabled, bool? emailConfirmed, int? page = 1, int? pageSize = 10)
         {
-            var result = UserService.GetAllUser(page, pageSize, ref recordCount);
+            int? recordCount = 0;
+            var result = UserService.GetAll(term, lockoutEnabled, emailConfirmed, page, pageSize, ref recordCount);
+            var pagedResult = new StaticPagedList<UserSummary>(result, page ?? 1, (int)pageSize, (int)recordCount);
 
-            return View(result);
+            ViewBag.Filters = new UserFilter
+            {
+                Term = term,
+                LockoutEnabled = lockoutEnabled,
+                EmailConfirmed = emailConfirmed,
+            };
+
+            return View(pagedResult);
         }
 
         public ActionResult Create()
         {
             var options = RoleService.GetOptionsForDropdownList();
-            ViewBag.Roles = new SelectList(options.Items, options.DataValueField, options.DataTextField, options.SelectedValues);
+            var gender = UserService.GetGenderOptionsForDropdownList();
+            ViewBag.Roles = new MultiSelectList(options.Items, options.DataValueField, options.DataTextField);
+            ViewBag.Gender = new SelectList(gender.Items, gender.DataValueField, gender.DataTextField);
 
             return View();
         }
@@ -44,13 +89,31 @@ namespace App.Website.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ErrorHandler(View = "Create")]
-        public ActionResult Create(UserEntry entry)
+        public async Task<ActionResult> Create(UserEntry entry)
         {
             var options = RoleService.GetOptionsForDropdownList();
-            ViewBag.Roles = new SelectList(options.Items, options.DataValueField, options.DataTextField, options.SelectedValues);
+            var gender = UserService.GetGenderOptionsForDropdownList();
+            ViewBag.Roles = new MultiSelectList(options.Items, options.DataValueField, options.DataTextField, entry.RoleIds);
+            ViewBag.Gender = new SelectList(gender.Items, gender.DataValueField, gender.DataTextField, entry.Gender);
 
             if (ModelState.IsValid)
             {
+                //var user = new User
+                //{
+                //    Lastname = entry.Lastname,
+                //    Firstname = entry.Firstname,
+                //    Email = entry.Email,
+                //    EmailConfirmed = entry.EmailConfirmed
+                //};
+                //string password = Membership.GeneratePassword(6, 3);
+                //var result = await UserManager.st(user, password);
+
+                //if (result.Succeeded)
+                //{
+                //    var roles = options.Items.Where(x => entry.RoleIds.Contains(x.Value)).Select(x => x.Text).ToArray();
+                //    UserManager.AddToRoles(user.Id, roles);
+                //}
+
                 UserService.Insert(entry);
                 return RedirectToAction("Index");
             }
@@ -60,11 +123,17 @@ namespace App.Website.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var options = RoleService.GetOptionsForDropdownList();
-            ViewBag.Roles = new SelectList(options.Items, options.DataValueField, options.DataTextField, options.SelectedValues);
-
             var user = UserService.GetById(id);
-            return View(DetailToEntry(user));
+
+            var model = DetailToEntry(user);
+
+            var options = RoleService.GetOptionsForDropdownList();
+            var gender = UserService.GetGenderOptionsForDropdownList();
+            ViewBag.Roles = new MultiSelectList(options.Items, options.DataValueField, options.DataTextField, model.RoleIds);
+            ViewBag.Gender = new SelectList(gender.Items, gender.DataValueField, gender.DataTextField, model.Gender);
+
+            
+            return View(model);
         }
 
         [HttpPost]
@@ -73,12 +142,15 @@ namespace App.Website.Areas.Admin.Controllers
         public ActionResult Edit(int id, UserEntry entry)
         {
             var options = RoleService.GetOptionsForDropdownList();
-            ViewBag.Roles = new SelectList(options.Items, options.DataValueField, options.DataTextField, options.SelectedValues);
+            var gender = UserService.GetGenderOptionsForDropdownList();
+            ViewBag.Roles = new MultiSelectList(options.Items, options.DataValueField, options.DataTextField, entry.RoleIds);
+            ViewBag.Gender = new SelectList(gender.Items, gender.DataValueField, gender.DataTextField, entry.Gender);
 
             if (ModelState.IsValid)
             {
-                UserService.Insert(entry);
-                return RedirectToAction("Index");
+                UserService.Update(id, entry);
+                TempData["Message"] = "Saved successfully.";
+                return RedirectToAction("Edit", new { id = id });
             }
 
             return View(entry);
@@ -140,9 +212,12 @@ namespace App.Website.Areas.Admin.Controllers
                 PhoneNumber = detail.PhoneNumber,
                 PhoneNumberConfirmed = detail.PhoneNumberConfirmed,
                 Address = detail.Address,
+                DateOfBirth = detail.DateOfBirth,
+                Gender = (byte?)detail.Gender,
+                Thumbnail = detail.ProfilePicture,
                 LockoutEnabled = detail.LockoutEnabled,
                 LockoutEndDateUtc = detail.LockoutEndDateUtc,
-                Roles = detail.Roles.Select(x=>x.RoleId).ToList()
+                RoleIds = detail.Roles.Select(x=>x.RoleId).ToList()
             };
         }
         #endregion

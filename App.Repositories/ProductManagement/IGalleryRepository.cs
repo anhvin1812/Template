@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Core.Repositories;
-using App.Entities.ProductManagement;
+using App.Entities.FileManagement;
 
 namespace App.Repositories.ProductManagement
 {

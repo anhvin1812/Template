@@ -1,0 +1,105 @@
+﻿@using App.Services.Dtos.Layout
+@using App.Core.Extensions
+@using App.Infrastructure.File
+@using Microsoft.Security.Application
+@model App.Services.Dtos.NewsManagement.PublicNewsDetail
+
+@{
+    ViewBag.Title = Model.Title;
+    var category = Model.Categories.LastOrDefault();
+}
+
+@section FullContent{
+   @Html.Action("BreadCrumb", "Article", new { categoryId = category?.Id})
+}
+
+
+<div class="post-widget bg-white light-shadow mb30">
+    <article class="post">
+        <div class="img-holder-wrap">
+            <a class="img-holder" href="#">
+                <img src="@Url.Content(GalleryHelper.GetImagePath(Model.Image))" alt="@Model.Title">
+            </a>
+            <span class="post-badge">@(category?.Name)</span>
+        </div>
+        <div class="post-info p30">
+            <h3>@Model.Title</h3>
+            <div class="row mb10">
+                <div class="col-sm-6">
+                    <ul class="post-meta m0 p0">
+                        <li><i class="fa fa-clock-o"></i> @Model.PublishedDate.RelativeTime()</li>
+                        <li><i class="fa fa-eye"></i> @Model.Views</li>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                @{
+                    var shareUrl = Url.Encode(Request?.Url.OriginalString);
+                }
+                    <ul class="social-share reset text-right">
+                        <li>
+                            <a class="btn-facebook" onclick="return ShareSocial(this);"  href="https://www.facebook.com/sharer/sharer.php?u=@shareUrl">
+                                <span class="fa fa-facebook"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn-twitter" onclick="return ShareSocial(this);"  href="https://twitter.com/share?url=@shareUrl">
+                                <span class="fa fa-twitter"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn-linkedin" onclick="return ShareSocial(this);"  href="https://www.linkedin.com/cws/share?url=@shareUrl">
+                                <span class="fa fa-linkedin"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="post-content">
+                @Html.Raw(Model.Content) 
+            </div>
+            <div class="post-tags-holder">
+                <ul class="post-tags reset">
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <li><a href="@Url.Action("Tag", "Article", new {id = tag.Id, tag=tag.Name})">@tag.Name</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </article>
+</div><!-- /.post-widget-->
+
+@Html.Action("Related", "Article", new {newsId = Model.Id, categoryId = category?.Id})
+
+@Html.Partial("_FacebookComment", Request?.Url.OriginalString)
+
+@section SideBar{
+    @Html.Partial("_SideBar", new SideBar { CategoryId = category?.Id })
+}
+
+@section Scripts{
+<script type="text/javascript">
+    jQuery(function ($) {
+        // active hot news slider
+        $(".related-news-slider .owl-carousel").owlCarousel({
+            loop: false,
+            margin: 30,
+            nav: false,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                768: {
+                    items: 3
+                },
+                1000: {
+                    items: 4
+                }
+            }
+        });
+    });
+</script>
+}

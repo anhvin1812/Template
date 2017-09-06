@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using App.Entities.ProductManagement;
+using App.Entities.FileManagement;
+using App.Entities.IdentityManagement;
 
 namespace App.Entities.NewsManagement
 {

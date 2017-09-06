@@ -10,13 +10,12 @@ using App.Core.Exceptions;
 using App.Core.Repositories;
 using App.Entities;
 using App.Entities.ProductManagement;
-using App.Entities.ProductManagement;
+using App.Entities.FileManagement;
 using App.Infrastructure.File;
 using App.Repositories.ProductManagement;
 using App.Services.Dtos.Gallery;
 using App.Services.Dtos.ProductManagement;
 using App.Services.Gallery;
-using Gallery= App.Entities.ProductManagement.Gallery;
 
 namespace App.Services.ProductManagement
 {
@@ -138,7 +137,7 @@ namespace App.Services.ProductManagement
                     OldPrice = entry.OldPrice,
                     CategoryId = entry.CategoryId,
                     StatusId = entry.StatusId,
-                    Galleries = new List<App.Entities.ProductManagement.Gallery>()
+                    Galleries = new List<Entities.FileManagement.Gallery>()
                 };
 
                 // upload image
@@ -146,7 +145,7 @@ namespace App.Services.ProductManagement
                 {
                     var imageName = GalleryHelper.UploadGallery(entry.Image, AppSettings.ConfigurationProvider.ThumbnailWidth);
 
-                    entity.Image = new Entities.ProductManagement.Gallery
+                    entity.Image = new Entities.FileManagement.Gallery
                     {
                         Image = imageName,
                         Thumbnail = imageName,
@@ -161,7 +160,7 @@ namespace App.Services.ProductManagement
                     {
                         var fileName = GalleryHelper.UploadGallery(gallery, AppSettings.ConfigurationProvider.ThumbnailWidth);
 
-                        entity.Galleries.Add(new Entities.ProductManagement.Gallery
+                        entity.Galleries.Add(new Entities.FileManagement.Gallery
                         {
                             Image = fileName,
                             Thumbnail = fileName,
@@ -215,7 +214,7 @@ namespace App.Services.ProductManagement
                     }
                     else
                     {
-                        entity.Image = new Entities.ProductManagement.Gallery
+                        entity.Image = new Entities.FileManagement.Gallery
                         {
                             Image = imageName,
                             Thumbnail = imageName,
@@ -234,7 +233,7 @@ namespace App.Services.ProductManagement
 
                         var fileName = GalleryHelper.UploadGallery(gallery, AppSettings.ConfigurationProvider.ThumbnailWidth);
 
-                        entity.Galleries.Add(new Entities.ProductManagement.Gallery
+                        entity.Galleries.Add(new Entities.FileManagement.Gallery
                         {
                             Image = fileName,
                             Thumbnail = fileName,

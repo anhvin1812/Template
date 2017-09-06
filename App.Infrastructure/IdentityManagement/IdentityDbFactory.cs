@@ -3,7 +3,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using App.Data.EntityFramework;
 using App.Entities;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 

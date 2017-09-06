@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using App.Entities.ProductManagement;
+using App.Entities.FileManagement;
 
 namespace App.Entities.ProductManagement
 {

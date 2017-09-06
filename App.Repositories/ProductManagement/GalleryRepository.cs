@@ -1,11 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using App.Core.Repositories;
-using App.Entities.ProductManagement;
-using App.Entities.ProductManagement;
-using App.Infrastructure.IdentityManagement;
-using App.Repositories.Common;
-using Microsoft.AspNet.Identity;
+using App.Entities.FileManagement;
 
 namespace App.Repositories.ProductManagement
 {

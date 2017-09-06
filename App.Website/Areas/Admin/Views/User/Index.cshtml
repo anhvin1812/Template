@@ -1,76 +1,117 @@
 ﻿@using System.Web.Optimization
-@{
-    ViewBag.Title = "Người dùng";
-}
-@model IEnumerable<App.Services.Dtos.IdentityManagement.UserSummary>
+@using App.Services.Dtos.IdentityManagement
+@using PagedList.Mvc
+@model PagedList.StaticPagedList<UserSummary>
 
+@{
+    ViewBag.Title = "Users management";
+    var filters = (UserFilter)ViewBag.Filters;
+}
 @section AddStyles{
     @*@Styles.Render("~/Admin/Css/DataTable")*@
 }
 
-<div class="box">
-    @*<div class="box-header">
-        <h3 class="box-title">Data Table With Full Features</h3>
-        @using (Html.BeginForm("Index", "User", FormMethod.Get))
+<div class="box box-primary">
+    <div class="box-header with-border">
+        @using (Html.BeginForm("Index", "User", FormMethod.Get, new { @class = "form-inline" }))
         {
-            <div class="input-group input-group-sm">
-                <input class="form-control" type="text">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-info btn-flat">Go</button>
-                </span>
+            <div class="row">
+                <div class="col-xs-12 col-sm-3">
+                    <div class="form-group">
+                        <h3 class="box-title">
+                            <a class="btn btn-block btn-primary btn-sm" href="@Url.Action("Create", "User")">New user</a>
+                            <br />
+                        </h3>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-9  text-right">
+                    <div class="form-group">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control" type="text" name="keyword" placeholder="Name, email, phone number" value="@filters.Term">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="lockoutEnabled" value="true" @(filters.LockoutEnabled.GetValueOrDefault() ? "checked" : string.Empty) />
+                                Lockout enabled
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="emailConfirmed" value="true" @(filters.EmailConfirmed.GetValueOrDefault() ? "checked" : string.Empty)/> Hot
+                                Email confirmed
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-filter"></i> Filter</button>
+                </div>
             </div>
         }
-    </div>*@
-    <div class="box-header with-border">
-        <h3 class="box-title">
-            <a class="btn btn-block btn-primary" href="@Url.Action("Create", "User")">Tạo tài khoản</a>
-        </h3>
-    </div>
-    <!-- /.box-header -->
+    </div><!-- /.box-header -->
     <div class="box-body">
-        <table id="example1" class="table table-bordered table-hover">
+        <table class="table table-hover table-striped">
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
+                    <th>Fullname</th>
+                    <th>Email</th>
                     <th>Phone Number</th>
+                    <th class="text-center">Lockout</th>
                     <th>Roles</th>
                     <th>Action</th>
                 </tr>
             </thead>
-        <tbody>
-        @foreach (var m in Model)
-        {
-            <tr>
-                <td>@m.Id</td>
-                <td>@m.Firstname</td>
-                <td>@m.Lastname</td>
-                <td>@m.PhoneNumber</td>
-                <td>
-                    @foreach (var r in m.Roles)
-                    {
-                        <span class="label label-info">@r.RoleName</span>
-                    }
-                </td>
-                <td>
-                    <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "User", new {id = m.Id})">
-                        <i class="fa fa-fw fa-pencil"></i> Edit
-                    </a>
-                </td>
-            </tr>
-        }
-        </tbody>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td>@m.Id</td>
+                        <td>@m.Lastname @m.Firstname </td>
+                        <td>
+                            <span class="@(m.EmailConfirmed ? "text-green" : "text-yellow")">@m.Email</span>
+                        </td>
+                        <td>@m.PhoneNumber</td>
+                        <td class="text-center">
+                            @if (!m.LockoutEnabled)
+                            {
+                                <i class="fa fa-user text-green"></i>
+                            }
+                            else
+                            {
+                                <i class="fa fa-user-times text-red"></i>
+                            }
+                        </td>
+                        <td>
+                            @foreach (var r in m.Roles)
+                            {
+                                <span class="label label-info">@r.RoleName</span>
+                            }
+                        </td>
+                        <td>
+                            <a class="btn btn-default btn-sm" href="@Url.Action("Edit", "User", new {id = m.Id})">
+                                <i class="fa fa-fw fa-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div><!-- /.box-body -->
+
+
     <div class="box-footer clearfix">
-        <ul class="pagination no-margin pull-right">
-            <li><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { term = filters.Term, roleId = filters.RoleId, lockoutEnabled = filters.LockoutEnabled, emailConfirmed = filters.EmailConfirmed, page = page }), new PagedListRenderOptions { ContainerDivClasses = new[] { "no-margin", "pull-right" } })
+
     </div>
 </div><!-- /.box -->
 
@@ -80,10 +121,10 @@
     <!-- DataTables -->
     @*@Scripts.Render("~/Admin/Js/dataTable")
 
-    <script>
-      $(function () {
-        $("#example1").DataTable();
-      });
-    </script>*@
+        <script>
+          $(function () {
+            $("#example1").DataTable();
+          });
+        </script>*@
 }
 

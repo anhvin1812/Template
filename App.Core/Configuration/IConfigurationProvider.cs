@@ -14,6 +14,10 @@
 
         string DirectoryLogo { get; }
 
-       
+        string DirectoryProfileImage { get; }
+        string DirectoryProfileThumbnail { get; }
+        string DefaultProfileImage { get; }
+        string DefaultProfileThumbnail { get; }
+
     }
 }

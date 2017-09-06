@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using App.Entities.ProductManagement;
+using App.Entities.FileManagement;
 
 namespace App.Data.EntityFramework.Mapping
 {

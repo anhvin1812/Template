@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using App.Core.Repositories;
-using App.Entities.ProductManagement;
+using App.Entities;
+using App.Entities.IdentityManagement;
 using App.Infrastructure.IdentityManagement;
 using App.Repositories.Common;
 using Microsoft.AspNet.Identity;
@@ -13,24 +14,39 @@ namespace App.Repositories.IdentityManagement
         private ApplicationUserManager _applicationUserManager;
         private ApplicationRoleManager _applicationRoleManager;
 
-        public UserRepository(IMinhKhangDatabaseContext databaseContext, ApplicationUserManager applicationUserManager)
+        public UserRepository(IMinhKhangDatabaseContext databaseContext)
             : base(databaseContext)
         {
-            _applicationUserManager = applicationUserManager;
+            _applicationUserManager = ApplicationUserManager.Create(databaseContext.MinhKhangDbContext);
         }
 
         private IMinhKhangDatabaseContext DatabaseContext => PlatformContext as IMinhKhangDatabaseContext;
 
         public User GetUserById(int id)
         {
-            var result = _applicationUserManager.FindById(id);
-
+            var result = DatabaseContext.FindById<User>(id);
             return result;    
         }
 
-        public IEnumerable<User> GetAllUser(int? page, int? pageSize, ref int? recordCount)
+        public IEnumerable<User> GetAll(string term, bool? lockoutEnabled, bool? emailConfirmed, int? page, int? pageSize, ref int? recordCount)
         {
             var result = DatabaseContext.Get<User>();
+
+            if (!string.IsNullOrWhiteSpace(term))
+            {
+                result = result.Where(t => (t.Lastname + " " + t.Firstname).Contains(term)
+                || t.Email.Contains(term) || t.PhoneNumber.Contains(term));
+            }
+
+            if (lockoutEnabled != null)
+            {
+                result = result.Where(t => t.LockoutEnabled == lockoutEnabled);
+            }
+
+            if (emailConfirmed != null)
+            {
+                result = result.Where(t => t.EmailConfirmed == emailConfirmed);
+            }
 
             if (recordCount != null)
             {
@@ -45,14 +61,16 @@ namespace App.Repositories.IdentityManagement
             return result;
         }
 
-        public void Create(User user)
+        public void Create(User user, string password)
         {
-            _applicationUserManager.Create(user);
+            user.PasswordHash = _applicationUserManager.PasswordHasher.HashPassword(password);
+            DatabaseContext.Insert(user);
         }
 
         public void Update(User user)
         {
-            _applicationUserManager.Update(user);
+            //_applicationUserManager.Update(user);
+            DatabaseContext.Update(user);
         }
 
         public void Delete(User user)
@@ -65,12 +83,30 @@ namespace App.Repositories.IdentityManagement
             return DatabaseContext.Get<Role>().Where(r => r.Users.Any(u => u.UserId == useId));
         }
 
-        public bool IsExistedEmail(string email)
+        public bool IsExistedEmail(string email, int? id = null)
         {
-            return DatabaseContext.Get<User>().Any(t=>t.Email == email);
+            var result = DatabaseContext.Get<User>().Any(t => t.Email == email);
 
+            if (id.HasValue)
+                result = DatabaseContext.Get<User>().Any(t => t.Email == email && t.Id != id);
+
+            return result;
         }
 
+        #region UserRole
+        public void DeleteRoles(IEnumerable<UserRole> entities)
+        {
+            foreach (var entity in entities)
+            {
+                entity.State = ObjectState.Deleted; 
+            }
+        }
+
+        public void InsertUserRole(UserRole entity)
+        {
+            DatabaseContext.Insert(entity);
+        }
+        #endregion
 
         #region Dispose
         private bool _disposed = false;

@@ -4,7 +4,7 @@ using System.Linq;
 using App.Core.Repositories;
 using App.Data.EntityFramework;
 using App.Entities;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 

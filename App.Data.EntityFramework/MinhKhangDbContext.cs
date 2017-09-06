@@ -1,7 +1,8 @@
 ﻿using System.Data.Entity;
 using System.Diagnostics;
 using App.Data.EntityFramework.Mapping;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace App.Data.EntityFramework
 {
@@ -25,11 +26,6 @@ namespace App.Data.EntityFramework
             return new MinhKhangDbContext();
         }
 
-        //public static MinhKhangDbContext Create()
-        //{
-        //    return  new MinhKhangDbContext();
-        //}
-
         public new IDbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();
@@ -44,11 +40,13 @@ namespace App.Data.EntityFramework
 #endif
 
             // Add entities for Identity
+            modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Role>().ToTable("Role");
             modelBuilder.Entity<UserRole>().ToTable("UserRole");
             modelBuilder.Entity<UserLogin>().ToTable("UserLogin");
             modelBuilder.Entity<UserClaim>().ToTable("UserClaim");
-            modelBuilder.Entity<Role>().ToTable("Role");
-            modelBuilder.Entity<User>().ToTable("User");
+
+
 
             // Mapping
             IdentityManagementMap.Configure(modelBuilder);

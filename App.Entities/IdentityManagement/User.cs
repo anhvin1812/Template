@@ -1,19 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using App.Entities.FileManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace App.Entities.ProductManagement
+namespace App.Entities.IdentityManagement
 {
     public class User : IdentityUser<int, UserLogin, UserRole, UserClaim>, IObjectState
     {
         public string Firstname  { get; set; }
         public string Lastname { get; set; }
         public string Address { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public byte? Gender { get; set; }
+        public int? GalleryId { get; set; }
 
         public virtual ICollection<Role> UserRoles { get; set; }
+
+        [ForeignKey("GalleryId")]
+        public virtual Gallery ProfilePicture { get; set; }
 
         [NotMapped]
         public ObjectState State { get; set; }

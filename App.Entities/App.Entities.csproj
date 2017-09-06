@@ -88,7 +88,7 @@
     <Compile Include="NewsManagement\News.cs" />
     <Compile Include="ObjecState.cs" />
     <Compile Include="NewsManagement\Category.cs" />
-    <Compile Include="ProductManagement\Gallery.cs" />
+    <Compile Include="FileManagement\Gallery.cs" />
     <Compile Include="ProductManagement\ProductStatus.cs" />
     <Compile Include="ProductManagement\ProductCategory.cs" />
     <Compile Include="ProductManagement\Product.cs" />

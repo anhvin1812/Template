@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace App.Entities.ProductManagement
+namespace App.Entities.IdentityManagement
 {
     public class RoleClaim : EntityBase
     {

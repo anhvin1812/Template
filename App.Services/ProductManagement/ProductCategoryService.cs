@@ -11,7 +11,7 @@ using App.Core.Exceptions;
 using App.Core.Repositories;
 using App.Entities;
 using App.Entities.ProductManagement;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
 using App.Repositories.IdentityManagement;
 using App.Repositories.ProductManagement;
 using App.Services.Dtos.IdentityManagement;

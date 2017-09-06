@@ -72,12 +72,12 @@ namespace App.Repositories.NewsManagement
 
         public bool IsExistedName(string name, int? id = null)
         {
-            if (id.HasValue)
-            {
-                return DatabaseContext.Get<NewsCategory>().Any(t => t.Name == name && t.Id != id);
-            }
+            var result = DatabaseContext.Get<NewsCategory>().Any(t => t.Name == name);
 
-            return DatabaseContext.Get<NewsCategory>().Any(t => t.Name == name);
+            if (id.HasValue)
+                result = DatabaseContext.Get<NewsCategory>().Any(t => t.Id != id);
+
+            return result;
         }
     }
 }

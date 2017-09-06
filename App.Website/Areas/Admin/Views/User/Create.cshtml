@@ -1,10 +1,15 @@
 ﻿@using System.Web.Optimization
+@using App.Core.Files
+@using App.Core.User
+@using App.Infrastructure.File
 @model App.Services.Dtos.IdentityManagement.UserEntry
 @{
     ViewBag.Title = "User";
 }
 
 @section AddStyles{
+    <!-- Bootstrap-toggle -->
+@Styles.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.css")
 }
 
 @section ContentHeader
@@ -15,17 +20,18 @@
             <small>Create</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>User Management</li>
-            <li class="active">User</li>
+            <li><a href="@Url.Action("Index", "Home", new {area = "Admin"})"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="@Url.Action("Index", "User", new {area = "Admin"})"><i class="fa fa-dashboard"></i> Users Management</a></li>
+            <li class="active">Users</li>
         </ol>
     </section>
 }
 
 
-@using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { @class = "", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
+    var toggleAttributes = new { data_toggle = "toggle", data_onstyle = "success", data_on = "Yes", data_off = "No", data_size = "small" };
 
     <div class="row">
         <div class="col-xs-12">
@@ -34,52 +40,97 @@
     </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Thông tin cơ bản</h3>
+                        <h3 class="box-title">Personal Information</h3>
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Email)
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter email" })
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    @Html.LabelFor(m => m.Firstname)
+                                    @Html.LabelFor(m => m.Firstname, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.Firstname, new { @class = "form-control", placeholder = "Enter first name" })
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    @Html.LabelFor(m => m.Lastname)
+                                    @Html.LabelFor(m => m.Lastname, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.Lastname, new { @class = "form-control", placeholder = "Enter last name" })
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.PhoneNumber)
+                            @Html.LabelFor(m => m.PhoneNumber, "Phone number", new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "Enter phone number" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Address)
+                            @Html.LabelFor(m => m.DateOfBirth, "Date of birth", new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control", placeholder = "Date of birth" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Gender)
+                            @Html.DropDownListFor(m=>m.Gender, (SelectList)ViewBag.Gender, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Address, new { @class = "control-label" })
                             @Html.TextBoxFor(m => m.Address, new { @class = "form-control", placeholder = "Enter address" })
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
 
-            </div>
-
-            <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Vai trò</h3>
+                        <h3 class="box-title">Account Information</h3>
+                    </div>
+                    <div class="box-body form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.RoleIds, "Roles", new {@class = "control-label col-sm-2"})
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(m => m.RoleIds, (MultiSelectList) ViewBag.Roles, new {@class = "form-control col-sm-10 select2", @multiple = "multiple"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.EmailConfirmed, "Email confirmed", new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.EmailConfirmed, toggleAttributes)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.LockoutEnabled, "Lockout enabled", new { @class = "control-label col-sm-2" })
+                            <div class="col-sm-10">
+                                @Html.CheckBoxFor(m => m.LockoutEnabled, new { data_toggle = "toggle", data_onstyle = "danger", data_on = "On", data_off = "Off", data_size = "small" })
+                            </div>
+                        </div>
+                        
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Profile picture</h3>
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Roles, "Roles")
-                            @Html.DropDownListFor(m => m.Roles, (SelectList)ViewBag.Roles, new { @class = "form-control select2", @multiple = "multiple" })
+                            <div id="wrapperUploadFeaturedImage" class="input-group">
+                                <span class="input-group-btn">
+                                    <span class="btn btn-success btn-sm btn-file">
+                                        <i class="fa fa-folder-open-o"></i> Browse...
+                                        @Html.TextBoxFor(x => x.ProfilePicture, new { type = "file", @class = "input-file-single", data_preview = "previewProfilePicture" })
+                                    </span>
+                                </span>
+                                <input type="text" readonly="readonly" class="form-control input-sm input-file">
+                            </div><!-- /input-group -->
+                        </div>
+                        <div id="previewProfilePicture" class="">
+                            <img src="@Url.Content(GalleryHelper.GetFilePath(string.Empty, FilePath.ProfileThumbnail))" class="profile-user-img img-responsive img-circle" style="height: 100px">
                         </div>
                     </div><!-- /.box-body -->
                 </div><!-- /.box -->
@@ -98,15 +149,14 @@
     @Scripts.Render("~/Admin/Js/jqueryval")
 
     <!-- Select2-->
-    @Scripts.Render("~/Areas/Admin/Scripts/select2/select2.full.min.js")
+    @Scripts.Render("~/Admin/Js/select2")
             
-    <!-- Product -->
-    @*@Scripts.Render("~/Admin/App/product")*@
+     <!-- Bootstrap-toggle -->
+    @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
 
     <script type="text/javascript">
             jQuery(function ($) {
                 //Initialize Select2 Elements
-                $(".select2").select2();
             });
     </script>
 }

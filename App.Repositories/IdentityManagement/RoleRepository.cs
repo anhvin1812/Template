@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using App.Core.Repositories;
-using App.Entities.ProductManagement;
-using App.Infrastructure.IdentityManagement;
+using App.Entities.IdentityManagement;
 using App.Repositories.Common;
-using Microsoft.AspNet.Identity;
 
 namespace App.Repositories.IdentityManagement
 {
@@ -54,6 +52,11 @@ namespace App.Repositories.IdentityManagement
         public IEnumerable<Role> GetByUserId(int userId)
         {
             return DatabaseContext.Get<Role>().Where(t => t.Users.Any(u => u.UserId == userId));
+        }
+
+        public IEnumerable<Role> GetByIds(IEnumerable<int> ids)
+        {
+            return DatabaseContext.Get<Role>().Where(t => ids.Contains(t.Id));
         }
 
         public void Insert(Role entity)

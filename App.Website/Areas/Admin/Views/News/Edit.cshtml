@@ -1,4 +1,5 @@
 ﻿@using System.Web.Optimization
+@using App.Core.Files
 @using App.Core.Permission
 @using App.Infrastructure.File
 @model App.Services.Dtos.NewsManagement.NewsUpdateEntry
@@ -98,7 +99,7 @@
                         </div><!-- /input-group -->
                     </div>
                     <div id="previewFeaturedImage">
-                        <img src="@Url.Content(GalleryHelper.GetThumbnailPath(Model.Thumbnail))" class="img-responsive" style="max-height:200px; max-width:90%">
+                        <img src="@Url.Content(GalleryHelper.GetFilePath(Model.Thumbnail, FilePath.NewsThumbnail))" class="img-responsive" style="max-height:200px; max-width:90%">
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->

@@ -32,5 +32,17 @@ namespace App.Core.Configuration
         public int ThumbnailPhotoWidth => 600;
 
         public string DirectoryLogo => GetAppSetting("DirectoryLogo").Trim();
+
+        public string DirectoryProfileImage => GetAppSetting("DirectoryProfileImage").Trim();
+
+        public string DirectoryProfileThumbnail => GetAppSetting("DirectoryProfileThumbnail").Trim();
+
+        public string DefaultProfileImage => GetAppSetting("DefaultProfileImage").Trim();
+
+        public string DefaultProfileThumbnail => GetAppSetting("DefaultProfileThumbnail").Trim();
+
+        public int ProfileImageWidth => 360;
+        public int ProfileThumbnailWidth => 150;
+
     }
 }

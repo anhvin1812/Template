@@ -1446,6 +1446,8 @@
     <Content Include="Content\images\bg-stripe.png" />
     <Content Include="Content\images\default-image.png" />
     <Content Include="Content\images\default-thumbnail.png" />
+    <Content Include="Content\images\default_avatar_150x150.jpg" />
+    <Content Include="Content\images\default_avatar_360x360.jpg" />
     <Content Include="Content\images\facebook-footer.png" />
     <Content Include="Content\images\facebook.png" />
     <Content Include="Content\images\google.png" />
@@ -1792,6 +1794,8 @@
     <Folder Include="Content\FileUpload\Logo\" />
     <Folder Include="Content\FileUpload\Products\Images\" />
     <Folder Include="Content\FileUpload\Products\Thumbnails\" />
+    <Folder Include="Content\FileUpload\ProfileImages\Images\" />
+    <Folder Include="Content\FileUpload\ProfileImages\Thumbnails\" />
     <Folder Include="Scripts\owl-carousel\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>

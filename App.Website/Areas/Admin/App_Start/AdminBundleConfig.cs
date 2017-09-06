@@ -51,6 +51,10 @@ namespace App.Website.Areas.Admin.App_Start
                       getPath("Scripts/iCheck/icheck.min.js"),
                       getPath("Scripts/js/active-iCheck.js")));
 
+            bundles.Add(new ScriptBundle("~/Admin/Js/select2").Include(
+                      getPath("Scripts/select2/select2.full.min.js"),
+                      getPath("Scripts/App/select2.js")));
+
             bundles.Add(new ScriptBundle("~/Admin/Js/app").Include(
                       getPath("Scripts/js/app.min.js"),
                       getPath("Scripts/App/common.js"),
@@ -83,9 +87,6 @@ namespace App.Website.Areas.Admin.App_Start
                       getPath("Content/css/skins/_all-skins.min.css"),
                       getPath("Content/css/site.css")));
 
-            bundles.Add(new StyleBundle("~/Admin/Content/iCheck").Include(
-                     getPath("Scripts/iCheck/flat/blue.css") ));
-
             bundles.Add(new StyleBundle("~/Admin/Content/morrischart").Include(
                      getPath("Scripts/morris/morris.css")));
 
@@ -107,8 +108,7 @@ namespace App.Website.Areas.Admin.App_Start
 
         private static string getPath(string relativePath)
         {
-            //return $"~/Areas/Admin/{relativePath}";
-            return string.Format("~/Areas/Admin/{0}", relativePath);
+            return $"~/Areas/Admin/{relativePath}";
 
         }
     }

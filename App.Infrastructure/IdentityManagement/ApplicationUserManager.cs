@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using App.Data.EntityFramework;
 using App.Entities;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -20,11 +21,11 @@ namespace App.Infrastructure.IdentityManagement
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
-            IOwinContext owinContext)
+            IOwinContext context)
         {
 
-            var store = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(owinContext.Get<MinhKhangDbContext>());
-            store.AutoSaveChanges = false;
+            var store = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(context.Get<MinhKhangDbContext>());
+            store.AutoSaveChanges = true;
             var appUserManager = new ApplicationUserManager(store);
 
 
@@ -58,6 +59,16 @@ namespace App.Infrastructure.IdentityManagement
                 };
             }
 
+            return appUserManager;
+        }
+
+        public static ApplicationUserManager Create(DbContext context)
+        {
+
+            var store = new UserStore<User, Role, int, UserLogin, UserRole, UserClaim>(context);
+            store.AutoSaveChanges = true;
+            var appUserManager = new ApplicationUserManager(store);
+            appUserManager._userManager = new UserManager<User, int>(store);
             return appUserManager;
         }
 
@@ -104,8 +115,9 @@ namespace App.Infrastructure.IdentityManagement
         }
         public void Create(User user, string password)
         {
-            _userManager.Create(user, password);
             user.State = ObjectState.Added;
+            _userManager.Create(user, password);
+            
         }
 
     }

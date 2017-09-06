@@ -17,10 +17,7 @@ namespace App.Data.EntityFramework
         {
         }
 
-        public DbContext MinhKhangDbContext
-        {
-            get { return (MinhKhangDbContext)_dbContext;  }
-        }
+        public DbContext MinhKhangDbContext => (MinhKhangDbContext)_dbContext;
 
         private bool disposed = false;
         protected override void Dispose(bool isDisposing)

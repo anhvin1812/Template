@@ -4,21 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using App.Core.Repositories;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
 
 
 namespace App.Repositories.IdentityManagement
 {
     public interface IUserRepository : IRepository
     {
-        IEnumerable<User> GetAllUser(int? page, int? pageSize, ref int? recordCount);
+        IEnumerable<User> GetAll(string term, bool? lockoutEnabled, bool? emailConfirmed, int? page, int? pageSize, ref int? recordCount);
         User GetUserById(int id);
-        void Create(User user);
+        void Create(User user, string password);
         void Update(User user);
         void Delete(User user);
 
         IEnumerable<Role> GetRoleByUser(int useId);
 
-        bool IsExistedEmail(string email);
+        bool IsExistedEmail(string email, int? id = null);
+
+        #region UserRole
+        void DeleteRoles(IEnumerable<UserRole> entities);
+        void InsertUserRole(UserRole entity);
+        #endregion
     }
 }

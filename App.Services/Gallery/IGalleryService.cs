@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using App.Services.Dtos.Gallery;
-using App.Services.Dtos.ProductManagement;
-using App.Services.Dtos.UI;
 
 namespace App.Services.Gallery
 {

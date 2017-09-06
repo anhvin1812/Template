@@ -8,7 +8,7 @@ using App.Core.Exceptions;
 using App.Core.Permission;
 using App.Core.Repositories;
 using App.Entities;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
 using App.Repositories.IdentityManagement;
 using App.Services.Common;
 using App.Services.Dtos.IdentityManagement;
@@ -52,19 +52,15 @@ namespace App.Services.IdentityManagement
 
         public SelectListOptions GetOptionsForDropdownList()
         {
-            var userId = CurrentClaimsIdentity.GetUserId();
-
             int? recordCount = null;
-            var items = RoleRepository.GetAll(null, null, ref recordCount).Select(x=> new OptionItem {
-                Value = x.Id,
-                Text = x.Name
-            });
-            var selectedValues = RoleRepository.GetByUserId(userId).Select(x=>x.Id);
-
+            var roles = RoleRepository.GetAll(null, null, ref recordCount);
 
             return new SelectListOptions {
-                Items = items,
-                SelectedValues = selectedValues
+                Items = roles.Select(x => new OptionItem
+                {
+                    Value = x.Id,
+                    Text = x.Name
+                })
             };
             
         }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace App.Entities.ProductManagement
+namespace App.Entities.FileManagement
 {
     public class Gallery : EntityBase
     {

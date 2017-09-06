@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using App.Core.Repositories;
-using App.Entities.ProductManagement;
+using App.Entities.IdentityManagement;
 
 
 namespace App.Repositories.IdentityManagement
@@ -10,6 +10,7 @@ namespace App.Repositories.IdentityManagement
         #region Role
         IEnumerable<Role> GetAll(int? page, int? pageSize, ref int? recordCount);
         IEnumerable<Role> GetByUserId(int userId);
+        IEnumerable<Role> GetByIds(IEnumerable<int> ids);
         Role GetByName(string roleName);
         Role GetById(int id);
         void Insert(Role role);
