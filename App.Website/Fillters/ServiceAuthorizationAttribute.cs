@@ -80,7 +80,7 @@ namespace App.Website.Fillters
                 var returnUrl = filterContext.HttpContext.Request.Url.GetComponents(UriComponents.PathAndQuery, UriFormat.SafeUnescaped);
 
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
-                    new {action = "Login", controller = "User", Area = "Admin", returnUrl = returnUrl}));
+                    new {action = "Login", controller = "Account", Area = "Admin", returnUrl = returnUrl}));
             }
             else
             {

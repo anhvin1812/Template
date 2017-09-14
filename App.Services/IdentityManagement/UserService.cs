@@ -1,41 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using System.Web;
 using System.Web.Security;
 using App.Core.Configuration;
 using App.Core.Exceptions;
-using App.Core.News;
 using App.Core.Permission;
 using App.Core.Repositories;
 using App.Core.User;
 using App.Entities;
 using App.Entities.IdentityManagement;
-using App.Entities.ProductManagement;
+using App.Infrastructure.Email;
 using App.Infrastructure.File;
+using App.Infrastructure.IdentityManagement;
 using App.Repositories.IdentityManagement;
 using App.Services.Common;
 using App.Services.Common.Validations;
+using App.Services.Dtos.Email;
 using App.Services.Dtos.IdentityManagement;
 using App.Services.Dtos.UI;
+using Microsoft.AspNet.Identity;
 
 namespace App.Services.IdentityManagement
 {
     public class UserService: ServiceBase, IUserService
     {
         #region Contructor
+        private ApplicationUserManager UserManager;
+
         private IUserRepository UserRepository { get; set; }
         private IRoleRepository RoleRepository { get; set; }
         private ISecurityService SecurityService { get; set; }
 
-        public UserService(IUnitOfWork unitOfWork, ISecurityService securityService, IUserRepository userRepository, IRoleRepository roleRepository)
+        public UserService(IUnitOfWork unitOfWork, ISecurityService securityService, IUserRepository userRepository, IRoleRepository roleRepository,
+            ApplicationUserManager userManager)
             : base(unitOfWork, new IRepository[] { userRepository }, new IService[] { securityService })
         {
             SecurityService = securityService;
             UserRepository = userRepository;
             RoleRepository = roleRepository;
+            UserManager = userManager;
         }
 
         #endregion
@@ -97,6 +103,8 @@ namespace App.Services.IdentityManagement
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
 
+                if (entity.LockoutEnabled)
+                    entity.LockoutEndDateUtc = DateTime.UtcNow;
 
                 if (entry.ProfilePicture != null)
                 {
@@ -125,11 +133,13 @@ namespace App.Services.IdentityManagement
                 }
 
                 ts.Complete();
-            }
-            
 
-            //TODO: sent email
+                // send confirmation email
+                SendConfirmationEmail(entity);
+            }
         }
+
+       
 
         public void Update(int id, UserEntry entry)
         {
@@ -147,15 +157,16 @@ namespace App.Services.IdentityManagement
 
                 if (UserRepository.IsExistedEmail(entry.Email, entity.Id))
                 {
-                    var violations = new List<ErrorExtraInfo> {
-                        new ErrorExtraInfo { Code = ErrorCodeType.EmailIsUsed }
+                    var violations = new List<ErrorExtraInfo>
+                    {
+                        new ErrorExtraInfo {Code = ErrorCodeType.EmailIsUsed}
                     };
                     throw new ValidationError(violations);
                 }
 
-            
                 entity.Firstname = entry.Firstname;
                 entity.Lastname = entry.Lastname;
+                entity.UserName = entry.Email;
                 entity.Email = entry.Email;
                 entity.Address = entry.Address;
                 entity.PhoneNumber = entry.PhoneNumber;
@@ -163,6 +174,16 @@ namespace App.Services.IdentityManagement
                 entity.DateOfBirth = entry.DateOfBirth;
                 entity.LockoutEnabled = entry.LockoutEnabled;
                 entity.EmailConfirmed = entry.EmailConfirmed;
+
+                if (entity.LockoutEnabled && entity.LockoutEndDateUtc == null)
+                {
+                    entity.LockoutEndDateUtc = DateTime.UtcNow;
+                }
+                else if (!entity.LockoutEnabled && entity.LockoutEndDateUtc != null)
+                {
+                    entity.LockoutEndDateUtc = null;
+                }
+
 
                 // upload profile picture
                 if (entry.ProfilePicture != null)
@@ -189,13 +210,13 @@ namespace App.Services.IdentityManagement
 
                 // roles
                 UserRepository.DeleteRoles(entity.Roles);
-               
+
                 if (entry.RoleIds != null && entry.RoleIds.Any())
                 {
                     var roles = RoleRepository.GetByIds(entry.RoleIds).ToList();
                     foreach (var role in roles)
                     {
-                        UserRepository.InsertUserRole(new UserRole { UserId = entity.Id, RoleId = role.Id });
+                        UserRepository.InsertUserRole(new UserRole {UserId = entity.Id, RoleId = role.Id});
                     }
                 }
 
@@ -203,6 +224,7 @@ namespace App.Services.IdentityManagement
                 Save();
 
                 ts.Complete();
+
             }
         }
 
@@ -224,6 +246,40 @@ namespace App.Services.IdentityManagement
         }
 
 
+
+        #region Account
+
+        public void ChangePassword(ChangePasswordEntry entry)
+        {
+            var userId = CurrentClaimsIdentity.GetUserId();
+            ValidateChangePasswordEntryData(entry);
+
+            var entity = UserRepository.GetUserById(userId);
+            if(entity == null)
+                throw new DataNotFoundException();
+
+
+            //var hashedCurrentPassword = UserManager.PasswordHasher.HashPassword(entry.CurrentPassword);
+            var verifyCurrentPassword = UserManager.PasswordHasher.VerifyHashedPassword(entity.PasswordHash, entry.CurrentPassword);
+            if (verifyCurrentPassword != PasswordVerificationResult.Success)
+            {
+                var violations = new List<ErrorExtraInfo> {new ErrorExtraInfo {Code = ErrorCodeType.CurrentPasswordNotCorrect}};
+                throw new ValidationError(violations);
+            }
+
+            var hashedNewPassword = UserManager.PasswordHasher.HashPassword(entry.NewPassword);
+            entity.PasswordHash = hashedNewPassword;
+
+            UserRepository.Update(entity);
+            Save();
+        }
+
+        public void ResetPassword(ResetPasswordEntry entry)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
         #endregion
 
         #region Private Methods
@@ -251,6 +307,31 @@ namespace App.Services.IdentityManagement
             if (!ValidationHelper.IsEmail(entry.Email))
             {
                 violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.InvalidEmail, Property = "Email" });
+            }
+
+            if (violations.Any())
+                throw new ValidationError(violations);
+        }
+
+        private void ValidateChangePasswordEntryData(ChangePasswordEntry entry)
+        {
+            var violations = new List<ErrorExtraInfo>();
+
+            if (entry == null)
+            {
+                violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.InvalidData });
+
+                throw new ValidationError(violations);
+            }
+
+            if (string.IsNullOrWhiteSpace(entry.NewPassword) || entry.NewPassword.Length < 6)
+            {
+                violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.InvalidPassword, Property = "NewPassword" });
+            }
+
+            if (entry.NewPassword != entry.ConfirmPassword)
+            {
+                violations.Add(new ErrorExtraInfo { Code = ErrorCodeType.ConfirmationPasswordNotMatched, Property = "ConfirmPassword" });
             }
 
             if (violations.Any())
@@ -307,6 +388,18 @@ namespace App.Services.IdentityManagement
             };
         }
 
+        private void SendConfirmationEmail(User entity)
+        {
+            var confirmationToken = UserManager.GenerateEmailConfirmationToken(entity.Id);
+            var mail = new ConfirmEmailMail(entity.Email, new ConfirmEmail
+            {
+                UserId = entity.Id,
+                Firstname = entity.Firstname,
+                Code = confirmationToken
+            });
+
+            MailSender.SendAsync(mail);
+        }
         #endregion
 
 
@@ -321,6 +414,7 @@ namespace App.Services.IdentityManagement
                 {
                     SecurityService = null;
                     UserRepository = null;
+                    UserManager = null;
                 }
                 _disposed = true;
             }

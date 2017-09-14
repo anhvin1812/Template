@@ -1,4 +1,6 @@
-﻿namespace App.Core.Configuration
+﻿using System.Net.Configuration;
+
+namespace App.Core.Configuration
 {
     public interface IConfigurationProvider
     {
@@ -19,5 +21,7 @@
         string DefaultProfileImage { get; }
         string DefaultProfileThumbnail { get; }
 
+
+        SmtpSection SmtpConfiguration { get; }
     }
 }

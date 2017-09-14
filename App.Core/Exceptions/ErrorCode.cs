@@ -17,15 +17,20 @@ namespace App.Core.Exceptions
                 {ErrorCodeType.DataNotFound, "Data not found."},
                 {ErrorCodeType.InvalidData, "Data is not valid."},
                 {ErrorCodeType.InvalidName, "Name is not valid."},
+                
                 // Role
                 {ErrorCodeType.InvalidRoleName, "Role name is not valid."},
                 {ErrorCodeType.RoleNameIsUsed, "Role name is used."},
                 {ErrorCodeType.RoleIsNotExisted, "Role is not existed."},
+                
                 // User
                 {ErrorCodeType.InvalidFirstName, "First name is not valid."},
                 {ErrorCodeType.InvalidLastName, "Last name is not valid."},
                 {ErrorCodeType.InvalidEmail, "Email is not valid."},
                 {ErrorCodeType.EmailIsUsed, "Email is used."},
+                {ErrorCodeType.InvalidPassword, "The assword must be at least 6 characters long."},
+                {ErrorCodeType.ConfirmationPasswordNotMatched, "The password and confirmation password do not match."},
+                {ErrorCodeType.CurrentPasswordNotCorrect, "The current password is not correct."},
                 // Product
 
                 // News

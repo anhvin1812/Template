@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,100italic,400italic,500,700,500italic|Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        @@media only screen and (max-width: 678px) {
+            .device-width {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            .device-width-inner {
+                width: 100% !important;
+                height: auto !important;
+                float: left !important;
+            }
+
+            .mobile-hide {
+                display: none !important;
+            }
+
+            .mobile-nav {
+                padding: 10px 20px !important;
+                height: auto !important;
+                display: table-row !important;
+                width: 100% !important;
+            }
+
+            .mobile-center {
+                text-align: center !important;
+            }
+
+            .mobile-small-text {
+                font-size: 18px !important;
+            }
+
+            .mobile-center-table {
+                float: none !important;
+                margin: 0 auto !important;
+            }
+
+            .text-center {
+                text-align: center !important;
+            }
+
+            .padding-top {
+                padding-top: 20px !important;
+            }
+
+            .center-image {
+                margin: 0 auto !important;
+            }
+
+            .logo-small {
+                width: 200px !important;
+                height: auto !important;
+            }
+
+            .full-width-image-container img {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+    </style>
+    <!--[if mso]>
+        <style>
+            span, td, table, div {
+              font-family: Arial, serif !important;
+            }
+        </style>
+    <![endif]-->
+    <title></title>
+</head>
+<body style="background-color:#f6f6f6;">
+    <table style="width:100% !important;" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F6F6F6">
+        <tbody>
+            <tr>
+                <td>
+                    <table style="margin:0 auto !important;" class="device-width" width="650" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF" align="center">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table style="width:100% !important;margin:0 auto !important;background: #f6f6f6;padding-left: 10px" width="100%" cellspacing="0" cellpadding="0" border="0" align="left">
+                                        <tbody>
+                                            <tr>
+                                                <td class="">
+                                                    <div class="mktEditable" id="logo">
+                                                        <img src="@(new Uri(HttpContext.Current.Request.Url, "~/EmailTemplates/Images/logo.png").AbsoluteUri)" alt="" height="20">
+                                                        <span style="font-family:'Roboto',Arial,Sans-serif; font-size: 15px; line-height: 25px; font-weight: 700; color: #00a65a; vertical-align: top;">NgheTinh24h</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            @RenderBody()
+                            <tr>
+                                <td>
+                                    <table style="width:100% !important;" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F5F5F5">
+                                        <tbody>
+                                            <tr>
+                                                <td height="15"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table style="width:90% !important;margin:0 auto !important;" width="90%" cellspacing="0" cellpadding="0" border="0" align="center">
+                                        <tbody>
+                                            <tr>
+                                                <td height="20"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td>
+                                                             <![endif]-->
+                                                    <div class="mktEditable" id="social-1">
+                                                        <table class="device-width-inner mobile-center-table" width="195" cellspacing="0" cellpadding="0" border="0" align="left">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="https://www.facebook.com/Xunghetoday" style="text-decoration:none" target="_blank"><img alt="Facebook" src="@(new Uri(HttpContext.Current.Request.Url, "~/EmailTemplates/Images/icon-facebook.png").AbsoluteUri)" title="Facebook" style="margin:0;border:0;" width="40" height="40"></a>
+                                                                    </td>
+                                                                    <td style="font-size:12px;font-family:'Roboto', Arial,sans-serif;color:#666666;line-height:18px;padding-left:10px">
+                                                                        <a href="https://www.facebook.com/Xunghetoday" style="text-decoration:none;color:#848484" target="_blank">Like us on Facebook</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                                    </td>
+                                                    <td>
+                                                     <![endif]-->
+                                                    <div class="mktEditable" id="social-2">
+                                                        <table class="device-width-inner mobile-center-table padding-top" width="195" cellspacing="0" cellpadding="0" border="0" align="left">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="https://www.linkedin.com/in/tuan-le-manh-11522710b" style="text-decoration:none" target="_blank"><img alt="Linkedin" src="@(new Uri(HttpContext.Current.Request.Url, "~/EmailTemplates/Images/icon-linkedin.png").AbsoluteUri)" title="Linkedin" style="margin:0;border:0;" width="40" height="40"></a>
+                                                                    </td>
+                                                                    <td style="font-size:12px;font-family:'Roboto', Arial,sans-serif;color:#666666;line-height:18px;padding-left:10px">
+                                                                        <a href="https://www.linkedin.com/in/tuan-le-manh-11522710b" style="text-decoration:none;color:#848484" target="_blank">Follow us on Linkedin</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                                    </td>
+                                                    <td>
+                                                    <![endif]-->
+                                                    <div class="mktEditable" id="social-3">
+                                                        <table class="device-width-inner mobile-center-table padding-top" width="195" cellspacing="0" cellpadding="0" border="0" align="left">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="https://twitter.com/anhvin1812" style="text-decoration:none" target="_blank"><img alt="Twitter" src="@(new Uri(HttpContext.Current.Request.Url, "~/EmailTemplates/Images/icon-twitter.png").AbsoluteUri)" title="Twitter" style="margin:0;border:0;" width="40" height="40"></a>
+                                                                    </td>
+                                                                    <td style="font-size:12px;font-family:'Roboto', Arial,sans-serif;color:#666666;line-height:18px;padding-left:10px">
+                                                                        <a href="https://twitter.com/anhvin1812" style="text-decoration:none;color:#848484" target="_blank">Follow us on Twitter</a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <!--[if (gte mso 9)|(IE)]>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                     <![endif]-->
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="20"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td height="15"></td>
+            </tr>
+            <tr>
+                <td>
+                    <table class="device-width" style="margin:0 auto !important;text-align:center;" width="650" cellspacing="0" cellpadding="0" border="0" align="center">
+                        <tbody>
+                            <tr>
+                                <td style="padding-bottom:20px;padding-right:20px;padding-left:20px" valign="top">
+                                    <div class="mktEditable" id="footer">
+                                        <span style="font-size: 11px; line-height: 16px; font-family: Arial, Helvetica, sans-serif; color: #666666;">
+                                            © @DateTime.Now.Year NgheTinh24h. All Rights Reserved.
+                                        </span>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

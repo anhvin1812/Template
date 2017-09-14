@@ -1,4 +1,8 @@
-﻿<header class="main-header">
+﻿@using System.Security.Permissions
+@using App.Core.Files
+@using App.Infrastructure.File
+@using App.Infrastructure.IdentityManagement
+<header class="main-header">
     <!-- Logo -->
     <a href="/Admin" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -208,23 +212,26 @@
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
+                    @{
+                        var profilePicture = Url.Content(GalleryHelper.GetFilePath(User.Identity.GetProfileThumnail(), FilePath.ProfileThumbnail));
+                    }
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="/Areas/Admin/Content/Images/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">@User.Identity.Name</span>
+                        <img src="@profilePicture" class="user-image" alt="">
+                        <span class="hidden-xs">@User.Identity.GetFullName()</span> 
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="/Areas/Admin/Content/Images/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="@profilePicture" class="img-circle" alt="">
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                @User.Identity.GetFullName() - @User.Identity.GetRole()
+                                @*<small>Member since Nov. 2012</small>*@
                             </p>
                         </li>
                         <!-- Menu Body -->
                         <li class="user-body">
                             <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
+                                <a href="@Url.Action("ChangePassword", "Account")">Change Password</a>
                             </div>
                             <div class="col-xs-4 text-center">
                                 <a href="#">Sales</a>
@@ -239,7 +246,7 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="@Url.Action("LogOff", "Account")" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

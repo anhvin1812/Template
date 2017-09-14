@@ -95,6 +95,10 @@ namespace App.Website
             {
                 httpContext.Response.Redirect("~/Error/NotFound");
             }
+            if (exp is PermissionException)
+            {
+                httpContext.Response.Redirect("~/Error/NoPermission");
+            }
             //else
             //{
             //    Response.Redirect(string.Format("~/Error/?error={0}", exp.Message));

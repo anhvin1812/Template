@@ -29,6 +29,9 @@ namespace App.Core.Exceptions
         InvalidLastName = 101,
         InvalidEmail = 102,
         EmailIsUsed = 103,
+        InvalidPassword = 104,
+        ConfirmationPasswordNotMatched = 105,
+        CurrentPasswordNotCorrect = 106,
 
         // News
         InvalidTitle = 200,

@@ -78,8 +78,8 @@
                             @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", placeholder = "Enter phone number" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.DateOfBirth, "Date of birth", new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control", placeholder = "Date of birth" })
+                            @Html.LabelFor(m => m.DateOfBirth, "Date of birth", new { @class = "control-label " })
+                            @Html.TextBoxFor(m => m.DateOfBirth, "{0:d}", new { @class = "form-control datepicker", placeholder = "Enter date of birth" })
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Gender)
@@ -162,10 +162,14 @@
 
     <!-- Bootstrap-toggle -->
     @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
+    @Scripts.Render("~/Areas/Admin/Scripts/datepicker/bootstrap-datepicker.js")
 
     <script type="text/javascript">
             jQuery(function ($) {
-                //Initialize Select2 Elements
+                // Datepicker
+                $('.datepicker').datepicker({
+                    autoclose: true
+                });
             });
     </script>
 }

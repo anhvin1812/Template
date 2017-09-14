@@ -9,7 +9,8 @@ namespace App.Website.Areas.Admin.App_Start
         {
             bundles.Add(new ScriptBundle("~/Admin/Js/jquery").Include(
                         getPath("Scripts/jQuery/jQuery-2.1.4.min.js"),
-                        getPath("Scripts/bootstrap/js/bootstrap.min.js")));
+                        getPath("Scripts/bootstrap/js/bootstrap.min.js")
+                        ));
 
             bundles.Add(new ScriptBundle("~/Admin/Js/jqueryUI").Include(
                         getPath("Scripts/jQueryUI/jquery-ui.min.js")));
@@ -83,6 +84,7 @@ namespace App.Website.Areas.Admin.App_Start
                       getPath("Scripts/jQueryUI/jquery-ui.min.css"),
                       getPath("Scripts/bootstrap/css/bootstrap.min.css"),
                       getPath("Scripts/select2/select2.min.css"),
+                      getPath("Scripts/datepicker/datepicker3.css"),
                       getPath("Content/css/AdminLTE.min.css"),
                       getPath("Content/css/skins/_all-skins.min.css"),
                       getPath("Content/css/site.css")));

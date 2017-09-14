@@ -1,0 +1,74 @@
+﻿@model App.Services.Dtos.Email.ConfirmEmail
+@{
+    Layout = "~/EmailTemplates/_LayoutEmail.cshtml";
+}
+
+                        <tr>
+                            <td bgcolor="#29D2E4">
+                            	 <div class="mktEditable" id="header">
+                                <table class="device-width" width="650" cellspacing="0" cellpadding="0" border="0" bgcolor="#13829B" align="center">
+                                    <tbody><tr>
+                                      <td style="color:#ffffff;font-weight:400;font-family:'Roboto',Arial,Sans-serif;font-size:20px;text-align:center;padding:10px 0;">
+                                            Please Confirm Your Email
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="width:90% !important;margin:0 auto !important;" width="90%" cellspacing="0" cellpadding="0" border="0" align="center">
+                                    <tbody><tr>
+                                        <td height="25"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        	<div class="mktEditable" id="section-2">
+                                            <table style="width:100% !important;" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                <tbody><tr>
+                                                    <td style="color:#13829B;font-weight:400;font-family:'Roboto',Arial,Sans-serif;font-size:20px;">
+                                                        Hello @Model.Firstname,
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="15"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="color:#848484;font-weight:400;font-family:'Roboto',Arial,Sans-serif;font-size:15px;">
+                                                        Thank you for signing up with NgheTinh24h.com.vn. Click the button below to activate your account..<br>
+                                                        <br>
+                                                        <table style="border-right:solid 1px #0c6b80;border-left:solid 1px #0c6b80;border-top:solid 1px #0c6b80;border-bottom:solid 5px #0c6b80;border-radius:3px;" width="180" cellspacing="0" cellpadding="0" border="0" bgcolor="#13829B" align="center">
+                                                        <tbody><tr>
+                                                            <td style="font-size: 16px; font-family: 'Open Sans', Arial, Sans-serif; color: #FFFFFF; line-height: 24px; text-align: center; padding: 10px 20px;">
+                                                                <a href="@Url.Action("ConfirmEmail", "Account", new {area = "Admin", userId = Model.UserId, code = Model.Code}, protocol: Request.Url.Scheme)" target="_blank" style="color: #FFFFFF; text-decoration: none;">
+                                                                    <strong>Confirm Email</strong>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody></table>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="25"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            @*<table style="width:100% !important;" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#F5F5F5">
+                                                <tbody><tr>
+                                                    <td style="font-size:2px;line-height:2px;" height="2">&nbsp;</td>
+                                                </tr>
+                                            </tbody></table>*@
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td height="25"></td>
+                                    </tr>
+                                </tbody></table>
+                            </td>
+                        </tr>
+                        

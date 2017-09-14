@@ -1,0 +1,63 @@
+﻿@using System.Web.Optimization
+@{
+    Layout = "~/Areas/Admin/Views/Account/_AnonymousLayout.cshtml";
+    ViewBag.Title = "Login";
+}
+@model App.Services.Dtos.IdentityManagement.LogOnModel
+
+<div class="login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            NgheTinh24h
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+            @using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", placeholder = "Email" })
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" })
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                @Html.CheckBoxFor(x => x.RememberMe) Remember Me
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            }
+
+            <!-- /.social-auth-links -->
+            <a href="@Url.Action("ForgotPassword", "Account")">I forgot my password</a><br>
+        </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+
+   
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            $("input").iCheck({
+                checkboxClass: "icheckbox_square-blue",
+                radioClass: "iradio_square-blue",
+                increaseArea: "20%" // optional
+            });
+        });
+    </script>
+}

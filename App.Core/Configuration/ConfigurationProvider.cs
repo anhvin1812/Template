@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Net.Configuration;
 
 namespace App.Core.Configuration
 {
@@ -7,6 +8,13 @@ namespace App.Core.Configuration
         private string GetAppSetting(string key)
         {
             return ConfigurationManager.AppSettings.Get(key);             
+        }
+
+        private SmtpSection GetSection(string sectionName)
+        {
+            SmtpSection cfg = (SmtpSection)ConfigurationManager.GetSection(sectionName);
+
+            return cfg;
         }
 
         private string GetConnectionString(string name)
@@ -43,6 +51,8 @@ namespace App.Core.Configuration
 
         public int ProfileImageWidth => 360;
         public int ProfileThumbnailWidth => 150;
+
+        public SmtpSection SmtpConfiguration => (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
 
     }
 }

@@ -98,22 +98,6 @@ namespace App.Website.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                //var user = new User
-                //{
-                //    Lastname = entry.Lastname,
-                //    Firstname = entry.Firstname,
-                //    Email = entry.Email,
-                //    EmailConfirmed = entry.EmailConfirmed
-                //};
-                //string password = Membership.GeneratePassword(6, 3);
-                //var result = await UserManager.st(user, password);
-
-                //if (result.Succeeded)
-                //{
-                //    var roles = options.Items.Where(x => entry.RoleIds.Contains(x.Value)).Select(x => x.Text).ToArray();
-                //    UserManager.AddToRoles(user.Id, roles);
-                //}
-
                 UserService.Insert(entry);
                 return RedirectToAction("Index");
             }
@@ -139,7 +123,7 @@ namespace App.Website.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ErrorHandler(View = "Edit")]
-        public ActionResult Edit(int id, UserEntry entry)
+        public async Task<ActionResult> Edit(int id, UserEntry entry)
         {
             var options = RoleService.GetOptionsForDropdownList();
             var gender = UserService.GetGenderOptionsForDropdownList();
@@ -166,28 +150,6 @@ namespace App.Website.Areas.Admin.Controllers
             return View();
         }
 
-        [System.Web.Mvc.OverrideAuthorization]
-        [ServiceAuthorization(AllowAnonymous = true)]
-        [System.Web.Mvc.HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(LogOnModel model, string returnUrl)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            
-            var signIn = HttpContext.GetOwinContext().Get<Infrastructure.IdentityManagement.ApplicationSignInManager>();
-            var result = signIn.PasswordSignIn(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
-        }
 
         private ActionResult RedirectToLocal(string returnUrl)
         {

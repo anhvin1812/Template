@@ -140,9 +140,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Email\AccountEmail.cs" />
+    <Compile Include="Email\MailSender.cs" />
     <Compile Include="File\GalleryHelper.cs" />
     <Compile Include="IdentityManagement\ApplicationSignInManager.cs" />
     <Compile Include="IdentityManagement\AuthConfiguration.cs" />
+    <Compile Include="IdentityManagement\IdentityExtension.cs" />
     <Compile Include="IdentityManagement\CustomOAuthProvider.cs" />
     <Compile Include="IdentityManagement\CustomJwtFormat.cs" />
     <Compile Include="IdentityManagement\IdentityDbFactory.cs" />
@@ -157,9 +160,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Email\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>

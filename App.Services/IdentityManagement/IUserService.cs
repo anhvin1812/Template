@@ -21,6 +21,12 @@ namespace App.Services.IdentityManagement
 
         SelectListOptions GetGenderOptionsForDropdownList();
 
+        #region Account
 
+        void ChangePassword(ChangePasswordEntry entry);
+
+        void ResetPassword(ResetPasswordEntry entry);
+
+        #endregion
     }
 }

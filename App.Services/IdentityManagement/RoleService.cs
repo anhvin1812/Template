@@ -36,7 +36,7 @@ namespace App.Services.IdentityManagement
         public IEnumerable<RoleSummary> GetAll(int? page, int? pageSize, ref int? recordCount)
         {
             var userId = CurrentClaimsIdentity.GetUserId();
-            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER,ApplicationPermissions.Read))
+            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER,ApplicationPermissions.Super))
                 throw new PermissionException();
 
             var roles = RoleRepository.GetAll(page, pageSize, ref recordCount)
@@ -76,7 +76,7 @@ namespace App.Services.IdentityManagement
         public RoleEntry GetRoleForEditing(int id)
         {
             var userId = CurrentClaimsIdentity.GetUserId();
-            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Modify))
+            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Super))
                 throw new PermissionException();
 
             var roleEntity = RoleRepository.GetById(id);
@@ -106,7 +106,7 @@ namespace App.Services.IdentityManagement
         public void Insert(RoleEntry entry)
         {
             var userId = CurrentClaimsIdentity.GetUserId();
-            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Create))
+            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Super))
                 throw new PermissionException();
 
             // Validate data
@@ -160,7 +160,7 @@ namespace App.Services.IdentityManagement
         public void Update(int id, RoleEntry entry)
         {
             var userId = CurrentClaimsIdentity.GetUserId();
-            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Modify))
+            if (!SecurityService.HasPermission(userId, ApplicationPermissionCapabilities.USER, ApplicationPermissions.Super))
                 throw new PermissionException();
 
             // Validate data
