@@ -36,17 +36,20 @@
                                                 </tr>
                                                 <tr>
                                                     <td style="color:#848484;font-weight:400;font-family:'Roboto',Arial,Sans-serif;font-size:15px;">
-                                                        Thank you for signing up with NgheTinh24h.com.vn. Click the button below to activate your account..<br>
+                                                        Thank you for signing up with NgheTinh24h.com.vn. Click the button below to confirm your email. Then login with this password: <strong style="font-family: 'Arial',Sans-serif; color: #000;">@Model.Password</strong>
+                                                        <br>
                                                         <br>
                                                         <table style="border-right:solid 1px #0c6b80;border-left:solid 1px #0c6b80;border-top:solid 1px #0c6b80;border-bottom:solid 5px #0c6b80;border-radius:3px;" width="180" cellspacing="0" cellpadding="0" border="0" bgcolor="#13829B" align="center">
-                                                        <tbody><tr>
-                                                            <td style="font-size: 16px; font-family: 'Open Sans', Arial, Sans-serif; color: #FFFFFF; line-height: 24px; text-align: center; padding: 10px 20px;">
-                                                                <a href="@Url.Action("ConfirmEmail", "Account", new {area = "Admin", userId = Model.UserId, code = Model.Code}, protocol: Request.Url.Scheme)" target="_blank" style="color: #FFFFFF; text-decoration: none;">
-                                                                    <strong>Confirm Email</strong>
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody></table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="font-size: 16px; font-family: 'Open Sans', Arial, Sans-serif; color: #FFFFFF; line-height: 24px; text-align: center; padding: 10px 20px;">
+                                                                        <a href="@Url.Action("ConfirmEmail", "Account", new {area = "Admin", userId = Model.UserId, code = Model.Code}, protocol: Request.Url.Scheme)" target="_blank" style="color: #FFFFFF; text-decoration: none;">
+                                                                            <strong>Confirm Email</strong>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
                                                     </td>
                                                 </tr>
                                             </tbody></table>
