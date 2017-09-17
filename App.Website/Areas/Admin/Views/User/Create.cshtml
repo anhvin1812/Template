@@ -89,21 +89,27 @@
                     </div>
                     <div class="box-body form-horizontal">
                         <div class="form-group">
-                            @Html.LabelFor(m => m.RoleIds, "Roles", new {@class = "control-label col-sm-2"})
-                            <div class="col-sm-10">
-                                @Html.DropDownListFor(m => m.RoleIds, (MultiSelectList) ViewBag.Roles, new {@class = "form-control col-sm-10 select2", @multiple = "multiple"})
+                            @Html.LabelFor(m => m.RoleIds, "Roles", new {@class = "control-label col-sm-3"})
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(m => m.RoleIds, (MultiSelectList) ViewBag.Roles, new {@class = "form-control col-sm-9 select2", @multiple = "multiple"})
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.EmailConfirmed, "Email confirmed", new { @class = "control-label col-sm-2" })
-                            <div class="col-sm-10">
+                            @Html.LabelFor(m => m.EmailConfirmed, "Email confirmed", new { @class = "control-label col-sm-3" })
+                            <div class="col-sm-9">
                                 @Html.CheckBoxFor(m => m.EmailConfirmed, toggleAttributes)
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.LockoutEnabled, "Lockout enabled", new { @class = "control-label col-sm-2" })
-                            <div class="col-sm-10">
-                                @Html.CheckBoxFor(m => m.LockoutEnabled, new { data_toggle = "toggle", data_onstyle = "danger", data_on = "On", data_off = "Off", data_size = "small" })
+                            @Html.LabelFor(m => m.LockoutEnabled, "Lockout enabled", new {@class = "control-label col-sm-3"})
+                            <div class="col-sm-9">
+                                @Html.CheckBoxFor(m => m.LockoutEnabled, new {data_toggle = "toggle", data_onstyle = "danger", data_on = "On", data_off = "Off", data_size = "small"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.LockoutEndDateUtc, "Lockout end date", new { @class = "control-label col-sm-3" })
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.LockoutEndDateUtc, new { @class = "form-control datepicker", placeholder = "Enter lockout end date" })
                             </div>
                         </div>
                         
@@ -153,6 +159,7 @@
             
      <!-- Bootstrap-toggle -->
     @Scripts.Render("~/Areas/Admin/Scripts/bootstrap-toggle/bootstrap-toggle.min.js")
+    @Scripts.Render("~/Areas/Admin/Scripts/datepicker/bootstrap-datepicker.js")
 
     <script type="text/javascript">
             jQuery(function ($) {

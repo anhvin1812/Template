@@ -13,7 +13,7 @@ namespace App.Repositories.IdentityManagement
     {
         IEnumerable<User> GetAll(string term, bool? lockoutEnabled, bool? emailConfirmed, int? page, int? pageSize, ref int? recordCount);
         User GetUserById(int id);
-        void Create(User user, string password);
+        void Create(User user);
         void Update(User user);
         void Delete(User user);
 

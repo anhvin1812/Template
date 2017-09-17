@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using App.Core.Repositories;
-using App.Data.EntityFramework;
+﻿using App.Data.EntityFramework;
 using App.Entities.IdentityManagement;
 using App.Infrastructure.IdentityManagement;
 using Autofac;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace App.Infrastructure
 {

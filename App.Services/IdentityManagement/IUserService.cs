@@ -27,6 +27,8 @@ namespace App.Services.IdentityManagement
 
         void ResetPassword(ResetPasswordEntry entry);
 
+        void ConfirmEmail(int userId, string code);
+
         #endregion
     }
 }

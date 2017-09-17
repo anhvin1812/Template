@@ -22,6 +22,12 @@ namespace App.Website.Areas.Admin
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 new[] { "App.Website.Areas.Admin.Controllers" }
             );
+
+            context.MapRoute(
+            "Admin_elmah",
+            "Admin/elmah/{type}",
+            new { action = "Index", controller = "Elmah", type = UrlParameter.Optional }
+        );
         }
 
         private void RegisterBundles()

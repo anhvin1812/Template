@@ -1,18 +1,24 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 using App.Data.EntityFramework;
 using App.Entities.IdentityManagement;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.DataProtection;
 using Owin;
 
 namespace App.Infrastructure.IdentityManagement
 {
     public class AuthConfiguration
     {
+        public static IDataProtectionProvider DataProtectionProvider { get; set; }
+
         public static void ConfigureAuth(IAppBuilder app)
         {
+            DataProtectionProvider = app.GetDataProtectionProvider();
+
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(MinhKhangDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);

@@ -194,14 +194,15 @@ namespace App.Website.Areas.Admin.Controllers
         // GET: /Account/ConfirmEmail
         [OverrideAuthorization]
         [ServiceAuthorization(AllowAnonymous = true)]
-        public async Task<ActionResult> ConfirmEmail(int userId, string code)
+        public ActionResult ConfirmEmail(int userId, string code)
         {
             if (userId == null || code == null)
             {
-                return View("Error");
+                return RedirectToAction("NotFound", "Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            
+            UserService.ConfirmEmail(userId, code);
+            return View();
         }
 
         //

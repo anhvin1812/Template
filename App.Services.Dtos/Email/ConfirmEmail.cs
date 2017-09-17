@@ -11,6 +11,7 @@ namespace App.Services.Dtos.Email
     {
         public int UserId { get; set; }
         public string Firstname { get; set; }
+        public string Password { get; set; }
         public string Code { get; set; }
     }
 }

@@ -60,6 +60,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ckfinder\bin\Release\CKFinder.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.13605.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="HtmlSanitizationLibrary, Version=4.3.0.0, Culture=neutral, PublicKeyToken=d127efab8a9c114f, processorArchitecture=MSIL">
       <HintPath>..\packages\AntiXSS.4.3.0\lib\net40\HtmlSanitizationLibrary.dll</HintPath>
       <Private>True</Private>
@@ -219,6 +227,7 @@
     <Compile Include="Areas\Admin\App_Start\AdminBundleConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ElmahController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsCategoryController.cs" />
@@ -1427,6 +1436,84 @@
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\css\site.min.css" />
+    <Content Include="Content\FileUpload\CKEditor\images\IMG_20151022_032623.png" />
+    <Content Include="Content\FileUpload\CKEditor\_thumbs\Images\IMG_20151022_032623.png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219012926..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219012941..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219165641..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219165647..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219165650..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219172945..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219172946..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219183617..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219183630..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170219183632..png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170223224513798.png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170223224950843.png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170225153841928.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170225153841982.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170225153842022.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718135953866.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718140302338.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718181057863.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718183058218.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718183257979.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718184512472.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718184732649.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718184854749.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718185021235.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718185357139.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170718185503111.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170719191259047.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170719200654980.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170719200749998.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170719200941677.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170719201155983.png" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170720202944024.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170724221013648.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170827034638805.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Images\Gallery_20170901003957094.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219012926..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219012941..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219165641..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219165647..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219165650..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219172945..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219172946..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219183617..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219183630..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170219183632..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170221163850..png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170223224513798.png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170223224950843.png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170225153841928.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170225153841982.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170225153842022.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718135953866.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718140302338.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718181057863.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718183058218.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718183257979.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718184512472.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718184732649.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718184854749.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718185021235.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718185357139.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170718185503111.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170719191259047.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170719200654980.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170719200749998.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170719200941677.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170719201155983.png" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170720202944024.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170724221013648.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170827034638805.jpg" />
+    <Content Include="Content\FileUpload\Galleries\Thumbnails\Gallery_20170901003957094.jpg" />
+    <Content Include="Content\FileUpload\Logo\Logo.png" />
+    <Content Include="Content\FileUpload\ProfileImages\Images\avatar_5671e5a7-3734-4ca6-8773-700c00484f24.jpg" />
+    <Content Include="Content\FileUpload\ProfileImages\Images\avatar_7cf178c4-b77c-4b1c-9138-85ccba31a2db.jpg" />
+    <Content Include="Content\FileUpload\ProfileImages\Thumbnails\avatar_5671e5a7-3734-4ca6-8773-700c00484f24.jpg" />
+    <Content Include="Content\FileUpload\ProfileImages\Thumbnails\avatar_7cf178c4-b77c-4b1c-9138-85ccba31a2db.jpg" />
     <Content Include="Content\fonts\fira-sans-v7-latin-300.svg" />
     <Content Include="Content\fonts\fira-sans-v7-latin-300italic.svg" />
     <Content Include="Content\fonts\fira-sans-v7-latin-500.svg" />
@@ -1481,7 +1568,6 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="EmailTemplates\_LayoutEmail.cshtml" />
     <Content Include="Areas\Admin\Views\Account\ChangePassword.cshtml" />
-    <None Include="EmailTemplates\ConfirmEmail.cshtml" />
     <Content Include="EmailTemplates\Images\icon-facebook.png" />
     <Content Include="EmailTemplates\Images\icon-linkedin.png" />
     <Content Include="EmailTemplates\Images\icon-twitter.png" />
@@ -1687,6 +1773,7 @@
     <Content Include="Content\fonts\fira-sans-v7-latin-regular.ttf" />
     <Content Include="Content\fonts\fira-sans-v7-latin-regular.woff" />
     <Content Include="Content\fonts\fira-sans-v7-latin-regular.woff2" />
+    <Content Include="EmailTemplates\ConfirmEmail.cshtml" />
     <None Include="Properties\DefaultSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>DefaultSettings.Designer.cs</LastGenOutput>
@@ -1808,14 +1895,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Html\" />
-    <Folder Include="Content\FileUpload\CKEditor\" />
-    <Folder Include="Content\FileUpload\Galleries\Images\" />
-    <Folder Include="Content\FileUpload\Galleries\Thumbnails\" />
-    <Folder Include="Content\FileUpload\Logo\" />
     <Folder Include="Content\FileUpload\Products\Images\" />
     <Folder Include="Content\FileUpload\Products\Thumbnails\" />
-    <Folder Include="Content\FileUpload\ProfileImages\Images\" />
-    <Folder Include="Content\FileUpload\ProfileImages\Thumbnails\" />
     <Folder Include="Scripts\owl-carousel\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>

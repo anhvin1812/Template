@@ -34,9 +34,9 @@ namespace App.Entities.IdentityManagement
             
             // Add custom user claims here
             userIdentity.AddClaim(new Claim(ClaimTypes.Email, this.Email));
-            userIdentity.AddClaim(new Claim(ClaimTypes.GivenName, $"{this.Lastname} {this.Firstname}"));
-            userIdentity.AddClaim(new Claim(ClaimTypes.Thumbprint, this.ProfilePicture?.Thumbnail));
-            userIdentity.AddClaim(new Claim(ClaimTypes.Role, manager.GetRoles(this.Id).FirstOrDefault() ));
+            userIdentity.AddClaim(new Claim(ClaimTypes.GivenName, $"{this.Firstname} {this.Lastname}"));
+            userIdentity.AddClaim(new Claim(ClaimTypes.Thumbprint, this.ProfilePicture?.Thumbnail ?? string.Empty));
+            userIdentity.AddClaim(new Claim(ClaimTypes.Role, manager.GetRoles(this.Id).FirstOrDefault() ?? string.Empty));
             
             return userIdentity;
         }

@@ -61,9 +61,8 @@ namespace App.Repositories.IdentityManagement
             return result;
         }
 
-        public void Create(User user, string password)
+        public void Create(User user)
         {
-            user.PasswordHash = _applicationUserManager.PasswordHasher.HashPassword(password);
             DatabaseContext.Insert(user);
         }
 

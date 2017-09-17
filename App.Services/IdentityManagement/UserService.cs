@@ -28,7 +28,7 @@ namespace App.Services.IdentityManagement
     public class UserService: ServiceBase, IUserService
     {
         #region Contructor
-        private ApplicationUserManager UserManager;
+        private ApplicationUserManager UserManager { get; set; }
 
         private IUserRepository UserRepository { get; set; }
         private IRoleRepository RoleRepository { get; set; }
@@ -84,27 +84,29 @@ namespace App.Services.IdentityManagement
                 throw new ValidationError(violations);
             }
 
-            string password = Membership.GeneratePassword(6, 3);
+            var password = Membership.GeneratePassword(6, 2);
+            User entity;
 
             using (var ts = new TransactionScope(TransactionScopeOption.Required))
             {
-                var entity = new User
+                entity = new User
                 {
                     Firstname = entry.Firstname,
                     Lastname = entry.Lastname,
                     Email = entry.Email,
+                    EmailConfirmed = entry.EmailConfirmed,
                     UserName = entry.Email,
+                    PasswordHash = UserManager.PasswordHasher.HashPassword(password),
                     Address = entry.Address,
                     PhoneNumber = entry.PhoneNumber,
                     Gender = entry.Gender,
                     DateOfBirth = entry.DateOfBirth,
                     LockoutEnabled = entry.LockoutEnabled,
-                    EmailConfirmed = entry.EmailConfirmed,
+                    LockoutEndDateUtc = entry.LockoutEndDateUtc,
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
 
-                if (entity.LockoutEnabled)
-                    entity.LockoutEndDateUtc = DateTime.UtcNow;
+                    
 
                 if (entry.ProfilePicture != null)
                 {
@@ -118,7 +120,7 @@ namespace App.Services.IdentityManagement
                     };
                 }
 
-                UserRepository.Create(entity, password);
+                UserRepository.Create(entity);
                 Save();
 
                 // roles
@@ -133,10 +135,10 @@ namespace App.Services.IdentityManagement
                 }
 
                 ts.Complete();
-
-                // send confirmation email
-                SendConfirmationEmail(entity);
             }
+
+            // send confirmation email
+            SendConfirmationEmail(entity, password);
         }
 
        
@@ -274,6 +276,23 @@ namespace App.Services.IdentityManagement
             Save();
         }
 
+        public void ConfirmEmail(int userId, string code)
+        {
+            var entity = UserRepository.GetUserById(userId);
+            if (entity == null)
+                throw new DataNotFoundException();
+
+            var isValidCode = UserManager.VerifyUserTokenAsync(userId, "Confirmation", code);
+
+            if (isValidCode.Result)
+            {
+                entity.EmailConfirmed = true;
+
+                UserRepository.Update(entity);
+                Save();
+            }
+        }
+
         public void ResetPassword(ResetPasswordEntry entry)
         {
             throw new NotImplementedException();
@@ -388,13 +407,14 @@ namespace App.Services.IdentityManagement
             };
         }
 
-        private void SendConfirmationEmail(User entity)
+        private void SendConfirmationEmail(User entity, string password)
         {
             var confirmationToken = UserManager.GenerateEmailConfirmationToken(entity.Id);
             var mail = new ConfirmEmailMail(entity.Email, new ConfirmEmail
             {
                 UserId = entity.Id,
                 Firstname = entity.Firstname,
+                Password = password,
                 Code = confirmationToken
             });
 

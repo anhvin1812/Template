@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace App.Infrastructure.IdentityManagement
 {
@@ -18,6 +19,15 @@ namespace App.Infrastructure.IdentityManagement
             : base(store)
         {
             _userManager = new UserManager<User, int>(store);
+
+            var dataProtectionProvider = AuthConfiguration.DataProtectionProvider;
+            //var dataProtectionProvider = new DpapiDataProtectionProvider();
+
+            this.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"))
+            {
+                //Code for email confirmation and reset password life time
+                TokenLifespan = TimeSpan.FromHours(48)
+            };
         }
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
@@ -49,15 +59,14 @@ namespace App.Infrastructure.IdentityManagement
             // Configure send email
             appUserManager.EmailService = new IdentityEmail();
 
-            var dataProtectionProvider = options.DataProtectionProvider;
-            if (dataProtectionProvider != null)
-            {
-                appUserManager.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"))
+            var dataProtectionProvider = new DpapiDataProtectionProvider();
+
+            appUserManager.UserTokenProvider =
+                new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"))
                 {
                     //Code for email confirmation and reset password life time
-                    TokenLifespan = TimeSpan.FromHours(6)
+                    TokenLifespan = TimeSpan.FromHours(48)
                 };
-            }
 
             return appUserManager;
         }

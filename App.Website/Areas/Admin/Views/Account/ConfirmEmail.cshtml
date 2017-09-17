@@ -1,10 +1,26 @@
-﻿@{
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Account/_AnonymousLayout.cshtml";
     ViewBag.Title = "Confirm Email";
 }
-
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
+@model App.Services.Dtos.IdentityManagement.LogOnModel
+<div class="login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            NgheTinh24h
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">
+                Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            </p>
+        </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
 </div>
+
+@section Scripts
+{
+   
+}
+
+

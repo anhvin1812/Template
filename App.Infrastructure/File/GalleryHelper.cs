@@ -101,7 +101,7 @@ namespace App.Infrastructure.File
                 throw new ArgumentNullException(nameof(image), "File can not be null.");
 
             var extension = Path.GetExtension(image.FileName);
-            var imageName = $"avatar_{Guid.NewGuid()}{ extension }";
+            var imageName = $"avatar_{Guid.NewGuid()}{extension}";
 
             Image img = Image.FromStream(image.InputStream);
             Image thumb = img;
