@@ -83,6 +83,12 @@ namespace App.Website.Areas.Admin.Controllers
             }
             
             var user = UserManager.Find(model.UserName, model.Password);
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+            }
+
             if (!user.EmailConfirmed)
             {
                 ModelState.AddModelError("", "Your email is not confirmed.");

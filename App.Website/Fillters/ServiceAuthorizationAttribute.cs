@@ -84,16 +84,21 @@ namespace App.Website.Fillters
             }
             else
             {
+                
                 if (filterContext.HttpContext.Request.IsAuthenticated)
                 {
+                    if (!this.AuthorizeCore(filterContext.HttpContext))
+                    {
+                        filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
+                        new { action = "NoPermission", controller = "Error" }));
+                    }
+
                     claimsPrincipal = (ClaimsPrincipal)filterContext.HttpContext.User;
                     var currentController = filterContext.Controller as BaseController;
 
                     currentController?.SetIdentity(claimsPrincipal);
                 }
-                //base.OnAuthorization(filterContext);
             }
-            
         }
 
 

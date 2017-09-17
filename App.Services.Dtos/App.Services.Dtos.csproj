@@ -112,7 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BasicAction.cs" />
-    <Compile Include="Common\ElmahResult.cs" />
     <Compile Include="Common\EntityActionSummary.cs" />
     <Compile Include="Common\DropdownListDto.cs" />
     <Compile Include="Common\HttpResponseMessageExtensions.cs" />
