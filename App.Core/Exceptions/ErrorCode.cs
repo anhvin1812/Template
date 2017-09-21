@@ -17,6 +17,7 @@ namespace App.Core.Exceptions
                 {ErrorCodeType.DataNotFound, "Data not found."},
                 {ErrorCodeType.InvalidData, "Data is not valid."},
                 {ErrorCodeType.InvalidName, "Name is not valid."},
+                {ErrorCodeType.InvalidCode, "Code is expired or invalid."},
                 
                 // Role
                 {ErrorCodeType.InvalidRoleName, "Role name is not valid."},

@@ -20,15 +20,25 @@ namespace App.Infrastructure.IdentityManagement
         {
             _userManager = new UserManager<User, int>(store);
 
+            SetTokenLifeTime(36);
+        }
+
+        public void SetTokenLifeTime(double hours)
+        {
             var dataProtectionProvider = AuthConfiguration.DataProtectionProvider;
-            //var dataProtectionProvider = new DpapiDataProtectionProvider();
 
             this.UserTokenProvider = new DataProtectorTokenProvider<User, int>(dataProtectionProvider.Create("ASP.NET Identity"))
             {
                 //Code for email confirmation and reset password life time
-                TokenLifespan = TimeSpan.FromHours(48)
+                TokenLifespan = TimeSpan.FromHours(hours)
             };
         }
+
+        public void ResetTokenLifeTime()
+        {
+            SetTokenLifeTime(36);
+        }
+
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
             IOwinContext context)

@@ -11,9 +11,14 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">
-                Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-            </p>
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            @if (ViewData.ModelState.IsValid)
+            {
+                <p class="login-box-msg">
+                    Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                </p>
+            }
         </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 </div>

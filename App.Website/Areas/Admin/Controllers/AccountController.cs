@@ -65,6 +65,9 @@ namespace App.Website.Areas.Admin.Controllers
         [ServiceAuthorization(AllowAnonymous = true)]
         public ActionResult Login(string returnUrl)
         {
+            if(Request.IsAuthenticated)
+                return RedirectToLocal(returnUrl);
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -200,6 +203,7 @@ namespace App.Website.Areas.Admin.Controllers
         // GET: /Account/ConfirmEmail
         [OverrideAuthorization]
         [ServiceAuthorization(AllowAnonymous = true)]
+        [ErrorHandler(View = "ConfirmEmail", Master = "_AnonymousLayout")]
         public ActionResult ConfirmEmail(int userId, string code)
         {
             if (userId == null || code == null)

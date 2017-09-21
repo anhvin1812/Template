@@ -284,13 +284,16 @@ namespace App.Services.IdentityManagement
 
             var isValidCode = UserManager.VerifyUserTokenAsync(userId, "Confirmation", code);
 
-            if (isValidCode.Result)
+            if (!isValidCode.Result)
             {
-                entity.EmailConfirmed = true;
-
-                UserRepository.Update(entity);
-                Save();
+                var violations = new List<ErrorExtraInfo> { new ErrorExtraInfo { Code = ErrorCodeType.InvalidCode } };
+                throw new ValidationError(violations);
             }
+
+            entity.EmailConfirmed = true;
+
+            UserRepository.Update(entity);
+            Save();
         }
 
         public void ResetPassword(ResetPasswordEntry entry)
@@ -409,6 +412,7 @@ namespace App.Services.IdentityManagement
 
         private void SendConfirmationEmail(User entity, string password)
         {
+            UserManager.SetTokenLifeTime(24*365);
             var confirmationToken = UserManager.GenerateEmailConfirmationToken(entity.Id);
             var mail = new ConfirmEmailMail(entity.Email, new ConfirmEmail
             {
@@ -417,6 +421,7 @@ namespace App.Services.IdentityManagement
                 Password = password,
                 Code = confirmationToken
             });
+            UserManager.ResetTokenLifeTime();
 
             MailSender.SendAsync(mail);
         }

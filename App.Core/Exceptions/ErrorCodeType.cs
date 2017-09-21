@@ -15,7 +15,8 @@ namespace App.Core.Exceptions
         DataNotFound = 5,
         InvalidData = 6,
         InvalidName = 7,
-        
+        InvalidCode = 8,
+
         // Role
         InvalidRoleName = 20,
         RoleNameIsUsed = 21,
@@ -32,6 +33,7 @@ namespace App.Core.Exceptions
         InvalidPassword = 104,
         ConfirmationPasswordNotMatched = 105,
         CurrentPasswordNotCorrect = 106,
+        
 
         // News
         InvalidTitle = 200,

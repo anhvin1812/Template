@@ -49,7 +49,8 @@ namespace App.Website.Fillters
 
                             foreach (var extraInfo in extraInfos)
                             {
-                                viewData.ModelState.AddModelError(extraInfo.Code.ToString(), ErrorCode.ErrorCodes[extraInfo.Code]);
+                                viewData.ModelState.AddModelError(extraInfo.Code.ToString(),
+                                    ErrorCode.ErrorCodes[extraInfo.Code]);
 
                                 error.ExtraInfos.Add(new ErrorExtraInfo
                                 {
@@ -83,9 +84,12 @@ namespace App.Website.Fillters
             }
             else
             {
+                if(IsGlobalError(context.Exception))
+                    return;
+
                 context.Result = new ViewResult
                 {
-                    MasterName = "_Layout",
+                    MasterName = this.Master ?? "_Layout",
                     ViewName = this.View,
                     ViewData = viewData,
                     TempData = context.Controller.TempData
@@ -99,5 +103,12 @@ namespace App.Website.Fillters
         {
             return filterContext.HttpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest";
         }
+
+        private bool IsGlobalError(Exception ex)
+        {
+            return !(ex is ValidationError);
+        }
+
+
     }
 }
