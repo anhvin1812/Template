@@ -1,0 +1,61 @@
+﻿@model App.Services.Dtos.NewsManagement.CrawlEntry
+
+@using (Html.BeginForm("Save", "Crawl", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-xs-7">
+            <div class="form-group">
+                @Html.ListBoxFor(m => m.CategoryIds, (MultiSelectList) ViewBag.Categories, new {@class = "form-control select2", data_placeholder = "Select categories", style = "width: 100%;"})
+                <p class="temp-categories hide">
+                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-list-ul"></i> Categories</button> 
+                    @foreach (var category in Model.Categories)
+                    {
+                        <span class="label label-info">@(HttpUtility.HtmlDecode(category))</span>
+                    }
+                </p>
+            </div>
+            <div class="form-group">
+                @Html.ListBoxFor(m => m.TagIds, new List<SelectListItem>(), new {@class = "form-control select2-ajax", style = "width: 100%;", data_placeholder = "Select tags", data_multiple = "true", data_ajax_url = Url.Action("TagsIn", "Tag")})
+                <p class="temp-tags hide">
+                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-tags"></i> Tags</button> 
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <span class="label label-default">@(HttpUtility.HtmlDecode(tag))</span>
+                    }
+                </p>
+            </div>
+
+        </div>
+        <div class="col-xs-5">
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.MediaTypeId, (SelectList) ViewBag.MediaTypes, new {@class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(m => m.StatusId, (SelectList) ViewBag.Status, new {@class = "form-control"})
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-7">
+                @Html.CheckBoxFor(m => m.IsFeatured, new {data_toggle = "toggle", data_onstyle = "success", data_on = "Featured", data_off = "Featured"})
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.CheckBoxFor(m => m.IsHot, new {data_toggle = "toggle", data_onstyle = "success", data_on = "Hot", data_off = "Hot"})
+            </div>
+            <div class="col-xs-5 text-right">
+                <button type="button" class="btn btn-default btn-preview-crawl"><i class="fa fa-eye"></i> Preview</button>
+                <button type="submit" class="btn btn-success btn-save-crawl"><i class="fa fa-save"></i> Post</button>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Title)
+    @Html.HiddenFor(m => m.Content)
+    @Html.HiddenFor(m => m.Description)
+    @Html.HiddenFor(m => m.FeaturedImage)
+}
+
+
+
+
+            

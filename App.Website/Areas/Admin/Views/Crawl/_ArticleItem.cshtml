@@ -1,0 +1,34 @@
+﻿@model IEnumerable<App.Services.Dtos.NewsManagement.CrawlSummary>
+
+@{
+    var toggleAttributes = new { data_toggle = "toggle", data_onstyle = "success", data_on = "Yes", data_off = "No" };
+    var index = 1;
+}
+
+@foreach (var m in Model)
+    {
+        <tr id="crawl-item-@index">
+            <td style="width: 50%">
+                <a href="@m.Link" target="_blank"><b>@m.Title</b></a>
+                <p class="clearfix">
+                    <img class="pull-left" src="@m.FeaturedImage" style="width: 150px; margin-right: 10px;" width="150" alt="" />
+                    @Html.Hidden("TempFeaturedImage", m.FeaturedImage, new {@class = "feature-image-url"})
+                    <span>@m.Desciption</span>
+                </p>
+                <p class="crawl-categories">
+                </p>
+                <p class="crawl-tags">
+                </p>
+            </td>
+            <td id="crawl-form-@index" style="width: 50%">
+                <div class="crawl-form" data-crawl-index="@index">
+                    <div class="save-messages"></div>
+                    <div class="save-form-container">
+                        <button type="button" class="btn btn-info btn-crawl-article-detail" data-source-id="@m.CrawlSourceId" data-crawl-index="@index" data-article-url="@m.Link"><i class="fa fa-edit"></i> Save</button>
+                    </div>
+                </div><!-- /.crawl-form-->
+            </td>
+        </tr>
+   
+    index++;
+}
