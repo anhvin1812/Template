@@ -4,7 +4,7 @@
 
 @{
     var url = Request?.Url.OriginalString;
-    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetImagePath(Model.Image))).OriginalString;
+    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetNewsFeaturedImagePath(Model.Image)));
 }
 
 <!-- Place this data between the <head> tags of your website -->

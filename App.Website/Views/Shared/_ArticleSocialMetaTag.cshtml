@@ -2,40 +2,50 @@
 @model App.Services.Dtos.NewsManagement.PublicNewsDetail
 
 @{
-    var url = Request?.Url.OriginalString;
-    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetFilePath(Model.Thumbnail, FilePath.NewsThumbnail))).OriginalString;
+    var url = HttpContext.Current.Request.Url.AbsoluteUri;
+    var image = new Uri(Request?.Url, Url.Content(GalleryHelper.GetNewsFeaturedImagePath(Model.Image))).OriginalString;
     var tags = string.Join(",", Model.Tags.Select(x => x.Name));
+    var title = !string.IsNullOrWhiteSpace(Model.Title) ? Model.Title : ViewBag.Title;
+    var description = !string.IsNullOrWhiteSpace(Model.Description) ? Model.Description
+        : "Tin tức Xứ Nghệ mới nhất được cập nhật hàng giờ. Tin tức Xứ Nghệ về xã hội, kinh doanh, pháp luật, khoa học, công nghệ, sức khoẻ, đời sống, văn hóa, rao vặt, tâm sự...";
+    var keywords = !string.IsNullOrWhiteSpace(Model.Title) ? Model.Title
+        : "Xứ Nghệ,Nghệ Tĩnh 24h,Nghệ An,Hà Tĩnh,Vinh,Sông Lam Nghệ An,Tin nhanh,cập nhật,báo điện tử,việt báo,tin việt,VietNews,mua bán,rao vặt,tư vấn,việc làm,Hà Nội,Sài Gòn,tin tức,Huế,Đà Nẵng,VDC,Netnam,Saigonnet,Sggp,VET,Nhân dân,Lao động,Kinh tế,Kinh doanh,Tin nhanh,cap nhat,bao dien tu,Vietbao,TinViet,Mua Ban,Rao Vat,Tu Van,Viec Lam,Hanoi,Ha Noi,Saigon,Sai gon,Tin tuc,Tintuc,Hue,Da Nang,Danang,Nhandan,Nhan dan,Laodong,Lao dong,Kinhte,Kinh te,Kinhdoanh,Kinh doanh";
 }
-
-<meta name="description" content="Tin tức Xứ Nghệ mới nhất được cập nhật hàng giờ. Tin tức Xứ Nghệ về xã hội, kinh doanh, pháp luật, khoa học, công nghệ, sức khoẻ, đời sống, văn hóa, rao vặt, tâm sự...">
-<meta name="keywords" content="Xứ Nghệ,Nghệ Tĩnh 24h,Nghệ An,Hà Tĩnh,Vinh,Sông Lam Nghệ An,Tin nhanh,cập nhật,báo điện tử,việt báo,tin việt,VietNews,mua bán,rao vặt,tư vấn,việc làm,Hà Nội,Sài Gòn,tin tức,Huế,Đà Nẵng,VDC,Netnam,Saigonnet,Sggp,VET,Nhân dân,Lao động,Kinh tế,Kinh doanh,Tin nhanh,cap nhat,bao dien tu,Vietbao,TinViet,Mua Ban,Rao Vat,Tu Van,Viec Lam,Hanoi,Ha Noi,Saigon,Sai gon,Tin tuc,Tintuc,Hue,Da Nang,Danang,Nhandan,Nhan dan,Laodong,Lao dong,Kinhte,Kinh te,Kinhdoanh,Kinh doanh">
+  
+<title>@title | Xứ Nghệ</title>
+<meta name="description" content="@description">
+<meta name="keywords" content="@keywords">
 
 <!-- Place this data between the <head> tags of your website -->
-<meta name="description" content="@Model.Description" />
+<meta name="description" content="@description" />
 
 <!-- Schema.org markup for Google+ -->
-<meta itemprop="name" content="@Model.Title">
-<meta itemprop="description" content="@Model.Description">
+<meta itemprop="name" content="@title">
+<meta itemprop="description" content="@description">
 <meta itemprop="image" content="@image">
 
 <!-- Twitter Card data -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:site" content="Nghệ Tĩnh 24h">
-<meta name="twitter:title" content="@Model.Title">
-<meta name="twitter:description" content="@Model.Description">
-<meta name="twitter:creator" content="@Model.CreatedBy">
+<meta name="twitter:title" content="@title">
+<meta name="twitter:description" content="@description">
+<meta name="twitter:creator" content="NgheTinh24h">
 <!-- Twitter summary card with large image must be at least 280x150px -->
 <meta name="twitter:image:src" content="@image">
 
 <!-- Open Graph data -->
-<meta property="og:title" content="@Model.Title" />
+<meta property="og:title" content="@title" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="@url" />
 <meta property="og:image" content="@image" />
-<meta property="og:description" content="@Model.Description" />
-<meta property="og:site_name" content="Xứ Nghệ 24h" />
+<meta property="og:image:alt" content="@title" />
+<meta property="og:description" content="@description" />
+<meta property="og:site_name" content="Nghệ Tĩnh 24h" />
 <meta property="article:published_time" content="@Model.PublishedDate.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
 <meta property="article:modified_time" content="@Model.PublishedDate.ToString("o")" /> <!--2013-09-16T19:08:47+01:00-->
-<meta property="article:section" content="Xứ Nghệ" />
+<meta property="article:author" content="https://www.facebook.com/Xunghetoday" />
+<meta property="article:section" content="NgheTinh24h" />
 <meta property="article:tag" content="@tags" />
-<meta property="fb:admins" content="105735046784078" /> 
+<meta property="fb:admins" content="105735046784078"/> 
+<meta property="fb:app_id" content="105735046784078" /> 
+

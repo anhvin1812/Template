@@ -1,0 +1,81 @@
+﻿<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                    <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Product")">
+                    <i class="fa fa-dropbox"></i> <span>Sản phẩm</span> <small class="label pull-right bg-green">new</small>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Service")">
+                    <i class="fa fa-gears"></i> <span>Dịch vụ</span> <small class="label pull-right bg-green">new</small>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Order")">
+                    <i class="fa fa-shopping-cart"></i> <span>Đơn hàng</span> <small class="label pull-right bg-red">3</small>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span>Users Management</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Index", "Role")"><i class="fa fa-users"></i> Roles</a></li>
+                    <li><a href="@Url.Action("Index", "User")"><i class="fa fa-user"></i> Users</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user"></i>
+                    <span>Products Management</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Index", "Product")"><i class="fa fa-users"></i> Products</a></li>
+                    <li><a href="@Url.Action("Index", "ProductCategory")"><i class="fa fa-user"></i> Categories</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>News Management</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Index", "News")">News</a></li>
+                    <li><a href="@Url.Action("Index", "Crawl")">Scan news</a></li>
+                    <li><a href="@Url.Action("Index", "NewsCategory")">Categories</a></li>
+                    <li><a href="@Url.Action("Index", "Tag")">Tags</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>Settings</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="@Url.Action("Homepage", "Setting")">Home page</a></li>
+                    <li><a href="@Url.Action("Menu", "Setting")">Menu</a></li>
+                    <li><a href="@Url.Action("Options", "Setting")">Options</a></li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
