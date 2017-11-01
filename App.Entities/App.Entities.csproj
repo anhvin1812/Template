@@ -83,6 +83,10 @@
     <Compile Include="IdentityManagement\UserLogin.cs" />
     <Compile Include="IdentityManagement\UserRole.cs" />
     <Compile Include="IObjectState.cs" />
+    <Compile Include="NewsManagement\CrawlArticleSection.cs" />
+    <Compile Include="NewsManagement\CrawlArticleDetail.cs" />
+    <Compile Include="NewsManagement\CrawlSourcePage.cs" />
+    <Compile Include="NewsManagement\CrawlSource.cs" />
     <Compile Include="NewsManagement\NewsStatus.cs" />
     <Compile Include="NewsManagement\Tag.cs" />
     <Compile Include="NewsManagement\News.cs" />

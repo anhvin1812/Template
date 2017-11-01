@@ -143,7 +143,7 @@ namespace App.Services.ProductManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var imageName = GalleryHelper.UploadGallery(entry.Image, AppSettings.ConfigurationProvider.ThumbnailWidth);
+                    var imageName = GalleryHelper.UploadGallery(entry.Image, AppSettings.ConfigurationProvider.SmallNewsImageWidth);
 
                     entity.Image = new Entities.FileManagement.Gallery
                     {
@@ -158,7 +158,7 @@ namespace App.Services.ProductManagement
                 {
                     foreach (var gallery in entry.Gallery)
                     {
-                        var fileName = GalleryHelper.UploadGallery(gallery, AppSettings.ConfigurationProvider.ThumbnailWidth);
+                        var fileName = GalleryHelper.UploadGallery(gallery, AppSettings.ConfigurationProvider.SmallNewsImageWidth);
 
                         entity.Galleries.Add(new Entities.FileManagement.Gallery
                         {
@@ -202,7 +202,7 @@ namespace App.Services.ProductManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var imageName = GalleryHelper.UploadGallery(entry.Image, AppSettings.ConfigurationProvider.ThumbnailWidth);
+                    var imageName = GalleryHelper.UploadGallery(entry.Image, AppSettings.ConfigurationProvider.SmallNewsImageWidth);
 
                     if (entity.Image != null)
                     {
@@ -231,7 +231,7 @@ namespace App.Services.ProductManagement
                     {
                         if (gallery == null) continue;
 
-                        var fileName = GalleryHelper.UploadGallery(gallery, AppSettings.ConfigurationProvider.ThumbnailWidth);
+                        var fileName = GalleryHelper.UploadGallery(gallery, AppSettings.ConfigurationProvider.SmallNewsImageWidth);
 
                         entity.Galleries.Add(new Entities.FileManagement.Gallery
                         {

@@ -85,6 +85,11 @@
     <Build Include="Tables\NewsStatus.sql" />
     <Build Include="Tables\Setting.sql" />
     <Build Include="Tables\HomepageLayout.sql" />
+    <Build Include="Tables\CrawlSource.sql" />
+    <Build Include="Tables\CrawlSourcePage.sql" />
+    <Build Include="Tables\CrawlSourcePageDetail.sql" />
+    <Build Include="Tables\CrawlArticleSection.sql" />
+    <None Include="Scripts\PostDeployment\Insert\Script.CrawlSource.Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="App.Database.refactorlog" />

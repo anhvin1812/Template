@@ -37,6 +37,7 @@ namespace App.Services
             builder.RegisterType<PublicNewsService>().As<IPublicNewsService>().InstancePerDependency();
             builder.RegisterType<NewsCategoryService>().As<INewsCategoryService>().InstancePerDependency();
             builder.RegisterType<TagService>().As<ITagService>().InstancePerDependency();
+            builder.RegisterType<CrawlService>().As<ICrawlService>().InstancePerDependency();
 
             // Settings
             builder.RegisterType<SettingService>().As<ISettingService>().InstancePerDependency();

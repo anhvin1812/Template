@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq.Expressions;
+using System.Security.AccessControl;
 using System.Web;
 using App.Core.Configuration;
 using App.Core.Files;
@@ -22,7 +24,12 @@ namespace App.Infrastructure.File
 
             switch (filePath)
             {
-                    case FilePath.NewsThumbnail:
+                case FilePath.News:
+                    fullPath = string.IsNullOrWhiteSpace(fileName)
+                        ? AppSettings.ConfigurationProvider.DefaultGalleryImage
+                        : $"{AppSettings.ConfigurationProvider.DirectoryNewsImage}/{fileName}";
+                    break;
+                case FilePath.NewsThumbnail:
                     fullPath = string.IsNullOrWhiteSpace(fileName) 
                         ? AppSettings.ConfigurationProvider.DefaultGalleryThumbnail 
                         : $"{AppSettings.ConfigurationProvider.DirectoryGalleryThumbnail}/{fileName}";
@@ -50,11 +57,19 @@ namespace App.Infrastructure.File
             return fullPath;
         }
 
+        public static string GetNewsFeaturedImagePath(string fileName)
+        {
+            var imgPath = GetFilePath(fileName, FilePath.News);
+            return imgPath;
+        }
+
         public static string GetImagePath(string fileName)
         {
             var imgPath = GetFilePath(fileName, FilePath.NewsImage);
             return imgPath;
         }
+
+       
 
         public static string GetThumbnailPath(string fileName)
         {
@@ -93,6 +108,52 @@ namespace App.Infrastructure.File
             thumb.Save(thumbPath);
 
             return imageName;
+        }
+
+        public static void UploadNewsImage(Image image, out string smallImageName, out string largeImageName)
+        {
+            if (image == null)
+                throw new ArgumentNullException(nameof(image), "Image can not be null.");
+
+           
+            var smallImageWith = AppSettings.ConfigurationProvider.SmallNewsImageWidth;
+            var largeImageWith = AppSettings.ConfigurationProvider.LargeNewsImageWidth;
+            var subDirectory = $"{DateTime.Now.Year}/{DateTime.Now.Month}/";
+            var guid = Guid.NewGuid();
+            var extension = "jpg";
+            largeImageName = $"{guid}_{largeImageWith}";
+            smallImageName = $"{guid}_{smallImageWith}";
+
+            var directory = AppSettings.ConfigurationProvider.DirectoryNewsImage;
+            var directoryImage = HttpContext.Current.Server.MapPath($"{directory}/{subDirectory}");
+            Directory.CreateDirectory(directoryImage);
+
+            Image smallImage = image;
+
+            if (image.Width > largeImageWith)
+            {
+                var height = largeImageWith * image.Height / image.Width;
+                image = ResizeImage(image, largeImageWith, height);
+            }
+
+            if (smallImage.Width > smallImageWith)
+            {
+                var height = smallImageWith * image.Height / image.Width;
+                smallImage = ResizeImage(image, smallImageWith, height);
+            }
+
+            while (File.Exists($"{directoryImage}{largeImageName}.{extension}") || File.Exists($"{directoryImage}{smallImageName}.{extension}"))
+            {
+                guid = Guid.NewGuid();
+                largeImageName = $"{guid}_{largeImageWith}";
+                smallImageName = $"{guid}_{smallImageWith}";
+            }
+
+            image.Save($"{directoryImage}{largeImageName}.{extension}");
+            smallImage.Save($"{directoryImage}{smallImageName}.{extension}");
+
+            largeImageName = $"{subDirectory}{largeImageName}.{extension}";
+            smallImageName = $"{subDirectory}{smallImageName}.{extension}";
         }
 
         public static string UploadProfileImage(HttpPostedFileBase image)
@@ -232,21 +293,10 @@ namespace App.Infrastructure.File
             return newImage;
         }
 
-        private static void UploadImage(string imageName, Image image, Image thumbnail)
+        public static string GetNewsImageDirectory()
         {
-
-            var fullPath = HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
-
-            var index = 1;
-            while (File.Exists(fullPath))
-            {
-                imageName = $"Gallery_{DateTime.Now.ToString("yyyyMMddHHmmssfff")}_{index}{ Path.GetExtension(imageName)}";
-                fullPath = HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}");
-                index++;
-            }
-
-            image.Save(HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryImage}/{imageName}"));
-            thumbnail.Save(HttpContext.Current.Server.MapPath($"{AppSettings.ConfigurationProvider.DirectoryGalleryThumbnail}/{imageName}"));
+            var imgPath = AppSettings.ConfigurationProvider.DirectoryNewsImage;
+            return imgPath;
         }
         #endregion
     }

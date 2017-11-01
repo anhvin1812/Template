@@ -41,6 +41,8 @@ namespace App.Core.Exceptions
                 {ErrorCodeType.NewsStatusIsNotExisted, "Status not found."},
                 {ErrorCodeType.NewsCategoryIsExisted, "Category is existed."},
                 {ErrorCodeType.NewsCategoryNotFound, "Category is not existed."},
+                {ErrorCodeType.CanNotGetArticleContent, "Cannot get article content."},
+                {ErrorCodeType.NewsIsExisting, "The news is existing."},
 
                 // Tag
                 {ErrorCodeType.TagNameIsExisted, "Tag name is existed."},

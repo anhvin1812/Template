@@ -13,7 +13,7 @@ namespace App.Repositories.NewsManagement
         void Insert(News entity);
         void Update(News entity);
         void Delete(int id);
-
+        bool IsExist(string title);
         #region Status
 
         IEnumerable<NewsStatus> GetAllStatus();

@@ -18,7 +18,8 @@ namespace App.Services.Dtos.NewsManagement
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Thumbnail { get; set; }
+        public string SmallFeaturedImage { get; set; }
+        public string LargeFeaturedImage { get; set; }
         public int Views { get; set; }
 
         public DateTime PublishedDate { get; set; }

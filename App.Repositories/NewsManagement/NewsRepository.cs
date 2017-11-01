@@ -94,6 +94,10 @@ namespace App.Repositories.NewsManagement
             DatabaseContext.Delete<News>(id);
         }
 
+        public bool IsExist(string title)
+        {
+            return DatabaseContext.Get<News>().Any(t => t.Title == title);
+        }
         #region Status
 
         public IEnumerable<NewsStatus> GetAllStatus()

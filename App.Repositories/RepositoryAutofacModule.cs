@@ -24,6 +24,7 @@ namespace App.Repositories
             builder.RegisterType<NewsRepository>().As<INewsRepository>().InstancePerDependency();
             builder.RegisterType<NewsCategoryRepository>().As<INewsCategoryRepository>().InstancePerDependency();
             builder.RegisterType<TagRepository>().As<ITagRepository>().InstancePerDependency();
+            builder.RegisterType<CrawlRepository>().As<ICrawlRepository>().InstancePerDependency();
             // Settings
             builder.RegisterType<SettingRepository>().As<ISettingRepository>().InstancePerDependency();
 

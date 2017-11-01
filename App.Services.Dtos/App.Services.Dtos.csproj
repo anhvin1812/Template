@@ -132,6 +132,7 @@
     <Compile Include="Gallery\Gallery.cs" />
     <Compile Include="IdentityManagement\Account.cs" />
     <Compile Include="Layout\SideBar.cs" />
+    <Compile Include="NewsManagement\Crawl.cs" />
     <Compile Include="NewsManagement\Article.cs" />
     <Compile Include="NewsManagement\Breadcrumb.cs" />
     <Compile Include="NewsManagement\PublicNews.cs" />

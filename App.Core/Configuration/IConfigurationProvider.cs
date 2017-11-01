@@ -10,9 +10,10 @@ namespace App.Core.Configuration
         string DirectoryGalleryThumbnail { get; }
         string DefaultGalleryThumbnail { get; }
         string DefaultGalleryImage { get; }
+        string DirectoryNewsImage { get; }
 
-        int ThumbnailWidth { get; }
-        int ThumbnailPhotoWidth { get; }
+        int SmallNewsImageWidth { get; }
+        int LargeNewsImageWidth { get; }
 
         string DirectoryLogo { get; }
 

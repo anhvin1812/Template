@@ -227,6 +227,7 @@
     <Compile Include="Areas\Admin\App_Start\AdminBundleConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CrawlController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsCategoryController.cs" />
@@ -335,6 +336,7 @@
     <Content Include="Areas\Admin\Content\Images\user6-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user7-128x128.jpg" />
     <Content Include="Areas\Admin\Content\Images\user8-128x128.jpg" />
+    <Content Include="Areas\Admin\Scripts\App\crawl.js" />
     <Content Include="Areas\Admin\Scripts\App\select2.js" />
     <Content Include="Areas\Admin\Scripts\App\modal.js" />
     <Content Include="Areas\Admin\Scripts\App\common.js" />
@@ -1736,6 +1738,9 @@
     <Content Include="Areas\Admin\Views\Account\SendCode.cshtml" />
     <Content Include="Areas\Admin\Views\Account\VerifyCode.cshtml" />
     <Content Include="Areas\Admin\Views\Account\_AnonymousLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Crawl\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Crawl\_ArticleItem.cshtml" />
+    <Content Include="Areas\Admin\Views\Crawl\_SaveForm.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -1894,6 +1899,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Html\" />
+    <Folder Include="Content\FileUpload\News\" />
     <Folder Include="Content\FileUpload\Products\Images\" />
     <Folder Include="Content\FileUpload\Products\Thumbnails\" />
     <Folder Include="Scripts\owl-carousel\" />

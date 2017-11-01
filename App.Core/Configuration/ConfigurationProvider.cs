@@ -35,9 +35,9 @@ namespace App.Core.Configuration
 
         public string DefaultGalleryThumbnail => GetAppSetting("DefaultGalleryThumbnail").Trim();
 
-        public int ThumbnailWidth => 420;
+        public int SmallNewsImageWidth => 300;
 
-        public int ThumbnailPhotoWidth => 600;
+        public int LargeNewsImageWidth => 600;
 
         public string DirectoryLogo => GetAppSetting("DirectoryLogo").Trim();
 
@@ -48,6 +48,8 @@ namespace App.Core.Configuration
         public string DefaultProfileImage => GetAppSetting("DefaultProfileImage").Trim();
 
         public string DefaultProfileThumbnail => GetAppSetting("DefaultProfileThumbnail").Trim();
+
+        public string DirectoryNewsImage => GetAppSetting("DirectoryNewsImage").Trim();
 
         public int ProfileImageWidth => 360;
         public int ProfileThumbnailWidth => 150;

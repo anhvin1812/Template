@@ -160,7 +160,8 @@ namespace App.Services.NewsManagement
                 Description = x.Description,
                 Views = x.Views,
                 PublishedDate = x.CreatedDate,
-                Thumbnail = x.Image.Thumbnail,
+                SmallFeaturedImage = x.Image.Thumbnail,
+                LargeFeaturedImage = x.Image.Image,
                 UpdatedBy = $"{x.Editor.Firstname} {x.Editor.Lastname}",
                 Category = x.Categories.Select(c=> new PublicCategorySummary { Id = c.Id, Name = c.Name}).LastOrDefault()
             });

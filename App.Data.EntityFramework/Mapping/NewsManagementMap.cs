@@ -13,6 +13,10 @@ namespace App.Data.EntityFramework.Mapping
             modelBuilder.Configurations.Add(new NewsCategoryMap());
             modelBuilder.Configurations.Add(new TagMap());
             modelBuilder.Configurations.Add(new NewsStatusMap());
+            modelBuilder.Configurations.Add(new CrawlSourceMap());
+            modelBuilder.Configurations.Add(new CrawlSourcePageMap());
+            modelBuilder.Configurations.Add(new CrawlSourcePageDetailMap());
+            modelBuilder.Configurations.Add(new CrawlArticleSectionMap());
         }
 
         private class NewsMap : EntityTypeConfiguration<News>
@@ -112,5 +116,100 @@ namespace App.Data.EntityFramework.Mapping
                 Property(t => t.Status).IsRequired();
             }
         }
+
+        #region Crawl
+        private class CrawlSourceMap : EntityTypeConfiguration<CrawlSource>
+        {
+            public CrawlSourceMap()
+            {
+                ToTable("CrawlSource");
+                // Primary Key
+                HasKey(t => t.Id);
+                Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+                // Properties
+                Property(t => t.Name).IsRequired();
+                Property(t => t.Url).IsOptional();
+                Property(t => t.IsDisabled).IsOptional();
+            }
+        }
+
+        private class CrawlSourcePageMap : EntityTypeConfiguration<CrawlSourcePage>
+        {
+            public CrawlSourcePageMap()
+            {
+                ToTable("CrawlSourcePage");
+                // Primary Key
+                HasKey(t => t.Id);
+                Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+                // Properties
+                Property(t => t.CrawlSourceId).IsRequired();
+                Property(t => t.Name).IsRequired();
+                Property(t => t.Url).IsRequired();
+                Property(t => t.IsRelativeUrl).IsRequired();
+                Property(t => t.BaseUrl).IsOptional();
+
+                // Relationship
+                HasRequired(t => t.CrawlSource).WithMany().HasForeignKey(t => t.CrawlSourceId);
+
+            }
+        }
+
+        private class CrawlSourcePageDetailMap : EntityTypeConfiguration<CrawlSourcePageDetail>
+        {
+            public CrawlSourcePageDetailMap()
+            {
+                ToTable("CrawlSourcePageDetail");
+                // Primary Key
+                HasKey(t => t.Id);
+                Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+                // Properties
+                Property(t => t.CrawlSourceId).IsRequired();
+                Property(t => t.TitleSelector).IsRequired();
+                Property(t => t.DescriptionSelector).IsRequired();
+                Property(t => t.ContentSelector).IsRequired();
+                Property(t => t.RemoveFromContentSelector).IsOptional();
+                Property(t => t.DateSelector).IsOptional();
+                Property(t => t.DateFormat).IsOptional();
+                Property(t => t.EditorSelector).IsOptional();
+                Property(t => t.TagSelector).IsOptional();
+                Property(t => t.CategorySelector).IsOptional();
+                Property(t => t.VideoSelector).IsOptional();
+                Property(t => t.VideoSourceSelector).IsOptional();
+                Property(t => t.BaseUrl).IsOptional();
+            }
+        }
+
+        private class CrawlArticleSectionMap : EntityTypeConfiguration<CrawlArticleSection>
+        {
+            public CrawlArticleSectionMap()
+            {
+                ToTable("CrawlArticleSection");
+                // Primary Key
+                HasKey(t => t.Id);
+                Property(t => t.Id).IsRequired().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+                // Properties
+                Property(t => t.CrawlSourcePageId).IsRequired();
+                Property(t => t.Name).IsRequired();
+                Property(t => t.Selector).IsRequired();
+                Property(t => t.TitleSelector).IsRequired();
+                Property(t => t.LinkSelector).IsRequired();
+                Property(t => t.DescriptionSelector).IsRequired();
+                Property(t => t.FeaturedImageSelector).IsRequired();
+                Property(t => t.FeaturedImageAttribute).IsOptional();
+                Property(t => t.FeatureImageSizeIdentity).IsRequired();
+                Property(t => t.LargeFeatureImageSizeIdentity).IsRequired();
+                Property(t => t.IsRelativeUrl).IsRequired();
+                Property(t => t.BaseUrl).IsOptional();
+
+                // Relationship
+                HasRequired(t => t.CrawlSourcePage).WithMany().HasForeignKey(t => t.CrawlSourcePageId);
+
+            }
+        }
+        #endregion
     }
 }

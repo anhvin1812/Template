@@ -42,6 +42,8 @@ namespace App.Core.Exceptions
         NewsStatusIsNotExisted = 203,
         NewsCategoryIsExisted = 204,
         NewsCategoryNotFound = 205,
+        CanNotGetArticleContent = 206,
+        NewsIsExisting = 207,
 
         // Tag
         TagNameIsExisted = 300,

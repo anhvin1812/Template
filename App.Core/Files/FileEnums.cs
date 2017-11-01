@@ -7,6 +7,7 @@ namespace App.Core.Files
         NewsImage = 2,
         Logo = 3,
         ProfileThumbnail = 4,
-        ProfileImage = 5
+        ProfileImage = 5,
+        News = 6
     }
 }

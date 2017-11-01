@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Transactions;
 using App.Core.Configuration;
@@ -96,11 +97,20 @@ namespace App.Services.NewsManagement
         public void Insert(NewsEntry entry)
         {
             //TODO: Check exit Role, permission,...
+            var userId = CurrentClaimsIdentity.GetUserId();
 
             // Validate data
             ValidateEntryData(entry);
 
-            var userId = CurrentClaimsIdentity.GetUserId();
+            var isExisting = NewsRepository.IsExist(entry.Title);
+            if (isExisting)
+            {
+                var violations = new List<ErrorExtraInfo>
+                {
+                    new ErrorExtraInfo {Code = ErrorCodeType.NewsIsExisting, Property = "Title"}
+                };
+                throw new ValidationError(violations);
+            }
 
             // status
             var status = NewsRepository.GetStatusById(entry.StatusId);
@@ -148,16 +158,14 @@ namespace App.Services.NewsManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var thumbnailWidth = entry.MediaTypeId == (int) MediaType.Photo
-                        ? AppSettings.ConfigurationProvider.ThumbnailWidth
-                        : AppSettings.ConfigurationProvider.ThumbnailPhotoWidth;
-
-                    var imageName = GalleryHelper.UploadGallery(entry.Image, thumbnailWidth);
+                    string thubnailName, imageName;
+                    var image = Image.FromStream(entry.Image.InputStream);
+                    GalleryHelper.UploadNewsImage(image, out thubnailName, out imageName);
 
                     entity.Image = new Gallery
                     {
                         Image = imageName,
-                        Thumbnail = imageName,
+                        Thumbnail = thubnailName,
                         State = ObjectState.Added
                     };
                 }
@@ -229,18 +237,16 @@ namespace App.Services.NewsManagement
                 // upload image
                 if (entry.Image != null)
                 {
-                    var thumbnailWidth = entry.MediaTypeId == (int)MediaType.Photo
-                        ? AppSettings.ConfigurationProvider.ThumbnailWidth
-                        : AppSettings.ConfigurationProvider.ThumbnailPhotoWidth;
-
-                    var imageName = GalleryHelper.UploadGallery(entry.Image, thumbnailWidth);
+                    string thubnailName, imageName;
+                    var image = Image.FromStream(entry.Image.InputStream);
+                    GalleryHelper.UploadNewsImage(image, out thubnailName, out imageName);
 
                     if (entity.Image != null)
                     {
                         GalleryHelper.DeleteGallery(entity.Image.Image, entity.Image.Thumbnail);
 
                         entity.Image.Image = imageName;
-                        entity.Image.Thumbnail = imageName;
+                        entity.Image.Thumbnail = thubnailName;
                         entity.Image.State = ObjectState.Modified;
                     }
                     else
@@ -292,8 +298,6 @@ namespace App.Services.NewsManagement
                 Image = entry.Thumbnail,
                 MediaTypeId = entry.MediaTypeId,
                 PublishedDate = DateTime.Now,
-                Views = 0,
-                
             };
             if (entry.Image != null)
                 detail.Image = entry.Image.ToBase64String();

@@ -147,4 +147,256 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="LayoutTypeId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="0277cd95-94ef-4a69-85a8-c07fbb1cf6ad" ChangeDateTime="10/11/2017 16:30:10">
+    <Property Name="ElementName" Value="[dbo].[Category].[url]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Category]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Url" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fe26911b-1814-4871-b4af-43dbe8b5713f" ChangeDateTime="10/11/2017 16:43:10">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePage].[Thumbnail]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FeaturedImageSmall" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="18b82b79-c309-44f3-8264-4818996b7ca0" ChangeDateTime="10/11/2017 17:07:31">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePage].[BigNewsFeaturedImageSmall]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BigNewsFeaturedImage" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="12eeb691-795e-4f5d-87fa-a74808f1fc29" ChangeDateTime="10/11/2017 17:07:49">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePage].[FeaturedImageSmall]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FeaturedImage" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a813144c-bc55-476b-b12d-27b211703e64" ChangeDateTime="10/11/2017 17:08:27">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePage].[BigFeatureImage]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BigFeatureImageFormat" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="320d337a-a317-45d5-9586-6f05007bc2a4" ChangeDateTime="10/11/2017 17:08:31">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePage].[SmallFeatureImage]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SmallFeatureImageFormat" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ed1a05fc-cee4-49d9-a739-7dd96dd4bb5f" ChangeDateTime="10/11/2017 17:08:40">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePage].[BigFeatureImageFormat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BigFeatureImageLinkFormat" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f54fee51-d7b0-4ec7-b17b-d9516fb4bc53" ChangeDateTime="10/11/2017 17:08:49">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePage].[BigFeatureImageLinkFormat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BigFeatureImageUrlFormat" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3e88a6e3-04ae-4678-ab7c-5909444b7123" ChangeDateTime="10/11/2017 17:08:52">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePage].[SmallFeatureImageFormat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SmallFeatureImageUrlFormat" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0f80323c-97d9-4688-9bdc-b82a180540f2" ChangeDateTime="10/11/2017 17:12:17">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Title" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="edc98a1a-c525-4d6a-87ae-19a8d52747b8" ChangeDateTime="10/15/2017 07:36:57">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[CrawlSourceId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CrawlSourcePageId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7f493519-c2de-46ae-aa8b-d35b48c4bd59" ChangeDateTime="10/15/2017 07:37:44">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Title]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2d564d5a-bed5-479a-82b4-64140ba4f004" ChangeDateTime="10/15/2017 07:38:43">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Description]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Selector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b004a808-33fd-4389-bf41-011ade2a5610" ChangeDateTime="10/15/2017 07:39:06">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Content]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TitleSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3f76dede-717c-4bb4-a354-f4750a025a9c" ChangeDateTime="10/15/2017 07:39:26">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LinkSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bbe0178b-8db3-49e9-b89c-d21cc9bc416f" ChangeDateTime="10/15/2017 07:39:34">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[DateFormat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DescriptionSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9eee7235-6847-44a1-9d5d-5937d063f1a0" ChangeDateTime="10/15/2017 07:39:45">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Editor]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ImageSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="efa644ec-bf6a-439a-b391-d416ee99df15" ChangeDateTime="10/15/2017 07:40:07">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[ImageSelector]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FeaturedImageSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="59538998-3c2c-45d0-8e0a-050ea0219cc5" ChangeDateTime="10/15/2017 07:43:10">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Tag]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FeatureImageSizeIndentity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6f299b28-de91-4e36-9cf1-c6a1a637ffac" ChangeDateTime="10/15/2017 07:43:17">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Category]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="BigFeatureImageSizeIndentity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f2d8b058-9831-4823-be58-3ec974f75ead" ChangeDateTime="10/15/2017 07:44:51">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[BigFeatureImageSizeIndentity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LargeFeatureImageSizeIndentity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e5ef15fa-0721-472b-848b-bd0a9409e658" ChangeDateTime="10/15/2017 07:44:58">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[FeatureImageSizeIndentity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FeatureImageSizeIdentity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b7d8bbbb-7099-4f21-983c-f1d1ad0b4f84" ChangeDateTime="10/15/2017 07:45:00">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[LargeFeatureImageSizeIndentity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="LargeFeatureImageSizeIdentity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="11650aa9-8d21-464f-9513-bcab5a8bbbea" ChangeDateTime="10/15/2017 07:56:36">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Title]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TitleSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="272638b6-bc2d-439b-84a4-52472144aec9" ChangeDateTime="10/15/2017 07:56:39">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Description]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DescriptionSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="92c16e69-f813-45ed-9a77-71fca1084e10" ChangeDateTime="10/15/2017 07:56:40">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Content]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ContentSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="44361049-4500-4d10-b904-e995dc554b1c" ChangeDateTime="10/15/2017 07:56:41">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d4f1154b-3106-4ba7-a9f1-142284d99889" ChangeDateTime="10/15/2017 07:56:42">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[DateFormat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateFormatSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="d690427d-f90e-4c90-ba4a-fce2c9d3fec2" ChangeDateTime="10/15/2017 07:56:44">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Editor]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EditorSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0e3bdd26-91c3-4cc6-a966-7c706c352577" ChangeDateTime="10/15/2017 07:56:47">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Tag]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TagSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b3e5b302-0579-4b37-9f83-645f25b89b3f" ChangeDateTime="10/15/2017 07:56:49">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Category]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CategorySelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="4ae14855-c213-4330-bcd9-4176ce37c239" ChangeDateTime="10/15/2017 07:56:50">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[Video]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="VideoSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="473d53a3-7fb5-447c-8de4-35da3826afc4" ChangeDateTime="10/15/2017 07:56:55">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[VideoSource]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="VideoSourceSelector" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6eb7e524-3dd4-40b4-a164-ff2754005253" ChangeDateTime="10/15/2017 08:10:17">
+    <Property Name="ElementName" Value="[dbo].[CrawlSourcePageDetail].[DateFormatSelector]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSourcePageDetail]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateFormat" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="8b12e66d-e37b-45d4-b7ea-8136743c27c9" ChangeDateTime="10/21/2017 11:44:29">
+    <Property Name="ElementName" Value="[dbo].[CrawlSource].[IsDiabled]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlSource]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsDisabled" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7844e6c7-5898-4259-8549-c0ae253fcafd" ChangeDateTime="10/23/2017 13:21:17">
+    <Property Name="ElementName" Value="[dbo].[CrawlArticleSection].[FeaturedImage]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlArticleSection]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FeaturedImageAttribute" />
+  </Operation>
 </Operations>
