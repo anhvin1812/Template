@@ -106,6 +106,12 @@ namespace App.Website.Areas.Admin.App_Start
 
             bundles.Add(new StyleBundle("~/Admin/Css/DataTable").Include(
                      getPath("Scripts/datatables/dataTables.bootstrap.css")));
+
+#if DEBUG
+            BundleTable.EnableOptimizations = false;
+#else
+            BundleTable.EnableOptimizations = true;
+#endif
         }
 
         private static string getPath(string relativePath)

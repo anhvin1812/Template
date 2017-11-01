@@ -39,7 +39,7 @@ namespace App.Website
                       "~/Content/css/responsive.css"));
 
 #if DEBUG
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
 #else
             BundleTable.EnableOptimizations = true;
 #endif

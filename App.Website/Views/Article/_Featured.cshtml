@@ -14,7 +14,7 @@
                 <div class="item @(i==0 ? "active" : "")">
                     <div class="img-holder-wrap">
                         <a class="img-holder" href="@url">
-                            <img src="@Url.Content(GalleryHelper.GetThumbnailPath(m.Thumbnail))" alt="@m.Title">
+                            <img src="@Url.Content(GalleryHelper.GetNewsFeaturedImagePath(m.LargeFeaturedImage))" alt="@m.Title">
                         </a>
                     </div>
                     <div class="carousel-caption">

@@ -20,8 +20,9 @@ var common = (function () {
         }
     };
 
-    my.ShowSuccess = function (msg) {
-        var msgContainer = $("#validation-messages");
+    my.ShowSuccess = function (msg, container) {
+        var msgContainer = $(container || "#validation-messages");
+
         var html = "<div class=\"alert alert-success alert-dismissible\">"
                     + "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">×</button>"
                     + "<h4><i class=\"icon fa fa-check\"></i> Success!</h4>"
@@ -31,13 +32,19 @@ var common = (function () {
         msgContainer.html(html);
     }
 
-    my.ShowError = function (errors) {
-        var msgContainer = $("#validation-messages");
+    my.ShowError = function (errors, container) {
+        var msgContainer = $(container || "#validation-messages");
 
         var msg = "", i;
 
         for (i = 0; i < errors.length; i++) {
-            msg += "<li>" +errors[i].Message + "</li>";
+            if (errors[i].ExtraInfos) {
+                for (j = 0; j < errors[i].ExtraInfos.length; j++) {
+                    msg += "<li>" + errors[i].ExtraInfos[j].Message + "</li>";
+                }
+            } else {
+                msg += "<li>" + errors[i].Message + "</li>";
+            }
         }
 
         var html = "<div class=\"alert alert-danger alert-dismissible\">"
@@ -112,3 +119,24 @@ $(document).ready(function () {
     // Init upload controls
     common.InitUploadControls();
 });
+
+
+// serialize from json
+(function ($) {
+    $.fn.serializeFormJSON = function () {
+
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || "");
+            } else {
+                o[this.name] = this.value || "";
+            }
+        });
+        return o;
+    };
+})(jQuery);

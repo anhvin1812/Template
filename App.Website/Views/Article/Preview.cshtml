@@ -3,17 +3,10 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutPreview.cshtml";
-    var category = Model.Categories.LastOrDefault();
 }
 
 <div class="post-widget bg-white light-shadow mb30">
     <article class="post">
-        <div class="img-holder-wrap">
-            <a class="img-holder" href="#">
-                <img src="@Model.Image" alt="@Model.Title">
-            </a>
-            <span class="post-badge">@(category?.Name)</span>
-        </div>
         <div class="post-info p30">
             <h3>@Model.Title</h3>
             <div class="row mb10">
