@@ -211,3 +211,5 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 App.Website/Content/FileUpload/Galleries/
+WebPackage/
+App.Website/Content/FileUpload/News/
